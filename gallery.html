@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="画廊 - 传奇建造队">
+    <title>画廊 | 传奇建造队</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+    <link rel="preload" as="image" href="https://s2.loli.net/2025/06/12/qCLiGk4BdamZvXW.png">
+</head>
+<body>
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="page-hero-bg" style="background-image: url('https://cdn.fastly.steamstatic.com/steam/apps/387990/page_bg_generated_v6b.jpg');"></div>
+        <div class="page-hero-content animate-on-scroll" data-animation="slide-up">
+            <h1 data-i18n="galleryPage.title">画廊</h1>
+            <p class="page-hero-subtitle" data-i18n="galleryPage.subtitle">Gallery</p>
+        </div>
+    </section>
+
+    <!-- 画廊内容 -->
+    <section class="page-section page-section-compact">
+        <div class="container">
+            <!-- 板块切换 -->
+            <div class="gallery-tabs animate-on-scroll" data-animation="fade-in">
+                <button class="gallery-tab active" data-tab="artwork" data-i18n="galleryPage.tabArtwork">艺术作品</button>
+                <button class="gallery-tab" data-tab="workshop" data-i18n="galleryPage.tabWorkshop">创意工坊</button>
+            </div>
+
+            <!-- 搜索表单（仅创意工坊显示） -->
+            <form class="search-form animate-on-scroll" data-animation="fade-in" id="gallerySearchForm" style="display: none;">
+                <!-- 作者筛选 -->
+                <div class="filter-dropdown" id="galleryCreatorFilter">
+                    <button type="button" class="filter-btn">
+                        <i class="ri-filter-3-line"></i>
+                        <span data-i18n="galleryPage.filterCreator">筛选作者</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <div class="filter-menu" id="galleryCreatorFilterMenu">
+                        <!-- 由 JS 动态生成 -->
+                    </div>
+                </div>
+                <div class="search-input-wrapper">
+                    <input type="text" id="gallerySearch" placeholder="搜索作品标题..." class="search-input" data-i18n-placeholder="galleryPage.searchPlaceholder">
+                    <button type="button" class="search-clear" id="gallerySearchClear"><i class="ri-close-line"></i></button>
+                </div>
+                <button type="submit" class="search-btn"><i class="ri-search-line"></i> <span data-i18n="galleryPage.searchBtn">搜索</span></button>
+            </form>
+
+            <!-- 艺术作品板块 -->
+            <div class="gallery-panel active" id="artworkPanel">
+                <!-- 由 JS 动态生成 -->
+            </div>
+
+            <!-- 创意工坊板块 -->
+            <div class="gallery-panel" id="workshopPanel">
+                <div class="placeholder-content">
+                    <p style="text-align: center; color: var(--color-text-muted); font-size: 16px;" data-i18n="galleryPage.workshopPlaceholder">创意工坊内容建设中</p>
+                </div>
+            </div>
+
+            <!-- 更新提示 -->
+            <p class="gallery-coming-soon" data-i18n="galleryPage.moreComingSoon">更多内容持续更新中，敬请期待</p>
+        </div>
+    </section>
+
+    <!-- 灯箱 -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-overlay"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="关闭">&times;</button>
+            <button class="lightbox-prev" aria-label="上一张">
+                <i class="ri-arrow-left-s-line"></i>
+            </button>
+            <img class="lightbox-image" src="" alt="">
+            <button class="lightbox-next" aria-label="下一张">
+                <i class="ri-arrow-right-s-line"></i>
+            </button>
+            <div class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script src="js/components.js"></script>
+    <script>Components.init({ activePage: 'gallery' });</script>
+    <script src="js/i18n.js"></script>
+    <script src="js/lang/zh-CN.js"></script>
+    <script src="js/lang/en.js"></script>
+    <script src="js/gallery-data.js"></script>
+    <script src="js/gallery/gallery-qingguangying.js"></script>
+    <script src="js/gallery/gallery-dianyuzhangzane.js"></script>
+    <script src="js/gallery/gallery-apxiaosong.js"></script>
+    <script src="js/gallery/gallery-baiyuanhuchui.js"></script>
+    <script src="js/gallery/gallery-mingmei8.js"></script>
+    <script src="js/workshop-data.js"></script>
+    <script src="js/workshop/workshop-dianyuzhangzane.js"></script>
+    <script src="js/workshop/workshop-baiyuanhuchui.js"></script>
+    <script src="js/workshop/workshop-gangbi.js"></script>
+    <script src="js/workshop/workshop-neza-nezha.js"></script>
+    <script src="js/workshop/workshop-miaozi.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

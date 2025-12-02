@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="常见问题 - 传奇建造队">
+    <title>常见问题 | 传奇建造队</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+    <link rel="preload" as="image" href="https://s2.loli.net/2025/06/12/qCLiGk4BdamZvXW.png">
+    <link rel="preload" as="image" href="https://s2.loli.net/2025/11/29/fDOp5dtIUly7RkE.png">
+</head>
+<body>
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="page-hero-bg" style="background-image: url('https://s2.loli.net/2025/11/29/fDOp5dtIUly7RkE.png');"></div>
+        <div class="page-hero-content animate-on-scroll" data-animation="slide-up">
+            <h1 data-i18n="faqPage.title">常见问题</h1>
+            <p class="page-hero-subtitle" data-i18n="faqPage.subtitle">FAQ</p>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="page-section page-section-compact">
+        <div class="container">
+            <form class="search-form animate-on-scroll" data-animation="fade-in" id="faqSearchForm">
+                <div class="search-input-wrapper">
+                    <input type="text" id="faqSearch" placeholder="搜索问题..." class="search-input" data-i18n-placeholder="faqPage.searchPlaceholder">
+                    <button type="button" class="search-clear" id="faqSearchClear"><i class="ri-close-line"></i></button>
+                </div>
+                <button type="submit" class="search-btn"><i class="ri-search-line"></i> <span data-i18n="faqPage.searchBtn">搜索</span></button>
+            </form>
+            <div class="results-info" id="faqResultsInfo"></div>
+            <div class="faq-list" id="faqList"></div>
+            <div class="pagination" id="faqPagination" style="display: none;"></div>
+        </div>
+    </section>
+
+    <script src="js/components.js"></script>
+    <script>Components.init({ activePage: 'faq' });</script>
+    <script src="js/i18n.js"></script>
+    <script src="js/lang/zh-CN.js"></script>
+    <script src="js/lang/en.js"></script>
+    <script src="js/faq-data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

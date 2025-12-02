@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="传奇建造队 - 废品机械师游戏中最具影响力的中国玩家团队，提供Steam创意工坊排名第一的传奇Mod">
+    <title>传奇建造队 | Legend Team</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+    <!-- 预加载关键图片 -->
+    <link rel="preload" as="image" href="https://s2.loli.net/2025/06/12/qCLiGk4BdamZvXW.png">
+    <link rel="preload" as="image" href="https://s2.loli.net/2025/12/02/Je7Cx96BAoYqKfu.png">
+    <link rel="preload" as="image" href="https://s2.loli.net/2025/11/20/FMN1VeRlCEop3B7.jpg">
+</head>
+<body>
+    <!-- 页面加载器 -->
+    <div class="page-loader">
+        <img src="https://s2.loli.net/2025/12/02/Je7Cx96BAoYqKfu.png" alt="Loading" class="loader-logo">
+        <span class="loader-text" data-i18n="common.loading">正在加载中……</span>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <img src="https://s2.loli.net/2025/06/12/qCLiGk4BdamZvXW.png" alt="传奇建造队">
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link active" data-i18n="nav.home">首页</a></li>
+                <li class="nav-item has-dropdown">
+                    <a href="#home" class="nav-link" data-i18n="nav.about">关于</a>
+                    <div class="dropdown-menu">
+                        <a href="about-game.html" data-i18n="nav.aboutGame">废品机械师</a>
+                        <a href="about-team.html" data-i18n="nav.aboutTeam">传奇建造队</a>
+                    </div>
+                </li>
+                <li class="nav-item has-dropdown">
+                    <a href="#mod" class="nav-link" data-i18n="nav.mod">模组</a>
+                    <div class="dropdown-menu">
+                        <a href="mod.html" data-i18n="nav.modIntro">模组</a>
+                        <a href="download.html" data-i18n="nav.download">下载</a>
+                    </div>
+                </li>
+                <li class="nav-item has-dropdown">
+                    <a href="#community" class="nav-link" data-i18n="nav.community">社区</a>
+                    <div class="dropdown-menu">
+                        <a href="community.html" data-i18n="nav.updates">动态</a>
+                        <a href="gallery.html" data-i18n="nav.gallery">画廊</a>
+                        <a href="faq.html" data-i18n="nav.faq">常见问题</a>
+                    </div>
+                </li>
+                <li class="nav-item has-dropdown">
+                    <a href="#tutorials" class="nav-link" data-i18n="nav.tutorials">教程</a>
+                    <div class="dropdown-menu">
+                        <a href="tutorials.html" data-i18n="nav.tutorials">教程</a>
+                        <a href="tutorial-library.html" data-i18n="nav.tutorialLib">教程库</a>
+                    </div>
+                </li>
+                <li><a href="#contact" class="nav-link" data-i18n="nav.feedback">反馈</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="nav-action-btn" id="langToggle" aria-label="切换语言">EN</button>
+                <button class="nav-action-btn" id="themeToggle" aria-label="切换主题">
+                    <i class="ri-sun-line"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页 Hero -->
+    <section class="section hero" id="home">
+        <div class="hero-bg-text-container">
+            <div class="hero-bg-text-row row-right">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
+            <div class="hero-bg-text-row row-left">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
+            <div class="hero-bg-text-row row-right">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
+            <div class="hero-bg-text-row row-left">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
+            <div class="hero-bg-text-row row-right">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
+            <div class="hero-bg-text-row row-left">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
+            <div class="hero-bg-text-row row-right">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
+            <div class="hero-bg-text-row row-left">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
+        </div>
+        <div class="hero-content animate-on-scroll" data-animation="slide-up">
+            <h1 class="hero-title" data-i18n="hero.title">重塑创造边界</h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">在废品机械师的世界中，我们重新定义工程美学，打破游戏原版限制，为您带来极致的建造体验</p>
+            <p class="hero-desc" data-i18n="hero.desc">《废品机械师》游戏中国玩家社区与Mod开发团队</p>
+            <a href="#mod" class="btn btn-primary" data-i18n="hero.cta">探索更多</a>
+            <div class="hero-links">
+                <a href="mod.html" class="hero-link" data-i18n="hero.legendIntro">传奇介绍</a>
+                <a href="about-team.html" class="hero-link" data-i18n="hero.teamIntro">团队介绍</a>
+            </div>
+        </div>
+        <div class="hero-scroll-hint">
+            <i class="ri-arrow-down-line scroll-arrow"></i>
+        </div>
+    </section>
+
+    <!-- 模组 -->
+    <section class="section mod-section" id="mod">
+        <div class="mod-bg"></div>
+        <div class="mod-content">
+            <div class="mod-info">
+                <span class="mod-badge animate-on-scroll" data-animation="fade-in" data-i18n="mod.badge">Steam 创意工坊综合排行榜第一</span>
+                <h2 class="section-title animate-on-scroll" data-animation="slide-up" data-delay="100" data-i18n="mod.title">传奇Mod</h2>
+                <p class="mod-subtitle">New Legend Mod</p>
+                <p class="mod-tagline" data-i18n="mod.tagline">终极解决方案</p>
+                <p class="mod-desc" data-i18n="mod.desc">传奇建造队成立于2016年，历经多年发展已成为横跨三个千人交流群的国内大型玩家团体。传奇Mod诞生于同年5月，现已成长为创意工坊总订阅量第一、物品丰富度与体量第一的大型综合性模组。</p>
+                <div class="mod-features">
+                    <div class="feature-item animate-on-scroll" data-animation="scale-in" data-delay="200">
+                        <span class="feature-number">v4.1.0</span>
+                        <span class="feature-label" data-i18n="mod.feature1">当前版本</span>
+                    </div>
+                    <div class="feature-item animate-on-scroll" data-animation="scale-in" data-delay="300">
+                        <span class="feature-number">2016</span>
+                        <span class="feature-label" data-i18n="mod.feature2">成立年份</span>
+                    </div>
+                    <div class="feature-item animate-on-scroll" data-animation="scale-in" data-delay="400">
+                        <span class="feature-number">EN/CN</span>
+                        <span class="feature-label" data-i18n="mod.feature3">多语言支持</span>
+                    </div>
+                </div>
+                <div class="mod-actions">
+                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3309460746" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="mod.cta">前往 Steam 创意工坊</a>
+                    <a href="mod.html" class="btn btn-outline" data-i18n="mod.learnMore">了解更多</a>
+                    <a href="download.html" class="btn btn-outline" data-i18n="mod.downloadBtn">下载</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 社区 -->
+    <section class="section community-section" id="community">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll" data-animation="slide-up" data-i18n="community.title">加入我们</h2>
+            <p class="section-subtitle animate-on-scroll" data-animation="slide-up" data-delay="100" data-i18n="community.subtitle">与志同道合的建造者交流创意</p>
+            <div class="community-grid">
+                <div class="community-card qq-card animate-on-scroll" data-animation="slide-up" data-delay="200" data-qq="537532878">
+                    <div class="card-icon">QQ</div>
+                    <h3 data-i18n="community.qq1">QQ群 一群</h3>
+                    <p class="card-number">537532878</p>
+                </div>
+                <div class="community-card qq-card animate-on-scroll" data-animation="slide-up" data-delay="300" data-qq="158484814">
+                    <div class="card-icon">QQ</div>
+                    <h3 data-i18n="community.qq2">QQ群 二群</h3>
+                    <p class="card-number">158484814</p>
+                </div>
+                <div class="community-card qq-card animate-on-scroll" data-animation="slide-up" data-delay="400" data-qq="633703984">
+                    <div class="card-icon">QQ</div>
+                    <h3 data-i18n="community.qq3">QQ群 三群</h3>
+                    <p class="card-number">633703984</p>
+                </div>
+                <a href="https://steamcommunity.com/groups/ltsandbox" target="_blank" rel="noopener" class="community-card community-card-steam animate-on-scroll" data-animation="slide-up" data-delay="500">
+                    <div class="card-icon">Steam</div>
+                    <h3 data-i18n="community.steam">Steam 社区组</h3>
+                    <p class="card-link" data-i18n="community.join">点击加入 →</p>
+                </a>
+            </div>
+            <div class="section-actions animate-on-scroll" data-animation="fade-in" data-delay="600">
+                <a href="community.html" class="btn btn-outline" data-i18n="community.viewUpdates">查看动态</a>
+                <a href="gallery.html" class="btn btn-outline" data-i18n="community.browseGallery">浏览画廊</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教程 -->
+    <section class="section tutorials-section" id="tutorials">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll" data-animation="slide-up" data-i18n="tutorials.title">教程与资讯</h2>
+            <p class="section-subtitle animate-on-scroll" data-animation="slide-up" data-delay="100" data-i18n="tutorials.subtitle">掌握核心技巧，释放创造潜能</p>
+            <div class="tutorials-grid">
+                <a href="https://youtu.be/_e1cA5B9wqw" target="_blank" rel="noopener" class="media-card animate-on-scroll" data-animation="slide-up" data-delay="200">
+                    <div class="media-thumb" style="background-image: url('https://img.youtube.com/vi/_e1cA5B9wqw/hqdefault.jpg');">
+                        <div class="play-icon"></div>
+                    </div>
+                    <div class="media-info">
+                        <span class="media-source"><i class="ri-youtube-line"></i> YouTube</span>
+                        <div class="media-title" data-i18n="tutorials.video1">履带更新预告</div>
+                    </div>
+                </a>
+                <a href="https://www.bilibili.com/video/BV1f18bzuEiQ" target="_blank" rel="noopener" class="media-card animate-on-scroll" data-animation="slide-up" data-delay="250">
+                    <div class="media-thumb">
+                        <img src="https://i1.hdslb.com/bfs/archive/cd8975501da6a59821ad7f7801523aca50a0affe.jpg" alt="" referrerpolicy="no-referrer">
+                        <div class="play-icon"></div>
+                    </div>
+                    <div class="media-info">
+                        <span class="media-source"><i class="ri-bilibili-line"></i> Bilibili</span>
+                        <div class="media-title" data-i18n="tutorials.video1">履带更新预告</div>
+                    </div>
+                </a>
+                <a href="https://youtu.be/vNJYXOaeNuU" target="_blank" rel="noopener" class="media-card animate-on-scroll" data-animation="slide-up" data-delay="300">
+                    <div class="media-thumb" style="background-image: url('https://img.youtube.com/vi/vNJYXOaeNuU/hqdefault.jpg');">
+                        <div class="play-icon"></div>
+                    </div>
+                    <div class="media-info">
+                        <span class="media-source"><i class="ri-youtube-line"></i> YouTube</span>
+                        <div class="media-title" data-i18n="tutorials.video2">履带及激光制导使用教程</div>
+                    </div>
+                </a>
+                <a href="https://www.bilibili.com/video/BV18N4RzQEEA" target="_blank" rel="noopener" class="media-card animate-on-scroll" data-animation="slide-up" data-delay="350">
+                    <div class="media-thumb">
+                        <img src="https://i0.hdslb.com/bfs/archive/934c80a73f8b409fe271218e68dfc3d7ab6bff2f.jpg" alt="" referrerpolicy="no-referrer">
+                        <div class="play-icon"></div>
+                    </div>
+                    <div class="media-info">
+                        <span class="media-source"><i class="ri-bilibili-line"></i> Bilibili</span>
+                        <div class="media-title" data-i18n="tutorials.video2">履带及激光制导使用教程</div>
+                    </div>
+                </a>
+                <a href="https://www.bilibili.com/video/BV1fE411R7aL" target="_blank" rel="noopener" class="media-card animate-on-scroll" data-animation="slide-up" data-delay="400">
+                    <div class="media-thumb">
+                        <img src="https://i1.hdslb.com/bfs/archive/504ff78f6d33f1d7ba9adfa3e1a07d81e3433ad3.jpg" alt="" referrerpolicy="no-referrer">
+                        <div class="play-icon"></div>
+                    </div>
+                    <div class="media-info">
+                        <span class="media-source"><i class="ri-bilibili-line"></i> Bilibili</span>
+                        <div class="media-title" data-i18n="tutorials.video3">废品机械师新手教程</div>
+                    </div>
+                </a>
+            </div>
+            <div class="section-actions animate-on-scroll" data-animation="fade-in" data-delay="500">
+                <a href="tutorial-library.html" class="btn btn-outline" data-i18n="tutorials.browseLib">浏览教程库</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 反馈 -->
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll" data-animation="slide-up" data-i18n="contact.title">联系我们</h2>
+            <p class="section-subtitle animate-on-scroll" data-animation="slide-up" data-delay="100" data-i18n="contact.subtitle">您的反馈是我们前进的动力</p>
+            <div class="contact-content animate-on-scroll" data-animation="fade-in" data-delay="200">
+                <div class="contact-email">
+                    <span class="email-label" data-i18n="contact.email">反馈邮箱</span>
+                    <a href="mailto:smlegendmod@163.com" class="email-address">smlegendmod@163.com</a>
+                </div>
+            </div>
+            <a href="contact.html" class="btn btn-primary animate-on-scroll" style="margin-top: 32px;" data-animation="fade-in" data-delay="300" data-i18n="contact.goToPage">前往反馈页面</a>
+        </div>
+    </section>
+
+    <script src="js/components.js"></script>
+    <script>Components.init({ isHome: true, activePage: 'home', footerOnly: true });</script>
+    <script src="js/i18n.js"></script>
+    <script src="js/lang/zh-CN.js"></script>
+    <script src="js/lang/en.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

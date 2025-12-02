@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="联系传奇建造队 - 您的反馈是我们前进的动力">
+    <title>反馈 | 传奇建造队</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+    <!-- 预加载关键图片 -->
+    <link rel="preload" as="image" href="https://s2.loli.net/2025/06/12/qCLiGk4BdamZvXW.png">
+    <link rel="preload" as="image" href="https://s2.loli.net/2025/11/29/7byYGrQzqC6jMXk.png">
+</head>
+<body>
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="page-hero-bg" style="background-image: url('https://s2.loli.net/2025/11/29/7byYGrQzqC6jMXk.png');"></div>
+        <img src="https://s2.loli.net/2025/06/12/qCLiGk4BdamZvXW.png" alt="" class="contact-hero-logo">
+        <div class="page-hero-content animate-on-scroll" data-animation="slide-up">
+            <h1 data-i18n="contactPage.title">联系我们</h1>
+            <p class="page-hero-subtitle" data-i18n="contactPage.subtitle">您的反馈是我们前进的动力</p>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="page-section">
+        <div class="container">
+            <div class="contact-content animate-on-scroll" data-animation="fade-in">
+                <div class="contact-email">
+                    <span class="email-label" data-i18n="contactPage.emailLabel">反馈邮箱</span>
+                    <a href="mailto:smlegendmod@163.com" class="email-address">smlegendmod@163.com</a>
+                </div>
+            </div>
+
+            <!-- 联系卡片 -->
+            <div class="contact-cards">
+                <a href="https://docs.qq.com/form/page/DZHR6YlVwRm52b2lR" target="_blank" rel="noopener" class="contact-card animate-on-scroll" data-animation="slide-up" data-delay="100">
+                    <i class="ri-feedback-line"></i>
+                    <h3 data-i18n="contactPage.feedbackForm">意见反馈</h3>
+                    <p data-i18n="contactPage.feedbackFormDesc">填写表单提交您的建议或问题</p>
+                    <span class="contact-card-btn" data-i18n="contactPage.goToForm">前往填写</span>
+                </a>
+                <a href="https://steamcommunity.com/workshop/filedetails/discussion/3309460746/7026264603286324042/" target="_blank" rel="noopener" class="contact-card animate-on-scroll" data-animation="slide-up" data-delay="200">
+                    <i class="ri-question-answer-line"></i>
+                    <h3 data-i18n="contactPage.qaDiscussion">常见问题讨论</h3>
+                    <p data-i18n="contactPage.qaDiscussionDesc">在Steam讨论区查看或提问</p>
+                    <span class="contact-card-btn" data-i18n="contactPage.goToDiscussion">前往讨论区</span>
+                </a>
+                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3309460746" target="_blank" rel="noopener" class="contact-card animate-on-scroll" data-animation="slide-up" data-delay="300">
+                    <i class="ri-chat-3-line"></i>
+                    <h3 data-i18n="contactPage.workshopComments">创意工坊评论</h3>
+                    <p data-i18n="contactPage.workshopCommentsDesc">在Mod页面留下您的评论</p>
+                    <span class="contact-card-btn" data-i18n="contactPage.goToComments">前往评论</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/components.js"></script>
+    <script>Components.init({ activePage: 'contact' });</script>
+    <script src="js/i18n.js"></script>
+    <script src="js/lang/zh-CN.js"></script>
+    <script src="js/lang/en.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

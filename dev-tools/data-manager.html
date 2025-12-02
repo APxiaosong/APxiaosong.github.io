@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据库管理器 - 传奇建造队</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+    <style>
+        /* ========== CSS Variables ========== */
+        :root {
+            --color-bg: #2C2C27;
+            --color-bg-light: #3a3a33;
+            --color-bg-dark: #1a1a17;
+            --color-accent: #FF9300;
+            --color-accent-hover: #ffab33;
+            --color-text: #FFFFFF;
+            --color-text-muted: #D7D7D7;
+            --color-border: rgba(255, 147, 0, 0.3);
+            --color-danger: #e74c3c;
+            --color-danger-hover: #c0392b;
+            --color-success: #27ae60;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --transition: 0.3s ease;
+        }
+
+        /* ========== Reset & Base ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ========== Layout ========== */
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 20px;
+        }
+
+        .app-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .app-title i {
+            color: var(--color-accent);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* ========== Buttons ========== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-accent-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--color-accent);
+            border: 1px solid var(--color-accent);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+        }
+
+        .btn-danger {
+            background-color: var(--color-danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: var(--color-danger-hover);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+        }
+
+        .btn-icon:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .btn-icon.danger:hover {
+            border-color: var(--color-danger);
+            color: var(--color-danger);
+        }
+
+        /* ========== Tab Navigation ========== */
+        .tab-nav {
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            color: var(--color-text);
+        }
+
+        .tab-btn.active {
+            color: var(--color-accent);
+            border-bottom-color: var(--color-accent);
+        }
+
+        .tab-btn i {
+            font-size: 18px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ========== Section Header ========== */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* ========== Creator Group ========== */
+        .creator-group {
+            background-color: var(--color-bg-dark);
+            border: 1px solid var(--color-border);
+            margin-bottom: 16px;
+        }
+
+        .creator-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--color-border);
+            cursor: pointer;
+            transition: background var(--transition);
+        }
+
+        .creator-header:hover {
+            background-color: var(--color-bg-light);
+        }
+
+        .creator-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .creator-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .creator-count {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            background: var(--color-bg-light);
+            padding: 2px 8px;
+        }
+
+        .creator-toggle {
+            color: var(--color-text-muted);
+            transition: transform var(--transition);
+        }
+
+        .creator-group.collapsed .creator-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .creator-group.collapsed .creator-content {
+            display: none;
+        }
+
+        .creator-content {
+            padding: 16px 20px;
+        }
+
+        /* ========== Item Cards ========== */
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .item-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background-color: var(--color-bg);
+            border: 1px solid var(--color-border);
+            transition: all var(--transition);
+        }
+
+        .item-card:hover {
+            border-color: var(--color-accent);
+        }
+
+        .item-card.dragging {
+            opacity: 0.5;
+            border-color: var(--color-accent);
+            background-color: var(--color-bg-light);
+        }
+
+        .item-card.drag-over {
+            border-color: var(--color-accent);
+            transform: translateY(2px);
+        }
+
+        .drag-handle {
+            cursor: grab;
+            color: var(--color-text-muted);
+            padding: 4px;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .item-thumbnail {
+            width: 80px;
+            height: 45px;
+            object-fit: cover;
+            background-color: var(--color-bg-dark);
+            flex-shrink: 0;
+        }
+
+        .item-thumbnail.square {
+            width: 60px;
+            height: 60px;
+        }
+
+        .item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .item-title {
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 4px;
+        }
+
+        .item-meta {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        /* ========== FAQ Items ========== */
+        .faq-item {
+            padding: 16px;
+            background-color: var(--color-bg-dark);
+            border: 1px solid var(--color-border);
+            margin-bottom: 8px;
+            transition: all var(--transition);
+        }
+
+        .faq-item:hover {
+            border-color: var(--color-accent);
+        }
+
+        .faq-item.dragging {
+            opacity: 0.5;
+        }
+
+        .faq-item.drag-over {
+            border-color: var(--color-accent);
+            transform: translateY(2px);
+        }
+
+        .faq-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .faq-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .faq-question {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .faq-question-en {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* ========== Modal ========== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background-color: var(--color-bg-dark);
+            border: 1px solid var(--color-border);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform var(--transition);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--color-text-muted);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--color-text);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 20px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        /* ========== Form Elements ========== */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            margin-bottom: 6px;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-family: inherit;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            border: 1px solid var(--color-border);
+            transition: border-color var(--transition);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* ========== Export Panel ========== */
+        .export-panel {
+            position: fixed;
+            top: 0;
+            right: -500px;
+            width: 500px;
+            height: 100vh;
+            background-color: var(--color-bg-dark);
+            border-left: 1px solid var(--color-border);
+            z-index: 1000;
+            transition: right var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .export-panel.active {
+            right: 0;
+        }
+
+        .export-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .export-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .export-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .export-notice {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: rgba(255, 147, 0, 0.1);
+            border: 1px solid var(--color-border);
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .export-notice i {
+            color: var(--color-accent);
+            font-size: 18px;
+        }
+
+        .export-file {
+            padding: 12px 16px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            margin-bottom: 8px;
+        }
+
+        .export-file-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .export-file-path {
+            font-size: 13px;
+            font-family: monospace;
+            color: var(--color-accent);
+        }
+
+        .export-actions {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .export-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition);
+        }
+
+        .export-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ========== Toast ========== */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .toast {
+            padding: 12px 20px;
+            background-color: var(--color-bg-dark);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.success {
+            border-color: var(--color-success);
+        }
+
+        .toast.success i {
+            color: var(--color-success);
+        }
+
+        .toast.error {
+            border-color: var(--color-danger);
+        }
+
+        .toast.error i {
+            color: var(--color-danger);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* ========== Loading State ========== */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            color: var(--color-text-muted);
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--color-border);
+            border-top-color: var(--color-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ========== Empty State ========== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--color-text-muted);
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 12px;
+            }
+
+            .app-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+
+            .tab-nav {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 13px;
+                white-space: nowrap;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .item-card {
+                flex-wrap: wrap;
+            }
+
+            .item-thumbnail {
+                width: 60px;
+                height: 34px;
+            }
+
+            .export-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        /* ========== Utility ========== */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        .text-muted {
+            color: var(--color-text-muted);
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+
+        /* ========== Multi-select Mode ========== */
+        .creator-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-multiselect {
+            padding: 4px 10px;
+            font-size: 12px;
+        }
+
+        .multiselect-bar {
+            display: none;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .creator-group.multiselect .multiselect-bar {
+            display: flex;
+        }
+
+        .creator-group.multiselect .drag-handle {
+            display: none;
+        }
+
+        .item-checkbox {
+            display: none;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--color-accent);
+            cursor: pointer;
+        }
+
+        .creator-group.multiselect .item-checkbox {
+            display: block;
+        }
+
+        .select-count {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        /* ========== Tags ========== */
+        .item-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-right: 8px;
+        }
+
+        .item-tag {
+            font-size: 11px;
+            padding: 2px 6px;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            white-space: nowrap;
+        }
+
+        .btn-tag {
+            padding: 4px 8px;
+            font-size: 12px;
+            background: transparent;
+            border: 1px dashed var(--color-border);
+            color: var(--color-text-muted);
+            cursor: pointer;
+        }
+
+        .btn-tag:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .tag-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .tag-option:hover {
+            border-color: var(--color-accent);
+        }
+
+        .tag-option.selected {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: var(--color-bg);
+        }
+
+        .tag-option input {
+            display: none;
+        }
+
+        /* 框选 */
+        .selection-box {
+            position: fixed;
+            border: 1px solid var(--color-accent);
+            background: rgba(255, 147, 0, 0.1);
+            pointer-events: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="app-title">
+                <i class="ri-database-2-line"></i>
+                数据库管理器
+            </h1>
+            <div class="header-actions">
+                <button class="btn btn-outline" onclick="refreshData()">
+                    <i class="ri-refresh-line"></i>
+                    刷新数据
+                </button>
+                <button class="btn btn-primary" onclick="openExportPanel()">
+                    <i class="ri-save-line"></i>
+                    导出保存
+                </button>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="tutorials" onclick="switchTab('tutorials')">
+                <i class="ri-video-line"></i>
+                B站教程
+            </button>
+            <button class="tab-btn" data-tab="faq" onclick="switchTab('faq')">
+                <i class="ri-question-answer-line"></i>
+                常见问题
+            </button>
+            <button class="tab-btn" data-tab="gallery" onclick="switchTab('gallery')">
+                <i class="ri-image-line"></i>
+                艺术作品
+            </button>
+            <button class="tab-btn" data-tab="workshop" onclick="switchTab('workshop')">
+                <i class="ri-tools-line"></i>
+                创意工坊
+            </button>
+        </nav>
+
+        <!-- Tab Contents -->
+        <div id="tab-tutorials" class="tab-content active">
+            <div class="loading" id="tutorials-loading">
+                <div class="loading-spinner"></div>
+                <span>加载中...</span>
+            </div>
+            <div id="tutorials-content" class="hidden"></div>
+        </div>
+
+        <div id="tab-faq" class="tab-content">
+            <div class="section-header">
+                <h2 class="section-title">常见问题管理</h2>
+                <div class="section-actions">
+                    <button class="btn btn-primary" onclick="openFaqModal()">
+                        <i class="ri-add-line"></i>
+                        新增FAQ
+                    </button>
+                </div>
+            </div>
+            <div class="loading" id="faq-loading">
+                <div class="loading-spinner"></div>
+                <span>加载中...</span>
+            </div>
+            <div id="faq-content" class="hidden"></div>
+        </div>
+
+        <div id="tab-gallery" class="tab-content">
+            <div class="loading" id="gallery-loading">
+                <div class="loading-spinner"></div>
+                <span>加载中...</span>
+            </div>
+            <div id="gallery-content" class="hidden"></div>
+        </div>
+
+        <div id="tab-workshop" class="tab-content">
+            <div class="loading" id="workshop-loading">
+                <div class="loading-spinner"></div>
+                <span>加载中...</span>
+            </div>
+            <div id="workshop-content" class="hidden"></div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="delete-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">确认删除</h3>
+                <button class="modal-close" onclick="closeDeleteModal()">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>确定要删除以下内容吗？此操作不可撤销。</p>
+                <div id="delete-preview" style="margin-top: 16px; padding: 12px; background: var(--color-bg); border: 1px solid var(--color-border);">
+                    <!-- Preview content -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeDeleteModal()">取消</button>
+                <button class="btn btn-danger" onclick="confirmDelete()">
+                    <i class="ri-delete-bin-line"></i>
+                    确认删除
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Edit Modal -->
+    <div class="modal-overlay" id="faq-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="faq-modal-title">新增FAQ</h3>
+                <button class="modal-close" onclick="closeFaqModal()">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">问题 (中文) *</label>
+                    <input type="text" class="form-input" id="faq-question" placeholder="请输入问题">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">问题 (英文)</label>
+                    <input type="text" class="form-input" id="faq-question-en" placeholder="Enter question in English">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">回答 (中文) *</label>
+                    <textarea class="form-textarea" id="faq-answer" placeholder="请输入回答"></textarea>
+                </div>
+                <div class="form-group mb-0">
+                    <label class="form-label">回答 (英文)</label>
+                    <textarea class="form-textarea" id="faq-answer-en" placeholder="Enter answer in English"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeFaqModal()">取消</button>
+                <button class="btn btn-primary" onclick="saveFaq()">
+                    <i class="ri-check-line"></i>
+                    保存
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tag Edit Modal -->
+    <div class="modal-overlay" id="tag-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">编辑标签</h3>
+                <button class="modal-close" onclick="closeTagModal()">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tag-selector" id="tag-selector"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeTagModal()">取消</button>
+                <button class="btn btn-primary" onclick="saveTag()">
+                    <i class="ri-check-line"></i>
+                    保存
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Panel -->
+    <div class="export-overlay" id="export-overlay" onclick="closeExportPanel()"></div>
+    <div class="export-panel" id="export-panel">
+        <div class="export-header">
+            <h3 class="export-title">导出数据</h3>
+            <button class="modal-close" onclick="closeExportPanel()">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="export-body" id="export-body">
+            <!-- Export content will be generated here -->
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Load Data Scripts -->
+    <script src="../js/tutorial-data.js"></script>
+    <script src="../js/gallery-data.js"></script>
+    <script src="../js/workshop-data.js"></script>
+    <script src="../js/faq-data.js"></script>
+
+    <!-- Load Individual Data Files -->
+    <script src="../js/tutorial/tutorial-davidsirius.js"></script>
+    <script src="../js/tutorial/tutorial-jingwuwei.js"></script>
+
+    <script src="../js/gallery/gallery-qingguangying.js"></script>
+    <script src="../js/gallery/gallery-apxiaosong.js"></script>
+    <script src="../js/gallery/gallery-baiyuanhuchui.js"></script>
+    <script src="../js/gallery/gallery-mingmei8.js"></script>
+    <script src="../js/gallery/gallery-dianyuzhangzane.js"></script>
+
+    <script src="../js/workshop/workshop-dianyuzhangzane.js"></script>
+    <script src="../js/workshop/workshop-baiyuanhuchui.js"></script>
+    <script src="../js/workshop/workshop-gangbi.js"></script>
+    <script src="../js/workshop/workshop-neza-nezha.js"></script>
+    <script src="../js/workshop/workshop-miaozi.js"></script>
+
+    <script>
+        // ========== State Management ==========
+        let state = {
+            tutorials: [],
+            faq: [],
+            gallery: [],
+            workshop: [],
+            modified: {
+                tutorials: new Set(),
+                faq: false,
+                gallery: new Set(),
+                workshop: new Set()
+            }
+        };
+
+        let deleteContext = null;
+        let editingFaqIndex = null;
+        let collapsedGroups = new Set(); // 保存折叠状态
+        let tagEditContext = null;
+
+        const TUTORIAL_TAGS = {
+            'tutorial': '教程',
+            'gameplay': '游戏视频',
+            'other': '其他'
+        };
+
+        // 获取本地化文本
+        function getLocalizedText(text) {
+            if (!text) return '';
+            if (typeof text === 'string') return text;
+            return text.zh || text.en || '';
+        }
+
+        // ========== Initialization ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                loadAllData();
+            }, 100);
+        });
+
+        function loadAllData() {
+            loadTutorials();
+            loadFaq();
+            loadGallery();
+            loadWorkshop();
+        }
+
+        function refreshData() {
+            location.reload();
+        }
+
+        // ========== Tab Switching ==========
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tabId);
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.toggle('active', content.id === `tab-${tabId}`);
+            });
+        }
+
+        // ========== Tutorial Functions ==========
+        function loadTutorials() {
+            try {
+                const creators = TutorialData.getAllCreators();
+                state.tutorials = creators.map(creator => ({
+                    id: creator.id,
+                    name: creator.name,
+                    videos: creator.videos.map(v => ({
+                        ...v,
+                        tags: v.tags && v.tags.length > 0 ? v.tags : ['tutorial']
+                    }))
+                }));
+                renderTutorials();
+            } catch (e) {
+                console.error('Failed to load tutorials:', e);
+                document.getElementById('tutorials-loading').innerHTML = '<div class="empty-state"><i class="ri-error-warning-line"></i><p>加载失败</p></div>';
+            }
+        }
+
+        function renderTutorials() {
+            const container = document.getElementById('tutorials-content');
+            const loading = document.getElementById('tutorials-loading');
+
+            if (state.tutorials.length === 0) {
+                loading.innerHTML = '<div class="empty-state"><i class="ri-video-line"></i><p>暂无教程数据</p></div>';
+                return;
+            }
+
+            let html = '';
+            state.tutorials.forEach((creator, creatorIndex) => {
+                html += `
+                    <div class="creator-group collapsed" data-creator="${creator.id}" data-type="tutorials" data-creator-index="${creatorIndex}">
+                        <div class="creator-header" onclick="toggleCreatorGroup(this)">
+                            <div class="creator-info">
+                                <span class="creator-name">${creator.name}</span>
+                                <span class="creator-count">${creator.videos.length} 个视频</span>
+                            </div>
+                            <div class="creator-actions">
+                                <button class="btn btn-outline btn-multiselect" onclick="event.stopPropagation();toggleMultiselect(this.closest('.creator-group'))">
+                                    <i class="ri-checkbox-multiple-line"></i> 多选
+                                </button>
+                                <i class="ri-arrow-down-s-line creator-toggle"></i>
+                            </div>
+                        </div>
+                        <div class="creator-content">
+                            <div class="multiselect-bar">
+                                <input type="checkbox" class="item-checkbox" style="display:block" onchange="toggleSelectAll(this)">
+                                <span class="select-count">已选 0 项</span>
+                                <button class="btn btn-outline btn-sm" onclick="event.stopPropagation();batchTagSelected(this.closest('.creator-group'))">
+                                    <i class="ri-price-tag-3-line"></i> 批量标签
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteSelected(this.closest('.creator-group'))">
+                                    <i class="ri-delete-bin-line"></i> 删除选中
+                                </button>
+                            </div>
+                            <div class="item-list" data-type="tutorials" data-creator="${creatorIndex}">
+                                ${creator.videos.map((video, index) => `
+                                    <div class="item-card" draggable="true" data-index="${index}">
+                                        <input type="checkbox" class="item-checkbox" onchange="updateSelectCount(this.closest('.creator-group'))">
+                                        <i class="ri-draggable drag-handle"></i>
+                                        <img class="item-thumbnail" src="${video.封面}" alt="${video.标题}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 45%22><rect fill=%22%233a3a33%22 width=%2280%22 height=%2245%22/></svg>'">
+                                        <div class="item-info">
+                                            <div class="item-title">${video.标题}</div>
+                                            <div class="item-meta">${video.链接}</div>
+                                        </div>
+                                        <div class="item-tags">
+                                            ${(video.tags || []).map(t => `<span class="item-tag">${TUTORIAL_TAGS[t] || t}</span>`).join('')}
+                                            <button class="btn-tag" onclick="openTagModal('tutorials', ${creatorIndex}, ${index})" title="编辑标签">
+                                                <i class="ri-price-tag-3-line"></i>
+                                            </button>
+                                        </div>
+                                        <div class="item-actions">
+                                            <a href="${video.链接}" target="_blank" class="btn-icon" title="查看视频">
+                                                <i class="ri-external-link-line"></i>
+                                            </a>
+                                            <button class="btn-icon danger" onclick="deleteItem('tutorials', ${creatorIndex}, ${index})" title="删除">
+                                                <i class="ri-delete-bin-line"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            loading.classList.add('hidden');
+            container.classList.remove('hidden');
+
+            restoreCollapsedState();
+            initDragAndDrop('tutorials');
+        }
+
+        // ========== FAQ Functions ==========
+        function loadFaq() {
+            try {
+                state.faq = JSON.parse(JSON.stringify(FAQ_DATA));
+                renderFaq();
+            } catch (e) {
+                console.error('Failed to load FAQ:', e);
+                document.getElementById('faq-loading').innerHTML = '<div class="empty-state"><i class="ri-error-warning-line"></i><p>加载失败</p></div>';
+            }
+        }
+
+        function renderFaq() {
+            const container = document.getElementById('faq-content');
+            const loading = document.getElementById('faq-loading');
+
+            if (state.faq.length === 0) {
+                container.innerHTML = '<div class="empty-state"><i class="ri-question-answer-line"></i><p>暂无FAQ数据</p></div>';
+                loading.classList.add('hidden');
+                container.classList.remove('hidden');
+                return;
+            }
+
+            let html = '<div class="item-list" data-type="faq">';
+            state.faq.forEach((item, index) => {
+                html += `
+                    <div class="faq-item" draggable="true" data-index="${index}">
+                        <div class="faq-header">
+                            <i class="ri-draggable drag-handle"></i>
+                            <div class="faq-content">
+                                <div class="faq-question">${item.question}</div>
+                                <div class="faq-question-en">${item.questionEn || ''}</div>
+                                <div class="faq-answer">${item.answer}</div>
+                            </div>
+                            <div class="item-actions">
+                                <button class="btn-icon" onclick="editFaq(${index})" title="编辑">
+                                    <i class="ri-edit-line"></i>
+                                </button>
+                                <button class="btn-icon danger" onclick="deleteItem('faq', null, ${index})" title="删除">
+                                    <i class="ri-delete-bin-line"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+
+            container.innerHTML = html;
+            loading.classList.add('hidden');
+            container.classList.remove('hidden');
+
+            initDragAndDrop('faq');
+        }
+
+        function openFaqModal(index = null) {
+            editingFaqIndex = index;
+            const modal = document.getElementById('faq-modal');
+            const title = document.getElementById('faq-modal-title');
+
+            if (index !== null) {
+                const item = state.faq[index];
+                title.textContent = '编辑FAQ';
+                document.getElementById('faq-question').value = item.question || '';
+                document.getElementById('faq-question-en').value = item.questionEn || '';
+                document.getElementById('faq-answer').value = item.answer || '';
+                document.getElementById('faq-answer-en').value = item.answerEn || '';
+            } else {
+                title.textContent = '新增FAQ';
+                document.getElementById('faq-question').value = '';
+                document.getElementById('faq-question-en').value = '';
+                document.getElementById('faq-answer').value = '';
+                document.getElementById('faq-answer-en').value = '';
+            }
+
+            modal.classList.add('active');
+        }
+
+        function closeFaqModal() {
+            document.getElementById('faq-modal').classList.remove('active');
+            editingFaqIndex = null;
+        }
+
+        function editFaq(index) {
+            openFaqModal(index);
+        }
+
+        function saveFaq() {
+            const question = document.getElementById('faq-question').value.trim();
+            const questionEn = document.getElementById('faq-question-en').value.trim();
+            const answer = document.getElementById('faq-answer').value.trim();
+            const answerEn = document.getElementById('faq-answer-en').value.trim();
+
+            if (!question || !answer) {
+                showToast('请填写问题和回答', 'error');
+                return;
+            }
+
+            const faqItem = {
+                id: editingFaqIndex !== null ? state.faq[editingFaqIndex].id : Date.now(),
+                question,
+                questionEn,
+                answer,
+                answerEn
+            };
+
+            if (editingFaqIndex !== null) {
+                state.faq[editingFaqIndex] = faqItem;
+                showToast('FAQ已更新', 'success');
+            } else {
+                state.faq.push(faqItem);
+                showToast('FAQ已添加', 'success');
+            }
+
+            state.modified.faq = true;
+            closeFaqModal();
+            renderFaq();
+        }
+
+        // ========== Gallery Functions ==========
+        function loadGallery() {
+            try {
+                const artists = GalleryData.getAllArtists();
+                state.gallery = artists.map(artist => ({
+                    id: artist.id,
+                    name: artist.name,
+                    works: [...artist.works]
+                }));
+                renderGallery();
+            } catch (e) {
+                console.error('Failed to load gallery:', e);
+                document.getElementById('gallery-loading').innerHTML = '<div class="empty-state"><i class="ri-error-warning-line"></i><p>加载失败</p></div>';
+            }
+        }
+
+        function renderGallery() {
+            const container = document.getElementById('gallery-content');
+            const loading = document.getElementById('gallery-loading');
+
+            if (state.gallery.length === 0) {
+                loading.innerHTML = '<div class="empty-state"><i class="ri-image-line"></i><p>暂无艺术作品数据</p></div>';
+                return;
+            }
+
+            let html = '';
+            state.gallery.forEach((artist, artistIndex) => {
+                html += `
+                    <div class="creator-group collapsed" data-creator="${artist.id}" data-type="gallery" data-creator-index="${artistIndex}">
+                        <div class="creator-header" onclick="toggleCreatorGroup(this)">
+                            <div class="creator-info">
+                                <span class="creator-name">${artist.name}</span>
+                                <span class="creator-count">${artist.works.length} 个作品</span>
+                            </div>
+                            <div class="creator-actions">
+                                <button class="btn btn-outline btn-multiselect" onclick="event.stopPropagation();toggleMultiselect(this.closest('.creator-group'))">
+                                    <i class="ri-checkbox-multiple-line"></i> 多选
+                                </button>
+                                <i class="ri-arrow-down-s-line creator-toggle"></i>
+                            </div>
+                        </div>
+                        <div class="creator-content">
+                            <div class="multiselect-bar">
+                                <input type="checkbox" class="item-checkbox" style="display:block" onchange="toggleSelectAll(this)">
+                                <span class="select-count">已选 0 项</span>
+                                <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteSelected(this.closest('.creator-group'))">
+                                    <i class="ri-delete-bin-line"></i> 删除选中
+                                </button>
+                            </div>
+                            <div class="item-list" data-type="gallery" data-creator="${artistIndex}">
+                                ${artist.works.map((work, index) => `
+                                    <div class="item-card" draggable="true" data-index="${index}">
+                                        <input type="checkbox" class="item-checkbox" onchange="updateSelectCount(this.closest('.creator-group'))">
+                                        <i class="ri-draggable drag-handle"></i>
+                                        <img class="item-thumbnail square" src="${work.image}" alt="${work.title}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 60 60%22><rect fill=%22%233a3a33%22 width=%2260%22 height=%2260%22/></svg>'">
+                                        <div class="item-info">
+                                            <div class="item-title">${work.title}</div>
+                                        </div>
+                                        <div class="item-actions">
+                                            <a href="${work.image}" target="_blank" class="btn-icon" title="查看图片">
+                                                <i class="ri-external-link-line"></i>
+                                            </a>
+                                            <button class="btn-icon danger" onclick="deleteItem('gallery', ${artistIndex}, ${index})" title="删除">
+                                                <i class="ri-delete-bin-line"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            loading.classList.add('hidden');
+            container.classList.remove('hidden');
+
+            restoreCollapsedState();
+            initDragAndDrop('gallery');
+        }
+
+        // ========== Workshop Functions ==========
+        function loadWorkshop() {
+            try {
+                const creators = WorkshopData.getAllCreators();
+                state.workshop = creators.map(creator => ({
+                    id: creator.id,
+                    name: creator.name,
+                    works: creator.works.map(w => ({
+                        title: w.title,
+                        description: w.description,
+                        image: w.image,
+                        link: w.link
+                    }))
+                }));
+                renderWorkshop();
+            } catch (e) {
+                console.error('Failed to load workshop:', e);
+                document.getElementById('workshop-loading').innerHTML = '<div class="empty-state"><i class="ri-error-warning-line"></i><p>加载失败</p></div>';
+            }
+        }
+
+        function renderWorkshop() {
+            const container = document.getElementById('workshop-content');
+            const loading = document.getElementById('workshop-loading');
+
+            if (state.workshop.length === 0) {
+                loading.innerHTML = '<div class="empty-state"><i class="ri-tools-line"></i><p>暂无创意工坊数据</p></div>';
+                return;
+            }
+
+            let html = '';
+            state.workshop.forEach((creator, creatorIndex) => {
+                html += `
+                    <div class="creator-group collapsed" data-creator="${creator.id}" data-type="workshop" data-creator-index="${creatorIndex}">
+                        <div class="creator-header" onclick="toggleCreatorGroup(this)">
+                            <div class="creator-info">
+                                <span class="creator-name">${creator.name}</span>
+                                <span class="creator-count">${creator.works.length} 个作品</span>
+                            </div>
+                            <div class="creator-actions">
+                                <button class="btn btn-outline btn-multiselect" onclick="event.stopPropagation();toggleMultiselect(this.closest('.creator-group'))">
+                                    <i class="ri-checkbox-multiple-line"></i> 多选
+                                </button>
+                                <i class="ri-arrow-down-s-line creator-toggle"></i>
+                            </div>
+                        </div>
+                        <div class="creator-content">
+                            <div class="multiselect-bar">
+                                <input type="checkbox" class="item-checkbox" style="display:block" onchange="toggleSelectAll(this)">
+                                <span class="select-count">已选 0 项</span>
+                                <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteSelected(this.closest('.creator-group'))">
+                                    <i class="ri-delete-bin-line"></i> 删除选中
+                                </button>
+                            </div>
+                            <div class="item-list" data-type="workshop" data-creator="${creatorIndex}">
+                                ${creator.works.map((work, index) => `
+                                    <div class="item-card" draggable="true" data-index="${index}">
+                                        <input type="checkbox" class="item-checkbox" onchange="updateSelectCount(this.closest('.creator-group'))">
+                                        <i class="ri-draggable drag-handle"></i>
+                                        <img class="item-thumbnail" src="${work.image}" alt="${work.title}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 45%22><rect fill=%22%233a3a33%22 width=%2280%22 height=%2245%22/></svg>'">
+                                        <div class="item-info">
+                                            <div class="item-title">${getLocalizedText(work.title)}</div>
+                                            <div class="item-meta">${work.description ? getLocalizedText(work.description).substring(0, 50) + '...' : ''}</div>
+                                        </div>
+                                        <div class="item-actions">
+                                            <a href="${work.link}" target="_blank" class="btn-icon" title="查看作品">
+                                                <i class="ri-external-link-line"></i>
+                                            </a>
+                                            <button class="btn-icon danger" onclick="deleteItem('workshop', ${creatorIndex}, ${index})" title="删除">
+                                                <i class="ri-delete-bin-line"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            loading.classList.add('hidden');
+            container.classList.remove('hidden');
+
+            restoreCollapsedState();
+            initDragAndDrop('workshop');
+        }
+
+        // ========== Drag and Drop ==========
+        function initDragAndDrop(type) {
+            const lists = document.querySelectorAll(`.item-list[data-type="${type}"]`);
+
+            lists.forEach(list => {
+                const items = list.querySelectorAll('[draggable="true"]');
+
+                items.forEach(item => {
+                    item.addEventListener('dragstart', handleDragStart);
+                    item.addEventListener('dragend', handleDragEnd);
+                    item.addEventListener('dragover', handleDragOver);
+                    item.addEventListener('dragleave', handleDragLeave);
+                    item.addEventListener('drop', handleDrop);
+                });
+            });
+        }
+
+        let draggedItem = null;
+        let draggedList = null;
+
+        function handleDragStart(e) {
+            draggedItem = this;
+            draggedList = this.parentElement;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+            draggedItem = null;
+            draggedList = null;
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            if (this !== draggedItem && this.parentElement === draggedList) {
+                this.classList.add('drag-over');
+            }
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+
+            if (this === draggedItem || this.parentElement !== draggedList) return;
+
+            const list = this.parentElement;
+            const type = list.dataset.type;
+            const creatorIndex = list.dataset.creator ? parseInt(list.dataset.creator) : null;
+
+            const fromIndex = parseInt(draggedItem.dataset.index);
+            const toIndex = parseInt(this.dataset.index);
+
+            // Update data
+            if (type === 'faq') {
+                const item = state.faq.splice(fromIndex, 1)[0];
+                state.faq.splice(toIndex, 0, item);
+                state.modified.faq = true;
+                renderFaq();
+            } else if (type === 'tutorials') {
+                const creator = state.tutorials[creatorIndex];
+                const item = creator.videos.splice(fromIndex, 1)[0];
+                creator.videos.splice(toIndex, 0, item);
+                state.modified.tutorials.add(creator.id);
+                renderTutorials();
+            } else if (type === 'gallery') {
+                const artist = state.gallery[creatorIndex];
+                const item = artist.works.splice(fromIndex, 1)[0];
+                artist.works.splice(toIndex, 0, item);
+                state.modified.gallery.add(artist.id);
+                renderGallery();
+            } else if (type === 'workshop') {
+                const creator = state.workshop[creatorIndex];
+                const item = creator.works.splice(fromIndex, 1)[0];
+                creator.works.splice(toIndex, 0, item);
+                state.modified.workshop.add(creator.id);
+                renderWorkshop();
+            }
+
+            showToast('排序已更新', 'success');
+        }
+
+        // ========== Delete Functions ==========
+        function deleteItem(type, creatorIndex, itemIndex) {
+            let preview = '';
+
+            if (type === 'tutorials') {
+                const video = state.tutorials[creatorIndex].videos[itemIndex];
+                preview = `<strong>教程：</strong>${video.标题}`;
+            } else if (type === 'faq') {
+                const item = state.faq[itemIndex];
+                preview = `<strong>问题：</strong>${item.question}`;
+            } else if (type === 'gallery') {
+                const work = state.gallery[creatorIndex].works[itemIndex];
+                preview = `<strong>作品：</strong>${work.title}`;
+            } else if (type === 'workshop') {
+                const work = state.workshop[creatorIndex].works[itemIndex];
+                preview = `<strong>作品：</strong>${work.title}`;
+            }
+
+            deleteContext = { type, creatorIndex, itemIndex };
+            document.getElementById('delete-preview').innerHTML = preview;
+            document.getElementById('delete-modal').classList.add('active');
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('delete-modal').classList.remove('active');
+            deleteContext = null;
+        }
+
+        function confirmDelete() {
+            if (!deleteContext) return;
+
+            const { type, creatorIndex, itemIndex } = deleteContext;
+
+            if (type === 'tutorials') {
+                const creator = state.tutorials[creatorIndex];
+                creator.videos.splice(itemIndex, 1);
+                state.modified.tutorials.add(creator.id);
+                renderTutorials();
+            } else if (type === 'faq') {
+                state.faq.splice(itemIndex, 1);
+                state.modified.faq = true;
+                renderFaq();
+            } else if (type === 'gallery') {
+                const artist = state.gallery[creatorIndex];
+                artist.works.splice(itemIndex, 1);
+                state.modified.gallery.add(artist.id);
+                renderGallery();
+            } else if (type === 'workshop') {
+                const creator = state.workshop[creatorIndex];
+                creator.works.splice(itemIndex, 1);
+                state.modified.workshop.add(creator.id);
+                renderWorkshop();
+            }
+
+            closeDeleteModal();
+            showToast('已删除', 'success');
+        }
+
+        // ========== Export Functions ==========
+        function openExportPanel() {
+            generateExportContent();
+            document.getElementById('export-panel').classList.add('active');
+            document.getElementById('export-overlay').classList.add('active');
+        }
+
+        function closeExportPanel() {
+            document.getElementById('export-panel').classList.remove('active');
+            document.getElementById('export-overlay').classList.remove('active');
+        }
+
+        function generateExportContent() {
+            const container = document.getElementById('export-body');
+            let html = '';
+
+            // 提示信息
+            html += `
+                <div class="export-notice">
+                    <i class="ri-information-line"></i>
+                    <span>下载后请将文件覆盖到项目对应目录中</span>
+                </div>
+            `;
+
+            // FAQ Export
+            if (state.modified.faq || state.faq.length > 0) {
+                html += `
+                    <div class="export-file">
+                        <div class="export-file-header">
+                            <span class="export-file-path">js/faq-data.js</span>
+                            <button class="btn btn-sm btn-primary" onclick="downloadFile('faq-data.js', 'faq')">
+                                <i class="ri-download-line"></i> 下载
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Tutorial Exports
+            state.tutorials.forEach(creator => {
+                html += `
+                    <div class="export-file">
+                        <div class="export-file-header">
+                            <span class="export-file-path">js/tutorial/tutorial-${creator.id}.js</span>
+                            <button class="btn btn-sm btn-primary" onclick="downloadFile('tutorial-${creator.id}.js', 'tutorial', '${creator.id}')">
+                                <i class="ri-download-line"></i> 下载
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Gallery Exports
+            state.gallery.forEach(artist => {
+                html += `
+                    <div class="export-file">
+                        <div class="export-file-header">
+                            <span class="export-file-path">js/gallery/gallery-${artist.id}.js</span>
+                            <button class="btn btn-sm btn-primary" onclick="downloadFile('gallery-${artist.id}.js', 'gallery', '${artist.id}')">
+                                <i class="ri-download-line"></i> 下载
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Workshop Exports
+            state.workshop.forEach(creator => {
+                html += `
+                    <div class="export-file">
+                        <div class="export-file-header">
+                            <span class="export-file-path">js/workshop/workshop-${creator.id}.js</span>
+                            <button class="btn btn-sm btn-primary" onclick="downloadFile('workshop-${creator.id}.js', 'workshop', '${creator.id}')">
+                                <i class="ri-download-line"></i> 下载
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // 批量下载按钮
+            html += `
+                <div class="export-actions">
+                    <button class="btn btn-primary" onclick="downloadAllFiles()">
+                        <i class="ri-download-2-line"></i> 下载全部文件
+                    </button>
+                </div>
+            `;
+
+            container.innerHTML = html || '<div class="empty-state"><p>暂无数据可导出</p></div>';
+        }
+
+        // 下载单个文件
+        function downloadFile(filename, type, id) {
+            let content = '';
+            if (type === 'faq') {
+                content = generateFaqCode();
+            } else if (type === 'tutorial') {
+                const creator = state.tutorials.find(c => c.id === id);
+                content = generateTutorialCode(creator);
+            } else if (type === 'gallery') {
+                const artist = state.gallery.find(a => a.id === id);
+                content = generateGalleryCode(artist);
+            } else if (type === 'workshop') {
+                const creator = state.workshop.find(c => c.id === id);
+                content = generateWorkshopCode(creator);
+            }
+
+            const blob = new Blob([content], { type: 'text/javascript;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast(`已下载 ${filename}`, 'success');
+        }
+
+        // 批量下载所有文件
+        function downloadAllFiles() {
+            let downloadCount = 0;
+
+            // FAQ
+            if (state.faq.length > 0) {
+                setTimeout(() => downloadFile('faq-data.js', 'faq'), downloadCount * 200);
+                downloadCount++;
+            }
+
+            // Tutorials
+            state.tutorials.forEach(creator => {
+                setTimeout(() => downloadFile(`tutorial-${creator.id}.js`, 'tutorial', creator.id), downloadCount * 200);
+                downloadCount++;
+            });
+
+            // Gallery
+            state.gallery.forEach(artist => {
+                setTimeout(() => downloadFile(`gallery-${artist.id}.js`, 'gallery', artist.id), downloadCount * 200);
+                downloadCount++;
+            });
+
+            // Workshop
+            state.workshop.forEach(creator => {
+                setTimeout(() => downloadFile(`workshop-${creator.id}.js`, 'workshop', creator.id), downloadCount * 200);
+                downloadCount++;
+            });
+
+            showToast(`正在下载 ${downloadCount} 个文件...`, 'success');
+        }
+
+        function generateFaqCode() {
+            const items = state.faq.map(item => {
+                return `  {
+    "id": ${item.id},
+    "question": ${JSON.stringify(item.question)},
+    "questionEn": ${JSON.stringify(item.questionEn || '')},
+    "answer": ${JSON.stringify(item.answer)},
+    "answerEn": ${JSON.stringify(item.answerEn || '')}
+  }`;
+            }).join(',\n');
+
+            return `const FAQ_DATA = [
+${items}
+];
+`;
+        }
+
+        function generateTutorialCode(creator) {
+            const videos = JSON.stringify(creator.videos, null, 2);
+            return `/**
+ * ${creator.name} - 教程视频数据
+ */
+TutorialData.register('${creator.id}', {
+    name: ${JSON.stringify(creator.name)},
+    videos:
+${videos}
+});
+`;
+        }
+
+        function generateGalleryCode(artist) {
+            const works = JSON.stringify(artist.works, null, 2);
+            return `/**
+ * ${artist.name} - 艺术作品数据
+ */
+GalleryData.register('${artist.id}', {
+    name: ${JSON.stringify(artist.name)},
+    works:
+${works}
+});
+`;
+        }
+
+        function generateWorkshopCode(creator) {
+            const works = JSON.stringify(creator.works, null, 2);
+            return `/**
+ * ${creator.name} - 创意工坊作品数据
+ */
+WorkshopData.register('${creator.id}', {
+    name: ${JSON.stringify(creator.name)},
+    works:
+${works}
+});
+`;
+        }
+
+        // ========== Utility Functions ==========
+        function toggleCreatorGroup(header) {
+            const group = header.parentElement;
+            const creatorId = group.dataset.creator;
+            group.classList.toggle('collapsed');
+            if (group.classList.contains('collapsed')) {
+                collapsedGroups.add(creatorId);
+            } else {
+                collapsedGroups.delete(creatorId);
+            }
+        }
+
+        function restoreCollapsedState() {
+            document.querySelectorAll('.creator-group').forEach(group => {
+                const id = group.dataset.creator;
+                // 如果用户手动展开过，则移除collapsed
+                if (collapsedGroups.has(id) === false && collapsedGroups.size > 0) {
+                    group.classList.remove('collapsed');
+                }
+            });
+        }
+
+        // ========== Multi-select Functions ==========
+        function toggleMultiselect(group) {
+            group.classList.toggle('multiselect');
+            const btn = group.querySelector('.btn-multiselect');
+            if (group.classList.contains('multiselect')) {
+                btn.innerHTML = '<i class="ri-close-line"></i> 取消';
+                group.querySelectorAll('.item-checkbox').forEach(cb => cb.checked = false);
+                updateSelectCount(group);
+            } else {
+                btn.innerHTML = '<i class="ri-checkbox-multiple-line"></i> 多选';
+            }
+        }
+
+        function toggleSelectAll(checkbox) {
+            const group = checkbox.closest('.creator-group');
+            const checkboxes = group.querySelectorAll('.item-list .item-checkbox');
+            checkboxes.forEach(cb => cb.checked = checkbox.checked);
+            updateSelectCount(group);
+        }
+
+        function updateSelectCount(group) {
+            const checkboxes = group.querySelectorAll('.item-list .item-checkbox');
+            const checked = group.querySelectorAll('.item-list .item-checkbox:checked').length;
+            group.querySelector('.select-count').textContent = `已选 ${checked} 项`;
+            group.querySelector('.multiselect-bar .item-checkbox').checked = checked === checkboxes.length && checked > 0;
+        }
+
+        // ========== 框选功能 ==========
+        let selectionBox = null;
+        let selectionStart = null;
+        let selectionGroup = null;
+
+        document.addEventListener('mousedown', (e) => {
+            const group = e.target.closest('.creator-group.multiselect');
+            if (!group || !e.target.closest('.item-list')) return;
+            if (e.target.closest('.item-actions, .btn-tag, .item-checkbox')) return;
+
+            selectionGroup = group;
+            selectionStart = { x: e.clientX, y: e.clientY };
+            selectionBox = document.createElement('div');
+            selectionBox.className = 'selection-box';
+            document.body.appendChild(selectionBox);
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!selectionBox || !selectionStart) return;
+            const x = Math.min(e.clientX, selectionStart.x);
+            const y = Math.min(e.clientY, selectionStart.y);
+            const w = Math.abs(e.clientX - selectionStart.x);
+            const h = Math.abs(e.clientY - selectionStart.y);
+            selectionBox.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${h}px`;
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (!selectionBox || !selectionGroup) {
+                selectionBox?.remove();
+                selectionBox = selectionStart = selectionGroup = null;
+                return;
+            }
+            const boxRect = selectionBox.getBoundingClientRect();
+            selectionGroup.querySelectorAll('.item-list .item-card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.left < boxRect.right && rect.right > boxRect.left &&
+                    rect.top < boxRect.bottom && rect.bottom > boxRect.top) {
+                    card.querySelector('.item-checkbox').checked = true;
+                }
+            });
+            updateSelectCount(selectionGroup);
+            selectionBox.remove();
+            selectionBox = selectionStart = selectionGroup = null;
+        });
+
+        function deleteSelected(group) {
+            const type = group.dataset.type;
+            const creatorIndex = parseInt(group.dataset.creatorIndex);
+            const checkboxes = group.querySelectorAll('.item-list .item-checkbox:checked');
+            if (checkboxes.length === 0) {
+                showToast('请先选择要删除的项目', 'error');
+                return;
+            }
+            const indices = Array.from(checkboxes).map(cb => parseInt(cb.closest('.item-card').dataset.index)).sort((a, b) => b - a);
+
+            if (type === 'tutorials') {
+                const creator = state.tutorials[creatorIndex];
+                indices.forEach(i => creator.videos.splice(i, 1));
+                state.modified.tutorials.add(creator.id);
+                renderTutorials();
+            } else if (type === 'gallery') {
+                const artist = state.gallery[creatorIndex];
+                indices.forEach(i => artist.works.splice(i, 1));
+                state.modified.gallery.add(artist.id);
+                renderGallery();
+            } else if (type === 'workshop') {
+                const creator = state.workshop[creatorIndex];
+                indices.forEach(i => creator.works.splice(i, 1));
+                state.modified.workshop.add(creator.id);
+                renderWorkshop();
+            }
+            showToast(`已删除 ${indices.length} 项`, 'success');
+        }
+
+        // ========== Tag Functions ==========
+        let batchTagContext = null;
+
+        function batchTagSelected(group) {
+            const type = group.dataset.type;
+            if (type !== 'tutorials') return;
+            const creatorIndex = parseInt(group.dataset.creatorIndex);
+            const checkboxes = group.querySelectorAll('.item-list .item-checkbox:checked');
+            if (checkboxes.length === 0) {
+                showToast('请先选择要打标签的项目', 'error');
+                return;
+            }
+            const indices = Array.from(checkboxes).map(cb => parseInt(cb.closest('.item-card').dataset.index));
+            batchTagContext = { type, creatorIndex, indices };
+
+            const selector = document.getElementById('tag-selector');
+            selector.innerHTML = Object.entries(TUTORIAL_TAGS).map(([key, label]) => `
+                <label class="tag-option" data-tag="${key}">
+                    <input type="checkbox">
+                    ${label}
+                </label>
+            `).join('');
+
+            selector.querySelectorAll('.tag-option').forEach(opt => {
+                opt.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    selector.querySelectorAll('.tag-option').forEach(o => o.classList.remove('selected'));
+                    opt.classList.add('selected');
+                });
+            });
+
+            document.getElementById('tag-modal').classList.add('active');
+        }
+
+        function openTagModal(type, creatorIndex, itemIndex) {
+            if (type !== 'tutorials') return;
+            batchTagContext = null;
+            tagEditContext = { type, creatorIndex, itemIndex };
+            const item = state.tutorials[creatorIndex].videos[itemIndex];
+            const currentTags = item.tags || [];
+
+            const selector = document.getElementById('tag-selector');
+            selector.innerHTML = Object.entries(TUTORIAL_TAGS).map(([key, label]) => `
+                <label class="tag-option ${currentTags.includes(key) ? 'selected' : ''}" data-tag="${key}">
+                    <input type="checkbox" ${currentTags.includes(key) ? 'checked' : ''}>
+                    ${label}
+                </label>
+            `).join('');
+
+            selector.querySelectorAll('.tag-option').forEach(opt => {
+                opt.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    selector.querySelectorAll('.tag-option').forEach(o => o.classList.remove('selected'));
+                    opt.classList.add('selected');
+                });
+            });
+
+            document.getElementById('tag-modal').classList.add('active');
+        }
+
+        function closeTagModal() {
+            document.getElementById('tag-modal').classList.remove('active');
+            tagEditContext = null;
+            batchTagContext = null;
+        }
+
+        function saveTag() {
+            const selected = Array.from(document.querySelectorAll('#tag-selector .tag-option.selected'))
+                .map(opt => opt.dataset.tag);
+
+            // 批量模式
+            if (batchTagContext) {
+                const { creatorIndex, indices } = batchTagContext;
+                indices.forEach(i => state.tutorials[creatorIndex].videos[i].tags = [...selected]);
+                state.modified.tutorials.add(state.tutorials[creatorIndex].id);
+                renderTutorials();
+                closeTagModal();
+                showToast(`已为 ${indices.length} 项更新标签`, 'success');
+                return;
+            }
+
+            // 单项模式
+            if (!tagEditContext) return;
+            const { creatorIndex, itemIndex } = tagEditContext;
+            state.tutorials[creatorIndex].videos[itemIndex].tags = selected;
+            state.modified.tutorials.add(state.tutorials[creatorIndex].id);
+            renderTutorials();
+
+            closeTagModal();
+            showToast('标签已更新', 'success');
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="ri-${type === 'success' ? 'check' : 'error-warning'}-line"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

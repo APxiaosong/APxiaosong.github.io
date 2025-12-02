@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0;url=https://www.legendbuild.cn/">
+    <title>正在跳转 - 传奇建造队</title>
+    <style>
+        :root {
+            --color-bg: #2C2C27;
+            --color-text-muted: #D7D7D7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--color-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            padding-bottom: 80px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        .loader-logo {
+            width: 120px;
+            animation: loaderSpin 1.2s linear infinite;
+        }
+        .loader-text {
+            color: var(--color-text-muted);
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        @keyframes loaderSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <img src="https://s2.loli.net/2025/12/02/Je7Cx96BAoYqKfu.png" alt="Loading" class="loader-logo">
+    <span class="loader-text">正在跳转中……</span>
+    <script>
+        // JS备用跳转，确保跳转成功
+        setTimeout(function() {
+            window.location.href = 'https://www.legendbuild.cn/';
+        }, 500);
+    </script>
+</body>
+</html>

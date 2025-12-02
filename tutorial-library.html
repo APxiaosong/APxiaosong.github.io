@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="教程库 - 传奇建造队">
+    <title>教程库 | 传奇建造队</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+    <link rel="preload" as="image" href="https://s2.loli.net/2025/06/12/qCLiGk4BdamZvXW.png">
+</head>
+<body>
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="page-hero-bg" style="background-image: url('https://s2.loli.net/2025/11/29/kbViqHPAeXo7N1U.png');"></div>
+        <div class="page-hero-content animate-on-scroll" data-animation="slide-up">
+            <h1 data-i18n="tutorialLibPage.title">教程库</h1>
+            <p class="page-hero-subtitle" data-i18n="tutorialLibPage.subtitle">Tutorial Library</p>
+        </div>
+    </section>
+
+    <!-- 搜索和内容 -->
+    <section class="page-section page-section-compact">
+        <div class="container">
+            <!-- 搜索表单 -->
+            <form class="search-form animate-on-scroll" data-animation="fade-in" id="searchForm">
+                <!-- 筛选 -->
+                <div class="filter-dropdown" id="tutorialFilter">
+                    <button type="button" class="filter-btn">
+                        <i class="ri-filter-3-line"></i>
+                        <span data-i18n="common.filter">筛选</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <div class="filter-menu has-columns">
+                        <div class="filter-menu-columns">
+                            <div class="filter-column" id="tutorialCreatorColumn">
+                                <div class="filter-column-title" data-i18n="tutorialLibPage.filterCreator">筛选UP主</div>
+                            </div>
+                            <div class="filter-column" id="tutorialTagColumn">
+                                <div class="filter-column-title" data-i18n="tutorialLibPage.filterTag">筛选标签</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-input-wrapper">
+                    <input type="text" id="tutorialSearch" placeholder="搜索视频标题或简介..." class="search-input" data-i18n-placeholder="tutorialLibPage.searchPlaceholder">
+                    <button type="button" class="search-clear" id="tutorialSearchClear"><i class="ri-close-line"></i></button>
+                </div>
+                <button type="submit" class="search-btn"><i class="ri-search-line"></i> <span data-i18n="tutorialLibPage.searchBtn">搜索</span></button>
+            </form>
+            <div class="results-info" id="resultsInfo"></div>
+
+            <!-- 视频网格 -->
+            <div class="video-grid" id="videoGrid">
+                <div class="video-grid-loading" data-i18n="tutorialLibPage.loading">加载中...</div>
+            </div>
+
+            <!-- 分页 -->
+            <div class="pagination" id="pagination" style="display: none;"></div>
+        </div>
+    </section>
+
+    <script src="js/components.js"></script>
+    <script>Components.init({ activePage: 'tutorial-library' });</script>
+    <script src="js/i18n.js"></script>
+    <script src="js/lang/zh-CN.js"></script>
+    <script src="js/lang/en.js"></script>
+    <script src="js/tutorial-data.js"></script>
+    <script src="js/tutorial/tutorial-davidsirius.js"></script>
+    <script src="js/tutorial/tutorial-jingwuwei.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
