@@ -43,7 +43,7 @@
                     <a href="#mod" class="nav-link" data-i18n="nav.mod">模组</a>
                     <div class="dropdown-menu">
                         <a href="mod.html" data-i18n="nav.modIntro">模组</a>
-                        <a href="download.html" data-i18n="nav.download">下载</a>
+                        <a href="get.html" data-i18n="nav.download">下载</a>
                     </div>
                 </li>
                 <li class="nav-item has-dropdown">
@@ -126,7 +126,7 @@
                 <div class="mod-actions">
                     <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3309460746" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="mod.cta">前往 Steam 创意工坊</a>
                     <a href="mod.html" class="btn btn-outline" data-i18n="mod.learnMore">了解更多</a>
-                    <a href="download.html" class="btn btn-outline" data-i18n="mod.downloadBtn">下载</a>
+                    <a href="get.html" class="btn btn-outline" data-i18n="mod.downloadBtn">下载</a>
                 </div>
             </div>
         </div>
@@ -227,6 +227,20 @@
         </div>
     </section>
 
+    <!-- 创意工坊预览 -->
+    <section class="section workshop-preview-section" id="workshop-preview">
+        <div class="workshop-preview-bg"></div>
+        <div class="container">
+            <h2 class="section-title animate-on-scroll" data-animation="slide-up" data-i18n="workshopPreview.title">创意工坊</h2>
+            <p class="section-subtitle animate-on-scroll" data-animation="slide-up" data-delay="100" data-i18n="workshopPreview.subtitle">社区创作者的精选作品</p>
+            <div class="workshop-preview-container animate-on-scroll" data-animation="fade-in" data-delay="200">
+                <div class="workshop-preview-grid" id="workshopPreviewGrid"></div>
+                <div class="workshop-preview-fade"></div>
+            </div>
+            <a href="gallery.html#workshop" class="btn btn-primary animate-on-scroll" data-animation="fade-in" data-delay="300" data-i18n="workshopPreview.viewAll">浏览全部作品</a>
+        </div>
+    </section>
+
     <!-- 反馈 -->
     <section class="section contact-section" id="contact">
         <div class="container">
@@ -247,6 +261,8 @@
     <script src="js/i18n.js"></script>
     <script src="js/lang/zh-CN.js"></script>
     <script src="js/lang/en.js"></script>
+    <script src="js/workshop-data.js"></script>
+    <script src="js/workshop/workshop-dianyuzhangzane.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

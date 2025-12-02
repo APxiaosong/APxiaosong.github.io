@@ -10,7 +10,7 @@
     # 检查是否已初始化
     if (-not (Test-Path ".git")) {
         Write-Host "[错误] 未检测到 .git 文件夹" -ForegroundColor Red
-        Write-Host "请先双击 首次部署.bat 进行首次部署"
+        Write-Host "请先运行 git init 初始化仓库"
         Read-Host "按回车键退出"
         exit 1
     }
@@ -27,7 +27,7 @@
     $remote = git remote get-url origin 2>$null
     if (-not $remote) {
         Write-Host "[错误] 未配置远程仓库" -ForegroundColor Red
-        Write-Host "请先运行首次部署脚本"
+        Write-Host "请先运行 git remote add origin <仓库地址> 配置远程仓库"
         Read-Host "按回车键退出"
         exit 1
     }
@@ -60,8 +60,9 @@
     Write-Host "正在添加文件..."
     git add . 2>&1 | Out-Null
 
-    # 创建提交
+    # 创建提交（确保中文编码正确）
     Write-Host "正在创建提交..."
+    $env:LC_ALL = "C.UTF-8"
     git commit -m $msg 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) {
         Write-Host "[错误] 创建提交失败" -ForegroundColor Red
@@ -71,7 +72,7 @@
 
     # 推送
     Write-Host "正在推送到 GitHub..."
-    git push 2>&1
+    git push --progress 2>&1 | ForEach-Object { Write-Host $_ }
     if ($LASTEXITCODE -ne 0) {
         Write-Host ""
         Write-Host "[错误] 推送失败" -ForegroundColor Red

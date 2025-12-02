@@ -32,10 +32,10 @@ const Components = {
                     </div>
                 </li>
                 <li class="nav-item has-dropdown">
-                    <a href="#" class="nav-link${getParentActive(['mod', 'download'])}" data-i18n="nav.mod">模组</a>
+                    <a href="#" class="nav-link${getParentActive(['mod', 'get'])}" data-i18n="nav.mod">模组</a>
                     <div class="dropdown-menu">
                         <a href="mod.html" data-i18n="nav.modIntro">模组</a>
-                        <a href="download.html" data-i18n="nav.download">下载</a>
+                        <a href="get.html" data-i18n="nav.download">下载</a>
                     </div>
                 </li>
                 <li class="nav-item has-dropdown">
@@ -84,7 +84,7 @@ const Components = {
                     <div class="footer-col">
                         <h4 data-i18n="footer.mod">模组</h4>
                         <a href="mod.html" data-i18n="footer.modIntro">模组介绍</a>
-                        <a href="download.html" data-i18n="nav.download">下载</a>
+                        <a href="get.html" data-i18n="nav.download">下载</a>
                     </div>
                     <div class="footer-col">
                         <h4 data-i18n="footer.community">社区</h4>

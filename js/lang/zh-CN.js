@@ -7,7 +7,7 @@ I18n.register('zh-CN', {
         aboutTeam: '传奇建造队',
         mod: '模组',
         modIntro: '模组',
-        download: '下载',
+        download: '获取',
         community: '社区',
         updates: '动态',
         gallery: '画廊',
@@ -39,7 +39,7 @@ I18n.register('zh-CN', {
         feature3: '多语言支持',
         cta: '前往 Steam 创意工坊',
         learnMore: '了解更多',
-        downloadBtn: '下载'
+        downloadBtn: '获取'
     },
 
     // 社区区块
@@ -66,6 +66,13 @@ I18n.register('zh-CN', {
         browseLib: '浏览教程库'
     },
 
+    // 创意工坊预览
+    workshopPreview: {
+        title: '创意工坊',
+        subtitle: '社区创作者的精选作品',
+        viewAll: '浏览全部作品'
+    },
+
     // 联系区块
     contact: {
         title: '联系我们',
@@ -88,7 +95,7 @@ I18n.register('zh-CN', {
         communityGroup: '社区组',
         scrapMechanic: '废品机械师',
         legendTeam: '传奇建造队',
-        download: '下载',
+        download: '获取',
         updates: '动态',
         gallery: '画廊',
         tutorials: '教程',
@@ -195,23 +202,6 @@ I18n.register('zh-CN', {
         teamTitle: '团队成员',
         teamSubtitle: '感谢每一位为传奇Mod付出的贡献者',
         updatedOn: '更新于'
-    },
-
-    // 下载页
-    downloadPage: {
-        title: '下载',
-        subtitle: '获取传奇Mod',
-        steamTitle: 'Steam 创意工坊',
-        steamDesc: '推荐方式，自动更新，一键订阅',
-        steamBtn: '前往订阅',
-        manualTitle: '手动下载',
-        manualDesc: '适用于无法访问 Steam 创意工坊的用户',
-        manualBtn: '下载压缩包',
-        installTitle: '安装说明',
-        installStep1: '下载并解压压缩包',
-        installStep2: '将解压后的文件夹复制到游戏Mod目录',
-        installStep3: '在游戏中启用Mod',
-        modPath: 'Mod目录路径'
     },
 
     // 废品机械师介绍页
@@ -387,10 +377,10 @@ I18n.register('zh-CN', {
         goToComments: '前往评论'
     },
 
-    // 下载中心页
+    // 获取中心页
     downloadPage: {
-        title: '下载中心',
-        subtitle: 'Downloads',
+        title: '获取中心',
+        subtitle: 'Get',
         modSectionTitle: '传奇Mod系列',
         modSectionSubtitle: '在 Steam 创意工坊订阅',
         legendMod: '传奇Mod',

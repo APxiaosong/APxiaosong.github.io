@@ -7,7 +7,7 @@ I18n.register('en', {
         aboutTeam: 'Legend Team',
         mod: 'Mod',
         modIntro: 'Mod',
-        download: 'Download',
+        download: 'Get',
         community: 'Community',
         updates: 'Updates',
         gallery: 'Gallery',
@@ -39,7 +39,7 @@ I18n.register('en', {
         feature3: 'Languages',
         cta: 'Go to Steam Workshop',
         learnMore: 'Learn More',
-        downloadBtn: 'Download'
+        downloadBtn: 'Get'
     },
 
     // Community Section
@@ -66,6 +66,13 @@ I18n.register('en', {
         browseLib: 'Browse Tutorial Library'
     },
 
+    // Workshop Preview
+    workshopPreview: {
+        title: 'Workshop',
+        subtitle: 'Featured creations from our community',
+        viewAll: 'View All Works'
+    },
+
     // Contact Section
     contact: {
         title: 'Contact Us',
@@ -88,7 +95,7 @@ I18n.register('en', {
         communityGroup: 'Steam Group',
         scrapMechanic: 'Scrap Mechanic',
         legendTeam: 'Legend Team',
-        download: 'Download',
+        download: 'Get',
         updates: 'Updates',
         gallery: 'Gallery',
         tutorials: 'Tutorials',
@@ -195,23 +202,6 @@ I18n.register('en', {
         teamTitle: 'Team Members',
         teamSubtitle: 'Thanks to every contributor to Legend Mod',
         updatedOn: 'Updated on'
-    },
-
-    // Download Page
-    downloadPage: {
-        title: 'Download',
-        subtitle: 'Get Legend Mod',
-        steamTitle: 'Steam Workshop',
-        steamDesc: 'Recommended. Auto-updates, one-click subscribe',
-        steamBtn: 'Subscribe',
-        manualTitle: 'Manual Download',
-        manualDesc: 'For users who cannot access Steam Workshop',
-        manualBtn: 'Download ZIP',
-        installTitle: 'Installation Guide',
-        installStep1: 'Download and extract the ZIP file',
-        installStep2: 'Copy the extracted folder to the game\'s Mod directory',
-        installStep3: 'Enable the Mod in game',
-        modPath: 'Mod Directory Path'
     },
 
     // Game Page
@@ -386,10 +376,10 @@ I18n.register('en', {
         goToComments: 'Go to Comments'
     },
 
-    // Download Page
+    // Get Page
     downloadPage: {
-        title: 'Downloads',
-        subtitle: 'Downloads',
+        title: 'Get',
+        subtitle: 'Get',
         modSectionTitle: 'Legend Mod Series',
         modSectionSubtitle: 'Subscribe on Steam Workshop',
         legendMod: 'Legend Mod',

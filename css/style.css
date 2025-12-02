@@ -688,6 +688,74 @@ img {
     background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-light) 100%);
 }
 
+/* Community Entrance Carousel Background */
+.community-entrance {
+    position: relative;
+    overflow: hidden;
+}
+
+.entrance-carousel-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.entrance-carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: translateX(0);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.entrance-carousel-slide.active {
+    opacity: 0.5;
+    transform: translateX(0);
+}
+
+.entrance-carousel-slide.slide-out-left {
+    opacity: 0;
+    transform: translateX(-8%);
+}
+
+.entrance-carousel-slide.slide-in-right {
+    opacity: 0;
+    transform: translateX(8%);
+}
+
+.community-entrance::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-bg-light) 0%, rgba(58, 58, 51, 0.6) 50%, transparent 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+[data-theme="light"] .community-entrance::before {
+    background: linear-gradient(90deg, var(--color-bg-light) 0%, rgba(240, 240, 240, 0.6) 50%, transparent 100%);
+}
+
+[data-theme="light"] .entrance-carousel-slide.active {
+    opacity: 0.4;
+}
+
+.community-entrance .container {
+    position: relative;
+    z-index: 2;
+}
+
 .community-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -4029,5 +4097,83 @@ img {
     .faq-answer-content {
         padding: 0 20px 20px;
         font-size: 13px;
+    }
+}
+
+/* ========================================
+   创意工坊预览板块
+   ======================================== */
+
+.workshop-preview-section {
+    position: relative;
+    background-color: var(--color-bg-light);
+}
+
+.workshop-preview-section .workshop-preview-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://cdn.fastly.steamstatic.com/steam/apps/387990/page_bg_generated_v6b.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+}
+
+.workshop-preview-section .workshop-preview-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, transparent 7%, var(--color-bg-light) 100%);
+}
+
+.workshop-preview-section .btn-primary::before {
+    background-color: var(--color-bg-light);
+}
+
+.workshop-preview-section .workshop-preview-fade {
+    background: linear-gradient(to bottom, transparent 0%, var(--color-bg-light) 90%);
+}
+
+.workshop-preview-section .btn {
+    margin-top: 32px;
+}
+
+.workshop-preview-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.workshop-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.workshop-preview-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to bottom, transparent 0%, var(--color-bg) 90%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+@media (max-width: 768px) {
+    .workshop-preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .workshop-preview-grid {
+        grid-template-columns: 1fr;
     }
 }

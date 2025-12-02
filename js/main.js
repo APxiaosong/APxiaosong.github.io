@@ -771,3 +771,103 @@ if (document.readyState === 'loading') {
 } else {
     FAQManager.init();
 }
+
+// 首页创意工坊预览
+function initWorkshopPreview() {
+    const grid = document.getElementById('workshopPreviewGrid');
+    if (!grid || typeof WorkshopData === 'undefined') return;
+
+    const creator = WorkshopData.getCreator('dianyuzhangzane');
+    if (!creator || !creator.works) return;
+
+    const items = creator.works.slice(0, 3);
+    grid.innerHTML = items.map(item => `
+        <div class="workshop-item">
+            <a href="${item.link}" target="_blank" rel="noopener" class="workshop-link">
+                <div class="workshop-thumb">
+                    <img src="${item.image}" alt="${item.title}" loading="lazy" referrerpolicy="no-referrer">
+                    <div class="workshop-thumb-overlay"><i class="ri-steam-fill"></i></div>
+                </div>
+                <div class="workshop-info">
+                    <h3 class="workshop-title">${item.title}</h3>
+                    <p class="workshop-desc">${item.description || ''}</p>
+                </div>
+            </a>
+        </div>
+    `).join('');
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWorkshopPreview);
+} else {
+    initWorkshopPreview();
+}
+
+// ========================================
+// Community Entrance Carousel Background
+// ========================================
+function initEntranceCarousel() {
+    const container = document.querySelector('.entrance-carousel-bg');
+    if (!container) return;
+
+    const slides = container.querySelectorAll('.entrance-carousel-slide');
+    if (slides.length < 2) return;
+
+    const images = [
+        'https://images.steamusercontent.com/ugc/16132458798851579615/E73CFAC5EF821A860AE5A43F4316FDCEF09E58CD/',
+        'https://images.steamusercontent.com/ugc/9546155098926737150/1BC4FA54AF97B29D1637793C17AC02ACC9F19BCC/',
+        'https://images.steamusercontent.com/ugc/12463685672229803625/2642C645834997C17B801D31289A62F2DA73C93E/',
+        'https://images.steamusercontent.com/ugc/10934611208860954779/943C2CFC0D691DF57866108AAE93372CD1CC5212/',
+        'https://images.steamusercontent.com/ugc/16389891040394510856/CCFEF164909AF7A91B79D3A34A74A0B4CDF8C836/',
+        'https://images.steamusercontent.com/ugc/11367830578160335829/3AB9610A664AC75B3D36365D4DAB0168F2BEC668/'
+    ];
+
+    let currentIndex = 0;
+    let activeSlide = 0;
+
+    // Shuffle and pick first image
+    const shuffled = [...images].sort(() => Math.random() - 0.5);
+    currentIndex = 0;
+
+    // Initialize first slide
+    slides[0].style.backgroundImage = `url('${shuffled[currentIndex]}')`;
+    slides[0].classList.add('active');
+
+    function getNextIndex() {
+        let next;
+        do {
+            next = Math.floor(Math.random() * shuffled.length);
+        } while (next === currentIndex && shuffled.length > 1);
+        return next;
+    }
+
+    function transition() {
+        const nextIndex = getNextIndex();
+        const nextSlide = activeSlide === 0 ? 1 : 0;
+
+        // Prepare next slide
+        slides[nextSlide].style.backgroundImage = `url('${shuffled[nextIndex]}')`;
+        slides[nextSlide].classList.add('slide-in-right');
+        slides[nextSlide].classList.remove('active', 'slide-out-left');
+
+        // Force reflow
+        slides[nextSlide].offsetHeight;
+
+        // Animate out current, animate in next
+        slides[activeSlide].classList.add('slide-out-left');
+        slides[activeSlide].classList.remove('active');
+        slides[nextSlide].classList.remove('slide-in-right');
+        slides[nextSlide].classList.add('active');
+
+        currentIndex = nextIndex;
+        activeSlide = nextSlide;
+    }
+
+    setInterval(transition, 6000);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEntranceCarousel);
+} else {
+    initEntranceCarousel();
+}
