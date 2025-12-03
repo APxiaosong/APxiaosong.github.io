@@ -821,14 +821,25 @@ function initEntranceCarousel() {
     const slides = container.querySelectorAll('.entrance-carousel-slide');
     if (slides.length < 2) return;
 
-    const images = [
-        'https://images.steamusercontent.com/ugc/16132458798851579615/E73CFAC5EF821A860AE5A43F4316FDCEF09E58CD/',
-        'https://images.steamusercontent.com/ugc/9546155098926737150/1BC4FA54AF97B29D1637793C17AC02ACC9F19BCC/',
-        'https://images.steamusercontent.com/ugc/12463685672229803625/2642C645834997C17B801D31289A62F2DA73C93E/',
-        'https://images.steamusercontent.com/ugc/10934611208860954779/943C2CFC0D691DF57866108AAE93372CD1CC5212/',
-        'https://images.steamusercontent.com/ugc/16389891040394510856/CCFEF164909AF7A91B79D3A34A74A0B4CDF8C836/',
-        'https://images.steamusercontent.com/ugc/11367830578160335829/3AB9610A664AC75B3D36365D4DAB0168F2BEC668/'
-    ];
+    // 从 GalleryData 获取图片，如果不可用则使用空数组
+    let images = [];
+    if (typeof GalleryData !== 'undefined') {
+        const artist = GalleryData.getArtist('neza-nezha');
+        if (artist && artist.works) {
+            images = artist.works.map(w => w.image);
+        }
+    }
+    if (images.length === 0) return;
+
+    // 根据设备分辨率获取适当尺寸的图片
+    function getResponsiveImageUrl(url) {
+        const dpr = window.devicePixelRatio || 1;
+        const screenWidth = Math.min(window.innerWidth * dpr, 1920);
+        const size = screenWidth <= 640 ? 512 : screenWidth <= 1280 ? 1024 : 1920;
+        // Steam 图片 URL 格式：移除原有参数，添加新的尺寸参数
+        const baseUrl = url.split('?')[0];
+        return `${baseUrl}?imw=${size}&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true`;
+    }
 
     let currentIndex = 0;
     let activeSlide = 0;
@@ -838,10 +849,18 @@ function initEntranceCarousel() {
     currentIndex = 0;
 
     // Initialize first slide
-    slides[0].style.backgroundImage = `url('${shuffled[currentIndex]}')`;
+    slides[0].style.backgroundImage = `url('${getResponsiveImageUrl(shuffled[currentIndex])}')`;
     slides[0].classList.add('active');
 
+    // 预加载队列
+    let preloadQueue = [];
+    function preloadNext() {
+        preloadQueue = [getNextIndex(), getNextIndex()];
+        preloadQueue.forEach(i => { new Image().src = getResponsiveImageUrl(shuffled[i]); });
+    }
+
     function getNextIndex() {
+        if (preloadQueue.length > 0) return preloadQueue.shift();
         let next;
         do {
             next = Math.floor(Math.random() * shuffled.length);
@@ -854,7 +873,7 @@ function initEntranceCarousel() {
         const nextSlide = activeSlide === 0 ? 1 : 0;
 
         // Prepare next slide
-        slides[nextSlide].style.backgroundImage = `url('${shuffled[nextIndex]}')`;
+        slides[nextSlide].style.backgroundImage = `url('${getResponsiveImageUrl(shuffled[nextIndex])}')`;
         slides[nextSlide].classList.add('slide-in-right');
         slides[nextSlide].classList.remove('active', 'slide-out-left');
 
@@ -869,8 +888,10 @@ function initEntranceCarousel() {
 
         currentIndex = nextIndex;
         activeSlide = nextSlide;
+        preloadNext();
     }
 
+    preloadNext(); // 初始预加载
     setInterval(transition, 6000);
 }
 
