@@ -19,8 +19,12 @@ import json
 import os
 
 # ============ 配置参数 ============
+# UP主显示名称（中文）
+CREATOR_NAME = "戴维Sirius"
+# UP主ID（英文，用于文件名和注册ID）
+CREATOR_ID = "davidsirius"
 # 输出文件路径（用户下载文件夹）
-OUTPUT_FILE = os.path.join(os.path.expanduser("~"), "Downloads", "tutorial-data.js")
+OUTPUT_FILE = os.path.join(os.path.expanduser("~"), "Downloads", f"tutorial-{CREATOR_ID}.js")
 # ==================================
 
 
@@ -141,9 +145,15 @@ def main():
         })
 
     # 生成JS文件
-    js_content = "const TUTORIAL_VIDEOS = \n"
-    js_content += json.dumps(final_videos, ensure_ascii=False, indent=2)
-    js_content += ";\n"
+    js_content = f"""/**
+ * {CREATOR_NAME} - 教程视频数据
+ */
+TutorialData.register('{CREATOR_ID}', {{
+    name: {json.dumps(CREATOR_NAME, ensure_ascii=False)},
+    videos:
+{json.dumps(final_videos, ensure_ascii=False, indent=2)}
+}});
+"""
 
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         f.write(js_content)

@@ -7,6 +7,7 @@
     <title>传奇建造队 | Legend Team</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+    <script src="js/seo.js"></script>
     <!-- 预加载关键图片 -->
     <link rel="preload" as="image" href="https://s2.loli.net/2025/06/12/qCLiGk4BdamZvXW.png">
     <link rel="preload" as="image" href="https://s2.loli.net/2025/12/02/Je7Cx96BAoYqKfu.png">
@@ -15,7 +16,9 @@
 <body>
     <!-- 页面加载器 -->
     <div class="page-loader">
-        <img src="https://s2.loli.net/2025/12/02/Je7Cx96BAoYqKfu.png" alt="Loading" class="loader-logo">
+        <div class="loader-logo-wrapper">
+            <img src="https://s2.loli.net/2025/12/02/Je7Cx96BAoYqKfu.png" alt="Loading" class="loader-logo">
+        </div>
         <span class="loader-text" data-i18n="common.loading">正在加载中……</span>
     </div>
 
@@ -75,15 +78,23 @@
 
     <!-- 首页 Hero -->
     <section class="section hero" id="home">
-        <div class="hero-bg-text-container">
-            <div class="hero-bg-text-row row-right">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
-            <div class="hero-bg-text-row row-left">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
-            <div class="hero-bg-text-row row-right">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
-            <div class="hero-bg-text-row row-left">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
-            <div class="hero-bg-text-row row-right">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
-            <div class="hero-bg-text-row row-left">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
-            <div class="hero-bg-text-row row-right">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
-            <div class="hero-bg-text-row row-left">LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · LEGEND · </div>
+        <!-- 加载占位背景 -->
+        <div class="hero-placeholder">
+            <div class="hero-placeholder-bg"></div>
+            <div class="hero-scroll-text" aria-hidden="true">
+                <span>LEGEND</span><span>LEGEND</span><span>LEGEND</span><span>LEGEND</span>
+            </div>
+        </div>
+        <!-- Hero 背景轮播 -->
+        <div class="hero-carousel">
+            <div class="hero-carousel-slide"></div>
+            <div class="hero-carousel-slide"></div>
+        </div>
+        <div class="hero-carousel-overlay"></div>
+        <!-- 图片作者署名 -->
+        <div class="hero-image-credit">
+            <span class="credit-label" data-i18n="hero.photoBy">Photo by</span>
+            <span class="credit-artist"></span>
         </div>
         <div class="hero-content animate-on-scroll" data-animation="slide-up">
             <h1 class="hero-title" data-i18n="hero.title">重塑创造边界</h1>
@@ -258,10 +269,11 @@
     </section>
 
     <script src="js/components.js"></script>
-    <script>Components.init({ isHome: true, activePage: 'home', footerOnly: true });</script>
+    <script>Components.init({ isHome: true, activePage: 'home', footerOnly: true }); SEO.init('index');</script>
     <script src="js/i18n.js"></script>
     <script src="js/lang/zh-CN.js"></script>
     <script src="js/lang/en.js"></script>
+    <script src="js/gallery-featured.js"></script>
     <script src="js/workshop-data.js"></script>
     <script src="js/workshop/workshop-dianyuzhangzane.js"></script>
     <script src="js/main.js"></script>

@@ -21,20 +21,21 @@ I18n.register('en', {
 
     // Hero
     hero: {
-        title: 'Redefine Creation',
-        subtitle: 'In the world of Scrap Mechanic, we redefine engineering aesthetics, break through vanilla limitations, and bring you the ultimate building experience',
+        title: 'Explore More Possibilities',
+        subtitle: 'Providing rich mod content and building tools for Scrap Mechanic players',
         desc: 'Scrap Mechanic Chinese Player Community & Mod Development Team',
         cta: 'Explore More',
         legendIntro: 'About Legend',
-        teamIntro: 'About Team'
+        teamIntro: 'About Team',
+        photoBy: 'Image by'
     },
 
     // Mod Section
     mod: {
-        badge: '#1 on Steam Workshop',
+        badge: 'Popular Mod on Steam Workshop',
         title: 'Legend Mod',
-        tagline: 'The Ultimate Solution',
-        desc: 'Founded in 2016, Legend Team has grown into a major Chinese player community spanning three large QQ groups. Legend Mod was born in May of the same year and has since become the most subscribed comprehensive mod on the Steam Workshop.',
+        tagline: 'Comprehensive Mod',
+        desc: 'Founded in 2016, Legend Team is an active Chinese player community. Legend Mod was born in May of the same year, offering a wide range of parts, tools, and feature expansions to give players more building options.',
         feature1: 'Current Version',
         feature2: 'Founded',
         feature3: 'Languages',
@@ -60,7 +61,7 @@ I18n.register('en', {
     // Tutorials Section
     tutorials: {
         title: 'Tutorials & News',
-        subtitle: 'Master core skills, unleash your creative potential',
+        subtitle: 'Building guides from beginner to advanced',
         video1: 'Track Update Preview',
         video2: 'Track & Laser Guidance Tutorial',
         video3: 'Scrap Mechanic Beginner Guide',
@@ -77,14 +78,14 @@ I18n.register('en', {
     // Contact Section
     contact: {
         title: 'Contact Us',
-        subtitle: 'Your feedback drives us forward',
+        subtitle: 'Questions or suggestions? Feel free to reach out',
         email: 'Feedback Email',
         goToPage: 'Go to Feedback Page'
     },
 
     // Footer
     footer: {
-        tagline: 'Redefine Creation',
+        tagline: 'Explore More Possibilities',
         about: 'About',
         mod: 'Mod',
         modIntro: 'Mod Info',
@@ -125,7 +126,7 @@ I18n.register('en', {
 
     // Mod Detail Page
     modPage: {
-        badge: '#1 on Steam Workshop',
+        badge: 'Popular Mod on Steam Workshop',
         title: 'Legend Mod',
         updateDate: 'Updated on 2025.8.5',
         steamBtn: 'Go to Steam Workshop',
@@ -220,22 +221,22 @@ I18n.register('en', {
         tagMultiplayer: 'Multiplayer',
         tagSurvival: 'Survival',
         aboutTitle: 'About the Game',
-        intro1: 'Scrap Mechanic is a creative sandbox game developed by Swedish indie studio Axolot Games. Released in Early Access on Steam on January 20, 2016, it quickly gained popularity worldwide thanks to its unique physics engine and highly flexible building system.',
-        intro2: 'In this world of possibilities, you can build various mechanical devices, vehicles, and structures. The game provides a rich variety of parts and tools, allowing you to turn your imagination into reality. From simple cars to complex automated factories, anything is possible.',
-        intro3: 'The game supports multiplayer, allowing you to explore, build, and adventure with friends. In Survival Mode, you need to gather resources, build bases, and defend against robot attacks. In Creative Mode, you can unleash your creativity without any limitations.',
+        intro1: 'Scrap Mechanic is a creative sandbox game developed by Swedish indie studio Axolot Games. Released in Early Access on Steam on January 20, 2016, it features a physics-driven building system as its core gameplay.',
+        intro2: 'In the game, you can build various mechanical devices, vehicles, and structures. The game provides a variety of parts and tools, supporting builds ranging from simple cars to complex automated factories.',
+        intro3: 'The game supports multiplayer, allowing you to explore, build, and adventure with friends. Survival Mode requires gathering resources, building bases, and defending against robots; Creative Mode provides unlimited resources for focused building.',
         statParts: 'Building Parts',
         statModes: 'Game Modes',
         statYear: 'Release Year',
         featuresTitle: 'Game Features',
         featurePhysicsIcon: 'Physics',
         featurePhysicsTitle: 'Realistic Physics Engine',
-        featurePhysicsDesc: 'The game uses an advanced physics engine where every part has realistic physical properties. Weight, friction, and air resistance all affect how your creations perform.',
+        featurePhysicsDesc: 'The game is built on a physics engine where every part has corresponding physical properties. Weight, friction, and air resistance affect how vehicles and machines perform.',
         featureCreateIcon: 'Create',
         featureCreateTitle: 'Free Building System',
-        featureCreateDesc: 'Hundreds of parts to combine, from simple blocks to complex logic circuits, from basic wheels to jet engines, creating unlimited possibilities.',
+        featureCreateDesc: 'Offers hundreds of parts for players to combine, including blocks, logic circuits, wheels, engines, and more.',
         featureCoopIcon: 'Co-op',
         featureCoopTitle: 'Multiplayer Cooperation',
-        featureCoopDesc: 'Supports online multiplayer gaming. Build, explore, and adventure with friends. Share your creativity and complete grand engineering projects together.',
+        featureCoopDesc: 'Supports online multiplayer gaming. Build, explore, and adventure with friends to complete engineering projects together.',
         featureWorkshopTitle: 'Workshop Support',
         featureWorkshopDesc: 'Through Steam Workshop, you can download blueprints and mods shared by other players, or upload your own creations to share with the world.',
         modesTitle: 'Game Modes',
@@ -244,7 +245,7 @@ I18n.register('en', {
         modeChallengeTitle: 'Challenge Mode',
         modeChallengeDesc: 'Complete various preset challenges, test your building skills and creative thinking, earn achievements and rewards.',
         modeCreativeTitle: 'Creative Mode',
-        modeCreativeDesc: 'Unlimited resources, invincibility mode, focus on pure building fun. This is where all your crazy ideas come to life.',
+        modeCreativeDesc: 'Unlimited resources, invincibility mode, focused on building itself. Suitable for testing and creation.',
         modeCustomTitle: 'Custom Games',
         modeCustomDesc: 'Experience unique community-created content through mods and custom maps, or create your own game modes.',
         specsTitle: 'System Requirements',
@@ -259,7 +260,7 @@ I18n.register('en', {
         specsDX11or12: 'Version 11 or 12',
         specsStorage: 'Storage',
         ctaTitle: 'Start Your Building Journey',
-        ctaDesc: 'Get Scrap Mechanic on Steam and join millions of players in a world of creation. Whether you\'re a building novice or a seasoned engineer, there\'s fun here for you.',
+        ctaDesc: 'Get Scrap Mechanic on Steam and experience physics-driven sandbox building gameplay.',
         ctaBuyBtn: 'Buy Now',
         ctaPriceValue: '$19.99',
         ctaPriceCurrency: 'USD'
@@ -270,8 +271,8 @@ I18n.register('en', {
         title: 'Legend Team',
         subtitle: 'Legend Team',
         aboutTitle: 'About Us',
-        intro: 'Founded in 2016, Legend Team is the most influential Chinese player team in Scrap Mechanic. We are dedicated to providing quality game content and community services, building a community full of creativity and passion.',
-        highlight: 'Legend Mod is our team\'s core project. After years of continuous development and optimization, it has grown to become the #1 comprehensive mod on the Steam Workshop, providing players worldwide with rich building parts and gaming experiences.',
+        intro: 'Founded in 2016, Legend Team is a Chinese player community focused on Scrap Mechanic. We provide mod content and a platform for players to connect.',
+        highlight: 'Legend Mod is the team\'s core project. After years of continuous development, it offers a wide range of building parts and feature expansions.',
         statFounded: 'Founded',
         statMembers: 'Community Members',
         statRank: 'Workshop Rank',

@@ -264,14 +264,22 @@ if (galleryElement) {
 }
 
 // ========================================
-// Page Loader
+// Page Loader (首页专用，其他页面由 components.js 处理)
 // ========================================
 const pageLoader = document.querySelector('.page-loader');
-if (pageLoader) {
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            pageLoader.classList.add('hidden');
-        }, 300);
+if (pageLoader && !pageLoader.dataset.handled) {
+    pageLoader.dataset.handled = 'true';
+    const logo = document.querySelector('.nav-logo img');
+    const loaderLogo = document.querySelector('.loader-logo');
+
+    Promise.all([
+        new Promise(r => document.readyState === 'loading'
+            ? document.addEventListener('DOMContentLoaded', r)
+            : r()),
+        new Promise(r => !logo || logo.complete ? r() : logo.addEventListener('load', r)),
+        new Promise(r => !loaderLogo || loaderLogo.complete ? r() : loaderLogo.addEventListener('load', r))
+    ]).then(() => {
+        pageLoader.classList.add('hidden');
     });
 }
 
@@ -870,4 +878,194 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initEntranceCarousel);
 } else {
     initEntranceCarousel();
+}
+
+// ========================================
+// Hero 背景轮播（首页）
+// ========================================
+function initHeroCarousel() {
+    const carousel = document.querySelector('.hero-carousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.hero-carousel-slide');
+    if (slides.length < 2) return;
+
+    const creditEl = document.querySelector('.hero-image-credit');
+    const creditArtist = document.querySelector('.credit-artist');
+
+    // 使用 GalleryFeatured 数据
+    let images = [];
+    if (typeof GalleryFeatured !== 'undefined' && GalleryFeatured.length > 0) {
+        images = GalleryFeatured;
+    } else {
+        console.warn('GalleryFeatured not loaded, hero carousel disabled');
+        return;
+    }
+
+    // 配置
+    const INTERVAL = 10000;
+    const PRELOAD_COUNT = 3;
+
+    let currentIndex = -1;
+    let activeSlide = 0;
+    let usedIndices = [];
+    let preloadedImages = new Set();
+    let intervalId = null;
+
+    // 获取屏幕适配的图片尺寸
+    function getScreenSize() {
+        const dpr = window.devicePixelRatio || 1;
+        const width = Math.min(window.innerWidth * dpr, 2560);
+        const height = Math.min(window.innerHeight * dpr, 1440);
+        return { width: Math.round(width), height: Math.round(height) };
+    }
+
+    // 优化图片 URL，根据屏幕分辨率调整
+    function getOptimizedImageUrl(url) {
+        if (!url) return url;
+        const { width, height } = getScreenSize();
+
+        // 移除现有的尺寸参数，添加新的
+        let baseUrl = url.split('?')[0];
+        // 确保 URL 末尾有 /
+        if (!baseUrl.endsWith('/')) {
+            baseUrl += '/';
+        }
+        return `${baseUrl}?imw=${width}&imh=${height}&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false`;
+    }
+
+    // 获取随机索引（避免近期重复）
+    function getRandomIndex() {
+        if (usedIndices.length >= images.length - 1) {
+            usedIndices = currentIndex >= 0 ? [currentIndex] : [];
+        }
+
+        let newIndex;
+        let attempts = 0;
+        do {
+            newIndex = Math.floor(Math.random() * images.length);
+            attempts++;
+        } while (usedIndices.includes(newIndex) && attempts < 50);
+
+        usedIndices.push(newIndex);
+        return newIndex;
+    }
+
+    // 预加载图片
+    function preloadImage(url) {
+        const optimizedUrl = getOptimizedImageUrl(url);
+        if (preloadedImages.has(optimizedUrl)) return Promise.resolve(optimizedUrl);
+
+        return new Promise(resolve => {
+            const img = new Image();
+            img.onload = () => {
+                preloadedImages.add(optimizedUrl);
+                resolve(optimizedUrl);
+            };
+            img.onerror = () => {
+                resolve(optimizedUrl);
+            };
+            img.src = optimizedUrl;
+        });
+    }
+
+    // 预加载接下来的图片
+    function preloadNextImages() {
+        for (let i = 0; i < PRELOAD_COUNT; i++) {
+            const idx = Math.floor(Math.random() * images.length);
+            if (images[idx] && images[idx].image) {
+                preloadImage(images[idx].image);
+            }
+        }
+    }
+
+    // 更新署名
+    function updateCredit(artist) {
+        if (creditEl && creditArtist) {
+            if (artist) {
+                creditArtist.textContent = artist;
+                creditEl.classList.add('show');
+            } else {
+                creditEl.classList.remove('show');
+            }
+        }
+    }
+
+    // 切换到下一张
+    function transition() {
+        const nextIndex = getRandomIndex();
+        const nextSlide = activeSlide === 0 ? 1 : 0;
+        const imageData = images[nextIndex];
+
+        if (!imageData || !imageData.image) return;
+
+        preloadImage(imageData.image).then((optimizedUrl) => {
+            slides[nextSlide].style.backgroundImage = `url('${optimizedUrl}')`;
+
+            requestAnimationFrame(() => {
+                slides[activeSlide].classList.add('fade-out');
+                slides[activeSlide].classList.remove('active');
+                slides[nextSlide].classList.remove('fade-out');
+                slides[nextSlide].classList.add('active');
+
+                updateCredit(imageData.artist);
+
+                currentIndex = nextIndex;
+                activeSlide = nextSlide;
+
+                preloadNextImages();
+            });
+        });
+    }
+
+    // 初始化第一张图片
+    function init() {
+        const heroSection = document.querySelector('.hero');
+        const firstIndex = Math.floor(Math.random() * images.length);
+        const imageData = images[firstIndex];
+
+        if (!imageData || !imageData.image) return;
+
+        preloadImage(imageData.image).then((optimizedUrl) => {
+            slides[0].style.backgroundImage = `url('${optimizedUrl}')`;
+            slides[0].classList.add('active');
+
+            // 图片加载完成，切换到轮播状态
+            if (heroSection) {
+                heroSection.classList.add('carousel-ready');
+            }
+
+            updateCredit(imageData.artist);
+
+            currentIndex = firstIndex;
+            usedIndices.push(firstIndex);
+
+            preloadNextImages();
+
+            intervalId = setInterval(transition, INTERVAL);
+        });
+    }
+
+    // 页面不可见时暂停轮播
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+        } else {
+            if (!intervalId && currentIndex >= 0) {
+                intervalId = setInterval(transition, INTERVAL);
+            }
+        }
+    });
+
+    init();
+}
+
+// 初始化 Hero 轮播
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroCarousel);
+} else {
+    initHeroCarousel();
 }

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /dev-tools/
+Disallow: /redirect.html
+
+Sitemap: https://www.legendbuild.cn/sitemap.xml

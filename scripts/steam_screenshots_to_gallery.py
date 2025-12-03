@@ -78,8 +78,10 @@ def get_item_ids(user_id, content_type, app_id=""):
                 total = int(m.group(1))
                 print(f"总数: {total}")
 
-        # 尝试两种匹配方式
+        # 尝试多种匹配方式
         found = re.findall(r'data-publishedfileid="(\d+)"', page_html)
+        if not found:
+            found = re.findall(r'sharedfiles/filedetails/\?id=(\d+)', page_html)
         if not found:
             found = re.findall(r'filedetails/\?id=(\d+)', page_html)
 

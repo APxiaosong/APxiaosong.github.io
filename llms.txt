@@ -1,0 +1,29 @@
+# Legend Team (传奇建造队)
+
+> Official website for Legend Team, the most influential Chinese player community for Scrap Mechanic game.
+
+## About
+
+Legend Team (传奇建造队) was founded in April 2016 as a player community for Scrap Mechanic. We develop the Legend Mod, ranked #1 on Steam Workshop with over 200,000 subscribers.
+
+## Legend Mod
+
+- Name: New Legend Mod Continuation (新传奇Mod 延续版)
+- Current Version: 4.1.0
+- Steam Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=3309460746
+- Features: Material blocks, geometric shapes, interactive parts, vehicle tires, weapons, decorations, building parts
+
+## Community
+
+- QQ Groups: 537532878, 158484814, 633703984
+- Steam Group: https://steamcommunity.com/groups/ltsandbox
+- Contact: smlegendmod@163.com
+
+## Links
+
+- Homepage: https://www.legendbuild.cn/
+- Mod Page: https://www.legendbuild.cn/mod.html
+- Download: https://www.legendbuild.cn/get.html
+- Tutorials: https://www.legendbuild.cn/tutorials.html
+- FAQ: https://www.legendbuild.cn/faq.html
+- Gallery: https://www.legendbuild.cn/gallery.html

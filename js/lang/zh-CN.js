@@ -21,20 +21,21 @@ I18n.register('zh-CN', {
 
     // 首页
     hero: {
-        title: '重塑创造边界',
-        subtitle: '在废品机械师的世界中，我们重新定义工程美学，打破游戏原版限制，为您带来极致的建造体验',
+        title: '探索更多可能',
+        subtitle: '为《废品机械师》玩家提供丰富的模组内容与建造工具',
         desc: '《废品机械师》游戏中国玩家社区与Mod开发团队',
         cta: '探索更多',
         legendIntro: '传奇介绍',
-        teamIntro: '团队介绍'
+        teamIntro: '团队介绍',
+        photoBy: '图片来自于'
     },
 
     // 模组区块
     mod: {
-        badge: 'Steam 创意工坊综合排行榜第一',
+        badge: 'Steam 创意工坊热门模组',
         title: '传奇Mod',
-        tagline: '终极解决方案',
-        desc: '传奇建造队成立于2016年，历经多年发展已成为横跨三个千人交流群的国内大型玩家团体。传奇Mod诞生于同年5月，现已成长为创意工坊总订阅量第一、物品丰富度与体量第一的大型综合性模组。',
+        tagline: '综合性模组',
+        desc: '传奇建造队成立于2016年，是一个活跃的国内玩家社区。传奇Mod诞生于同年5月，提供丰富的零件、工具与功能扩展，致力于为玩家带来更多建造选择。',
         feature1: '当前版本',
         feature2: '成立年份',
         feature3: '多语言支持',
@@ -60,7 +61,7 @@ I18n.register('zh-CN', {
     // 教程区块
     tutorials: {
         title: '教程与资讯',
-        subtitle: '掌握核心技巧，释放创造潜能',
+        subtitle: '从入门到进阶的建造指南',
         video1: '履带更新预告',
         video2: '履带及激光制导使用教程',
         video3: '废品机械师新手教程',
@@ -77,14 +78,14 @@ I18n.register('zh-CN', {
     // 联系区块
     contact: {
         title: '联系我们',
-        subtitle: '您的反馈是我们前进的动力',
+        subtitle: '有任何问题或建议，欢迎联系我们',
         email: '反馈邮箱',
         goToPage: '前往反馈页面'
     },
 
     // 页脚
     footer: {
-        tagline: '重塑创造边界',
+        tagline: '探索更多可能',
         about: '关于',
         mod: '模组',
         modIntro: '模组介绍',
@@ -125,7 +126,7 @@ I18n.register('zh-CN', {
 
     // Mod 详情页
     modPage: {
-        badge: 'Steam 创意工坊综合排行榜第一',
+        badge: 'Steam 创意工坊热门模组',
         title: '传奇Mod',
         updateDate: '更新于 2025.8.5',
         steamBtn: '前往 Steam 创意工坊',
@@ -220,22 +221,22 @@ I18n.register('zh-CN', {
         tagMultiplayer: '多人',
         tagSurvival: '生存',
         aboutTitle: '关于游戏',
-        intro1: '废品机械师是一款由瑞典独立游戏工作室 Axolot Games 开发的创意沙盒游戏。游戏于2016年1月20日在Steam平台发布抢先体验版本，凭借其独特的物理引擎和自由度极高的建造系统，迅速获得了全球玩家的喜爱。',
-        intro2: '在这个充满可能性的世界中，你可以建造各种机械装置、载具和建筑。游戏提供了丰富的零件和工具，让你能够将想象变为现实。无论是简单的小车还是复杂的自动化工厂，一切皆有可能。',
-        intro3: '游戏支持多人联机，你可以与朋友一起探索、建造和冒险。在生存模式中，你需要收集资源、建造基地，并抵御机器人的进攻。在创造模式中，你可以尽情发挥创意，不受任何限制。',
+        intro1: '废品机械师是一款由瑞典独立游戏工作室 Axolot Games 开发的创意沙盒游戏。游戏于2016年1月20日在Steam平台发布抢先体验版本，以物理引擎驱动的建造系统为核心玩法。',
+        intro2: '在游戏中，你可以建造各种机械装置、载具和建筑。游戏提供了丰富的零件和工具，支持从简单的小车到复杂的自动化工厂等多种建造方向。',
+        intro3: '游戏支持多人联机，可以与朋友一起探索、建造和冒险。生存模式中需要收集资源、建造基地并抵御机器人；创造模式则提供无限资源，专注于建造本身。',
         statParts: '建筑部件',
         statModes: '游戏模式',
         statYear: '发行年份',
         featuresTitle: '游戏特色',
         featurePhysicsIcon: '物理',
         featurePhysicsTitle: '真实物理引擎',
-        featurePhysicsDesc: '游戏采用先进的物理引擎，每一个零件都有真实的物理属性。重量、摩擦力、空气阻力都会影响你的创造物的表现。',
+        featurePhysicsDesc: '游戏基于物理引擎，每个零件都有对应的物理属性。重量、摩擦力、空气阻力等因素会影响载具和机械的运行表现。',
         featureCreateIcon: '创造',
         featureCreateTitle: '自由建造系统',
-        featureCreateDesc: '数百种零件任你组合，从简单的方块到复杂的逻辑电路，从基础轮子到喷气引擎，创造无限可能。',
+        featureCreateDesc: '提供数百种零件供玩家组合，包括方块、逻辑电路、轮子、引擎等多种类型。',
         featureCoopIcon: '联机',
         featureCoopTitle: '多人合作',
-        featureCoopDesc: '支持多人在线游戏，与朋友一起建造、探索和冒险。分享你的创意，共同完成宏大的工程项目。',
+        featureCoopDesc: '支持多人在线游戏，可以与朋友一起建造、探索和冒险，共同完成工程项目。',
         featureWorkshopTitle: '创意工坊支持',
         featureWorkshopDesc: '通过Steam创意工坊，你可以下载其他玩家分享的蓝图和Mod，也可以上传自己的作品与全世界分享。',
         modesTitle: '游戏模式',
@@ -244,7 +245,7 @@ I18n.register('zh-CN', {
         modeChallengeTitle: '挑战模式',
         modeChallengeDesc: '完成各种预设挑战，测试你的建造技巧和创意思维，获得成就和奖励。',
         modeCreativeTitle: '创造模式',
-        modeCreativeDesc: '无限资源，无敌模式，专注于纯粹的建造乐趣。这里是实现你所有疯狂想法的地方。',
+        modeCreativeDesc: '无限资源，无敌模式，专注于建造本身，适合测试和创作。',
         modeCustomTitle: '自定义游戏',
         modeCustomDesc: '通过Mod和自定义地图，体验社区创作的独特内容，或者创建属于你自己的游戏模式。',
         specsTitle: '配置要求',
@@ -259,7 +260,7 @@ I18n.register('zh-CN', {
         specsDX11or12: '版本 11 或 12',
         specsStorage: '存储空间',
         ctaTitle: '开始你的建造之旅',
-        ctaDesc: '在 Steam 上获取废品机械师，加入数百万玩家的创造世界。无论你是建造新手还是资深工程师，这里都有属于你的乐趣。',
+        ctaDesc: '在 Steam 上获取废品机械师，体验物理驱动的沙盒建造玩法。',
         ctaBuyBtn: '立即购买',
         ctaPriceValue: '68',
         ctaPriceCurrency: 'CNY'
@@ -270,8 +271,8 @@ I18n.register('zh-CN', {
         title: '传奇建造队',
         subtitle: 'Legend Team',
         aboutTitle: '关于我们',
-        intro: '传奇建造队成立于2016年，是废品机械师游戏中最具影响力的中国玩家团队。我们致力于为玩家提供优质的游戏内容和社区服务，打造一个充满创意和热情的玩家社区。',
-        highlight: '传奇Mod是我们团队的核心项目，经过多年的持续开发和优化，已成长为Steam创意工坊综合排行榜第一的大型综合性模组，为全球玩家提供了丰富的建造零件和游戏体验。',
+        intro: '传奇建造队成立于2016年，是一个专注于废品机械师游戏的中国玩家社区。我们为玩家提供模组内容和交流平台。',
+        highlight: '传奇Mod是团队的核心项目，经过多年持续开发，提供丰富的建造零件和功能扩展。',
         statFounded: '成立年份',
         statMembers: '社区成员',
         statRank: '创意工坊排名',

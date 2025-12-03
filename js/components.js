@@ -126,15 +126,47 @@ const Components = {
     getLoader() {
         return `
     <div class="page-loader">
-        <img src="https://s2.loli.net/2025/12/02/Je7Cx96BAoYqKfu.png" alt="Loading" class="loader-logo">
+        <div class="loader-logo-wrapper">
+            <img src="https://s2.loli.net/2025/12/02/Je7Cx96BAoYqKfu.png" alt="Loading" class="loader-logo">
+        </div>
         <span class="loader-text" data-i18n="common.loading">正在加载中……</span>
     </div>`;
+    },
+
+    // 隐藏页面加载器
+    hideLoader() {
+        const pageLoader = document.querySelector('.page-loader');
+        if (!pageLoader || pageLoader.dataset.handled) return;
+        pageLoader.dataset.handled = 'true';
+
+        const logo = document.querySelector('.nav-logo img');
+        const loaderLogo = document.querySelector('.loader-logo');
+
+        // 等 DOM + Logo 加载完就隐藏 loader
+        Promise.all([
+            new Promise(r => document.readyState === 'loading'
+                ? document.addEventListener('DOMContentLoaded', r)
+                : r()),
+            new Promise(r => !logo || logo.complete ? r() : logo.addEventListener('load', r)),
+            new Promise(r => !loaderLogo || loaderLogo.complete ? r() : loaderLogo.addEventListener('load', r))
+        ]).then(() => {
+            pageLoader.classList.add('hidden');
+        });
     },
 
     // 初始化页面组件
     init(options = {}) {
         const footerOnly = options.footerOnly || false;
-        const firstScript = document.querySelector('script');
+        const firstScript = document.body.querySelector('script');
+
+        // 注入 favicon
+        if (!document.querySelector('link[rel="icon"]')) {
+            const favicon = document.createElement('link');
+            favicon.rel = 'icon';
+            favicon.type = 'image/png';
+            favicon.href = 'https://s2.loli.net/2025/12/03/xeUrThPmK35WBjG.png';
+            document.head.appendChild(favicon);
+        }
 
         if (!footerOnly) {
             // 插入加载器
@@ -142,6 +174,8 @@ const Components = {
             // 插入导航栏（在加载器后面）
             const loader = document.querySelector('.page-loader');
             loader.insertAdjacentHTML('afterend', this.getNavbar(options));
+            // 立即启动 loader 隐藏逻辑（不等后面的数据 JS）
+            this.hideLoader();
         }
 
         // 插入页脚和返回顶部按钮（在脚本标签前面）
