@@ -11,6 +11,7 @@ I18n.register('zh-CN', {
         community: '社区',
         updates: '动态',
         gallery: '画廊',
+        workshop: '创意工坊',
         tutorials: '教程',
         tutorialLib: '教程库',
         feedback: '反馈',
@@ -320,12 +321,17 @@ I18n.register('zh-CN', {
     galleryPage: {
         title: '画廊',
         subtitle: 'Gallery',
-        tabArtwork: '艺术作品',
-        tabWorkshop: '创意工坊',
-        workshopPlaceholder: '创意工坊内容建设中',
+        noFeatured: '暂无精选作品',
+        moreComingSoon: '更多内容持续更新中，敬请期待'
+    },
+
+    // 创意工坊页
+    workshopPage: {
+        title: '创意工坊',
+        subtitle: 'Workshop',
+        placeholder: '创意工坊内容加载中',
         expand: '展开全部',
         collapse: '收起',
-        works: '作品',
         items: '个作品',
         filterCreator: '筛选作者',
         searchPlaceholder: '搜索作品标题...',

@@ -751,6 +751,14 @@ img {
     opacity: 0.4;
 }
 
+[data-theme="light"] .media-thumb::before {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .video-thumb::after {
+    background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 50%);
+}
+
 .community-entrance .container {
     position: relative;
     z-index: 2;
@@ -1281,7 +1289,7 @@ img {
     bottom: 0;
     background-size: cover;
     background-position: center;
-    opacity: 0.3;
+    opacity: 0.65;
 }
 
 .page-hero-bg::after {
@@ -2513,7 +2521,7 @@ img {
 }
 
 .game-hero .page-hero-bg {
-    opacity: 0.4;
+    opacity: 0.7;
 }
 
 .game-badge {
@@ -3267,55 +3275,6 @@ img {
     }
 }
 
-/* ========================================
-   Gallery Page - Tabs
-======================================== */
-.gallery-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 48px;
-}
-
-.gallery-tab {
-    padding: 12px 32px;
-    font-size: 14px;
-    font-weight: 600;
-    background-color: transparent;
-    border: 1px solid var(--color-border);
-    color: var(--color-text-muted);
-    cursor: pointer;
-    transition: all var(--transition);
-}
-
-@media (hover: hover) {
-    .gallery-tab:hover {
-        border-color: var(--color-accent);
-        color: var(--color-accent);
-    }
-}
-
-@media (hover: none) {
-    .gallery-tab:active {
-        border-color: var(--color-accent);
-        color: var(--color-accent);
-    }
-}
-
-.gallery-tab.active {
-    background-color: var(--color-accent);
-    border-color: var(--color-accent);
-    color: var(--color-bg);
-}
-
-.gallery-panel {
-    display: none;
-}
-
-.gallery-panel.active {
-    display: block;
-}
-
 .gallery-coming-soon {
     text-align: center;
     color: var(--color-text-muted);
@@ -3666,7 +3625,7 @@ img {
 }
 
 /* ========================================
-   Gallery Page - Workshop (创意工坊)
+   Workshop Page (创意工坊页)
 ======================================== */
 #workshopPanel {
     margin-top: 32px;
@@ -3938,15 +3897,6 @@ img {
     .artist-card,
     .creator-card {
         padding: 20px;
-    }
-
-    .gallery-tabs {
-        gap: 12px;
-    }
-
-    .gallery-tab {
-        padding: 10px 20px;
-        font-size: 13px;
     }
 
     .lightbox-prev {

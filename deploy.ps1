@@ -1,19 +1,11 @@
 ﻿try {
     # ============================================
-    # 日常更新脚本
+    # 部署脚本（支持首次初始化 + 日常更新）
     # ============================================
 
     Write-Host ""
-    Write-Host "========== 日常更新脚本 ==========" -ForegroundColor Cyan
+    Write-Host "========== 部署脚本 ==========" -ForegroundColor Cyan
     Write-Host ""
-
-    # 检查是否已初始化
-    if (-not (Test-Path ".git")) {
-        Write-Host "[错误] 未检测到 .git 文件夹" -ForegroundColor Red
-        Write-Host "请先运行 git init 初始化仓库"
-        Read-Host "按回车键退出"
-        exit 1
-    }
 
     # 检查 Git 是否安装
     if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
@@ -23,13 +15,24 @@
         exit 1
     }
 
-    # 检查远程仓库配置
+    # 检查是否已初始化
+    $isFirstTime = $false
+    if (-not (Test-Path ".git")) {
+        Write-Host "[提示] 首次运行，正在初始化 Git 仓库..." -ForegroundColor Yellow
+        git init 2>&1 | Out-Null
+        $isFirstTime = $true
+    }
+
+    # 配置远程仓库
+    $repoUrl = "https://github.com/APxiaosong/APxiaosong.github.io.git"
     $remote = git remote get-url origin 2>$null
     if (-not $remote) {
-        Write-Host "[错误] 未配置远程仓库" -ForegroundColor Red
-        Write-Host "请先运行 git remote add origin <仓库地址> 配置远程仓库"
-        Read-Host "按回车键退出"
-        exit 1
+        Write-Host "[配置] 设置远程仓库: $repoUrl" -ForegroundColor Yellow
+        git remote add origin $repoUrl
+        $isFirstTime = $true
+    } elseif ($remote -ne $repoUrl) {
+        Write-Host "[配置] 更新远程仓库: $repoUrl" -ForegroundColor Yellow
+        git remote set-url origin $repoUrl
     }
 
     # 检查是否有改动
@@ -72,7 +75,14 @@
 
     # 推送
     Write-Host "正在推送到 GitHub..."
-    git push --progress 2>&1 | ForEach-Object { Write-Host $_ }
+    if ($isFirstTime) {
+        # 首次推送：设置上游分支
+        $branch = git branch --show-current 2>$null
+        if (-not $branch) { $branch = "main" }
+        git push -u origin $branch --progress 2>&1 | ForEach-Object { Write-Host $_ }
+    } else {
+        git push --progress 2>&1 | ForEach-Object { Write-Host $_ }
+    }
     if ($LASTEXITCODE -ne 0) {
         Write-Host ""
         Write-Host "[错误] 推送失败" -ForegroundColor Red

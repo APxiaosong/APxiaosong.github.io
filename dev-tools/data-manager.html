@@ -588,6 +588,30 @@
             border-top: 1px solid var(--color-border);
         }
 
+        .export-category {
+            margin-bottom: 20px;
+        }
+
+        .export-category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--color-border);
+            font-weight: 600;
+        }
+
+        .export-category-header span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .export-category-header i {
+            color: var(--color-accent);
+        }
+
         .export-overlay {
             position: fixed;
             top: 0;
@@ -869,6 +893,235 @@
             pointer-events: none;
             z-index: 1000;
         }
+
+        /* 精选按钮 */
+        .featured-btn {
+            padding: 4px 8px;
+            font-size: 12px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: all var(--transition);
+            white-space: nowrap;
+        }
+
+        .featured-btn:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .featured-btn.active {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: var(--color-bg);
+        }
+
+        /* 精选面板 */
+        .featured-panel {
+            background: linear-gradient(135deg, rgba(255, 147, 0, 0.05) 0%, transparent 50%);
+            border: 1px solid var(--color-accent);
+            margin-bottom: 24px;
+        }
+
+        .featured-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            cursor: pointer;
+            user-select: none;
+            transition: background var(--transition);
+        }
+
+        .featured-panel-header:hover {
+            background: rgba(255, 147, 0, 0.08);
+        }
+
+        .featured-panel-header .section-title {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .featured-panel-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .panel-toggle-icon {
+            font-size: 20px;
+            color: var(--color-text-muted);
+            transition: transform var(--transition);
+        }
+
+        .featured-panel:not(.collapsed) .panel-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .featured-panel-body {
+            overflow: hidden;
+            padding: 0 20px 20px;
+        }
+
+        .featured-panel.collapsed .featured-panel-body {
+            display: none;
+        }
+
+        /* 精选网格 */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .featured-grid.empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+            color: var(--color-text-muted);
+            font-size: 13px;
+            background: var(--color-bg-dark);
+            border: 1px dashed var(--color-border);
+        }
+
+        .featured-card {
+            position: relative;
+            aspect-ratio: 1;
+            background: var(--color-bg-dark);
+            border: 1px solid var(--color-border);
+            overflow: hidden;
+            cursor: grab;
+            transition: all var(--transition);
+        }
+
+        .featured-card:hover {
+            border-color: var(--color-accent);
+        }
+
+        .featured-card.dragging {
+            opacity: 0.5;
+        }
+
+        .featured-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 8px;
+        }
+
+        .featured-card:hover .featured-card-overlay {
+            opacity: 1;
+        }
+
+        .featured-card-info {
+            font-size: 11px;
+            color: #fff;
+            line-height: 1.3;
+        }
+
+        .featured-card-info .artist {
+            color: var(--color-accent);
+        }
+
+        .featured-card-remove {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 24px;
+            height: 24px;
+            background: rgba(0,0,0,0.7);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all var(--transition);
+        }
+
+        .featured-card:hover .featured-card-remove {
+            opacity: 1;
+        }
+
+        .featured-card-remove:hover {
+            background: var(--color-danger);
+        }
+
+        .featured-card-index {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 精选翻页 */
+        .featured-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            margin-top: 16px;
+        }
+
+        .fp-btn {
+            min-width: 32px;
+            height: 32px;
+            padding: 0 8px;
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fp-btn:hover:not(:disabled):not(.active) {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .fp-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .fp-btn.active {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: var(--color-bg);
+        }
+
+        .fp-ellipsis {
+            padding: 0 4px;
+            color: var(--color-text-muted);
+        }
     </style>
 </head>
 <body>
@@ -938,6 +1191,27 @@
         </div>
 
         <div id="tab-gallery" class="tab-content">
+            <!-- 精选管理区域 -->
+            <div class="featured-panel collapsed" id="featured-panel">
+                <div class="featured-panel-header" onclick="toggleFeaturedPanel()">
+                    <h2 class="section-title">
+                        <i class="ri-star-fill" style="color: var(--color-accent);"></i>
+                        精选管理 <span id="featured-count" class="creator-count">0 张</span>
+                    </h2>
+                    <div class="featured-panel-actions">
+                        <button class="btn btn-outline btn-sm" id="shuffle-btn" onclick="event.stopPropagation();toggleShuffle()">
+                            <i class="ri-shuffle-line"></i> 打乱预览
+                        </button>
+                        <i class="ri-arrow-down-s-line panel-toggle-icon"></i>
+                    </div>
+                </div>
+                <div class="featured-panel-body" id="featured-content"></div>
+            </div>
+
+            <!-- 素材库区域 -->
+            <div class="section-header">
+                <h2 class="section-title">素材库</h2>
+            </div>
             <div class="loading" id="gallery-loading">
                 <div class="loading-spinner"></div>
                 <span>加载中...</span>
@@ -1057,7 +1331,7 @@
 
     <!-- Load Data Scripts -->
     <script src="../js/tutorial-data.js"></script>
-    <script src="../js/gallery-data.js"></script>
+    <script src="gallery-data.js"></script>
     <script src="../js/workshop-data.js"></script>
     <script src="../js/faq-data.js"></script>
 
@@ -1065,11 +1339,12 @@
     <script src="../js/tutorial/tutorial-davidsirius.js"></script>
     <script src="../js/tutorial/tutorial-jingwuwei.js"></script>
 
-    <script src="../js/gallery/gallery-qingguangying.js"></script>
-    <script src="../js/gallery/gallery-apxiaosong.js"></script>
-    <script src="../js/gallery/gallery-baiyuanhuchui.js"></script>
-    <script src="../js/gallery/gallery-mingmei8.js"></script>
-    <script src="../js/gallery/gallery-dianyuzhangzane.js"></script>
+    <script src="../js/gallery-featured.js"></script>
+    <script src="gallery-source/gallery-qingguangying.js"></script>
+    <script src="gallery-source/gallery-apxiaosong.js"></script>
+    <script src="gallery-source/gallery-baiyuanhuchui.js"></script>
+    <script src="gallery-source/gallery-mingmei8.js"></script>
+    <script src="gallery-source/gallery-dianyuzhangzane.js"></script>
 
     <script src="../js/workshop/workshop-dianyuzhangzane.js"></script>
     <script src="../js/workshop/workshop-baiyuanhuchui.js"></script>
@@ -1084,11 +1359,17 @@
             faq: [],
             gallery: [],
             workshop: [],
+            featured: [],
+            featuredOriginalOrder: null, // 打乱前的原顺序
+            shuffleEnabled: false,
+            featuredPage: 1,
+            featuredPerPage: 32,
             modified: {
                 tutorials: new Set(),
                 faq: false,
                 gallery: new Set(),
-                workshop: new Set()
+                workshop: new Set(),
+                featured: false
             }
         };
 
@@ -1331,7 +1612,7 @@
             }
 
             const faqItem = {
-                id: editingFaqIndex !== null ? state.faq[editingFaqIndex].id : Date.now(),
+                id: editingFaqIndex !== null ? state.faq[editingFaqIndex].id : (Math.max(0, ...state.faq.map(f => f.id)) + 1),
                 question,
                 questionEn,
                 answer,
@@ -1360,11 +1641,272 @@
                     name: artist.name,
                     works: [...artist.works]
                 }));
+                // 加载现有精选数据
+                if (typeof GalleryFeatured !== 'undefined' && Array.isArray(GalleryFeatured)) {
+                    state.featured = JSON.parse(JSON.stringify(GalleryFeatured));
+                }
+                renderFeatured();
                 renderGallery();
             } catch (e) {
                 console.error('Failed to load gallery:', e);
                 document.getElementById('gallery-loading').innerHTML = '<div class="empty-state"><i class="ri-error-warning-line"></i><p>加载失败</p></div>';
             }
+        }
+
+        // 检查图片是否在精选中
+        function isInFeatured(image) {
+            return state.featured.some(f => f.image === image);
+        }
+
+        // 切换精选状态
+        function toggleFeatured(artistIndex, workIndex, btn) {
+            const artist = state.gallery[artistIndex];
+            const work = artist.works[workIndex];
+            const idx = state.featured.findIndex(f => f.image === work.image);
+
+            if (idx >= 0) {
+                state.featured.splice(idx, 1);
+            } else {
+                state.featured.push({
+                    image: work.image,
+                    title: work.title || '',
+                    artist: artist.name
+                });
+            }
+            state.modified.featured = true;
+            renderFeatured();
+            // 更新按钮状态而不重新渲染整个列表
+            updateFeaturedButtons();
+        }
+
+        // 更新所有精选按钮状态
+        function updateFeaturedButtons() {
+            document.querySelectorAll('.featured-btn').forEach(btn => {
+                const card = btn.closest('.item-card');
+                const list = card.closest('.item-list');
+                const artistIdx = parseInt(list.dataset.creator);
+                const workIdx = parseInt(card.dataset.index);
+                const work = state.gallery[artistIdx].works[workIdx];
+                const isFeatured = isInFeatured(work.image);
+                btn.classList.toggle('active', isFeatured);
+                btn.textContent = isFeatured ? '已精选' : '精选';
+            });
+        }
+
+        // 批量加入精选
+        function addSelectedToFeatured(group) {
+            const artistIdx = parseInt(group.dataset.creatorIndex);
+            const artist = state.gallery[artistIdx];
+            const checkboxes = group.querySelectorAll('.item-list .item-checkbox:checked');
+            let addedCount = 0;
+
+            checkboxes.forEach(cb => {
+                const card = cb.closest('.item-card');
+                const workIdx = parseInt(card.dataset.index);
+                const work = artist.works[workIdx];
+                if (!isInFeatured(work.image)) {
+                    state.featured.push({
+                        image: work.image,
+                        title: work.title || '',
+                        artist: artist.name
+                    });
+                    addedCount++;
+                }
+                cb.checked = false;
+            });
+
+            if (addedCount > 0) {
+                state.modified.featured = true;
+                renderFeatured();
+                updateFeaturedButtons();
+                showToast(`已添加 ${addedCount} 张到精选`, 'success');
+            } else {
+                showToast('所选图片已在精选中', 'warning');
+            }
+            updateSelectCount(group);
+        }
+
+        // 从精选中移除
+        function removeFromFeatured(index) {
+            state.featured.splice(index, 1);
+            state.modified.featured = true;
+            renderFeatured();
+            updateFeaturedButtons();
+        }
+
+        // 切换精选面板展开/收起
+        function toggleFeaturedPanel() {
+            document.getElementById('featured-panel').classList.toggle('collapsed');
+        }
+
+        // 渲染精选列表
+        function renderFeatured() {
+            const container = document.getElementById('featured-content');
+            const countEl = document.getElementById('featured-count');
+            countEl.textContent = `${state.featured.length} 张`;
+
+            if (state.featured.length === 0) {
+                container.innerHTML = '<div class="featured-grid empty">暂无精选，请从素材库中添加</div>';
+                return;
+            }
+
+            const totalPages = Math.ceil(state.featured.length / state.featuredPerPage);
+            if (state.featuredPage > totalPages) state.featuredPage = totalPages;
+            const startIdx = (state.featuredPage - 1) * state.featuredPerPage;
+            const pageItems = state.featured.slice(startIdx, startIdx + state.featuredPerPage);
+
+            container.innerHTML = `
+                <div class="featured-grid" id="featured-list">
+                    ${pageItems.map((item, i) => {
+                        const realIdx = startIdx + i;
+                        return `
+                        <div class="featured-card" draggable="true" data-index="${realIdx}">
+                            <span class="featured-card-index">${realIdx + 1}</span>
+                            <img src="${item.image}" alt="${item.title || ''}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 60 60%22><rect fill=%22%233a3a33%22 width=%2260%22 height=%2260%22/></svg>'">
+                            <div class="featured-card-overlay">
+                                <div class="featured-card-info">
+                                    <div class="artist">${item.artist}</div>
+                                    <div>${item.title || '无标题'}</div>
+                                </div>
+                            </div>
+                            <button class="featured-card-remove" onclick="removeFromFeatured(${realIdx})" title="移除">
+                                <i class="ri-close-line"></i>
+                            </button>
+                        </div>
+                    `}).join('')}
+                </div>
+                ${totalPages > 1 ? renderFeaturedPagination(state.featuredPage, totalPages) : ''}
+            `;
+            initFeaturedDragAndDrop();
+        }
+
+        function renderFeaturedPagination(cur, total) {
+            let html = '<div class="featured-pagination">';
+            html += `<button class="fp-btn" onclick="changeFeaturedPage('prev')" ${cur <= 1 ? 'disabled' : ''}><i class="ri-arrow-left-s-line"></i></button>`;
+            const pages = getFeaturedPageNumbers(cur, total);
+            pages.forEach(p => {
+                if (p === '...') {
+                    html += '<span class="fp-ellipsis">…</span>';
+                } else {
+                    html += `<button class="fp-btn ${p === cur ? 'active' : ''}" onclick="changeFeaturedPage(${p})">${p}</button>`;
+                }
+            });
+            html += `<button class="fp-btn" onclick="changeFeaturedPage('next')" ${cur >= total ? 'disabled' : ''}><i class="ri-arrow-right-s-line"></i></button>`;
+            html += '</div>';
+            return html;
+        }
+
+        function getFeaturedPageNumbers(cur, total) {
+            if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+            if (cur <= 3) return [1, 2, 3, 4, '...', total];
+            if (cur >= total - 2) return [1, '...', total - 3, total - 2, total - 1, total];
+            return [1, '...', cur - 1, cur, cur + 1, '...', total];
+        }
+
+        function changeFeaturedPage(page) {
+            const totalPages = Math.ceil(state.featured.length / state.featuredPerPage);
+            if (page === 'prev') page = state.featuredPage - 1;
+            else if (page === 'next') page = state.featuredPage + 1;
+            if (page < 1 || page > totalPages || page === state.featuredPage) return;
+            state.featuredPage = page;
+            renderFeatured();
+        }
+
+        // 打乱开关
+        function toggleShuffle() {
+            const btn = document.getElementById('shuffle-btn');
+            if (state.shuffleEnabled) {
+                // 关闭打乱，恢复原顺序
+                if (state.featuredOriginalOrder) {
+                    state.featured = JSON.parse(JSON.stringify(state.featuredOriginalOrder));
+                    state.featuredOriginalOrder = null;
+                }
+                state.shuffleEnabled = false;
+                btn.innerHTML = '<i class="ri-shuffle-line"></i> 打乱预览';
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-outline');
+            } else {
+                // 开启打乱
+                state.featuredOriginalOrder = JSON.parse(JSON.stringify(state.featured));
+                shuffleFeaturedByBatch();
+                state.shuffleEnabled = true;
+                btn.innerHTML = '<i class="ri-arrow-go-back-line"></i> 恢复顺序';
+                btn.classList.remove('btn-outline');
+                btn.classList.add('btn-primary');
+            }
+            renderFeatured();
+        }
+
+        // 按批次打乱（越靠前越新，同批次内不同作者的图片打乱）
+        function shuffleFeaturedByBatch() {
+            if (state.featured.length === 0) return;
+
+            // 按作者分组，记录每个作者的图片索引
+            const artistMap = {};
+            state.featured.forEach((item, i) => {
+                if (!artistMap[item.artist]) artistMap[item.artist] = [];
+                artistMap[item.artist].push(i);
+            });
+
+            const artists = Object.keys(artistMap);
+            if (artists.length <= 1) return; // 只有一个作者，无需打乱
+
+            // 找出最大批次数（最多图片的作者的图片数）
+            const maxBatch = Math.max(...artists.map(a => artistMap[a].length));
+
+            // 按批次重组
+            const result = [];
+            for (let batch = 0; batch < maxBatch; batch++) {
+                // 收集这一批次各作者的图片
+                const batchItems = [];
+                artists.forEach(artist => {
+                    if (artistMap[artist][batch] !== undefined) {
+                        batchItems.push(state.featured[artistMap[artist][batch]]);
+                    }
+                });
+                // 打乱这一批次
+                for (let i = batchItems.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [batchItems[i], batchItems[j]] = [batchItems[j], batchItems[i]];
+                }
+                result.push(...batchItems);
+            }
+
+            state.featured = result;
+        }
+
+        // 精选列表拖拽排序
+        function initFeaturedDragAndDrop() {
+            const list = document.getElementById('featured-list');
+            if (!list) return;
+            const items = list.querySelectorAll('.featured-card');
+            items.forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    item.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+                item.addEventListener('dragend', () => item.classList.remove('dragging'));
+                item.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    const dragging = list.querySelector('.dragging');
+                    if (dragging && dragging !== item) {
+                        item.style.borderColor = 'var(--color-accent)';
+                    }
+                });
+                item.addEventListener('dragleave', () => item.style.borderColor = '');
+                item.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    item.style.borderColor = '';
+                    const dragging = list.querySelector('.dragging');
+                    if (!dragging || dragging === item) return;
+                    const fromIdx = parseInt(dragging.dataset.index);
+                    const toIdx = parseInt(item.dataset.index);
+                    const [moved] = state.featured.splice(fromIdx, 1);
+                    state.featured.splice(toIdx, 0, moved);
+                    state.modified.featured = true;
+                    renderFeatured();
+                });
+            });
         }
 
         function renderGallery() {
@@ -1396,6 +1938,9 @@
                             <div class="multiselect-bar">
                                 <input type="checkbox" class="item-checkbox" style="display:block" onchange="toggleSelectAll(this)">
                                 <span class="select-count">已选 0 项</span>
+                                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();addSelectedToFeatured(this.closest('.creator-group'))">
+                                    <i class="ri-star-line"></i> 加入精选
+                                </button>
                                 <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteSelected(this.closest('.creator-group'))">
                                     <i class="ri-delete-bin-line"></i> 删除选中
                                 </button>
@@ -1410,6 +1955,7 @@
                                             <div class="item-title">${work.title}</div>
                                         </div>
                                         <div class="item-actions">
+                                            <button class="featured-btn ${isInFeatured(work.image) ? 'active' : ''}" onclick="toggleFeatured(${artistIndex}, ${index})">${isInFeatured(work.image) ? '已精选' : '精选'}</button>
                                             <a href="${work.image}" target="_blank" class="btn-icon" title="查看图片">
                                                 <i class="ri-external-link-line"></i>
                                             </a>
@@ -1688,63 +2234,92 @@
                     <i class="ri-information-line"></i>
                     <span>下载后请将文件覆盖到项目对应目录中</span>
                 </div>
+                <div class="export-notice" style="background: rgba(231, 76, 60, 0.1); border-color: rgba(231, 76, 60, 0.3);">
+                    <i class="ri-shield-keyhole-line" style="color: var(--color-danger);"></i>
+                    <span>Windows 可能标记文件为危险，请右键文件 → 属性 → 勾选"解除锁定"</span>
+                </div>
             `;
 
-            // FAQ Export
-            if (state.modified.faq || state.faq.length > 0) {
-                html += `
+            // B站教程分类
+            if (state.tutorials.length > 0) {
+                html += `<div class="export-category">
+                    <div class="export-category-header">
+                        <span><i class="ri-video-line"></i> B站教程</span>
+                        <button class="btn btn-sm btn-outline" onclick="downloadCategory('tutorials')">
+                            <i class="ri-download-2-line"></i> 下载全部
+                        </button>
+                    </div>`;
+                state.tutorials.forEach(creator => {
+                    html += `
+                        <div class="export-file">
+                            <div class="export-file-header">
+                                <span class="export-file-path">js/tutorial/tutorial-${creator.id}.js</span>
+                                <button class="btn btn-sm btn-primary" onclick="downloadFile('tutorial-${creator.id}.js', 'tutorial', '${creator.id}')">
+                                    <i class="ri-download-line"></i>
+                                </button>
+                            </div>
+                        </div>`;
+                });
+                html += `</div>`;
+            }
+
+            // 常见问题分类
+            if (state.faq.length > 0) {
+                html += `<div class="export-category">
+                    <div class="export-category-header">
+                        <span><i class="ri-question-answer-line"></i> 常见问题</span>
+                        <button class="btn btn-sm btn-outline" onclick="downloadCategory('faq')">
+                            <i class="ri-download-2-line"></i> 下载全部
+                        </button>
+                    </div>
                     <div class="export-file">
                         <div class="export-file-header">
                             <span class="export-file-path">js/faq-data.js</span>
                             <button class="btn btn-sm btn-primary" onclick="downloadFile('faq-data.js', 'faq')">
-                                <i class="ri-download-line"></i> 下载
+                                <i class="ri-download-line"></i>
                             </button>
                         </div>
                     </div>
-                `;
+                </div>`;
             }
 
-            // Tutorial Exports
-            state.tutorials.forEach(creator => {
-                html += `
-                    <div class="export-file">
-                        <div class="export-file-header">
-                            <span class="export-file-path">js/tutorial/tutorial-${creator.id}.js</span>
-                            <button class="btn btn-sm btn-primary" onclick="downloadFile('tutorial-${creator.id}.js', 'tutorial', '${creator.id}')">
-                                <i class="ri-download-line"></i> 下载
-                            </button>
-                        </div>
+            // 艺术作品精选
+            html += `<div class="export-category">
+                <div class="export-category-header">
+                    <span><i class="ri-image-line"></i> 艺术作品精选 (${state.featured.length} 张)</span>
+                </div>
+                <div class="export-file">
+                    <div class="export-file-header">
+                        <span class="export-file-path">js/gallery-featured.js</span>
+                        <button class="btn btn-sm btn-primary" onclick="downloadFile('gallery-featured.js', 'featured')">
+                            <i class="ri-download-line"></i>
+                        </button>
                     </div>
-                `;
-            });
+                </div>
+            </div>`;
 
-            // Gallery Exports
-            state.gallery.forEach(artist => {
-                html += `
-                    <div class="export-file">
-                        <div class="export-file-header">
-                            <span class="export-file-path">js/gallery/gallery-${artist.id}.js</span>
-                            <button class="btn btn-sm btn-primary" onclick="downloadFile('gallery-${artist.id}.js', 'gallery', '${artist.id}')">
-                                <i class="ri-download-line"></i> 下载
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-
-            // Workshop Exports
-            state.workshop.forEach(creator => {
-                html += `
-                    <div class="export-file">
-                        <div class="export-file-header">
-                            <span class="export-file-path">js/workshop/workshop-${creator.id}.js</span>
-                            <button class="btn btn-sm btn-primary" onclick="downloadFile('workshop-${creator.id}.js', 'workshop', '${creator.id}')">
-                                <i class="ri-download-line"></i> 下载
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
+            // 创意工坊分类
+            if (state.workshop.length > 0) {
+                html += `<div class="export-category">
+                    <div class="export-category-header">
+                        <span><i class="ri-tools-line"></i> 创意工坊</span>
+                        <button class="btn btn-sm btn-outline" onclick="downloadCategory('workshop')">
+                            <i class="ri-download-2-line"></i> 下载全部
+                        </button>
+                    </div>`;
+                state.workshop.forEach(creator => {
+                    html += `
+                        <div class="export-file">
+                            <div class="export-file-header">
+                                <span class="export-file-path">js/workshop/workshop-${creator.id}.js</span>
+                                <button class="btn btn-sm btn-primary" onclick="downloadFile('workshop-${creator.id}.js', 'workshop', '${creator.id}')">
+                                    <i class="ri-download-line"></i>
+                                </button>
+                            </div>
+                        </div>`;
+                });
+                html += `</div>`;
+            }
 
             // 批量下载按钮
             html += `
@@ -1758,6 +2333,26 @@
             container.innerHTML = html || '<div class="empty-state"><p>暂无数据可导出</p></div>';
         }
 
+        // 下载指定分类的所有文件
+        function downloadCategory(category) {
+            let downloadCount = 0;
+            if (category === 'tutorials') {
+                state.tutorials.forEach(creator => {
+                    setTimeout(() => downloadFile(`tutorial-${creator.id}.js`, 'tutorial', creator.id), downloadCount * 200);
+                    downloadCount++;
+                });
+            } else if (category === 'faq') {
+                downloadFile('faq-data.js', 'faq');
+                downloadCount = 1;
+            } else if (category === 'workshop') {
+                state.workshop.forEach(creator => {
+                    setTimeout(() => downloadFile(`workshop-${creator.id}.js`, 'workshop', creator.id), downloadCount * 200);
+                    downloadCount++;
+                });
+            }
+            showToast(`正在下载 ${downloadCount} 个文件...`, 'success');
+        }
+
         // 下载单个文件
         function downloadFile(filename, type, id) {
             let content = '';
@@ -1766,9 +2361,8 @@
             } else if (type === 'tutorial') {
                 const creator = state.tutorials.find(c => c.id === id);
                 content = generateTutorialCode(creator);
-            } else if (type === 'gallery') {
-                const artist = state.gallery.find(a => a.id === id);
-                content = generateGalleryCode(artist);
+            } else if (type === 'featured') {
+                content = generateFeaturedCode();
             } else if (type === 'workshop') {
                 const creator = state.workshop.find(c => c.id === id);
                 content = generateWorkshopCode(creator);
@@ -1802,11 +2396,9 @@
                 downloadCount++;
             });
 
-            // Gallery
-            state.gallery.forEach(artist => {
-                setTimeout(() => downloadFile(`gallery-${artist.id}.js`, 'gallery', artist.id), downloadCount * 200);
-                downloadCount++;
-            });
+            // Featured
+            setTimeout(() => downloadFile('gallery-featured.js', 'featured'), downloadCount * 200);
+            downloadCount++;
 
             // Workshop
             state.workshop.forEach(creator => {
@@ -1847,16 +2439,12 @@ ${videos}
 `;
         }
 
-        function generateGalleryCode(artist) {
-            const works = JSON.stringify(artist.works, null, 2);
+        function generateFeaturedCode() {
+            const data = JSON.stringify(state.featured, null, 2);
             return `/**
- * ${artist.name} - 艺术作品数据
+ * 画廊精选数据
  */
-GalleryData.register('${artist.id}', {
-    name: ${JSON.stringify(artist.name)},
-    works:
-${works}
-});
+const GalleryFeatured = ${data};
 `;
         }
 

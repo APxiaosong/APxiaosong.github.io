@@ -39,10 +39,11 @@ const Components = {
                     </div>
                 </li>
                 <li class="nav-item has-dropdown">
-                    <a href="#" class="nav-link${getParentActive(['community', 'gallery', 'faq'])}" data-i18n="nav.community">社区</a>
+                    <a href="#" class="nav-link${getParentActive(['community', 'gallery', 'workshop', 'faq'])}" data-i18n="nav.community">社区</a>
                     <div class="dropdown-menu">
                         <a href="community.html" data-i18n="nav.updates">动态</a>
                         <a href="gallery.html" data-i18n="nav.gallery">画廊</a>
+                        <a href="workshop.html" data-i18n="nav.workshop">创意工坊</a>
                         <a href="faq.html" data-i18n="nav.faq">常见问题</a>
                     </div>
                 </li>
@@ -90,6 +91,7 @@ const Components = {
                         <h4 data-i18n="footer.community">社区</h4>
                         <a href="community.html" data-i18n="nav.updates">动态</a>
                         <a href="gallery.html" data-i18n="nav.gallery">画廊</a>
+                        <a href="workshop.html" data-i18n="nav.workshop">创意工坊</a>
                         <a href="faq.html" data-i18n="nav.faq">常见问题</a>
                         <a href="tutorials.html" data-i18n="nav.tutorials">教程</a>
                         <a href="tutorial-library.html" data-i18n="nav.tutorialLib">教程库</a>

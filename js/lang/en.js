@@ -11,6 +11,7 @@ I18n.register('en', {
         community: 'Community',
         updates: 'Updates',
         gallery: 'Gallery',
+        workshop: 'Workshop',
         tutorials: 'Tutorials',
         tutorialLib: 'Tutorial Library',
         feedback: 'Feedback',
@@ -320,12 +321,17 @@ I18n.register('en', {
     galleryPage: {
         title: 'Gallery',
         subtitle: 'Gallery',
-        tabArtwork: 'Artwork',
-        tabWorkshop: 'Workshop',
-        workshopPlaceholder: 'Workshop content coming soon',
+        noFeatured: 'No featured works yet',
+        moreComingSoon: 'More content coming soon, stay tuned'
+    },
+
+    // Workshop Page
+    workshopPage: {
+        title: 'Workshop',
+        subtitle: 'Workshop',
+        placeholder: 'Loading workshop content',
         expand: 'Expand All',
         collapse: 'Collapse',
-        works: 'works',
         items: 'items',
         filterCreator: 'Filter by Creator',
         searchPlaceholder: 'Search titles...',

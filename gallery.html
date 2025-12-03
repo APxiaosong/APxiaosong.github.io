@@ -22,42 +22,9 @@
     <!-- 画廊内容 -->
     <section class="page-section page-section-compact">
         <div class="container">
-            <!-- 板块切换 -->
-            <div class="gallery-tabs animate-on-scroll" data-animation="fade-in">
-                <button class="gallery-tab active" data-tab="artwork" data-i18n="galleryPage.tabArtwork">艺术作品</button>
-                <button class="gallery-tab" data-tab="workshop" data-i18n="galleryPage.tabWorkshop">创意工坊</button>
-            </div>
-
-            <!-- 搜索表单（仅创意工坊显示） -->
-            <form class="search-form animate-on-scroll" data-animation="fade-in" id="gallerySearchForm" style="display: none;">
-                <!-- 作者筛选 -->
-                <div class="filter-dropdown" id="galleryCreatorFilter">
-                    <button type="button" class="filter-btn">
-                        <i class="ri-filter-3-line"></i>
-                        <span data-i18n="galleryPage.filterCreator">筛选作者</span>
-                        <i class="ri-arrow-down-s-line"></i>
-                    </button>
-                    <div class="filter-menu" id="galleryCreatorFilterMenu">
-                        <!-- 由 JS 动态生成 -->
-                    </div>
-                </div>
-                <div class="search-input-wrapper">
-                    <input type="text" id="gallerySearch" placeholder="搜索作品标题..." class="search-input" data-i18n-placeholder="galleryPage.searchPlaceholder">
-                    <button type="button" class="search-clear" id="gallerySearchClear"><i class="ri-close-line"></i></button>
-                </div>
-                <button type="submit" class="search-btn"><i class="ri-search-line"></i> <span data-i18n="galleryPage.searchBtn">搜索</span></button>
-            </form>
-
             <!-- 艺术作品板块 -->
-            <div class="gallery-panel active" id="artworkPanel">
+            <div id="artworkPanel">
                 <!-- 由 JS 动态生成 -->
-            </div>
-
-            <!-- 创意工坊板块 -->
-            <div class="gallery-panel" id="workshopPanel">
-                <div class="placeholder-content">
-                    <p style="text-align: center; color: var(--color-text-muted); font-size: 16px;" data-i18n="galleryPage.workshopPlaceholder">创意工坊内容建设中</p>
-                </div>
             </div>
 
             <!-- 更新提示 -->
@@ -86,18 +53,7 @@
     <script src="js/i18n.js"></script>
     <script src="js/lang/zh-CN.js"></script>
     <script src="js/lang/en.js"></script>
-    <script src="js/gallery-data.js"></script>
-    <script src="js/gallery/gallery-qingguangying.js"></script>
-    <script src="js/gallery/gallery-dianyuzhangzane.js"></script>
-    <script src="js/gallery/gallery-apxiaosong.js"></script>
-    <script src="js/gallery/gallery-baiyuanhuchui.js"></script>
-    <script src="js/gallery/gallery-mingmei8.js"></script>
-    <script src="js/workshop-data.js"></script>
-    <script src="js/workshop/workshop-dianyuzhangzane.js"></script>
-    <script src="js/workshop/workshop-baiyuanhuchui.js"></script>
-    <script src="js/workshop/workshop-gangbi.js"></script>
-    <script src="js/workshop/workshop-neza-nezha.js"></script>
-    <script src="js/workshop/workshop-miaozi.js"></script>
+    <script src="js/gallery-featured.js"></script>
     <script src="js/gallery.js"></script>
     <script src="js/main.js"></script>
 </body>
