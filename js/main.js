@@ -944,6 +944,8 @@ function initHeroCarousel() {
     // 优化图片 URL，根据屏幕分辨率调整
     function getOptimizedImageUrl(url) {
         if (!url) return url;
+        // 仅对 Steam 图片应用尺寸优化
+        if (!url.includes('steamusercontent.com')) return url;
         const { width, height } = getScreenSize();
 
         // 移除现有的尺寸参数，添加新的

@@ -567,6 +567,12 @@ img {
         rgba(44, 44, 39, 0.95) 100%
     );
     pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.hero.carousel-ready .hero-carousel-overlay {
+    opacity: 1;
 }
 
 /* 浅色主题遮罩 */
@@ -625,19 +631,13 @@ img {
     letter-spacing: -1px;
     margin-bottom: 24px;
     color: #2C2C27;
-    background: linear-gradient(135deg, #2C2C27 0%, #FF9300 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
     text-shadow: none;
-    transition: all 1.5s ease;
+    transition: color 1.5s ease, text-shadow 1.5s ease;
 }
 
 /* 轮播加载完成后，标题变为白色 */
 .hero.carousel-ready .hero-title {
     color: #FFFFFF;
-    background: none;
-    -webkit-text-fill-color: #FFFFFF;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -646,18 +646,12 @@ img {
 }
 
 [data-theme="light"] .hero-title {
-    color: var(--color-text);
-    background: linear-gradient(135deg, #2C2C27 0%, #FF9300 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #2C2C27;
     text-shadow: none;
 }
 
 [data-theme="light"] .hero.carousel-ready .hero-title {
     color: var(--color-text);
-    background: none;
-    -webkit-text-fill-color: var(--color-text);
     text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
 }
 
