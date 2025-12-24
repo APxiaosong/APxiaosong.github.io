@@ -24,7 +24,7 @@
             <h1 data-i18n="modPage.title">传奇Mod</h1>
             <p class="page-hero-subtitle">New Legend Mod</p>
             <div class="page-hero-meta">
-                <span>v4.1.0</span>
+                <span>v4.1.1</span>
                 <span data-i18n="modPage.updateDate">更新于 2025.8.5</span>
             </div>
             <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3309460746" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="modPage.steamBtn">前往 Steam 创意工坊</a>
@@ -112,6 +112,48 @@
 
                 <h3 data-i18n="modPage.specialThanks">特别感谢</h3>
                 <p data-i18n="modPage.thanksText">感谢Modpack作者Durf对Mod体积优化的建议！<br>以及MJM Mod提供的开源座椅脚本!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 履带系统介绍 -->
+    <section class="page-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll" data-animation="slide-up" data-i18n="modPage.trackSystemTitle">履带系统介绍</h2>
+            <p class="section-desc animate-on-scroll" data-animation="slide-up" data-delay="100" data-i18n="modPage.trackSystemDesc">这是一套专为《废品机械师》设计的高级履带渲染与物理模拟系统。该系统彻底摒弃了传统的静态贴图或刚性模型方案，采用基于 Lua 脚本的动态几何生成技术。它能够智能识别车辆的轮组结构，自动生成贴合的履带路径，并提供从基础视觉到硬核物理模拟的多种运行模式，旨在为载具建造提供极致的视觉表现与交互体验。</p>
+
+            <hr class="mod-divider">
+
+            <div class="guide-block animate-on-scroll" data-animation="slide-up" data-delay="200">
+                <h3 data-i18n="modPage.trackModesTitle">三种运行模式</h3>
+                <p data-i18n="modPage.trackModesDesc">通过连接的"履带控制器"，可以根据载具需求实时切换三种核心模式：</p>
+                <ol>
+                    <li><strong data-i18n="modPage.trackModeSimpleTitle">简单模式</strong>：<span data-i18n="modPage.trackModeSimpleDesc">极致性能优化，适合超大型载具或背景装饰，以及配置较低的电脑使用。仅计算轮组的最外层轮廓，不能与地形互动，以最小的算力消耗提供基础的履带视觉效果。</span></li>
+                    <li><strong data-i18n="modPage.trackModeStandardTitle">标准模式</strong>：<span data-i18n="modPage.trackModeStandardDesc">默认模式，平衡之选，兼顾美观与性能。能够精确识别轮组的凹凸结构（如复杂的悬挂形状，以及模拟地形的起伏），自动生成紧贴轮廓的几何路径，并带有自然的倒角平滑处理，适合绝大多数载具使用。</span></li>
+                    <li><strong data-i18n="modPage.trackModeRealisticTitle">拟真模式</strong>：<span data-i18n="modPage.trackModeRealisticDesc">物理模拟与硬核玩法，赋予履带真实的物理属性。动态形变：履带不再是僵硬的模型，而是会随重力下垂，并能随地形起伏发生形变的真正履带；物理交互：模拟惯性带来的抖动感；断裂机制：当轮子缺失时，履带会真实地脱落（断链/掉链子），增加战场氛围与真实感。</span></li>
+                </ol>
+            </div>
+
+            <hr class="mod-divider">
+
+            <div class="guide-block animate-on-scroll" data-animation="slide-up" data-delay="300">
+                <h3 data-i18n="modPage.trackFeaturesTitle">主要功能</h3>
+                <ol>
+                    <li data-i18n="modPage.trackFeature1">智能轮组融合：系统会自动检测并合并相邻的同轴轮子（如双排轮设计），将其视为一个整体进行计算，有效提升渲染效率并防止重复的计算。</li>
+                    <li data-i18n="modPage.trackFeature2">高度自定义：通过 GUI 界面，可以自由更换履带板样式（内置多种风格）、调整 X/Y/Z 轴尺寸、微调间距，并支持输入 HEX 代码自定义颜色，拟真模式还支持履带张紧度设置以调整履带下垂程度。</li>
+                    <li data-i18n="modPage.trackFeature3">非标轮径支持：搭配"自定义直径履带轮"，支持手动输入轮径参数，确保履带在任何外观的作品下都能达到想要的效果。</li>
+                    <li data-i18n="modPage.trackFeature4">性能优化：内置智能休眠机制，当载具静止时自动降低运算频率，减少对游戏帧数的影响。</li>
+                </ol>
+            </div>
+
+            <hr class="mod-divider">
+
+            <div class="guide-block animate-on-scroll" data-animation="slide-up" data-delay="400">
+                <h3 data-i18n="modPage.trackQuickStartTitle">快速上手</h3>
+                <p><strong data-i18n="modPage.trackQuickStart1">搭建：像往常一样安装坦克轮。</strong></p>
+                <p><strong data-i18n="modPage.trackQuickStart2">连接：放置"履带控制器"，将所有同侧的履带轮逻辑连接至控制器（需形成闭环或完整的逻辑链）。</strong></p>
+                <p><strong data-i18n="modPage.trackQuickStart3">配置：对着控制器按 E 打开设置面板，选择模式并调整外观。</strong></p>
+                <p class="guide-note" data-i18n="modPage.trackQuickStartNote">老作品也可以无感升级至带履带的作品</p>
             </div>
         </div>
     </section>

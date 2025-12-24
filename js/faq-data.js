@@ -10,8 +10,8 @@ const FAQ_DATA = [
     "id": 2,
     "question": "传奇 Mod 与其他 Mod 兼容吗？",
     "questionEn": "Is the Legend Mod compatible with other mods?",
-    "answer": "传奇 Mod 与大多数 Mod 兼容，但请注意以下事项：\n• 请勿同时启用 New Legend Mod 3.2.3 与 New Legend Mod Continuation 4.1.0，否则会导致错误\n• 部分 Mod 组合可能导致材质偏色或显示异常\n• 传奇 Mod 已针对 Modpack 进行了部分兼容性优化",
-    "answerEn": "The Legend Mod is compatible with most mods. Please note:\n• Do not enable New Legend Mod 3.2.3 and New Legend Mod Continuation 4.1.0 simultaneously, as this will cause errors\n• Some mod combinations may cause texture discoloration or display issues\n• The Legend Mod has been partially optimized for Modpack compatibility"
+    "answer": "传奇 Mod 与大多数 Mod 兼容，但请注意以下事项：\n• 请勿同时启用 New Legend Mod 3.2.3 与 New Legend Mod Continuation 4.1.1，否则会导致错误\n• 部分 Mod 组合可能导致材质偏色或显示异常\n• 传奇 Mod 已针对 Modpack 进行了部分兼容性优化",
+    "answerEn": "The Legend Mod is compatible with most mods. Please note:\n• Do not enable New Legend Mod 3.2.3 and New Legend Mod Continuation 4.1.1 simultaneously, as this will cause errors\n• Some mod combinations may cause texture discoloration or display issues\n• The Legend Mod has been partially optimized for Modpack compatibility"
   },
   {
     "id": 3,
@@ -24,8 +24,8 @@ const FAQ_DATA = [
     "id": 4,
     "question": "为什么我的蓝图无法加载？",
     "questionEn": "Why can't I load my blueprint?",
-    "answer": "若蓝图使用旧版传奇 Mod 制作，请确保使用对应版本打开。新版 Mod 可兼容旧版蓝图，但旧版 Mod 无法打开新版蓝图。\n\n另外，请勿同时启用传奇 Mod 4.1.0 与 3.2.3 版本，否则可能导致作品加载时显示「无效接合位置」。",
-    "answerEn": "If the blueprint was created with an older version of the Legend Mod, ensure you use the corresponding version to open it. Newer versions can open older blueprints, but older versions cannot open newer ones.\n\nAlso, do not enable Legend Mod 4.1.0 and 3.2.3 simultaneously, as this may cause \"invalid joint position\" errors when loading creations."
+    "answer": "若蓝图使用旧版传奇 Mod 制作，请确保使用对应版本打开。新版 Mod 可兼容旧版蓝图，但旧版 Mod 无法打开新版蓝图。\n\n另外，请勿同时启用传奇 Mod 4.1.1 与 3.2.3 版本，否则可能导致作品加载时显示「无效接合位置」。",
+    "answerEn": "If the blueprint was created with an older version of the Legend Mod, ensure you use the corresponding version to open it. Newer versions can open older blueprints, but older versions cannot open newer ones.\n\nAlso, do not enable Legend Mod 4.1.1 and 3.2.3 simultaneously, as this may cause \"invalid joint position\" errors when loading creations."
   },
   {
     "id": 5,
