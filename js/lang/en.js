@@ -103,7 +103,7 @@ I18n.register('en', {
         tutorials: 'Tutorials',
         tutorialLib: 'Tutorial Library',
         feedback: 'Feedback',
-        copyright: '© 2025 Legend Team. All rights reserved.',
+        copyright: '© 2026 Legend Team. All rights reserved.',
         credits: 'Thanks to: Legend-ZANE, APxiaosong',
         disclaimer: 'This is a fan community site, not affiliated with Axolot Games. "Scrap Mechanic" and related assets are property of Axolot Games. User-generated content belongs to their respective creators. Some images are sourced from Steam and Bilibili.'
     },

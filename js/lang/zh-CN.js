@@ -103,7 +103,7 @@ I18n.register('zh-CN', {
         tutorials: '教程',
         tutorialLib: '教程库',
         feedback: '反馈',
-        copyright: '© 2025 传奇建造队 Legend Team. All rights reserved.',
+        copyright: '© 2026 传奇建造队 Legend Team. All rights reserved.',
         credits: '鸣谢：典狱长ZANE、APxiaosong',
         disclaimer: '本站为玩家社区，与 Axolot Games 无关。"Scrap Mechanic"及相关素材为 Axolot Games 所有。用户作品版权归原作者所有，部分图片引用自 Steam 及哔哩哔哩。'
     },
