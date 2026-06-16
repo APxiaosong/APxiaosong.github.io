@@ -15,7 +15,7 @@
 ├── about-game.html         # 游戏介绍
 ├── about-team.html         # 团队介绍
 ├── mod.html                # Mod详情
-├── download.html           # 下载中心
+├── get.html                # 获取中心
 ├── community.html          # 动态
 ├── gallery.html            # 画廊
 ├── faq.html                # 常见问题
@@ -29,14 +29,8 @@
     ├── components.js       # 公共组件
     ├── tutorial-data.js    # 教程数据管理器
     ├── faq-data.js         # FAQ数据
-    ├── gallery-data.js     # 画廊数据管理器
+    ├── gallery-featured.js # 前台精选画廊数据
     ├── workshop-data.js    # 创意工坊数据管理器
-    ├── gallery/            # 艺术作品数据（按作者）
-    │   ├── gallery-qingguangying.js
-    │   ├── gallery-dianyuzhangzane.js
-    │   ├── gallery-apxiaosong.js
-    │   ├── gallery-baiyuanhuchui.js
-    │   └── gallery-mingmei8.js
     ├── workshop/           # 创意工坊数据（按作者）
     │   ├── workshop-dianyuzhangzane.js
     │   ├── workshop-baiyuanhuchui.js
@@ -73,7 +67,7 @@
 
 | 文件 | 结构 |
 |------|------|
-| `gallery/gallery-*.js` | `GalleryData.register('id', { name, works: [{ title, image }] })` |
+| `dev-tools/gallery-source/gallery-*.js` | `GalleryData.register('id', { name, works: [{ title, image }] })` |
 | `workshop/workshop-*.js` | `WorkshopData.register('id', { name, works: [{ title, description, image, link }] })` |
 | `tutorial/tutorial-*.js` | `TutorialData.register('id', { name, videos: [{ 标题, 链接, 封面, 简介 }] })` |
 | `faq-data.js` | `{ id, question, questionEn, answer, answerEn }` |
@@ -105,4 +99,4 @@
 脚本在 Blender 4.5+ 中运行（利用 bpy 模块的网络功能）
 
 ---
-*更新: 2025-12-01*
+*更新: 2026-06-16*

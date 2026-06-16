@@ -54,7 +54,7 @@ WorkshopData.register('miaozi', {
         },
         {
                 "title": "New Legend Mod Continuation",
-                "description": "【Current Version】 New Legend Mod 4.1.0 Supplementary Update - 4 Detailed update list 【About the Mod】 Do NOT enable both New Legend Mod 3.2.3 and New Legend Mod Continuation 4.1.0 at the same time! Please use either the new mod or the old mod. Enabling both",
+                "description": "【Current Version】 New Legend Mod 4.1.2 Detailed update list 【About the Mod】 Do NOT enable New Legend Mod 3.2.3 and New Legend Mod Continuation 4.1.2 at the same time. New Legend Mod Continuation is actively developed and includes utility tools, material blocks, geometry parts, interactive parts, vehicle components, weapons, decorations, building elements, and more.",
                 "image": "https://images.steamusercontent.com/ugc/15611781624322465302/325176B2667614E7097C32B0C86DD6516C042BC1/?imw=1920&imh=1080&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true",
                 "link": "https://steamcommunity.com/sharedfiles/filedetails/?id=3309460746"
         },
@@ -174,7 +174,7 @@ WorkshopData.register('miaozi', {
         },
         {
                 "title": "极限国度",
-                "description": "【Текущая версия】 New Legend Mod 4.1.0 Дополнительное обновление-3 Подробный список изменений 【About the Mod】 This Mod is a continuation of the New Legend Mod, so all blueprints created with the New Legend Mod can be opened and used in this Mod. This Mod is",
+                "description": "该蓝图没有描述",
                 "image": "https://images.steamusercontent.com/ugc/2036242598642875608/16076DDC979919E5CB2C635D4A0864FEE0D210D2/?imw=1920&imh=1080&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true",
                 "link": "https://steamcommunity.com/sharedfiles/filedetails/?id=3010595310"
         },

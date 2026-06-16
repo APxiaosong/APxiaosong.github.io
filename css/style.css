@@ -3071,10 +3071,9 @@ img {
     }
 }
 
-.bilibili-icon svg {
-    width: 20px;
-    height: 20px;
-    fill: #fff;
+.bilibili-icon i {
+    color: #fff;
+    font-size: 20px;
 }
 
 .video-info {

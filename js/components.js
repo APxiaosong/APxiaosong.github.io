@@ -35,7 +35,7 @@ const Components = {
                     <a href="#" class="nav-link${getParentActive(['mod', 'get'])}" data-i18n="nav.mod">模组</a>
                     <div class="dropdown-menu">
                         <a href="mod.html" data-i18n="nav.modIntro">模组</a>
-                        <a href="get.html" data-i18n="nav.download">下载</a>
+                        <a href="get.html" data-i18n="nav.download">获取</a>
                     </div>
                 </li>
                 <li class="nav-item has-dropdown">
@@ -74,7 +74,7 @@ const Components = {
             <div class="footer-main">
                 <div class="footer-brand">
                     <img src="https://s2.loli.net/2025/06/12/qCLiGk4BdamZvXW.png" alt="传奇建造队" class="footer-logo">
-                    <p class="footer-tagline" data-i18n="footer.tagline">重塑创造边界</p>
+                    <p class="footer-tagline" data-i18n="footer.tagline">探索更多可能</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-col">
@@ -85,7 +85,7 @@ const Components = {
                     <div class="footer-col">
                         <h4 data-i18n="footer.mod">模组</h4>
                         <a href="mod.html" data-i18n="footer.modIntro">模组介绍</a>
-                        <a href="get.html" data-i18n="nav.download">下载</a>
+                        <a href="get.html" data-i18n="nav.download">获取</a>
                     </div>
                     <div class="footer-col">
                         <h4 data-i18n="footer.community">社区</h4>
@@ -106,7 +106,7 @@ const Components = {
                 </div>
             </div>
             <div class="footer-bottom">
-                <p data-i18n="footer.copyright">&copy; 2025 传奇建造队 Legend Team. All rights reserved.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 传奇建造队 Legend Team. All rights reserved.</p>
                 <p class="footer-credits" data-i18n="footer.credits">鸣谢：典狱长ZANE、APxiaosong</p>
                 <p class="footer-disclaimer" data-i18n="footer.disclaimer">本站为玩家社区，与 Axolot Games 无关。"Scrap Mechanic"及相关素材为 Axolot Games 所有。用户作品版权归原作者所有，部分图片引用自 Steam 及哔哩哔哩。</p>
             </div>

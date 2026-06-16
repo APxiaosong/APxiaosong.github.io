@@ -1,0 +1,23 @@
+# Claude Code
+.claude/
+AGENTS.md
+
+# 系统文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# 编辑器与 IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node.js（脚本可能产生的临时依赖）
+node_modules/
+
+# Python 缓存
+__pycache__/
+*.pyc

@@ -5,12 +5,12 @@ const SEO = {
 
     pages: {
         'index': {
-            zh: { title: '传奇建造队 | Legend Team', desc: '传奇建造队 - 废品机械师游戏中最具影响力的中国玩家团队，提供Steam创意工坊排名第一的传奇Mod' },
-            en: { title: 'Legend Team | Scrap Mechanic Mod', desc: 'Legend Team - The most influential Chinese player community for Scrap Mechanic, providing the #1 ranked Legend Mod on Steam Workshop' }
+            zh: { title: '传奇建造队 | Legend Team', desc: '传奇建造队 - 专注于《废品机械师》的中国玩家社区，提供传奇 Mod 与建造工具' },
+            en: { title: 'Legend Team | Scrap Mechanic Mod', desc: 'Legend Team - A Chinese Scrap Mechanic player community providing the Legend Mod and building tools' }
         },
         'mod': {
-            zh: { title: '传奇Mod | 传奇建造队', desc: '传奇Mod - Steam创意工坊综合排行榜第一的废品机械师模组，包含材质方块、几何体、武器、载具零件等丰富内容' },
-            en: { title: 'Legend Mod | Legend Team', desc: 'Legend Mod - #1 ranked Scrap Mechanic mod on Steam Workshop, featuring material blocks, geometric shapes, weapons, vehicle parts and more' }
+            zh: { title: '传奇Mod | 传奇建造队', desc: '传奇Mod - 面向《废品机械师》的大型综合性模组，包含材质方块、几何体、工具、载具零件等丰富内容' },
+            en: { title: 'Legend Mod | Legend Team', desc: 'Legend Mod - A comprehensive Scrap Mechanic mod featuring materials, geometry parts, tools, vehicle components and more' }
         },
         'about-team': {
             zh: { title: '传奇建造队 | Legend Team', desc: '传奇建造队 - 2016年成立的废品机械师中国玩家社区，拥有3000+成员' },
@@ -21,8 +21,8 @@ const SEO = {
             en: { title: 'Scrap Mechanic | Legend Team', desc: 'Scrap Mechanic - A physics sandbox building survival game where creativity builds machines' }
         },
         'get': {
-            zh: { title: '获取 | 传奇建造队', desc: '传奇Mod下载中心 - Steam创意工坊订阅与实用工具' },
-            en: { title: 'Download | Legend Team', desc: 'Legend Mod Download Center - Steam Workshop subscription and useful tools' }
+            zh: { title: '获取 | 传奇建造队', desc: '传奇 Mod 获取中心 - Steam 创意工坊订阅与实用工具' },
+            en: { title: 'Get | Legend Team', desc: 'Legend Mod get page - Steam Workshop subscription and useful tools' }
         },
         'community': {
             zh: { title: '社区 | 传奇建造队', desc: '加入传奇建造队社区 - 与志同道合的废品机械师玩家交流创意' },
