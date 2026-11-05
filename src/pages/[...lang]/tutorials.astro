@@ -13,6 +13,7 @@ import Section from '@/components/ui/Section.astro';
 import { pages } from '@/config/site';
 import { getFeaturedVideos, getTutorialCategories, getVideos } from '@/data/tutorials';
 import { getLang, getLangPaths, localizePath, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 export const getStaticPaths = getLangPaths;
@@ -26,7 +27,6 @@ const copy = {
     zh: '从零基础到进阶技巧，一些值得一看的《废品机械师》和传奇模组视频教程。',
     en: 'A few Scrap Mechanic and New Legend Mod video tutorials worth watching, from the basics to more advanced techniques.',
   },
-  tag: { zh: '教程 / Tutorials', en: 'Tutorials' },
   subtitle: { zh: 'Featured Guides', en: 'Featured Guides' },
   lead: {
     zh: '从零基础到进阶技巧，我们挑选了一些值得一看的教程。想要更系统的内容，请前往教程库。',
@@ -88,7 +88,7 @@ const [lead, ...others] = getFeaturedVideos().sort(
 <BaseLayout title={t(copy.title)} description={t(copy.description)}>
   <PageHero
     image={scene}
-    tag={t(copy.tag)}
+    tag={t(ui.tag.tutorials)}
     title={t(copy.title)}
     subtitle={t(copy.subtitle)}
     lead={t(copy.lead)}

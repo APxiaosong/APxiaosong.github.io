@@ -9,6 +9,7 @@ import Section from '@/components/ui/Section.astro';
 import { pages } from '@/config/site';
 import { getFaqGroups } from '@/data/faq';
 import { getLang, getLangPaths, localizePath, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 export const getStaticPaths = getLangPaths;
@@ -22,7 +23,6 @@ const copy = {
     zh: '传奇模组的获取、安装、使用与支持等方面的常见问题。',
     en: 'Answers to common questions about getting, installing and using the New Legend Mod, and where to find help.',
   },
-  tag: { zh: '社区 / Community', en: 'Community' },
   subtitle: { zh: 'Frequently Asked', en: 'Questions & Answers' },
   lead: {
     zh: '关于获取、安装、使用与支持的常见疑问，都整理在这里。若仍未解决，欢迎通过社群与我们联系。',
@@ -53,7 +53,7 @@ const structuredData = {
 
   <PageHero
     image={scene}
-    tag={t(copy.tag)}
+    tag={t(ui.tag.community)}
     title={t(copy.title)}
     subtitle={t(copy.subtitle)}
     lead={t(copy.lead)}

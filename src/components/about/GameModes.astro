@@ -8,6 +8,7 @@ import sceneChallenge from '@/assets/images/scene-challenge.png';
 import sceneCreative from '@/assets/images/scene-creative.png';
 import sceneSurvival from '@/assets/images/scene-survival.png';
 import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
 import Section from '@/components/ui/Section.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 
@@ -22,7 +23,7 @@ const modes = [
   {
     image: sceneCreative,
     label: 'Creative',
-    name: { zh: '创造模式', en: 'Creative Mode' },
+    name: ui.game.creativeMode,
     text: {
       zh: '400 余种建造零件与无限资源，专注于纯粹的建造与实验，并可通过创意工坊载入社区零件。',
       en: 'Over 400 building parts and unlimited resources, purely for building and experimenting. Community parts can be added through the Steam Workshop.',
@@ -32,7 +33,7 @@ const modes = [
   {
     image: sceneSurvival,
     label: 'Survival',
-    name: { zh: '生存模式', en: 'Survival Mode' },
+    name: ui.game.survivalMode,
     text: {
       zh: '迫降于失控的农业星球，采集、耕种、建造与防御。1.0「钻探雷霆」重制了生存模式，补完剧情并延伸至星球地心。',
       en: "Crash-land on a farming planet gone haywire, then gather, farm, build and defend. The 1.0 Drilling Thunder expansion reworks Survival, completes the story and takes it down to the planet's core.",
@@ -42,7 +43,7 @@ const modes = [
   {
     image: sceneChallenge,
     label: 'Challenge',
-    name: { zh: '挑战模式', en: 'Challenge Mode' },
+    name: ui.game.challengeMode,
     text: {
       zh: '「大师机械师试炼」共 40 道关卡，考验建造思维与机械直觉；也可自制关卡与好友分享。',
       en: 'The Master Mechanic Trials offer 40 levels that test your building logic and mechanical intuition. You can also make your own levels and share them with friends.',
@@ -58,7 +59,7 @@ const modes = [
   <ol class="modes" data-reveal>
     {
       modes.map((mode, i) => (
-        <li class:list={['mode', { featured: mode.featured }]} data-theme="dark">
+        <li class:list={['mode', { featured: mode.featured }]} data-theme="dark" data-chamfer="corner-lg">
           <Image src={mode.image} alt="" widths={[480, 720, 960]} sizes="(max-width: 900px) 100vw, 33vw" class="photo" />
           <span class="index" aria-hidden="true">
             {String(i + 1).padStart(2, '0')}
@@ -85,12 +86,11 @@ const modes = [
   }
 
   .mode {
+    --chamfer-stroke: var(--color-line);
     position: relative;
     aspect-ratio: 3 / 4.5;
     overflow: hidden;
-    border: 1px solid var(--color-line);
     color: var(--color-text);
-    clip-path: var(--clip-corner-lg);
   }
 
   /* 三张卡片错落排列，中间一张最高、位置最低 */
@@ -104,12 +104,14 @@ const modes = [
   }
 
   .featured {
-    border-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
+    --chamfer-stroke: var(--color-accent-line-soft);
   }
 
+  /* 图片垫在最底层，::before 的压暗层盖在它上面 */
   .photo {
     position: absolute;
     inset: 0;
+    z-index: -1;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -121,7 +123,7 @@ const modes = [
   }
 
   /* 顶部压暗以衬托序号，底部压暗以承托文字 */
-  .mode::after {
+  .mode::before {
     content: '';
     position: absolute;
     inset: 0;

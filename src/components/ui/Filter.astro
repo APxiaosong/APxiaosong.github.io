@@ -57,7 +57,7 @@ const allOptions = [{ value: '', label: t(copy.all) }, ...options];
   <div class="controls">
     {
       search && (
-        <label class="search">
+        <label class="search" data-chamfer="notch-md">
           <Icon name="search-line" class="search-icon" />
           <input class="search-input" type="search" placeholder={search} aria-label={search} autocomplete="off" data-filter-search />
         </label>
@@ -66,7 +66,7 @@ const allOptions = [{ value: '', label: t(copy.all) }, ...options];
     <div class="options" role="group" aria-label={label}>
       {
         allOptions.map((option) => (
-          <Chip class="option" pressed={option.value === ''} data-filter-option={option.value}>
+          <Chip pressed={option.value === ''} data-filter-option={option.value}>
             {option.label}
           </Chip>
         ))
@@ -85,15 +85,25 @@ const allOptions = [{ value: '', label: t(copy.all) }, ...options];
   const easing = getComputedStyle(document.documentElement).getPropertyValue('--ease-out').trim();
   const normalize = (text: string) => text.normalize('NFKC').toLowerCase();
 
-  // 筛选后重新出现的条目淡入；同时标记为已入场，免得滚动到它时再播放一次入场动画
-  function reveal(item: HTMLElement, order: number) {
-    item.classList.add('is-revealed');
+  const inViewport = (element: HTMLElement) => {
+    const { top, right, bottom, left } = element.getBoundingClientRect();
+    return bottom > 0 && right > 0 && top < innerHeight && left < innerWidth;
+  };
+
+  // 筛选后重新出现的条目标记为已入场，免得滚动到它时再播放一次入场动画，其中在视口内的条目依次淡入。
+  // 位置到下一帧再判断，这时 limitFiltered 等脚本已经按新的结果隐藏了超出数量的条目
+  function reveal(items: HTMLElement[]) {
+    for (const item of items) item.classList.add('is-revealed');
     if (prefersReducedMotion()) return;
-    item.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], {
-      duration: 500,
-      delay: Math.min(order, 8) * 40,
-      easing,
-      fill: 'backwards',
+    requestAnimationFrame(() => {
+      items.filter(inViewport).forEach((item, order) => {
+        item.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], {
+          duration: 500,
+          delay: Math.min(order, 8) * 40,
+          easing,
+          fill: 'backwards',
+        });
+      });
     });
   }
 
@@ -115,15 +125,17 @@ const allOptions = [{ value: '', label: t(copy.all) }, ...options];
     // animate：all 让全部可见条目重新淡入（切换分类），new 只让新出现的条目淡入（输入搜索词）
     function update(animate: 'all' | 'new' | 'none') {
       const terms = normalize(search?.value ?? '').split(/\s+/).filter(Boolean);
+      const appeared: HTMLElement[] = [];
       let shown = 0;
       for (const { element, values, text } of items) {
         const visible = (!selected || values.includes(selected)) && terms.every((term) => text.includes(term));
         const appearing = animate === 'all' || (animate === 'new' && element.hidden);
         element.hidden = !visible;
         if (!visible) continue;
-        if (appearing) reveal(element, shown);
+        if (appearing) appeared.push(element);
         shown++;
       }
+      reveal(appeared);
       for (const group of groups) group.hidden = !group.querySelector('[data-filter-value]:not([hidden])');
       if (count) count.textContent = count.dataset.filterCount!.replace('{n}', String(shown));
       empty.hidden = shown > 0;
@@ -177,16 +189,25 @@ const allOptions = [{ value: '', label: t(copy.all) }, ...options];
     gap: 18px 24px;
   }
 
+  /* 输入框没有伪元素，切角和描边加在外层的 label 上 */
   .search {
+    --chamfer-stroke: var(--color-line-strong);
     position: relative;
     flex: 1 1 320px;
     max-width: 440px;
+    background: var(--color-surface);
   }
 
-  /* 输入框的 clip-path 会形成层叠上下文，图标需要显式排在它上面 */
+  .search:hover {
+    --chamfer-stroke: var(--color-accent-line);
+  }
+
+  .search:focus-within {
+    --chamfer-stroke: var(--color-accent);
+  }
+
   .search-icon {
     position: absolute;
-    z-index: 1;
     top: 50%;
     left: 16px;
     font-size: 17px;
@@ -196,48 +217,29 @@ const allOptions = [{ value: '', label: t(copy.all) }, ...options];
   }
 
   .search-input {
+    display: block;
     width: 100%;
-    padding: 14px 16px 14px 44px;
-    border: 1px solid var(--color-line-strong);
-    background: var(--color-surface);
+    padding: 15px 17px 15px 45px;
+    border: 0;
+    background: none;
     color: var(--color-text);
     font: inherit;
     font-size: 15px;
-    clip-path: var(--clip-notch-md);
-    transition: border-color var(--duration-hover);
   }
 
   .search-input::placeholder {
     color: var(--color-text-muted);
   }
 
-  .search-input:hover,
-  .search-input:focus {
-    border-color: var(--color-accent-line);
-  }
-
-  /* 切角会裁掉外描边，焦点改用金色边框表示 */
+  /* 外层的切角会裁掉焦点框，焦点改由金色描边表示 */
   .search-input:focus-visible {
     outline: none;
-    border-color: var(--color-accent);
   }
 
   .options {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-  }
-
-  .options .option {
-    padding: 11px 22px;
-    font-family: var(--font-label);
-    font-size: 13px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  .options .option[aria-pressed='false'] {
-    background: transparent;
   }
 
   .count {
@@ -262,10 +264,6 @@ const allOptions = [{ value: '', label: t(copy.all) }, ...options];
   @media (max-width: 600px) {
     .options {
       gap: 8px;
-    }
-
-    .options .option {
-      padding: 9px 14px;
     }
   }
 </style>

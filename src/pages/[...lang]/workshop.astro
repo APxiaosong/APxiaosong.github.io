@@ -35,7 +35,6 @@ const other = otherLang(lang);
 
 const copy = {
   title: { zh: '创意工坊', en: 'Workshop' },
-  tag: { zh: '社区 / Community', en: 'Community' },
   subtitle: { zh: 'Workshop', en: 'Member Creations' },
   description: {
     zh: '传奇建造队成员在 Steam 创意工坊发布的《废品机械师》作品，按作者分章节展示，可以按分类筛选。',
@@ -46,10 +45,7 @@ const copy = {
     en: 'Arranged by creator, one workshop at a time. Each member’s chapter is a body of work worth browsing through. Everything here is distributed through the Steam Workshop.',
   },
   index: { zh: '作者索引', en: 'Creators' },
-  filter: { zh: '按分类筛选', en: 'Filter by category' },
   officialMeta: { zh: '传奇模组的开发团队', en: 'The team behind the New Legend Mod' },
-  modLink: { zh: '模组详情', en: 'About the Mod' },
-  viewAll: { zh: '查看该作者全部', en: 'View all on Steam' },
   joinTitle: { zh: '想成为下一位上榜的创作者？', en: 'Want to be the next creator featured here?' },
   join: { zh: '加入 Steam 社区组', en: 'Join the Steam Group' },
 };
@@ -107,7 +103,7 @@ const categoryOptions = getWorkshopCategories().map((category) => ({ value: cate
 <BaseLayout title={t(copy.title)} description={t(copy.description)}>
   <PageHero
     image={storeBackground}
-    tag={t(copy.tag)}
+    tag={t(ui.tag.community)}
     title={t(copy.title)}
     subtitle={t(copy.subtitle)}
     lead={t(copy.lead)}
@@ -127,7 +123,7 @@ const categoryOptions = getWorkshopCategories().map((category) => ({ value: cate
   </PageHero>
 
   <Section space="none" class="toolbar">
-    <Filter target="workshop-works" options={categoryOptions} label={t(copy.filter)} param="category" />
+    <Filter target="workshop-works" options={categoryOptions} label={t(ui.common.filterByCategory)} param="category" />
   </Section>
 
   <div id="workshop-works">
@@ -139,7 +135,7 @@ const categoryOptions = getWorkshopCategories().map((category) => ({ value: cate
       handle={pick(teamName, other)}
       meta={[t(copy.officialMeta)]}
       official
-      link={{ href: localizePath(pages.mod, lang), label: t(copy.modLink) }}
+      link={{ href: localizePath(pages.mod, lang), label: t(ui.mod.details) }}
       tone="base"
     >
       <ModFeature data-filter-value={modWork.category} />
@@ -153,7 +149,7 @@ const categoryOptions = getWorkshopCategories().map((category) => ({ value: cate
           name={chapter.name}
           handle={chapter.handle}
           meta={chapter.meta}
-          link={{ href: chapter.author.workshopUrl, label: t(copy.viewAll), external: true }}
+          link={{ href: chapter.author.workshopUrl, label: t(ui.common.viewAllWorks), external: true }}
           tone={i % 2 === 0 ? 'alt' : 'base'}
         >
           <WorkStrip author={chapter.author} works={chapter.works} total={chapter.total} limit={perChapter} />

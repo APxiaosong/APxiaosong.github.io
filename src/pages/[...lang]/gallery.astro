@@ -7,6 +7,7 @@ import storeBackground from '@/assets/images/steam-store-bg.jpg';
 import { pages } from '@/config/site';
 import { getGalleryArtists, getGalleryItems } from '@/data/gallery';
 import { getLang, getLangPaths, localizePath, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
 import Button from '@/components/ui/Button.astro';
 import Callout from '@/components/ui/Callout.astro';
 import Filter from '@/components/ui/Filter.astro';
@@ -23,7 +24,6 @@ const t = translator(lang);
 
 const copy = {
   title: { zh: '画廊', en: 'Gallery' },
-  tag: { zh: '社区 / Community', en: 'Community' },
   subtitle: { zh: 'Community Gallery', en: 'Selected Community Builds' },
   description: {
     zh: '传奇建造队社区成员的《废品机械师》建造作品精选，可以按作者筛选，点击图片查看大图。',
@@ -54,7 +54,7 @@ const tileSizes = '(max-width: 600px) calc(100vw - 40px), (max-width: 1100px) ca
 <BaseLayout title={t(copy.title)} description={t(copy.description)}>
   <PageHero
     image={storeBackground}
-    tag={t(copy.tag)}
+    tag={t(ui.tag.community)}
     title={t(copy.title)}
     subtitle={t(copy.subtitle)}
     lead={t(copy.lead)}

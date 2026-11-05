@@ -52,7 +52,14 @@ const first = slides[0];
   </div>
 
   <div data-reveal>
-    <div class="stage" data-theme="dark" role="group" aria-roledescription="carousel" aria-label={t(copy.carousel)}>
+    <div
+      class="stage"
+      data-theme="dark"
+      role="group"
+      aria-roledescription="carousel"
+      aria-label={t(copy.carousel)}
+      data-chamfer="corner-lg"
+    >
       <a class="frame" href={first.shot.image} data-lightbox="mod-screenshots" data-frame>
         <img
           src={first.src}
@@ -65,7 +72,7 @@ const first = slides[0];
           decoding="async"
           data-image
         />
-        <span class="open">
+        <span class="open" data-chamfer="notch-sm">
           {t(copy.open)}
           <Icon name="zoom-in-line" />
         </span>
@@ -73,10 +80,10 @@ const first = slides[0];
       <div class="shade" aria-hidden="true"></div>
       <p class="number" aria-hidden="true"><span data-counter>01</span><span class="total">/ {total}</span></p>
       <span class="side-label" aria-hidden="true">Preview</span>
-      <button class="arrow previous" type="button" aria-label={t(copy.previous)} data-step="-1">
+      <button class="arrow previous" type="button" aria-label={t(copy.previous)} data-chamfer="notch-sm" data-step="-1">
         <Icon name="arrow-left-s-fill" />
       </button>
-      <button class="arrow next" type="button" aria-label={t(copy.next)} data-step="1">
+      <button class="arrow next" type="button" aria-label={t(copy.next)} data-chamfer="notch-sm" data-step="1">
         <Icon name="arrow-right-s-fill" />
       </button>
       <span class="progress" aria-hidden="true"></span>
@@ -107,6 +114,7 @@ const first = slides[0];
 
 <script>
   import { prefersReducedMotion } from '@/components/ui/motion';
+  import { onSwipe } from '@/components/ui/swipe';
 
   const root = document.querySelector<HTMLElement>('[data-screenshots]')!;
   const frame = root.querySelector<HTMLAnchorElement>('[data-frame]')!;
@@ -138,8 +146,10 @@ const first = slides[0];
     }
     for (const counter of counters) counter.textContent = label;
     root.style.setProperty('--progress', `${((index + 1) / thumbs.length) * 100}%`);
+    // 缩略图在条内的位置用两者的视口坐标相减得到，offsetLeft 的基准不一定是缩略图条
+    const offset = thumb.getBoundingClientRect().left - rail.getBoundingClientRect().left;
     rail.scrollTo({
-      left: thumb.offsetLeft - (rail.clientWidth - thumb.offsetWidth) / 2,
+      left: rail.scrollLeft + offset - (rail.clientWidth - thumb.offsetWidth) / 2,
       behavior: prefersReducedMotion() ? 'auto' : 'smooth',
     });
     restartTimer();
@@ -181,16 +191,7 @@ const first = slides[0];
   });
 
   // 触屏上在大图上左右滑动切换
-  let swipeStart: number | null = null;
-  frame.addEventListener('pointerdown', (event) => {
-    swipeStart = event.pointerType === 'mouse' ? null : event.clientX;
-  });
-  frame.addEventListener('pointerup', (event) => {
-    if (swipeStart === null) return;
-    const dx = event.clientX - swipeStart;
-    swipeStart = null;
-    if (Math.abs(dx) > 48) stepManually(index + (dx < 0 ? 1 : -1));
-  });
+  onSwipe(frame, (direction) => stepManually(index + direction));
 
   const setPaused = (value: boolean) => {
     paused = value;
@@ -240,12 +241,11 @@ const first = slides[0];
 
   .stage {
     --progress: 5%;
+    --chamfer-stroke: var(--color-accent-line-soft);
     position: relative;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
     background: var(--color-bg-sunken);
-    clip-path: var(--clip-corner-lg);
   }
 
   .frame {
@@ -309,18 +309,17 @@ const first = slides[0];
   }
 
   .arrow {
+    --chamfer-stroke: var(--color-accent-line);
     position: absolute;
     top: 50%;
     display: grid;
     place-items: center;
     width: 52px;
     height: 52px;
-    border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
     background: color-mix(in srgb, var(--color-bg) 70%, transparent);
     color: var(--color-accent);
     font-size: 22px;
     translate: 0 -50%;
-    clip-path: var(--clip-notch-sm);
     transition:
       background-color var(--duration-hover),
       color var(--duration-hover);
@@ -340,21 +339,20 @@ const first = slides[0];
   }
 
   .open {
+    --chamfer-stroke: var(--color-accent-line);
     position: absolute;
     right: 30px;
     bottom: 26px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
-    border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
+    padding: 11px 21px;
     background: color-mix(in srgb, var(--color-bg) 72%, transparent);
     font-family: var(--font-label);
     font-size: var(--text-label);
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--color-accent);
-    clip-path: var(--clip-notch-sm);
     transition:
       background-color var(--duration-hover),
       color var(--duration-hover);

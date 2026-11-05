@@ -1,0 +1,45 @@
+---
+/**
+ * 模组的零件类别标签，最后一项「传奇专属零件」以金底突出。首页和模组页共用，外边距由使用处决定。
+ * 类别与创意工坊官方简介中列出的一致，英文沿用简介原文的用词。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import Chip from '@/components/ui/Chip.astro';
+import { getLang, translator } from '@/i18n';
+
+type Props = HTMLAttributes<'ul'>;
+
+const { class: className, ...rest } = Astro.props;
+const t = translator(getLang(Astro.url));
+
+const categories = [
+  { zh: '实用工具', en: 'Utility Tools' },
+  { zh: '材质方块', en: 'Material Blocks' },
+  { zh: '几何体', en: 'Geometric Shapes' },
+  { zh: '可互动零件', en: 'Interactive Parts' },
+  { zh: '车辆零件', en: 'Vehicle Components' },
+  { zh: '武器', en: 'Weapons' },
+  { zh: '装饰物件', en: 'Decorations' },
+  { zh: '建筑零件', en: 'Building Elements' },
+];
+const signature = { zh: '传奇专属零件', en: 'Legend-Exclusive Parts' };
+---
+
+<ul class:list={['chips', className]} {...rest}>
+  {
+    categories.map((category) => (
+      <li>
+        <Chip>{t(category)}</Chip>
+      </li>
+    ))
+  }
+  <li><Chip highlight>{t(signature)}</Chip></li>
+</ul>
+
+<style>
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+</style>

@@ -23,7 +23,6 @@ const copy = {
   tag: { zh: '获取游戏 / Get the Game', en: 'Get the Game' },
   // 「开」「始」之间隔着不占宽度的连接符 \u2060，标题换行时不会把这个词拆开
   title: { zh: '在 Steam 开\u2060始你的建造', en: 'Start building on Steam' },
-  subtitle: { zh: 'Scrap Mechanic', en: 'By Axolot Games' },
   text: {
     zh: '传奇模组需要在本体游戏中运行。若你还未拥有《废品机械师》，可前往 Steam 商店了解与购买，随后订阅传奇模组，即可开始属于你的建造旅程。',
     en: "The New Legend Mod runs inside the base game. If you don't own Scrap Mechanic yet, you can find it on the Steam store. Once you have the game, subscribe to the Mod and start building.",
@@ -45,7 +44,7 @@ const copy = {
 <Section space="lg" divider>
   <SectionHeading index="05" tag={t(copy.tag)} title={t(copy.title)} data-reveal />
 
-  <div class="ticket" data-reveal>
+  <div class="ticket" data-chamfer="ticket" data-reveal>
     <Watermark text={appId} />
 
     <div class="face">
@@ -54,15 +53,13 @@ const copy = {
         <span class="serial">No. SM-{appId}-NLM</span>
       </div>
       <h3 class="name">{t(ui.nav.game)}</h3>
-      <p class="subtitle text-accent">{t(copy.subtitle)}</p>
+      <p class="subtitle text-accent">{t(ui.game.subtitle)}</p>
       <p class="text text-body">{t(copy.text)}</p>
       <ul class="features">
         {
           t(copy.features).map((feature) => (
             <li>
-              <Badge tone="outline" class="feature">
-                {feature}
-              </Badge>
+              <Badge tone="outline">{feature}</Badge>
             </li>
           ))
         }
@@ -93,11 +90,11 @@ const copy = {
 <style>
   .ticket {
     --hole: var(--color-bg);
+    --chamfer-stroke: var(--color-accent-line);
     position: relative;
     display: grid;
     grid-template-columns: 1.6fr 1fr;
     overflow: hidden;
-    border: 1px solid var(--color-accent-line);
     background:
       repeating-linear-gradient(
         90deg,
@@ -105,28 +102,22 @@ const copy = {
         color-mix(in srgb, var(--color-text) 2%, transparent) 89px 90px
       ),
       var(--color-bg-alt);
-    clip-path: var(--clip-ticket);
   }
 
-  /* 上下边缘的邮票齿孔：一排与页面同色的圆，各露出一半 */
-  .ticket::before,
-  .ticket::after {
+  /* 上下边缘的邮票齿孔：上下各一排与页面同色的圆，各露出一半，盖住描边 */
+  .ticket::before {
+    --perforation: radial-gradient(circle 6px at 10px 7px, var(--hole) 6px, transparent 6.5px);
     content: '';
     position: absolute;
+    top: -7px;
     right: 22px;
+    bottom: -7px;
     left: 22px;
     z-index: 3;
-    height: 14px;
-    background: radial-gradient(circle 6px at 10px 7px, var(--hole) 6px, transparent 6.5px) 0 0 / 20px 14px repeat-x;
+    background:
+      var(--perforation) left top / 20px 14px repeat-x,
+      var(--perforation) left bottom / 20px 14px repeat-x;
     pointer-events: none;
-  }
-
-  .ticket::before {
-    top: -7px;
-  }
-
-  .ticket::after {
-    bottom: -7px;
   }
 
   .face {
@@ -191,10 +182,6 @@ const copy = {
     margin-top: 26px;
   }
 
-  .feature {
-    clip-path: var(--clip-notch-sm);
-  }
-
   /* 骑在虚线上的圆章，一半压在票根上 */
   .stamp {
     position: absolute;
@@ -207,7 +194,7 @@ const copy = {
     justify-content: center;
     width: 104px;
     height: 104px;
-    border: 2px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+    border: 2px solid var(--color-accent-line);
     border-radius: 50%;
     background: color-mix(in srgb, var(--color-bg-alt) 40%, transparent);
     font-family: var(--font-label);
@@ -245,12 +232,13 @@ const copy = {
     text-align: center;
   }
 
-  /* 虚线两端的打孔 */
+  /* 虚线两端的打孔，盖住描边 */
   .stub::before,
   .stub::after {
     content: '';
     position: absolute;
     left: -13px;
+    z-index: 2;
     width: 26px;
     height: 26px;
     border-radius: 50%;

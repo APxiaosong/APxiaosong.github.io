@@ -40,7 +40,7 @@ function embedUrl({ platform, id }: VideoSource): string {
 ---
 
 <figure class:list={['featured-video', size, className]} {...rest}>
-  <div class="frame" style={`--ratio: ${ratio}`}>
+  <div class="frame" style={`--ratio: ${ratio}`} data-chamfer={size === 'lg' ? 'frame-lg' : ''}>
     <a
       class="poster"
       href={source.url}
@@ -89,16 +89,13 @@ function embedUrl({ platform, id }: VideoSource): string {
 </script>
 
 <style>
+  /* 主视频切右下角，小视频不切角，描边都由切角描边画出 */
   .frame {
+    --chamfer-stroke: var(--color-line);
     position: relative;
     aspect-ratio: var(--ratio);
     overflow: hidden;
-    border: 1px solid var(--color-line);
     background: var(--color-bg-sunken);
-  }
-
-  .lg .frame {
-    clip-path: var(--clip-frame-lg);
   }
 
   .poster {

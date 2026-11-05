@@ -5,7 +5,6 @@
  */
 import ArrowLink from '@/components/ui/ArrowLink.astro';
 import Button from '@/components/ui/Button.astro';
-import Chip from '@/components/ui/Chip.astro';
 import Notice from '@/components/ui/Notice.astro';
 import Tag from '@/components/ui/Tag.astro';
 import Watermark from '@/components/ui/Watermark.astro';
@@ -13,6 +12,8 @@ import { links, pages } from '@/config/site';
 import { getMod } from '@/data/mod';
 import { getLang, localizePath, translator } from '@/i18n';
 import { formatDate } from '@/i18n/format';
+import { ui } from '@/i18n/ui';
+import ModCategories from './ModCategories.astro';
 
 const lang = getLang(Astro.url);
 const t = translator(lang);
@@ -23,29 +24,16 @@ const copy = {
   title: { zh: '综合性建造模组', en: 'A comprehensive building Mod' },
   description: {
     zh: '由中国玩家团队「传奇建造队」制作的综合性建造 Mod，涵盖实用工具、材质方块、几何体、可互动零件、车辆零件、武器、装饰与建筑零件，可满足绝大部分日常建造需求。本作为 New Legend Mod 的续作版本，原 Mod 蓝图可直接打开使用，目前处于积极开发阶段，欢迎反馈漏洞。已支持中英文物品描述。',
-    en: 'Made by Legend Build Team, a Chinese player community, this comprehensive building Mod includes utility tools, material blocks, geometric shapes, interactive parts, vehicle parts, weapons, decorations and building parts, covering most everyday building needs. It continues the original New Legend Mod, and blueprints made with the original open directly. The Mod is under active development, and bug reports are welcome. Item descriptions are available in Chinese and English.',
+    en: 'Made by Legend Build Team, a Chinese player community, this comprehensive building Mod includes utility tools, material blocks, geometric shapes, interactive parts, vehicle components, weapons, decorations and building elements, covering most everyday building needs. It continues the original New Legend Mod, and blueprints made with the original open directly. The Mod is under active development, and bug reports are welcome. Item descriptions are available in Chinese and English.',
   },
   version: { zh: '当前版本 / Version', en: 'Current Version' },
   changelog: { zh: '详细更新列表', en: 'Full changelog' },
-  subscribe: { zh: '前往创意工坊订阅', en: 'Subscribe on the Workshop' },
   updated: { zh: `更新于 ${formatDate(mod.updatedAt, 'zh')}`, en: `Updated ${formatDate(mod.updatedAt, 'en')}` },
   conflict: {
     zh: `请勿同时启用 New Legend Mod 3.2.3 与 Continuation ${mod.version}，二者只能择一启用，否则会引发未知错误。`,
     en: `Do not enable New Legend Mod 3.2.3 and New Legend Mod Continuation ${mod.version} at the same time. Only one can be active; otherwise unexpected errors will occur.`,
   },
 };
-
-const categories = [
-  { zh: '实用工具', en: 'Utility Tools' },
-  { zh: '材质方块', en: 'Material Blocks' },
-  { zh: '几何体', en: 'Geometric Shapes' },
-  { zh: '可互动零件', en: 'Interactive Parts' },
-  { zh: '车辆零件', en: 'Vehicle Parts' },
-  { zh: '武器', en: 'Weapons' },
-  { zh: '装饰物件', en: 'Decorations' },
-  { zh: '建筑零件', en: 'Building Parts' },
-];
-const signature = { zh: '传奇专属零件', en: 'Legend-Exclusive Parts' };
 ---
 
 <section class="about">
@@ -63,7 +51,7 @@ const signature = { zh: '传奇专属零件', en: 'Legend-Exclusive Parts' };
           <p class="text-label panel-label">{t(copy.version)}</p>
           <p class="version">{mod.version}</p>
           <ArrowLink href={localizePath(pages.news, lang)} underline class="changelog">{t(copy.changelog)}</ArrowLink>
-          <Button href={links.modWorkshop} external class="subscribe">{t(copy.subscribe)}</Button>
+          <Button href={links.modWorkshop} external class="subscribe">{t(ui.mod.subscribe)}</Button>
           <p class="text-label updated">{t(copy.updated)}</p>
         </div>
       </div>
@@ -72,16 +60,7 @@ const signature = { zh: '传奇专属零件', en: 'Legend-Exclusive Parts' };
   </div>
 
   <div class="container categories" data-reveal>
-    <ul class="chips">
-      {
-        categories.map((category) => (
-          <li>
-            <Chip>{t(category)}</Chip>
-          </li>
-        ))
-      }
-      <li><Chip highlight>{t(signature)}</Chip></li>
-    </ul>
+    <ModCategories />
   </div>
 </section>
 
@@ -187,12 +166,6 @@ const signature = { zh: '传奇专属零件', en: 'Legend-Exclusive Parts' };
 
   .categories {
     padding-block: var(--space-section-sm);
-  }
-
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
   }
 
   @media (max-width: 900px) {

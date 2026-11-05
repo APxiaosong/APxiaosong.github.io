@@ -27,9 +27,12 @@
   --color-on-accent: #0f0e0b;
   --color-accent-text: #ff9300;
   --color-accent-line: rgb(255 147 0 / 0.4);
+  --color-accent-line-soft: rgb(255 147 0 / 0.25);
+  --color-accent-line-faint: rgb(255 147 0 / 0.15);
   --color-accent-tint: rgb(255 147 0 / 0.05);
   --color-accent-tint-strong: rgb(255 147 0 / 0.12);
   --color-watermark: rgb(255 147 0 / 0.05);
+  --color-focus: var(--color-accent);
 
   --color-scrollbar: #3a382d;
   /* 图片加载前的占位斜纹 */
@@ -60,10 +63,14 @@
   --color-on-accent: #0f0e0b;
   /* 金色用作文字时加深，在两种浅色底上保持约 5:1 的对比度 */
   --color-accent-text: #a15300;
+  /* 细线用深金，亮金叠在浅色底上几乎看不见 */
   --color-accent-line: rgb(214 120 0 / 0.45);
+  --color-accent-line-soft: rgb(214 120 0 / 0.35);
+  --color-accent-line-faint: rgb(214 120 0 / 0.25);
   --color-accent-tint: rgb(255 147 0 / 0.08);
   --color-accent-tint-strong: rgb(255 147 0 / 0.16);
   --color-watermark: rgb(214 120 0 / 0.07);
+  --color-focus: var(--color-accent-text);
 
   --color-scrollbar: #cfc9ba;
   --placeholder-stripes: repeating-linear-gradient(45deg, #e4dfd2 0 13px, #ece8dd 13px 26px);
@@ -80,6 +87,7 @@
   --color-line: rgb(15 14 11 / 0.22);
   --color-line-strong: rgb(15 14 11 / 0.35);
   --color-watermark: rgb(15 14 11 / 0.06);
+  --color-focus: #0f0e0b;
 
   background: var(--color-accent);
   color: var(--color-text);
@@ -119,22 +127,60 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-hover: 0.3s;
   --duration-reveal: 0.9s;
+}
 
-  /*
-   * 切角形状，直接用于 clip-path。
-   * notch：左上和右下两角，用于按钮、chip、文字卡片；
-   * corner：只切右上角，用于带图卡片和面板；
-   * frame：只切右下角，用于图片框、视频框和下拉菜单；
-   * ticket：四角全切，只用于票券类拟物。
-   */
-  --clip-notch-sm: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
-  --clip-notch-md: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-  --clip-notch-lg: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
-  --clip-corner-sm: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
-  --clip-corner-lg: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%);
-  --clip-frame-sm: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
-  --clip-frame-lg: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
-  --clip-ticket: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
+/* 切角的形状和描边参数，画法见 global.css。每个切角元素都重新取默认值，不继承外层切角元素的设置 */
+:where([data-chamfer]) {
+  --chamfer-tl: 0px;
+  --chamfer-tr: 0px;
+  --chamfer-br: 0px;
+  --chamfer-bl: 0px;
+  --chamfer-stroke: transparent;
+  --chamfer-stroke-width: 1px;
+  --chamfer-dash: none;
+  /* 虚线的条纹与斜边垂直，斜边上才会断开：左上、右下的斜边对应 45deg，右上、左下的对应 135deg */
+  --chamfer-dash-angle: 45deg;
+  --chamfer-dashed: repeating-linear-gradient(var(--chamfer-dash-angle), #000 0 3px, transparent 3px 6px);
+}
+
+[data-chamfer='notch-sm'] {
+  --chamfer-tl: 7px;
+  --chamfer-br: 7px;
+}
+
+[data-chamfer='notch-md'] {
+  --chamfer-tl: 10px;
+  --chamfer-br: 10px;
+}
+
+[data-chamfer='notch-lg'] {
+  --chamfer-tl: 14px;
+  --chamfer-br: 14px;
+}
+
+[data-chamfer='corner-sm'] {
+  --chamfer-tr: 16px;
+  --chamfer-dash-angle: 135deg;
+}
+
+[data-chamfer='corner-lg'] {
+  --chamfer-tr: 24px;
+  --chamfer-dash-angle: 135deg;
+}
+
+[data-chamfer='frame-sm'] {
+  --chamfer-br: 10px;
+}
+
+[data-chamfer='frame-lg'] {
+  --chamfer-br: 24px;
+}
+
+[data-chamfer='ticket'] {
+  --chamfer-tl: 16px;
+  --chamfer-tr: 16px;
+  --chamfer-br: 16px;
+  --chamfer-bl: 16px;
 }
 
 /*

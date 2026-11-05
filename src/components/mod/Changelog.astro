@@ -89,6 +89,7 @@ const rows = entries.map((entry, index) => {
 </ol>
 
 <script>
+  import { anchorTarget } from '@/components/ui/anchor';
   import { prefersReducedMotion } from '@/components/ui/motion';
 
   const timeline = document.querySelector<HTMLElement>('[data-changelog]')!;
@@ -122,7 +123,7 @@ const rows = entries.map((entry, index) => {
   });
 
   function openTarget() {
-    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    const target = anchorTarget();
     if (target?.matches('.entry')) setOpen(target, true);
   }
 
@@ -182,7 +183,7 @@ const rows = entries.map((entry, index) => {
   .body {
     position: relative;
     padding: 4px 0 48px 32px;
-    border-left: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+    border-left: 1px solid var(--color-accent-line-soft);
   }
 
   /* 时间线上的菱形节点，描边使用页面底色，在节点处遮住竖线 */

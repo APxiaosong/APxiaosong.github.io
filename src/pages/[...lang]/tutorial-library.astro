@@ -12,6 +12,7 @@ import Section from '@/components/ui/Section.astro';
 import { pages } from '@/config/site';
 import { getTutorialAuthor, getTutorialCategories, getTutorialCategory, getVideos, type Video } from '@/data/tutorials';
 import { getLang, getLangPaths, localizePath, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 export const getStaticPaths = getLangPaths;
@@ -25,13 +26,11 @@ const copy = {
     zh: '按类别汇总的《废品机械师》视频教程与作品展示，可以按分类筛选和搜索。',
     en: 'Scrap Mechanic video tutorials and showcases, sorted by category and searchable.',
   },
-  tag: { zh: '教程 / Tutorials', en: 'Tutorials' },
   subtitle: { zh: 'Tutorial Library', en: 'Videos by Category' },
   lead: {
     zh: '按类别汇总的教程索引，从入门到进阶持续补充，也收录了一些作品展示。',
     en: 'An index of tutorials sorted by category, from getting started to advanced topics, along with a selection of showcase videos. New videos are added over time.',
   },
-  filterLabel: { zh: '按分类筛选', en: 'Filter by category' },
   search: { zh: '搜索教程、作者或关键词…', en: 'Search titles, creators or keywords…' },
   count: { zh: '{n} 个视频 · Results', en: 'Results: {n}' },
   empty: { zh: '没有匹配的视频，试试其他关键词或分类。', en: 'No videos match. Try a different keyword or category.' },
@@ -64,7 +63,7 @@ function searchText(video: Video): string {
 <BaseLayout title={t(copy.title)} description={t(copy.description)}>
   <PageHero
     image={scene}
-    tag={t(copy.tag)}
+    tag={t(ui.tag.tutorials)}
     title={t(copy.title)}
     subtitle={t(copy.subtitle)}
     lead={t(copy.lead)}
@@ -76,7 +75,7 @@ function searchText(video: Video): string {
     <Filter
       target="videos"
       options={options}
-      label={t(copy.filterLabel)}
+      label={t(ui.common.filterByCategory)}
       search={t(copy.search)}
       count={t(copy.count)}
       param={libraryParam}

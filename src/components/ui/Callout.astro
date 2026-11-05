@@ -15,7 +15,7 @@ interface Props extends HTMLAttributes<'div'> {
 const { kicker, align = 'split', class: className, ...rest } = Astro.props;
 ---
 
-<div class:list={['callout', align, className]} {...rest}>
+<div class:list={['callout', align, className]} data-chamfer="notch-lg" {...rest}>
   <div class="text">
     <p class="kicker text-accent">{kicker}</p>
     <p class="message"><slot /></p>
@@ -31,14 +31,14 @@ const { kicker, align = 'split', class: className, ...rest } = Astro.props;
 
 <style>
   .callout {
+    --chamfer-stroke: var(--color-line-strong);
+    --chamfer-dash: var(--chamfer-dashed);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 22px 30px;
     padding: clamp(28px, 3vw, 36px) clamp(24px, 3vw, 40px);
-    border: 1px dashed var(--color-line-strong);
-    clip-path: var(--clip-notch-lg);
   }
 
   .center {

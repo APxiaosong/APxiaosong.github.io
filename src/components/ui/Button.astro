@@ -25,6 +25,7 @@ const { href, variant = 'primary', size = 'md', icon, iconBefore, external = fal
 const t = translator(getLang(Astro.url));
 const trailingIcon = icon ?? (external ? 'arrow-right-up-line' : undefined);
 const classes = ['button', variant, size, className];
+const chamfer = size === 'sm' ? 'notch-sm' : 'notch-md';
 ---
 
 {
@@ -32,6 +33,7 @@ const classes = ['button', variant, size, className];
     <a
       class:list={classes}
       href={href}
+      data-chamfer={chamfer}
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener' : undefined}
       {...rest}
@@ -44,7 +46,7 @@ const classes = ['button', variant, size, className];
       {trailingIcon && <Icon name={trailingIcon} class="after" />}
     </a>
   ) : (
-    <button class:list={classes} type="button" {...(rest as HTMLAttributes<'button'>)}>
+    <button class:list={classes} type="button" data-chamfer={chamfer} {...(rest as HTMLAttributes<'button'>)}>
       {iconBefore && <Icon name={iconBefore} class="before" />}
       <span>
         <slot />
@@ -60,26 +62,22 @@ const classes = ['button', variant, size, className];
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 17px 36px;
-    border: 1px solid transparent;
+    padding: 18px 37px;
     font-family: var(--font-label);
     font-size: 15px;
     line-height: 1.2;
     letter-spacing: 1px;
     text-transform: uppercase;
     white-space: nowrap;
-    clip-path: var(--clip-notch-md);
     transition:
       background-color var(--duration-hover),
-      border-color var(--duration-hover),
       color var(--duration-hover),
       transform var(--duration-hover) var(--ease-out);
   }
 
   .sm {
-    padding: 11px 26px;
+    padding: 12px 27px;
     font-size: var(--text-small);
-    clip-path: var(--clip-notch-sm);
   }
 
   /* ghost 按钮沿用常规字重，与实心按钮并排时主次分明 */
@@ -89,7 +87,9 @@ const classes = ['button', variant, size, className];
     font-weight: 600;
   }
 
+  /* 焦点框画在按钮内侧，颜色要与按钮自身的底色区分开 */
   .primary {
+    --color-focus: var(--color-on-accent);
     background: var(--color-accent);
     color: var(--color-on-accent);
   }
@@ -100,19 +100,20 @@ const classes = ['button', variant, size, className];
   }
 
   .ghost {
-    border-color: var(--color-line-contrast);
+    --chamfer-stroke: var(--color-line-contrast);
     background: color-mix(in srgb, var(--color-text) 6%, transparent);
     color: var(--color-text);
     backdrop-filter: blur(6px);
   }
 
   .ghost:hover {
-    border-color: var(--color-accent);
+    --chamfer-stroke: var(--color-accent);
     background: var(--color-accent-tint-strong);
   }
 
   .outline {
-    border: 2px solid var(--color-accent);
+    --chamfer-stroke: var(--color-accent);
+    --chamfer-stroke-width: 2px;
     color: var(--color-accent-text);
   }
 
@@ -122,6 +123,7 @@ const classes = ['button', variant, size, className];
   }
 
   .dark {
+    --color-focus: var(--color-accent);
     background: var(--color-on-accent);
     color: var(--color-accent);
   }

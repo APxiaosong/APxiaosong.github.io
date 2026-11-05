@@ -48,7 +48,7 @@ src/
     ui.ts               多处共用的界面文字
   data/                 内容数据，说明见 src/data/README.md
   styles/
-    tokens.css          设计变量：颜色（深浅两套）、字体、字号、间距、切角、缓动
+    tokens.css          设计变量：颜色（深浅两套）、字体、字号、间距、缓动、切角形状
     global.css          全局基础样式、文字角色类、入场动画
     fonts.css           字体文件的引入
   assets/images/        经 astro:assets 优化后输出的图片
@@ -95,7 +95,7 @@ const copy = {
 | `title` | 页面名称，标题栏显示为「页面名称 \| 站点名」。首页不传 |
 | `description` | 搜索结果和分享卡片中的描述，不传时使用站点描述 |
 | `image` | 分享卡片的图片（`ImageMetadata`），不传时使用模组封面 |
-| `noindex` | 不让搜索引擎收录，同时省略 canonical 和语言互链 |
+| `noindex` | 不让搜索引擎收录，同时省略 canonical 和语言互链。这类页面没有另一种语言版本，导航中的语言切换指向另一种语言的首页 |
 
 需要被搜索引擎收录的页面，都要在 `src/config/site.ts` 的 `pages` 中登记中文路径，站点地图和 `llms.txt` 根据它列出页面。页面需要出现在导航里时，再在 `navGroups` 中加入链接，链接文字写在 `src/i18n/ui.ts` 的 `nav` 中。页脚复用 `navGroups`，不需要另外修改。
 
@@ -108,6 +108,8 @@ const copy = {
 - 内容数据中的双语字段同样使用 `Localized`。
 
 组件不需要从页面接收语言参数，用 `getLang(Astro.url)` 自己取得。站内链接一律通过 `localizePath` 生成，不要手写 `/en/` 前缀。
+
+访客点击语言切换时，所选语言保存在 `localStorage` 的 `lang` 键中（取值为 `zh-CN` 或 `en`，与旧网站相同）。之后打开的页面与偏好的语言不同时，`BaseLayout` 在首次绘制前跳到偏好语言的同一页面，并保留查询参数和锚点；没有保存过偏好的访客不会被跳转，`noindex` 页面也不跳转。
 
 `src/i18n/index.ts` 提供的函数：
 
@@ -136,12 +138,12 @@ const copy = {
 
 - 组件中的颜色一律引用 `tokens.css` 中的语义变量，浅色主题就会自动生效，不需要为浅色单独写样式。
 - 任何元素加上 `data-theme="dark"` 或 `data-theme="light"`，其中的变量就固定为那套主题。页面首屏和反馈区的邮箱卡片用这种方式在两种主题下都保持深色。
-- 金底区块用 `Section tone="accent"`，或者在元素上加 `data-surface="accent"`。区块内的文字、分隔线和巨型背景字会自动换成深色。
-- `--color-accent` 用于填充（按钮、标签、色块），`--color-accent-text` 用于金色文字。浅色主题下后者会加深，以保证对比度。
+- 金底区块用 `Section tone="accent"`，或者在元素上加 `data-surface="accent"`。区块内的文字、分隔线、巨型背景字和焦点框（`--color-focus`）会自动换成深色。
+- `--color-accent` 用于填充（按钮、标签、色块），`--color-accent-text` 用于金色文字，`--color-accent-line` 及较淡的 `--color-accent-line-soft`、`--color-accent-line-faint` 用于金色细线。浅色主题下文字和细线都会加深，以保证对比度，所以不要用 `color-mix()` 从 `--color-accent` 调出文字或细线的颜色。
 
 ## 样式约定
 
-- 组件样式写在组件自己的 `<style>` 中，颜色、字体、切角和缓动都引用 `tokens.css` 中的变量。字号优先使用 `--text-*` 变量；变量没有覆盖的尺寸（例如装饰性大字和个别区块的大标题）写在组件中，标题仍用 `clamp()` 随屏幕宽度变化。
+- 组件样式写在组件自己的 `<style>` 中，颜色、字体和缓动都引用 `tokens.css` 中的变量。切角用 `data-chamfer` 属性，切角元素的描边写 `--chamfer-stroke` 而不是 `border`，详见 DESIGN.md 第 5 节。字号优先使用 `--text-*` 变量；变量没有覆盖的尺寸（例如装饰性大字和个别区块的大标题）写在组件中，标题仍用 `clamp()` 随屏幕宽度变化。
 - 断点统一为三个：`1100px` 收窄多栏网格，`900px` 导航折叠为菜单、双栏改为单栏，`600px` 为手机布局（左右留白缩小到 20px）。媒体查询写 `max-width`。
 - `global.css` 提供四个文字角色类：`.text-body`（正文）、`.text-label`（Oswald 大写小字，颜色由使用处决定）、`.text-accent`（Spectral 斜体金色副标）、`.text-note`（Spectral 斜体灰色注释）。金色斜体的副标题和引语都加 `.text-accent`，灰色斜体的注释、结果数和署名都加 `.text-note`，组件样式中只写字号和间距；在金底区块中二者都自动变为深色。另有 `.container`（内容宽度和左右留白）和 `.sr-only`（只给读屏软件读的文字）。
 - 滚动入场动画：给元素加 `data-reveal` 属性即可，进入视口时淡入上移。一组元素需要错开时，用 `style="--reveal-delay: 120ms"` 设置延迟。系统开启「减弱动态效果」时，所有动画都会关闭。脚本播放的动画和平滑滚动不受样式表控制，需要先用 `src/components/ui/motion.ts` 中的 `prefersReducedMotion()` 判断。
@@ -180,8 +182,8 @@ import '@fontsource-variable/noto-serif-sc';
 | `ButtonGroup` | 一排按钮，放不下时换行，手机上每个按钮占满整行 | 没有参数。默认间距为 16px，使用处可以通过 `class` 调整间距、对齐和外边距 |
 | `ArrowLink` | 带箭头的文字链接 | `href`；`tone`：`accent`、`muted`；`underline`；`external`。不传 `href` 时渲染为 `<span>`，用在可点击的卡片内部 |
 | `Tag` | 金底切角标签，例如「关于 / About」 | `size`：`sm`、`md`、`lg`；`dot`：文字前加小方块（首屏使用） |
-| `Badge` | 卡片图片上的小号直角标签 | `tone`：`solid`、`outline`、`muted` |
-| `Chip` | 切角小标签、关键词、筛选按钮 | `href`：渲染为链接；`pressed`：渲染为切换按钮，脚本修改 `aria-pressed` 即可切换选中样式；`highlight`：金底突出 |
+| `Badge` | 卡片图片上的小号直角标签 | `tone`：`solid` 金底、`outline` 金色描边（切去左上和右下两角）、`muted` 半透明深底 |
+| `Chip` | 切角小标签、关键词、筛选按钮 | `href`：渲染为链接；`pressed`：渲染为筛选按钮（Oswald 大写字，未选中时透明底），脚本修改 `aria-pressed` 即可切换选中样式；`highlight`：金底突出 |
 | `Section` | 页面区块：背景、上下留白、内容宽度 | `tone`：`base`、`alt`、`accent`；`space`：`lg`、`md`、`sm`、`none`；`width`：`wide`（1400px）、`narrow`（1100px）；`divider`：顶部分隔线 |
 | `SectionHeading` | 区块标题 | `title`；`tag`：上方的标签；`index`：左侧金色大号序号；`note`：右侧 Spectral 斜体注释；`align`：`start`、`center`；`level`：`2`、`3` |
 | `Eyebrow` | 区块上方的一行金色小标题，例如「01 · 主推内容 Featured」 | `label`：Oswald 大写文字；`note`：后面的 Spectral 斜体注释 |
@@ -221,7 +223,7 @@ import '@fontsource-variable/noto-serif-sc';
 
 ### 灯箱的触发元素
 
-页面中放一个 `Lightbox`，可以点开的图片写成指向大图的链接，`data-lightbox` 的值是分组名。链接里放缩略图，缩略图必须带 `width` 和 `height`，灯箱据此在大图加载之前确定显示尺寸，并先用已经加载的缩略图占位。缩略图带 `referrerpolicy` 时，大图沿用同样的设置。
+页面中放一个 `Lightbox`，可以点开的图片写成指向大图的链接，`data-lightbox` 的值是分组名。链接里放缩略图，缩略图必须带 `width` 和 `height`，写原图的尺寸，灯箱据此在大图加载之前确定显示尺寸，并先用已经加载的缩略图占位。缩略图的像素已经够灯箱显示，或者已经达到原图宽度时，灯箱直接使用它，不再加载大图。缩略图带 `referrerpolicy` 时，大图沿用同样的设置。
 
 ```astro
 <Lightbox />
@@ -281,7 +283,7 @@ import '@fontsource-variable/noto-serif-sc';
 ## 搜索引擎优化
 
 - 每个页面通过 `BaseLayout` 的 `title` 和 `description` 设置标题和描述，两种语言分别撰写，页面之间不重复。`<head>` 中自动输出 canonical、两种语言的互链（包括 `x-default`）和 Open Graph 信息。
-- 404 页和 `contact.html` 跳转页带有 `noindex`，不被收录，也不列入站点地图。
+- 404 页和 `contact.html`、`redirect.html` 两个跳转页带有 `noindex`，不被收录，也不列入站点地图。两个跳转页保留旧网站的网址，分别跳到首页的反馈区块和首页。
 - `/sitemap.xml` 由 `src/pages/sitemap.xml.ts` 在构建时生成，列出 `pages` 中登记的全部页面及其语言互链，`public/robots.txt` 指向它。Google Search Console 中登记的也是这个地址。
 - `/llms.txt` 由 `src/pages/llms.txt.ts` 在构建时生成，内容是团队、模组、社群和页面列表的简介。
 - 首页输出描述团队和网站的结构化数据（`Organization` 和 `WebSite`），常见问题页输出 `FAQPage`。

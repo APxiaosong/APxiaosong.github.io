@@ -28,12 +28,12 @@ const copy = {
       <p class="text">{t(copy.text)}</p>
     </div>
     <div class="links">
-      <a class="link primary" href={links.modWorkshop} target="_blank" rel="noopener" data-theme="dark">
+      <a class="link primary" href={links.modWorkshop} target="_blank" rel="noopener" data-theme="dark" data-chamfer="notch-md">
         <span>{t(copy.workshop)}</span>
         <span class="sr-only">{t(ui.common.newWindow)}</span>
         <Icon name="arrow-right-up-line" class="arrow" />
       </a>
-      <a class="link secondary" href={localizePath(pages.get, lang)}>
+      <a class="link secondary" href={localizePath(pages.get, lang)} data-chamfer="notch-md">
         <span>{t(copy.get)}</span>
         <Icon name="arrow-right-line" class="arrow" />
       </a>
@@ -85,7 +85,6 @@ const copy = {
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
-    clip-path: var(--clip-notch-md);
     transition:
       transform var(--duration-hover) var(--ease-out),
       background-color var(--duration-hover);
@@ -109,7 +108,7 @@ const copy = {
   }
 
   .secondary {
-    border: 1px solid var(--color-line-strong);
+    --chamfer-stroke: var(--color-line-strong);
     background: color-mix(in srgb, var(--color-text) 12%, transparent);
   }
 

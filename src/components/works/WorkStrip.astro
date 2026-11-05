@@ -22,7 +22,6 @@ const { author, works, total, limit } = Astro.props;
 const t = translator(getLang(Astro.url));
 
 const copy = {
-  viewAll: { zh: '在 Steam 查看全部作品', en: 'View all on Steam' },
   back: { zh: '向前滚动', en: 'Scroll back' },
   forward: { zh: '向后滚动', en: 'Scroll forward' },
 };
@@ -38,20 +37,34 @@ const copy = {
       ))
     }
     <li>
-      <a class="all" href={author.workshopUrl} target="_blank" rel="noopener">
+      <a class="all" href={author.workshopUrl} target="_blank" rel="noopener" data-chamfer="corner-sm">
         <span class="count">{total}</span>
         <span class="all-label">
-          {t(copy.viewAll)}
+          {t(ui.common.viewAllWorks)}
           <Icon name="arrow-right-up-line" />
         </span>
         <span class="sr-only">{t(ui.common.newWindow)}</span>
       </a>
     </li>
   </ul>
-  <button class="nudge back" type="button" tabindex="-1" aria-label={t(copy.back)} data-strip-step="-1">
+  <button
+    class="nudge back"
+    type="button"
+    tabindex="-1"
+    aria-label={t(copy.back)}
+    data-chamfer="notch-sm"
+    data-strip-step="-1"
+  >
     <Icon name="arrow-left-s-line" />
   </button>
-  <button class="nudge forward" type="button" tabindex="-1" aria-label={t(copy.forward)} data-strip-step="1">
+  <button
+    class="nudge forward"
+    type="button"
+    tabindex="-1"
+    aria-label={t(copy.forward)}
+    data-chamfer="notch-sm"
+    data-strip-step="1"
+  >
     <Icon name="arrow-right-s-line" />
   </button>
 </div>
@@ -111,29 +124,24 @@ const copy = {
   }
 
   .all {
+    --chamfer-stroke: var(--color-line-strong);
+    --chamfer-dash: var(--chamfer-dashed);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 12px;
     aspect-ratio: 4 / 3;
-    border: 1px dashed var(--color-line-strong);
     color: var(--color-text-secondary);
-    clip-path: var(--clip-corner-sm);
     transition:
-      border-color var(--duration-hover),
       background-color var(--duration-hover),
       color var(--duration-hover);
   }
 
   .all:hover {
-    border-color: var(--color-accent);
+    --chamfer-stroke: var(--color-accent);
     background: var(--color-accent-tint);
     color: var(--color-accent-text);
-  }
-
-  .all:focus-visible {
-    outline-offset: -3px;
   }
 
   .count {
@@ -156,6 +164,7 @@ const copy = {
 
   /* 按钮停在卡片图片的垂直中线上，不计入轨道底部给滚动条留出的空间 */
   .nudge {
+    --chamfer-stroke: var(--color-line-strong);
     position: absolute;
     top: calc(4px + (100% - 22px) / 2);
     z-index: 2;
@@ -163,21 +172,18 @@ const copy = {
     place-items: center;
     width: 44px;
     height: 44px;
-    border: 1px solid var(--color-line-strong);
     background: color-mix(in srgb, var(--color-bg) 82%, transparent);
     color: var(--color-text);
     font-size: 22px;
-    clip-path: var(--clip-notch-sm);
     translate: 0 -50%;
     backdrop-filter: blur(6px);
     transition:
       opacity var(--duration-hover),
-      border-color var(--duration-hover),
       color var(--duration-hover);
   }
 
   .nudge:hover {
-    border-color: var(--color-accent);
+    --chamfer-stroke: var(--color-accent);
     color: var(--color-accent-text);
   }
 

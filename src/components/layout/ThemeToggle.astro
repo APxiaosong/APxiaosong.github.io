@@ -10,7 +10,7 @@ import Icon from '@/components/ui/Icon.astro';
 const t = translator(getLang(Astro.url));
 ---
 
-<button class="theme-toggle" type="button" data-theme-toggle>
+<button class="theme-toggle" type="button" data-chamfer="notch-sm" data-theme-toggle>
   <span class="to-light">
     <Icon name="sun-line" class="icon" />
     <span class="label">{t(ui.theme.toLight)}</span>
@@ -82,12 +82,11 @@ const t = translator(getLang(Astro.url));
 
   @media (max-width: 900px) {
     .theme-toggle {
+      --chamfer-stroke: var(--color-line-strong);
       width: auto;
       height: auto;
-      padding: 12px 18px;
-      border: 1px solid var(--color-line-strong);
+      padding: 13px 19px;
       font-size: var(--text-small);
-      clip-path: var(--clip-notch-sm);
     }
 
     .label {

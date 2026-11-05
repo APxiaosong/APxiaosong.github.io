@@ -18,6 +18,7 @@ import { links, pages } from '@/config/site';
 import { getMod } from '@/data/mod';
 import { getLang, getLangPaths, localizePath, translator } from '@/i18n';
 import { formatDate } from '@/i18n/format';
+import { ui } from '@/i18n/ui';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 export const getStaticPaths = getLangPaths;
@@ -28,7 +29,6 @@ const mod = getMod();
 
 const copy = {
   title: { zh: '获取中心', en: 'Get the Mod' },
-  tag: { zh: '获取 / Get', en: 'Get' },
   lead: {
     zh: '在这里集中获取传奇建造队制作的模组与自定义游戏。所有内容都通过 Steam 创意工坊分发，订阅后自动下载并保持更新。',
     en: 'Mods and custom games from Legend Build Team, all in one place. Everything is distributed through the Steam Workshop and stays up to date once you subscribe.',
@@ -36,8 +36,6 @@ const copy = {
   featured: { zh: '01 · 主推内容', en: '01 · Featured' },
   featuredNote: { zh: 'Featured', en: '' },
   modBadge: { zh: 'Mod · 模组', en: 'Mod' },
-  modName: { zh: '传奇模组', en: 'New Legend Mod' },
-  modSubtitle: { zh: 'New Legend Mod', en: 'Continuation' },
   modText: {
     zh: '综合性建造 Mod，涵盖材质方块、几何体、可互动零件、载具、武器、装饰与传奇专属零件。现已支持英文物品描述。',
     en: 'A comprehensive building Mod with material blocks, geometric shapes, interactive parts, vehicles, weapons, decorations and parts unique to the Mod. Item descriptions are available in English.',
@@ -46,15 +44,12 @@ const copy = {
   size: { zh: '大小', en: 'Size' },
   updated: { zh: '更新', en: 'Updated' },
   subscribe: { zh: '订阅模组', en: 'Subscribe' },
-  details: { zh: '模组详情', en: 'About the Mod' },
   more: { zh: '02 · 更多模组', en: '02 · More' },
-  steamGroup: { zh: 'Steam 社区组', en: 'Steam Group' },
   steamGroupText: {
     zh: '加入官方社区组，获取动态、活动与第一手发布信息。',
     en: 'Join the official group for news, events and release announcements.',
   },
   join: { zh: '加入', en: 'Join' },
-  game: { zh: '废品机械师', en: 'Scrap Mechanic' },
   gameText: {
     zh: '所有内容运行的本体游戏，在 Steam 商店了解与购买。',
     en: 'The base game everything here runs on. Learn more and buy it on the Steam Store.',
@@ -118,7 +113,7 @@ const splitLaunchOption = (text: string) => text.split(new RegExp(`(${LAUNCH_OPT
 <BaseLayout title={t(copy.title)} description={t(copy.lead)} image={cover}>
   <PageHero
     image={cover}
-    tag={t(copy.tag)}
+    tag={t(ui.tag.get)}
     title={t(copy.title)}
     subtitle="Mods & Setup"
     lead={t(copy.lead)}
@@ -127,14 +122,14 @@ const splitLaunchOption = (text: string) => text.split(new RegExp(`(${LAUNCH_OPT
 
   <Section>
     <Eyebrow label={t(copy.featured)} note={t(copy.featuredNote)} class="group-label" data-reveal />
-    <article class="featured" data-reveal>
+    <article class="featured" data-chamfer="corner-lg" data-reveal>
       <div class="featured-media">
         <Image src={modCover} alt="" widths={[640, 960, 1280]} sizes="(max-width: 1100px) 100vw, 760px" />
         <Badge class="featured-badge">{t(copy.modBadge)}</Badge>
       </div>
       <div class="featured-body">
-        <h2 class="featured-title">{t(copy.modName)}</h2>
-        <p class="featured-subtitle text-accent">{t(copy.modSubtitle)}</p>
+        <h2 class="featured-title">{t(ui.mod.name)}</h2>
+        <p class="featured-subtitle text-accent">{t(ui.mod.subtitle)}</p>
         <p class="text-body featured-text">{t(copy.modText)}</p>
         <dl class="specs">
           {
@@ -148,7 +143,7 @@ const splitLaunchOption = (text: string) => text.split(new RegExp(`(${LAUNCH_OPT
         </dl>
         <ButtonGroup class="actions">
           <Button href={links.modWorkshop} external>{t(copy.subscribe)}</Button>
-          <Button href={localizePath(pages.mod, lang)} variant="ghost">{t(copy.details)}</Button>
+          <Button href={localizePath(pages.mod, lang)} variant="ghost">{t(ui.mod.details)}</Button>
         </ButtonGroup>
       </div>
     </article>
@@ -160,13 +155,13 @@ const splitLaunchOption = (text: string) => text.split(new RegExp(`(${LAUNCH_OPT
     <div class="channels" data-reveal>
       <Card href={links.steamGroup} external shape="notch">
         <p class="text-label channel-label">Steam</p>
-        <h3 class="channel-title">{t(copy.steamGroup)}</h3>
+        <h3 class="channel-title">{t(ui.nav.steamGroup)}</h3>
         <p class="channel-text">{t(copy.steamGroupText)}</p>
         <ArrowLink external class="channel-action">{t(copy.join)}</ArrowLink>
       </Card>
       <Card href={links.gameStore} external shape="notch">
         <p class="text-label channel-label">Steam</p>
-        <h3 class="channel-title">{t(copy.game)}</h3>
+        <h3 class="channel-title">{t(ui.nav.game)}</h3>
         <p class="channel-text">{t(copy.gameText)}</p>
         <ArrowLink external class="channel-action">{t(copy.view)}</ArrowLink>
       </Card>
@@ -190,7 +185,7 @@ const splitLaunchOption = (text: string) => text.split(new RegExp(`(${LAUNCH_OPT
         }
       </ol>
 
-      <div class="refresh">
+      <div class="refresh" data-chamfer="notch-lg">
         <div>
           <Eyebrow label={t(copy.refreshEyebrow)} />
           <h3 class="refresh-title">{t(copy.refreshTitle)}</h3>
@@ -225,10 +220,9 @@ const splitLaunchOption = (text: string) => text.split(new RegExp(`(${LAUNCH_OPT
   }
 
   .featured {
+    --chamfer-stroke: var(--color-accent-line-soft);
     display: grid;
     grid-template-columns: 1.15fr 1fr;
-    border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
-    clip-path: var(--clip-corner-lg);
   }
 
   .featured-media {
@@ -360,14 +354,13 @@ const splitLaunchOption = (text: string) => text.split(new RegExp(`(${LAUNCH_OPT
   }
 
   .refresh {
+    --chamfer-stroke: var(--color-accent-line);
     display: grid;
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     gap: 24px 56px;
     margin-top: 16px;
     padding: clamp(28px, 3.5vw, 44px);
-    border: 1px solid var(--color-accent-line);
     background: var(--color-accent-tint);
-    clip-path: var(--clip-notch-lg);
   }
 
   .refresh-title {

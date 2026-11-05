@@ -6,37 +6,22 @@
 import { Image } from 'astro:assets';
 import cover from '@/assets/images/mod-cover.jpg';
 import Button from '@/components/ui/Button.astro';
-import Chip from '@/components/ui/Chip.astro';
 import Tag from '@/components/ui/Tag.astro';
 import { links } from '@/config/site';
 import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import ModCategories from './ModCategories.astro';
 
 const t = translator(getLang(Astro.url));
 
 const copy = {
   tag: { zh: '模组 / The Mod', en: 'The Mod' },
-  title: { zh: '传奇模组', en: 'New Legend Mod' },
-  subtitle: { zh: 'New Legend Mod', en: 'Continuation' },
   intro: {
-    zh: '欢迎各位机械师订阅由中国玩家团队「传奇建造队」制作的传奇模组。这是一个综合性 Mod，可满足日常建造的绝大部分需要：材质方块、各种几何体、可互动零件、车辆轮胎与载具零件、威力强大的武器、丰富的装饰与自然景物，以及独特的传奇专属零件。',
-    en: 'The New Legend Mod is made by Legend Build Team, a Chinese player community. It is a comprehensive Mod that covers most of what everyday building needs: material blocks, geometric shapes, interactive parts, wheels, tires and vehicle parts, weapons, decorations and natural scenery, along with a set of parts unique to the Mod.',
+    zh: '传奇模组由中国玩家团队「传奇建造队」制作，是一个综合性建造 Mod，可满足日常建造的绝大部分需要。模组涵盖实用工具、材质方块、几何体、可互动零件、车辆零件、武器、装饰和建筑零件，此外还有本模组独有的传奇专属零件。',
+    en: 'The New Legend Mod is made by Legend Build Team, a Chinese player community. This comprehensive building Mod covers most everyday building needs. It includes utility tools, material blocks, geometric shapes, interactive parts, vehicle components, weapons, decorations and building elements, along with Legend-exclusive parts found only in this Mod.',
   },
   english: { zh: '现已支持英文物品描述。', en: 'Item descriptions are available in English.' },
-  subscribe: { zh: '前往创意工坊订阅', en: 'Subscribe on the Workshop' },
 };
-
-const categories = [
-  { zh: '材质方块', en: 'Material Blocks' },
-  { zh: '几何体', en: 'Geometric Shapes' },
-  { zh: '可互动零件', en: 'Interactive Parts' },
-  { zh: '车辆轮胎', en: 'Wheels & Tires' },
-  { zh: '载具零件', en: 'Vehicle Parts' },
-  { zh: '强力武器', en: 'Weapons' },
-  { zh: '装饰物件', en: 'Decorations' },
-  { zh: '自然景物', en: 'Natural Scenery' },
-  { zh: '建筑零件', en: 'Building Parts' },
-];
-const signature = { zh: '传奇专属零件', en: 'Legend-Exclusive Parts' };
 ---
 
 <section id="mod" class="mod">
@@ -47,8 +32,8 @@ const signature = { zh: '传奇专属零件', en: 'Legend-Exclusive Parts' };
     <div class="shade" aria-hidden="true"></div>
     <div class="container cover-text" data-reveal>
       <Tag>{t(copy.tag)}</Tag>
-      <h2 class="title">{t(copy.title)}</h2>
-      <p class="subtitle text-accent">{t(copy.subtitle)}</p>
+      <h2 class="title">{t(ui.mod.name)}</h2>
+      <p class="subtitle text-accent">{t(ui.mod.subtitle)}</p>
     </div>
   </div>
 
@@ -58,17 +43,8 @@ const signature = { zh: '传奇专属零件', en: 'Legend-Exclusive Parts' };
       <p class="english">{t(copy.english)}</p>
     </div>
     <div>
-      <ul class="chips">
-        {
-          categories.map((category) => (
-            <li>
-              <Chip>{t(category)}</Chip>
-            </li>
-          ))
-        }
-        <li><Chip highlight>{t(signature)}</Chip></li>
-      </ul>
-      <Button href={links.modWorkshop} external class="subscribe">{t(copy.subscribe)}</Button>
+      <ModCategories />
+      <Button href={links.modWorkshop} external class="subscribe">{t(ui.mod.subscribe)}</Button>
     </div>
   </div>
 </section>
@@ -157,12 +133,6 @@ const signature = { zh: '传奇专属零件', en: 'Legend-Exclusive Parts' };
     margin-top: 1.6em;
     font-weight: 700;
     color: var(--color-text);
-  }
-
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 11px;
   }
 
   .subscribe {

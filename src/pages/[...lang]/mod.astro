@@ -19,6 +19,7 @@ import { links } from '@/config/site';
 import { getMod } from '@/data/mod';
 import { getLang, getLangPaths, translator } from '@/i18n';
 import { formatNumber } from '@/i18n/format';
+import { ui } from '@/i18n/ui';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 export const getStaticPaths = getLangPaths;
@@ -27,19 +28,16 @@ const t = translator(getLang(Astro.url));
 const mod = getMod();
 
 const copy = {
-  title: { zh: '传奇模组', en: 'New Legend Mod' },
-  subtitle: { zh: 'New Legend Mod', en: 'Continuation' },
   description: {
     zh: `传奇模组是传奇建造队为《废品机械师》制作的综合性建造模组，当前版本 ${mod.version}，共有 ${formatNumber(mod.itemCount)} 件物品。`,
     en: `The New Legend Mod is a comprehensive building Mod for Scrap Mechanic by Legend Build Team. Current version ${mod.version}, with ${formatNumber(mod.itemCount)} items.`,
   },
-  subscribe: { zh: '前往创意工坊订阅', en: 'Subscribe on the Workshop' },
   preview: { zh: '查看模组预览', en: 'See Screenshots' },
   overviewTag: { zh: '关于模组 / Overview', en: 'Overview' },
   overviewTitle: { zh: '满足日常建造的\n绝大部分需要', en: 'Most of what everyday building calls for' },
   overviewText: {
-    zh: '欢迎各位机械师订阅由中国玩家团队「传奇建造队」制作的传奇 Mod。这是一个综合性 Mod，包含材质方块、各种几何体、各种可互动零件、各种车辆轮胎、载具零件、威力强大的武器、各种装饰、自然景物装饰、建筑零件，以及独特的传奇专属零件。',
-    en: 'The New Legend Mod is made by Legend Build Team, a Chinese player community. It is a comprehensive Mod with material blocks, geometric shapes, interactive parts, wheels and tires, vehicle parts, weapons, decorations, natural scenery, building parts and a set of parts unique to the Mod.',
+    zh: `传奇模组是传奇建造队为《废品机械师》制作的综合性建造 Mod，为建造载具、建筑和机械装置的玩家提供零件与工具。模组目前共有 ${formatNumber(mod.itemCount)} 件物品，订阅并在存档中启用之后，就可以在创造模式的物品栏中按类别取用。`,
+    en: `The New Legend Mod is a comprehensive building Mod for Scrap Mechanic made by Legend Build Team. It provides parts and tools for players who build vehicles, structures and machines. The Mod currently has ${formatNumber(mod.itemCount)} items. Once you subscribe and enable it in a save, you can find them by category in the Creative Mode inventory.`,
   },
   english: { zh: '现已支持英文物品描述 · English Supported', en: 'Item descriptions in English and Chinese' },
   relatedEyebrow: { zh: '更多模组 / Related', en: 'Related' },
@@ -47,10 +45,10 @@ const copy = {
 };
 ---
 
-<BaseLayout title={t(copy.title)} description={t(copy.description)} image={cover}>
-  <PageHero variant="cover" image={cover} tag="Steam Workshop" title={t(copy.title)} subtitle={t(copy.subtitle)}>
+<BaseLayout title={t(ui.mod.name)} description={t(copy.description)} image={cover}>
+  <PageHero variant="cover" image={cover} tag="Steam Workshop" title={t(ui.mod.name)} subtitle={t(ui.mod.subtitle)}>
     <ButtonGroup>
-      <Button href={links.modWorkshop} external>{t(copy.subscribe)}</Button>
+      <Button href={links.modWorkshop} external>{t(ui.mod.subscribe)}</Button>
       <Button href="#screenshots" variant="ghost" icon="arrow-down-line">{t(copy.preview)}</Button>
     </ButtonGroup>
   </PageHero>
@@ -60,7 +58,7 @@ const copy = {
       <Tag>{t(copy.overviewTag)}</Tag>
       <h2 class="overview-title">{t(copy.overviewTitle)}</h2>
       <p class="text-body overview-text">{t(copy.overviewText)}</p>
-      <p class="english">{t(copy.english)}</p>
+      <p class="english" data-chamfer="notch-md">{t(copy.english)}</p>
     </NumberedIntro>
   </Section>
 
@@ -100,18 +98,17 @@ const copy = {
   }
 
   .english {
+    --chamfer-stroke: var(--color-accent-line);
     display: inline-flex;
     align-items: center;
     gap: 12px;
     margin-top: 26px;
-    padding: 12px 20px;
-    border: 1px solid var(--color-accent-line);
+    padding: 13px 21px;
     font-family: var(--font-label);
     font-size: var(--text-small);
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--color-accent-text);
-    clip-path: var(--clip-notch-md);
   }
 
   .english::before {

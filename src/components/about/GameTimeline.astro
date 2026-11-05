@@ -2,6 +2,7 @@
 /** 《废品机械师》发展历程的三个节点，最后一项为当前版本，用金色突出。 */
 import { formatDate } from '@/i18n/format';
 import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
 
 const lang = getLang(Astro.url);
 const t = translator(lang);
@@ -14,7 +15,7 @@ const milestones = [
   },
   {
     date: '2020-05-07',
-    title: { zh: '生存模式', en: 'Survival Mode' },
+    title: ui.game.survivalMode,
     note: { zh: '采集、耕种与烹饪', en: 'Gathering, farming and cooking' },
   },
   {

@@ -7,6 +7,7 @@ import { links } from '@/config/site';
 import { getMod } from '@/data/mod';
 import { getLang, translator } from '@/i18n';
 import { formatDate, formatNumber } from '@/i18n/format';
+import { ui } from '@/i18n/ui';
 import Button from '@/components/ui/Button.astro';
 
 type Props = HTMLAttributes<'div'>;
@@ -17,12 +18,10 @@ const t = translator(lang);
 const mod = getMod();
 
 const copy = {
-  title: { zh: '传奇模组', en: 'New Legend Mod' },
   lead: {
     zh: '由传奇建造队开发和维护的综合性模组，在 Steam 创意工坊发布。订阅之后，Steam 会自动下载并保持更新。',
     en: 'A comprehensive mod developed and maintained by Legend Build Team, published on the Steam Workshop. Once you subscribe, Steam downloads it and keeps it up to date.',
   },
-  subscribe: { zh: '在创意工坊订阅', en: 'Subscribe on Workshop' },
 };
 
 const specs = [
@@ -34,12 +33,12 @@ const specs = [
 ---
 
 <div class:list={['feature', className]} {...rest}>
-  <div class="media">
-    <Image src={cover} alt={t(copy.title)} widths={[640, 960, 1280]} sizes="(max-width: 900px) 100vw, 50vw" />
+  <div class="media" data-chamfer="frame-lg">
+    <Image src={cover} alt={t(ui.mod.name)} widths={[640, 960, 1280]} sizes="(max-width: 900px) 100vw, 50vw" />
   </div>
   <div class="text">
     <p class="kicker text-label">{mod.name}</p>
-    <h3 class="title">{t(copy.title)}</h3>
+    <h3 class="title">{t(ui.mod.name)}</h3>
     <p class="text-body">{t(copy.lead)}</p>
     <dl class="specs">
       {
@@ -51,7 +50,7 @@ const specs = [
         ))
       }
     </dl>
-    <Button href={links.modWorkshop} external>{t(copy.subscribe)}</Button>
+    <Button href={links.modWorkshop} external>{t(ui.mod.subscribe)}</Button>
   </div>
 </div>
 
@@ -64,9 +63,7 @@ const specs = [
   }
 
   .media {
-    overflow: hidden;
-    border: 1px solid var(--color-line);
-    clip-path: var(--clip-frame-lg);
+    --chamfer-stroke: var(--color-line);
   }
 
   .media :global(img) {

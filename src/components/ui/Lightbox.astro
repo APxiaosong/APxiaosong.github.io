@@ -1,7 +1,7 @@
 ---
 /**
  * 图片灯箱：点击缩略图后在整屏的深色浮层中查看大图，同一组的图片可以左右切换。
- * 每个页面放一个。触发元素写成 <a href="大图地址" data-lightbox="组名">，里面放一张带 width、height 的 <img>；
+ * 每个页面放一个。触发元素写成 <a href="大图地址" data-lightbox="组名">，里面放一张 width、height 为原图尺寸的 <img>；
  * 可选的 data-lightbox-title、data-lightbox-note 显示在图片下方，分别是标题和署名一类的补充说明。
  * 切换顺序是同组触发元素在文档中的顺序，被筛选隐藏的元素不参与切换。
  */
@@ -19,11 +19,11 @@ const copy = {
 ---
 
 <dialog class="lightbox" aria-label={t(copy.label)} data-theme="dark" data-lightbox-dialog>
-  <button class="control close" type="button" aria-label={t(copy.close)} autofocus data-lightbox-close>
+  <button class="control close" type="button" aria-label={t(copy.close)} autofocus data-chamfer="notch-sm" data-lightbox-close>
     <Icon name="close-line" />
   </button>
   <div class="frame">
-    <img class="image" alt="" />
+    <img class="image" alt="" data-chamfer="frame-lg" />
     <Icon name="loader-4-line" class="spinner" />
   </div>
   <p class="caption" aria-live="polite">
@@ -31,16 +31,17 @@ const copy = {
     <span class="title"></span>
     <span class="note text-note"></span>
   </p>
-  <button class="control previous" type="button" aria-label={t(copy.previous)} data-lightbox-step="-1">
+  <button class="control previous" type="button" aria-label={t(copy.previous)} data-chamfer="notch-sm" data-lightbox-step="-1">
     <Icon name="arrow-left-s-line" />
   </button>
-  <button class="control next" type="button" aria-label={t(copy.next)} data-lightbox-step="1">
+  <button class="control next" type="button" aria-label={t(copy.next)} data-chamfer="notch-sm" data-lightbox-step="1">
     <Icon name="arrow-right-s-line" />
   </button>
 </dialog>
 
 <script>
   import { prefersReducedMotion } from './motion';
+  import { onSwipe } from './swipe';
 
   const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox-dialog]')!;
   const frame = dialog.querySelector<HTMLElement>('.frame')!;
@@ -69,6 +70,17 @@ const copy = {
     frame.removeAttribute('data-loading');
   }
 
+  // 缩略图已经下载的像素宽度。带 srcset 时 naturalWidth 按 sizes 折算过，要从 srcset 中查出当前所用候选的宽度
+  function downloadedWidth(thumb: HTMLImageElement) {
+    if (!thumb.complete || !thumb.naturalWidth) return 0;
+    if (!thumb.srcset) return thumb.naturalWidth;
+    const current = thumb.srcset
+      .split(',')
+      .map((candidate) => candidate.trim().split(/\s+/))
+      .find(([url]) => new URL(url, document.baseURI).href === thumb.currentSrc);
+    return current ? parseInt(current[1]) : 0;
+  }
+
   function show(position: number, direction = 0) {
     index = (position + items.length) % items.length;
     const trigger = items[index];
@@ -78,13 +90,16 @@ const copy = {
     title.textContent = trigger.dataset.lightboxTitle ?? '';
     note.textContent = trigger.dataset.lightboxNote ?? '';
 
-    // 先用已经下载的缩略图占位，大图解码完成后再替换
+    // 先用已经下载的缩略图占位，大图解码完成后再替换。
+    // 缩略图的像素已经够显示，或者已经达到原图宽度时直接使用，不再加载大图
     frame.style.setProperty('--ratio', `${thumb.getAttribute('width')} / ${thumb.getAttribute('height')}`);
-    frame.setAttribute('data-loading', '');
     image.alt = thumb.alt;
     image.referrerPolicy = thumb.referrerPolicy;
     image.src = thumb.currentSrc || trigger.href;
-    loadFull(trigger, thumb.referrerPolicy);
+    const needed = Math.min(image.clientWidth * devicePixelRatio, Number(thumb.getAttribute('width')));
+    const sharp = downloadedWidth(thumb) >= needed;
+    frame.toggleAttribute('data-loading', !sharp);
+    if (!sharp) loadFull(trigger, thumb.referrerPolicy);
 
     if (direction && !prefersReducedMotion()) {
       const easing = getComputedStyle(dialog).getPropertyValue('--ease-out');
@@ -105,8 +120,9 @@ const copy = {
     );
     opener = trigger;
     dialog.toggleAttribute('data-single', items.length < 2);
-    show(items.indexOf(trigger));
+    // 灯箱打开之后才能量出图片的显示宽度
     dialog.showModal();
+    show(items.indexOf(trigger));
   }
 
   const step = (direction: number) => items.length > 1 && show(index + direction, direction);
@@ -134,20 +150,8 @@ const copy = {
     else if (event.key === 'ArrowRight') step(1);
   });
 
-  // 触屏上左右滑动切换图片；纵向手势和双指缩放仍由浏览器处理
-  let swipeStart: { x: number; y: number } | null = null;
-
-  dialog.addEventListener('pointerdown', (event) => {
-    swipeStart = event.pointerType === 'mouse' ? null : { x: event.clientX, y: event.clientY };
-  });
-
-  dialog.addEventListener('pointerup', (event) => {
-    if (!swipeStart) return;
-    const dx = event.clientX - swipeStart.x;
-    const dy = event.clientY - swipeStart.y;
-    swipeStart = null;
-    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
-  });
+  // 触屏上左右滑动切换图片
+  onSwipe(dialog, step);
 
   dialog.addEventListener('close', () => {
     opener?.focus();
@@ -167,7 +171,6 @@ const copy = {
     background: color-mix(in srgb, var(--color-bg) 94%, transparent);
     backdrop-filter: blur(10px);
     color: var(--color-text);
-    touch-action: pan-y pinch-zoom;
     opacity: 0;
     transition:
       opacity 0.35s var(--ease-out),
@@ -226,7 +229,6 @@ const copy = {
     aspect-ratio: var(--ratio);
     object-fit: cover;
     background: var(--placeholder-stripes);
-    clip-path: var(--clip-frame-lg);
   }
 
   .spinner {
@@ -293,22 +295,20 @@ const copy = {
   }
 
   .control {
+    --chamfer-stroke: var(--color-line-strong);
     display: grid;
     place-items: center;
     width: 48px;
     height: 48px;
-    border: 1px solid var(--color-line-strong);
     color: var(--color-text-secondary);
     font-size: 24px;
-    clip-path: var(--clip-notch-sm);
     transition:
       color var(--duration-hover),
-      border-color var(--duration-hover),
       background-color var(--duration-hover);
   }
 
   .control:hover {
-    border-color: var(--color-accent);
+    --chamfer-stroke: var(--color-accent);
     background: var(--color-accent-tint-strong);
     color: var(--color-accent-text);
   }

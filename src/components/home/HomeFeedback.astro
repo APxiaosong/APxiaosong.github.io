@@ -30,7 +30,7 @@ const copy = {
     </div>
 
     <div class="grid">
-      <EmailLink class="email-card" data-theme="dark">
+      <EmailLink class="email-card" data-theme="dark" data-chamfer="frame-lg">
         <span class="card-label">{t(copy.emailLabel)}</span>
         <span class="address" data-email-text>{feedbackEmail.user} [at] {feedbackEmail.domain}</span>
         <span class="hint">{t(copy.emailHint)} <Icon name="arrow-right-line" /></span>
@@ -86,7 +86,6 @@ const copy = {
     padding: clamp(28px, 4vw, 48px);
     background: var(--color-bg);
     color: var(--color-text);
-    clip-path: var(--clip-frame-lg);
     transition: transform var(--duration-hover) var(--ease-out);
   }
 

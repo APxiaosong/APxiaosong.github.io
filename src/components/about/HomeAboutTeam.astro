@@ -2,6 +2,7 @@
 /** 首页「关于传奇建造队」区块，锚点 #about-team，末尾链接到团队页。 */
 import { pages } from '@/config/site';
 import { getLang, localizePath, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
 import ArrowLink from '@/components/ui/ArrowLink.astro';
 import Section from '@/components/ui/Section.astro';
 import AboutIntro from './AboutIntro.astro';
@@ -10,7 +11,6 @@ const lang = getLang(Astro.url);
 const t = translator(lang);
 
 const copy = {
-  tag: { zh: '关于 / About', en: 'About' },
   title: { zh: '关于传奇建造队', en: 'About Legend Build Team' },
   founding: {
     zh: '传奇建造队成立于 2016 年 4 月 2 日，由一众《废品机械师》爱好者发起。多年发展至今，已成长为横跨三个千人交流群的国内大型玩家团体。我们因对这款游戏的热爱而聚集，持续挖掘它在建造与机械上的可能。',
@@ -25,7 +25,7 @@ const copy = {
 ---
 
 <Section id="about-team">
-  <AboutIntro index="01" tag={t(copy.tag)} title={t(copy.title)} paragraphs={[t(copy.founding), t(copy.mod)]}>
+  <AboutIntro index="01" tag={t(ui.tag.about)} title={t(copy.title)} paragraphs={[t(copy.founding), t(copy.mod)]}>
     <ArrowLink href={localizePath(pages.team, lang)} underline class="more">{t(copy.more)}</ArrowLink>
   </AboutIntro>
 </Section>

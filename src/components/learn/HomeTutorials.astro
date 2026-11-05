@@ -9,6 +9,7 @@ import Section from '@/components/ui/Section.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
 import { getFeaturedVideos, getTutorialCategories, getVideos } from '@/data/tutorials';
 import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
 import FeaturedVideo from './FeaturedVideo.astro';
 import { libraryCategoryPath } from './library';
 
@@ -16,9 +17,7 @@ const lang = getLang(Astro.url);
 const t = translator(lang);
 
 const copy = {
-  tag: { zh: '教程 / Tutorials', en: 'Tutorials' },
   title: { zh: '视频教程', en: 'Video Tutorials' },
-  library: { zh: '教程库', en: 'Library' },
   libraryNote: { zh: 'Library', en: 'Browse by category' },
   count: {
     zh: (count: number) => `${count} 个视频`,
@@ -38,14 +37,14 @@ const categories = getTutorialCategories().map((category) => ({
 ---
 
 <Section id="tutorials" divider>
-  <SectionHeading index="03" tag={t(copy.tag)} title={t(copy.title)} data-reveal />
+  <SectionHeading index="03" tag={t(ui.tag.tutorials)} title={t(copy.title)} data-reveal />
   <FeaturedVideo video={lead} size="lg" ratio="21 / 9" class="lead" data-reveal />
   <div class="pair" data-reveal>
     {others.map((video) => <FeaturedVideo video={video} />)}
   </div>
 
   <div class="library">
-    <SectionHeading level={3} title={t(copy.library)} note={t(copy.libraryNote)} data-reveal />
+    <SectionHeading level={3} title={t(ui.nav.library)} note={t(copy.libraryNote)} data-reveal />
     <ul class="categories" data-reveal>
       {
         categories.map((category, index) => (

@@ -25,6 +25,7 @@ const hasMedia = Astro.slots.has('media');
 
 <Element
   class:list={['card', shape, { interactive: href, 'has-media': hasMedia }, className]}
+  data-chamfer={shape === 'corner' ? 'corner-sm' : 'notch-md'}
   href={href}
   target={external ? '_blank' : undefined}
   rel={external ? 'noopener' : undefined}
@@ -46,27 +47,18 @@ const hasMedia = Astro.slots.has('media');
 
 <style>
   .card {
+    --chamfer-stroke: var(--color-line);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: 1px solid var(--color-line);
     background: var(--color-surface);
     transition:
-      border-color 0.35s,
       background-color 0.35s,
       transform 0.35s var(--ease-out);
   }
 
-  .corner {
-    clip-path: var(--clip-corner-sm);
-  }
-
-  .notch {
-    clip-path: var(--clip-notch-md);
-  }
-
   .interactive:hover {
-    border-color: var(--color-accent-line);
+    --chamfer-stroke: var(--color-accent-line);
     transform: translateY(-4px);
   }
 

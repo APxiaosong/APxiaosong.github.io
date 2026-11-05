@@ -14,6 +14,12 @@ import Icon from '@/components/ui/Icon.astro';
 import LangSwitch from './LangSwitch.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
+interface Props {
+  /** 当前页面另一种语言版本的路径，没有对应版本时为 null，由 BaseLayout 给出 */
+  alternate: string | null;
+}
+
+const { alternate } = Astro.props;
 const lang = getLang(Astro.url);
 const t = translator(lang);
 const currentPage = pageKey(Astro.url);
@@ -60,7 +66,7 @@ const current = (path: string) => (path === currentPage ? 'page' : undefined);
                   <Icon name="arrow-down-s-line" class="chevron" />
                 </button>
                 <div class="dropdown" id={`nav-${group.id}`}>
-                  <ul class="dropdown-list">
+                  <ul class="dropdown-list" data-chamfer="frame-sm">
                     {group.items.map((item) => (
                       <li>
                         <a class="dropdown-link" href={href(item.href)} aria-current={current(item.href)}>
@@ -77,7 +83,7 @@ const current = (path: string) => (path === currentPage ? 'page' : undefined);
       </nav>
       <div class="tools">
         <ThemeToggle />
-        <LangSwitch />
+        <LangSwitch alternate={alternate} />
       </div>
       <Button href={href(pages.feedback)} size="sm" class="feedback">{t(ui.nav.feedback)}</Button>
     </div>
@@ -108,10 +114,16 @@ const current = (path: string) => (path === currentPage ? 'page' : undefined);
 
   for (const group of groups) {
     const trigger = triggerOf(group);
+    let pointerType = '';
 
-    // 鼠标在宽屏下点击时只负责打开，避免悬停已经打开的菜单被点击关掉
-    trigger.addEventListener('click', (event) => {
-      const fromMouse = (event as PointerEvent).pointerType === 'mouse' && wide.matches;
+    // 鼠标在宽屏下点击时只负责打开，避免悬停已经打开的菜单被点击关掉。
+    // 指针类型在 pointerdown 时记下：较旧的浏览器中 click 事件不带 pointerType，键盘触发的 click 也没有 pointerdown
+    trigger.addEventListener('pointerdown', (event) => {
+      pointerType = event.pointerType;
+    });
+    trigger.addEventListener('click', () => {
+      const fromMouse = pointerType === 'mouse' && wide.matches;
+      pointerType = '';
       setGroup(group, fromMouse || !isOpen(group));
     });
 
@@ -253,14 +265,13 @@ const current = (path: string) => (path === currentPage ? 'page' : undefined);
   }
 
   .dropdown-list {
+    --chamfer-stroke: var(--color-accent-line);
     display: flex;
     flex-direction: column;
     gap: 1px;
     min-width: 188px;
-    padding: 6px;
-    border: 1px solid var(--color-accent-line);
+    padding: 7px;
     background: var(--color-bg-sunken);
-    clip-path: var(--clip-frame-sm);
   }
 
   .dropdown-link {
@@ -385,12 +396,12 @@ const current = (path: string) => (path === currentPage ? 'page' : undefined);
     }
 
     .dropdown-list {
+      --chamfer-stroke: transparent;
       gap: 0;
       min-width: 0;
       min-height: 0;
       overflow: hidden;
       padding: 0;
-      border: 0;
       background: none;
       clip-path: none;
     }

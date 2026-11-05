@@ -11,13 +11,13 @@ import { pages } from '@/config/site';
 import { changelogAnchor, getChangelog } from '@/data/changelog';
 import { getLang, localizePath, translator } from '@/i18n';
 import { formatDate } from '@/i18n/format';
+import { ui } from '@/i18n/ui';
 
 const lang = getLang(Astro.url);
 const t = translator(lang);
 const entries = getChangelog().slice(0, 3);
 
 const copy = {
-  tag: { zh: '社区 / Community', en: 'Community' },
   title: { zh: '社区动态', en: 'Community News' },
   latest: { zh: '最新更新', en: 'Latest' },
   update: { zh: '更新', en: 'Update' },
@@ -29,7 +29,7 @@ const copy = {
 
 <Section id="feed" tone="alt" divider space="none">
   <div class="feed">
-    <SectionHeading index="02" tag={t(copy.tag)} title={t(copy.title)} data-reveal />
+    <SectionHeading index="02" tag={t(ui.tag.community)} title={t(copy.title)} data-reveal />
     <ul class="rows" data-reveal>
       {
         entries.map((entry, i) => (

@@ -1,7 +1,7 @@
 ---
 /**
- * 小号直角标签，用于卡片图片上的分类、来源、难度等简短信息。
- * tone：solid 金底，outline 金色描边，muted 半透明深底（叠在图片上时使用）。
+ * 小号标签，用于卡片图片上的分类、来源、难度等简短信息。
+ * tone：solid 金底直角；outline 金色描边，切去左上和右下两角；muted 半透明深底直角（叠在图片上时使用）。
  */
 import type { HTMLAttributes } from 'astro/types';
 
@@ -12,7 +12,9 @@ interface Props extends HTMLAttributes<'span'> {
 const { tone = 'solid', class: className, ...rest } = Astro.props;
 ---
 
-<span class:list={['badge', tone, className]} {...rest}><slot /></span>
+<span class:list={['badge', tone, className]} data-chamfer={tone === 'outline' ? 'notch-sm' : undefined} {...rest}>
+  <slot />
+</span>
 
 <style>
   .badge {
@@ -32,8 +34,10 @@ const { tone = 'solid', class: className, ...rest } = Astro.props;
     color: var(--color-on-accent);
   }
 
+  /* 描边画在内侧，内边距多留出描边的宽度 */
   .outline {
-    border: 1px solid var(--color-accent-line);
+    --chamfer-stroke: var(--color-accent-line);
+    padding: 5px 11px;
     color: var(--color-accent-text);
   }
 

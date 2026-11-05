@@ -28,7 +28,7 @@ const copy = {
 };
 ---
 
-<a class:list={['work', className]} href={work.url} target="_blank" rel="noopener" {...rest}>
+<a class:list={['work', className]} href={work.url} target="_blank" rel="noopener" data-chamfer="corner-sm" {...rest}>
   <img
     src={resizeImage(work.previewUrl, 640)}
     srcset={resizeSrcset(work.previewUrl, [320, 640])}
@@ -51,24 +51,17 @@ const copy = {
 
 <style>
   .work {
+    --chamfer-stroke: var(--color-line);
     position: relative;
     display: block;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    border: 1px solid var(--color-line);
     background: var(--placeholder-stripes);
-    clip-path: var(--clip-corner-sm);
-    transition: border-color 0.35s;
   }
 
   .work:hover,
   .work:focus-visible {
-    border-color: var(--color-accent-line);
-  }
-
-  /* 切角会裁掉外侧的焦点框，改为画在内侧 */
-  .work:focus-visible {
-    outline-offset: -3px;
+    --chamfer-stroke: var(--color-accent-line);
   }
 
   img {

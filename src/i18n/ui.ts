@@ -4,10 +4,38 @@ import type { Localized } from './index';
 export const ui = {
   site: {
     name: { zh: '传奇建造队', en: 'Legend Build Team' },
+    // 团队名称下方的副标题
+    subtitle: { zh: 'Legend Build Team', en: 'Est. 2016' },
     description: {
       zh: '传奇建造队是《废品机械师》的中国玩家团体，也是传奇模组的开发团队。',
       en: 'Legend Build Team is a Chinese Scrap Mechanic community and the team behind the New Legend Mod.',
     },
+  },
+  mod: {
+    name: { zh: '传奇模组', en: 'New Legend Mod' },
+    // 模组标题下方的副标题。英文的名称加副标题就是创意工坊上的全名 New Legend Mod Continuation
+    subtitle: { zh: 'New Legend Mod', en: 'Continuation' },
+    subscribe: { zh: '前往创意工坊订阅', en: 'Subscribe on the Workshop' },
+    details: { zh: '模组详情', en: 'About the Mod' },
+  },
+  game: {
+    // 游戏名称下方的副标题，游戏名称本身见 nav.game
+    subtitle: { zh: 'Scrap Mechanic', en: 'By Axolot Games' },
+    creativeMode: { zh: '创造模式', en: 'Creative Mode' },
+    survivalMode: { zh: '生存模式', en: 'Survival Mode' },
+    challengeMode: { zh: '挑战模式', en: 'Challenge Mode' },
+  },
+  // 区块和内页首屏上方的标签，与导航的分组对应
+  tag: {
+    about: { zh: '关于 / About', en: 'About' },
+    get: { zh: '获取 / Get', en: 'Get' },
+    community: { zh: '社区 / Community', en: 'Community' },
+    tutorials: { zh: '教程 / Tutorials', en: 'Tutorials' },
+  },
+  // 统计带的说明文字，\n 处换行
+  stats: {
+    subscriptions: { zh: 'Steam 创意工坊\n订阅数', en: 'Steam Workshop\nsubscribers' },
+    items: { zh: '模组\n物品总数', en: 'Items\nin the Mod' },
   },
   nav: {
     home: { zh: '首页', en: 'Home' },
@@ -49,5 +77,7 @@ export const ui = {
   common: {
     skipToContent: { zh: '跳到正文', en: 'Skip to content' },
     newWindow: { zh: '（在新窗口打开）', en: ' (opens in a new window)' },
+    filterByCategory: { zh: '按分类筛选', en: 'Filter by category' },
+    viewAllWorks: { zh: '在 Steam 查看全部作品', en: 'View all on Steam' },
   },
 } satisfies Record<string, Record<string, Localized>>;

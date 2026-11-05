@@ -7,6 +7,7 @@ import { Image } from 'astro:assets';
 import poster from '@/assets/images/scene-creative.png';
 import { links } from '@/config/site';
 import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
 import Button from '@/components/ui/Button.astro';
 import ButtonGroup from '@/components/ui/ButtonGroup.astro';
 import Tag from '@/components/ui/Tag.astro';
@@ -14,8 +15,6 @@ import Tag from '@/components/ui/Tag.astro';
 const t = translator(getLang(Astro.url));
 
 const copy = {
-  title: { zh: '传奇建造队', en: 'Legend Build Team' },
-  subtitle: { zh: 'Legend Build Team', en: 'Est. 2016' },
   lead: {
     zh: '为《废品机械师》玩家提供丰富的模组内容与建造工具。我们是这款游戏的中国玩家社区，也是传奇模组的开发团队。',
     en: 'Mod content and building tools for Scrap Mechanic players. We are a Chinese Scrap Mechanic community and the team behind the New Legend Mod.',
@@ -33,8 +32,8 @@ const copy = {
 
   <div class="container content">
     <Tag size="lg" dot>New Legend Mod</Tag>
-    <h1 class="title">{t(copy.title)}</h1>
-    <p class="subtitle text-accent">{t(copy.subtitle)}</p>
+    <h1 class="title">{t(ui.site.name)}</h1>
+    <p class="subtitle text-accent">{t(ui.site.subtitle)}</p>
     <p class="lead">{t(copy.lead)}</p>
     <ButtonGroup class="actions">
       <Button href="#mod">{t(copy.explore)}</Button>

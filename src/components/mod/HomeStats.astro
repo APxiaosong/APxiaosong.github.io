@@ -4,6 +4,7 @@ import StatBand from '@/components/ui/StatBand.astro';
 import { getMod } from '@/data/mod';
 import { getLang, translator } from '@/i18n';
 import { formatNumber } from '@/i18n/format';
+import { ui } from '@/i18n/ui';
 
 const t = translator(getLang(Astro.url));
 const mod = getMod();
@@ -11,11 +12,11 @@ const mod = getMod();
 const items = [
   {
     value: formatNumber(mod.subscriptions),
-    label: t({ zh: 'Steam 创意工坊\n订阅数', en: 'Steam Workshop\nsubscribers' }),
+    label: t(ui.stats.subscriptions),
   },
   {
     value: formatNumber(mod.itemCount),
-    label: t({ zh: '模组\n物品总数', en: 'Items\nin the Mod' }),
+    label: t(ui.stats.items),
   },
   {
     value: 'EN',

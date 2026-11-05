@@ -43,12 +43,9 @@ B 站的图片服务器按 Referer 防盗链，请求带有其他网站的 Refer
 | `name` | 模组在 Steam 上的标题 | 接口返回的 `title` |
 | `version` | 当前版本号 | 接口返回的 `description` 中，【Current Version】之后第一个 `[b]…[/b]` 里的版本号 |
 | `itemCount` | 模组物品总数 | 手动维护，Steam 不提供 |
-| `createdAt` | 首次发布时间 | 接口返回的 `time_created` |
 | `updatedAt` | 最后更新时间 | 接口返回的 `time_updated` |
 | `subscriptions` | 当前订阅数 | 接口返回的 `subscriptions`，不是 `lifetime_subscriptions` |
-| `favorites` | 当前收藏数 | 接口返回的 `favorited` |
 | `fileSizeMb` | 文件大小，单位为 MB | 创意工坊页面 |
-| `previewUrl` | 预览图地址 | 接口返回的 `preview_url` |
 | `screenshots` | 截图，按页面上的顺序排列。每一项有原图地址 `image` 和原图的像素宽高 `width`、`height` | 创意工坊页面 |
 | `related` | 模组简介中推荐的其他创意工坊物品，字段见下表 | 接口返回的 `description` 和各物品的详情 |
 
@@ -59,14 +56,13 @@ B 站的图片服务器按 Referer 防盗链，请求带有其他网站的 Refer
 | `id` | 创意工坊物品编号 |
 | `title` | 中英文名称。英文与模组简介中的链接文字相同，中文由人填写 |
 | `kind` | 卡片上的类别标签，例如「自定义游戏」，由人填写 |
-| `url` | `https://steamcommunity.com/sharedfiles/filedetails/?id=<id>` |
 | `previewUrl` | 这个物品的接口返回的 `preview_url` |
 
-模组的创意工坊页面和 Steam 更新日志页面的地址是固定的站点常量，写在 `src/config/site.ts` 的 `links` 中，不在这份数据里。
+数据中只保存页面实际用到的字段，接口返回的其他字段（例如首次发布时间和收藏数）不写入。相关物品的创意工坊页面地址由 `mod.ts` 根据 `id` 生成，不保存在数据中。模组的创意工坊页面和 Steam 更新日志页面的地址是固定的站点常量，写在 `src/config/site.ts` 的 `links` 中，也不在这份数据里。
 
 ### 重新生成
 
-1. **查询接口。** 发送下面的 POST 请求，不需要密钥。所需的字段都在返回结果的 `response.publishedfiledetails[0]` 中，按上表填写；`time_created` 和 `time_updated` 是 Unix 时间戳，单位为秒。
+1. **查询接口。** 发送下面的 POST 请求，不需要密钥。所需的字段都在返回结果的 `response.publishedfiledetails[0]` 中，按上表填写；`time_updated` 是 Unix 时间戳，单位为秒。
 
    ```
    curl -s -X POST https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/ -d 'itemcount=1&publishedfileids[0]=3309460746'
@@ -272,7 +268,7 @@ B 站的图片服务器按 Referer 防盗链，请求带有其他网站的 Refer
 1. **找出新记录。** 请求更新日志的第 1 页，找出 `id` 不在现有数据中的记录。如果第 1 页全是新记录，继续请求下一页，直到出现已有的编号为止。
 2. **整理并加入。** 按上面几节拆分正文、确定版本号、写标签和标题、翻译成英文，然后把新记录按时间顺序加到数组开头。已有记录的 `id` 和顺序保持不变。
 3. **检查已有记录。** Steam 允许作者修改已经发布的日志。发现已有记录的原文与数据不一致时，只更新这条记录的正文和译文。
-4. **同步模组信息。** 同时更新 `mod.json`：`version` 改为最新记录的版本号，`updatedAt`、订阅数、收藏数和文件大小按接口和页面的最新数据重新填写。
+4. **同步模组信息。** 同时更新 `mod.json`：`version` 改为最新记录的版本号，`updatedAt`、订阅数和文件大小按接口和页面的最新数据重新填写。
 5. **核对总数。** 记录总数应当与创意工坊页面上的「N 项改动说明」一致。
 
 ## 团队（team）
@@ -303,9 +299,8 @@ B 站的图片服务器按 Referer 防盗链，请求带有其他网站的 Refer
 | `id` | 站内的成员标识。画廊数据中的同一个人使用相同的 id |
 | `name` | 中英文名称。英文名称有出处时才与中文不同，例如旧网站英文版中的写法；没有出处时两者相同，不自行翻译 |
 | `steamId` | Steam 账号的 SteamID64 |
-| `workshopUrl` | `https://steamcommunity.com/profiles/<steamId>/myworkshopfiles/?appid=387990` |
 
-`works` 是作品，按 `createdAt` 从新到旧排列，时间相同时按 `id` 从大到小排列。
+`works` 是作品，按接口返回的 `time_created`（首次发布时间）从新到旧排列，时间相同时按 `id` 从大到小排列。页面直接按数组的顺序展示，所以发布时间只用于排序，不写入数据。
 
 | 字段 | 含义 |
 |---|---|
@@ -313,15 +308,13 @@ B 站的图片服务器按 Referer 防盗链，请求带有其他网站的 Refer
 | `title` | Steam 上的标题，去掉首尾空白，并把连续的空白合并成一个空格 |
 | `category` | `categories` 中的 id |
 | `authors` | 成员 id。上传者是成员时排在第一位，其余成员按 `authors` 数组的顺序排列 |
-| `url` | `https://steamcommunity.com/sharedfiles/filedetails/?id=<id>` |
 | `previewUrl` | 接口返回的 `preview_url`，原样保存，末尾带 `/` |
-| `createdAt`、`updatedAt` | 由接口返回的 `time_created`、`time_updated`（Unix 时间戳，单位为秒）换算 |
 
-作品的简介没有收录，因为其中多为按键说明，页面上也不展示。
+成员的个人创意工坊页面和作品页面的地址由 `workshop.ts` 分别根据 `steamId` 和作品的 `id` 生成，不保存在数据中。作品的简介和更新时间没有收录，因为页面上不展示。
 
 ### 重新生成
 
-更新时按以下步骤重新生成全部作品，已有作品的标题、预览图和更新时间也随之刷新。
+更新时按以下步骤重新生成全部作品，已有作品的标题和预览图也随之刷新。
 
 1. **读取作品列表。** 对 `authors` 中的每位成员，依次请求下面的地址，页码从 1 开始，每页最多 30 件，两次请求之间间隔 1.5 秒：
 
@@ -345,7 +338,7 @@ B 站的图片服务器按 Referer 防盗链，请求带有其他网站的 Refer
 
    返回结果的 `response.publishedfiledetails` 中，`result` 为 1 的是有效作品。其他值（例如 9）表示作品已经删除或者不可见，这些作品不收录。
 
-3. **生成记录。** 按上面的字段说明，用 `title`、`creator`、`preview_url`、`time_created` 和 `time_updated` 生成每件作品。`creator` 是上传者的 SteamID64，它与某位成员的 `steamId` 相同时，这位成员排在 `authors` 的第一位。
+3. **生成记录。** 按上面的字段说明，用 `title`、`creator` 和 `preview_url` 生成每件作品，再按 `time_created`（Unix 时间戳，单位为秒）排序。`creator` 是上传者的 SteamID64，它与某位成员的 `steamId` 相同时，这位成员排在 `authors` 的第一位。
 
 4. **分类。** 已有的作品沿用 `workshop.json` 中原来的分类，只给新作品分类，方法见下一节。
 

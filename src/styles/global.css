@@ -97,7 +97,7 @@ h4 {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-focus);
   outline-offset: 3px;
 }
 
@@ -125,6 +125,66 @@ h4 {
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+/*
+ * 切角：按 tokens.css 中的形状裁去四角。::after 留给描边，组件通过 --chamfer-stroke 等变量设置描边，
+ * 自己的装饰改用 ::before 或子元素。
+ */
+[data-chamfer] {
+  position: relative;
+  clip-path: polygon(
+    var(--chamfer-tl) 0,
+    calc(100% - var(--chamfer-tr)) 0,
+    100% var(--chamfer-tr),
+    100% calc(100% - var(--chamfer-br)),
+    calc(100% - var(--chamfer-br)) 100%,
+    var(--chamfer-bl) 100%,
+    0 calc(100% - var(--chamfer-bl)),
+    0 var(--chamfer-tl)
+  );
+}
+
+/*
+ * 描边是整个元素减去内圈，外侧的切角交给元素自身的 clip-path。
+ * 内圈的斜边与外斜边相距一个描边宽度，落到直边上的顶点要比切角多让出 (√2 − 1) 倍描边宽度；不切的角只让出描边宽度。
+ */
+[data-chamfer]::after {
+  --inner-tl: max(var(--chamfer-stroke-width), var(--chamfer-tl) + var(--chamfer-stroke-width) * 0.4142);
+  --inner-tr: max(var(--chamfer-stroke-width), var(--chamfer-tr) + var(--chamfer-stroke-width) * 0.4142);
+  --inner-br: max(var(--chamfer-stroke-width), var(--chamfer-br) + var(--chamfer-stroke-width) * 0.4142);
+  --inner-bl: max(var(--chamfer-stroke-width), var(--chamfer-bl) + var(--chamfer-stroke-width) * 0.4142);
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--chamfer-stroke);
+  -webkit-mask: var(--chamfer-dash);
+  mask: var(--chamfer-dash);
+  clip-path: polygon(
+    evenodd,
+    0 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 0,
+    var(--inner-tl) var(--chamfer-stroke-width),
+    calc(100% - var(--inner-tr)) var(--chamfer-stroke-width),
+    calc(100% - var(--chamfer-stroke-width)) var(--inner-tr),
+    calc(100% - var(--chamfer-stroke-width)) calc(100% - var(--inner-br)),
+    calc(100% - var(--inner-br)) calc(100% - var(--chamfer-stroke-width)),
+    var(--inner-bl) calc(100% - var(--chamfer-stroke-width)),
+    var(--chamfer-stroke-width) calc(100% - var(--inner-bl)),
+    var(--chamfer-stroke-width) var(--inner-tl),
+    var(--inner-tl) var(--chamfer-stroke-width)
+  );
+  pointer-events: none;
+  transition: background-color var(--duration-hover);
+}
+
+/* 外侧的焦点框会被切角裁掉，改为画在描边内侧 */
+[data-chamfer]:focus-visible {
+  outline-offset: calc(-2px - var(--chamfer-stroke-width));
 }
 
 /* 文字角色，对应 DESIGN.md 的字体排印表 */

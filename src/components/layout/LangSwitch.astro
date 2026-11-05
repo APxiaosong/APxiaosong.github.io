@@ -1,29 +1,51 @@
 ---
 /**
- * 语言切换链接，指向当前页面的另一种语言版本，点击时带上当前网址的查询参数和锚点。
+ * 语言切换链接，指向当前页面的另一种语言版本；没有对应版本时（例如 404）指向另一种语言的首页。
+ * 点击时把所选语言保存为访客的语言偏好，BaseLayout 据此跳转；指向同一页面时还会带上当前网址的查询参数和锚点。
  * 宽屏下显示简写（EN / 中）；导航折叠为菜单面板后显示带图标的完整名称。
  */
-import { alternatePath, getLang, htmlLang, otherLang, translator } from '@/i18n';
+import { pages } from '@/config/site';
+import { getLang, htmlLang, localizePath, otherLang, translator } from '@/i18n';
 import { ui } from '@/i18n/ui';
 import Icon from '@/components/ui/Icon.astro';
 
+interface Props {
+  /** 当前页面另一种语言版本的路径，没有对应版本时为 null */
+  alternate: string | null;
+}
+
+const { alternate } = Astro.props;
 const lang = getLang(Astro.url);
 const t = translator(lang);
 const target = htmlLang[otherLang(lang)];
 ---
 
-<a class="lang-switch" href={alternatePath(Astro.url)} hreflang={target} lang={target} aria-label={t(ui.lang.switchLabel)}>
+<a
+  class="lang-switch"
+  href={alternate ?? localizePath(pages.home, otherLang(lang))}
+  data-same-page={alternate ? '' : undefined}
+  hreflang={target}
+  lang={target}
+  aria-label={t(ui.lang.switchLabel)}
+  data-chamfer="notch-sm"
+>
   <Icon name="global-line" class="icon" />
   <span class="short">{t(ui.lang.switchShort)}</span>
   <span class="full">{t(ui.lang.switchName)}</span>
 </a>
 
 <script>
-  // 两种语言的筛选参数和锚点相同，切换时带上，访客停在同样的筛选结果和位置
   const link = document.querySelector<HTMLAnchorElement>('.lang-switch')!;
   link.addEventListener('click', () => {
-    link.search = location.search;
-    link.hash = location.hash;
+    // 同一页面的两种语言版本筛选参数和锚点相同，切换时带上，访客停在同样的筛选结果和位置
+    if (link.hasAttribute('data-same-page')) {
+      link.search = location.search;
+      link.hash = location.hash;
+    }
+    // 取值与 <html lang> 相同，为 zh-CN 或 en，与旧网站保存的偏好通用
+    try {
+      localStorage.setItem('lang', link.hreflang);
+    } catch {}
   });
 </script>
 
@@ -54,13 +76,12 @@ const target = htmlLang[otherLang(lang)];
 
   @media (max-width: 900px) {
     .lang-switch {
+      --chamfer-stroke: var(--color-line-strong);
       height: auto;
-      padding: 12px 18px;
-      border: 1px solid var(--color-line-strong);
+      padding: 13px 19px;
       font-family: var(--font-body);
       font-size: var(--text-small);
       letter-spacing: 0;
-      clip-path: var(--clip-notch-sm);
     }
 
     .lang-switch .icon {

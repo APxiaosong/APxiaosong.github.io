@@ -1,0 +1,25 @@
+---
+/** /redirect.html 立即跳转到首页，使旧网站上这个地址的外部链接继续有效。页面本身不被搜索引擎收录。 */
+import { pages } from '@/config/site';
+import { getLang, getLangPaths, htmlLang, localizePath, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const target = localizePath(pages.home, lang);
+---
+
+<!doctype html>
+<html lang={htmlLang[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <title>{t(ui.nav.home)} | {t(ui.site.name)}</title>
+  </head>
+  <body>
+    <a href={target}>{t(ui.nav.home)}</a>
+  </body>
+</html>

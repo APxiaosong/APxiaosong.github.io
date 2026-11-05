@@ -10,6 +10,7 @@ import { links } from '@/config/site';
 import { getChangelog } from '@/data/changelog';
 import { getMod } from '@/data/mod';
 import { getLang, getLangPaths, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 export const getStaticPaths = getLangPaths;
@@ -24,7 +25,6 @@ const copy = {
     zh: '传奇模组在 Steam 创意工坊上的全部更新记录，按发布时间从新到旧排列。',
     en: 'Every New Legend Mod update published on the Steam Workshop, from newest to oldest.',
   },
-  tag: { zh: '社区 / Community', en: 'Community' },
   eyebrow: { zh: '模组更新日志', en: 'Mod Changelog' },
   eyebrowNote: { zh: 'Changelog', en: '' },
   heading: { zh: '传奇模组 · 更新记录', en: 'New Legend Mod · Updates' },
@@ -43,7 +43,7 @@ const copy = {
 <BaseLayout title={t(copy.title)} description={t(copy.description)}>
   <PageHero
     image={scene}
-    tag={t(copy.tag)}
+    tag={t(ui.tag.community)}
     title={t(copy.title)}
     subtitle="News & Changelog"
     lead={t(copy.description)}

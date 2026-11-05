@@ -14,14 +14,15 @@ interface Props extends HTMLAttributes<'span'> {
 const { size = 'md', dot = false, class: className, ...rest } = Astro.props;
 ---
 
-<span class:list={['tag', size, className]} {...rest}>
+<span class:list={['tag', size, className]} data-chamfer {...rest}>
   {dot && <span class="dot" aria-hidden="true"></span>}
   <slot />
 </span>
 
 <style>
+  /* 只切左下角 */
   .tag {
-    --cut: 8px;
+    --chamfer-bl: 8px;
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -35,17 +36,16 @@ const { size = 'md', dot = false, class: className, ...rest } = Astro.props;
     letter-spacing: 3px;
     text-transform: uppercase;
     white-space: nowrap;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
   }
 
   .sm {
-    --cut: 6px;
+    --chamfer-bl: 6px;
     padding: 4px 12px 4px 10px;
     letter-spacing: 2px;
   }
 
   .lg {
-    --cut: 10px;
+    --chamfer-bl: 10px;
     padding: 8px 18px 8px 14px;
     font-size: 13px;
   }
