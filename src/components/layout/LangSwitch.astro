@@ -1,0 +1,79 @@
+---
+/**
+ * 语言切换链接，指向当前页面的另一种语言版本，点击时带上当前网址的查询参数和锚点。
+ * 宽屏下显示简写（EN / 中）；导航折叠为菜单面板后显示带图标的完整名称。
+ */
+import { alternatePath, getLang, htmlLang, otherLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import Icon from '@/components/ui/Icon.astro';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const target = htmlLang[otherLang(lang)];
+---
+
+<a class="lang-switch" href={alternatePath(Astro.url)} hreflang={target} lang={target} aria-label={t(ui.lang.switchLabel)}>
+  <Icon name="global-line" class="icon" />
+  <span class="short">{t(ui.lang.switchShort)}</span>
+  <span class="full">{t(ui.lang.switchName)}</span>
+</a>
+
+<script>
+  // 两种语言的筛选参数和锚点相同，切换时带上，访客停在同样的筛选结果和位置
+  const link = document.querySelector<HTMLAnchorElement>('.lang-switch')!;
+  link.addEventListener('click', () => {
+    link.search = location.search;
+    link.hash = location.hash;
+  });
+</script>
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 40px;
+    height: 40px;
+    color: var(--color-text-secondary);
+    font-family: var(--font-label);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: color var(--duration-hover);
+  }
+
+  .lang-switch:hover {
+    color: var(--color-accent-text);
+  }
+
+  .lang-switch .icon,
+  .full {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .lang-switch {
+      height: auto;
+      padding: 12px 18px;
+      border: 1px solid var(--color-line-strong);
+      font-family: var(--font-body);
+      font-size: var(--text-small);
+      letter-spacing: 0;
+      clip-path: var(--clip-notch-sm);
+    }
+
+    .lang-switch .icon {
+      display: inline-block;
+      font-size: 18px;
+    }
+
+    .full {
+      display: inline;
+    }
+
+    .short {
+      display: none;
+    }
+  }
+</style>

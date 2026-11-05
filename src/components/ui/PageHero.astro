@@ -1,0 +1,166 @@
+---
+/**
+ * 内页首屏：背景大图缓慢缩放，叠两层暗色渐变，在两种主题下都保持深色。
+ * variant：banner 为内容高度的横幅，右上角可放巨型英文字（watermark）；
+ *          cover 为接近整屏的封面，内容压在底部，标签带小方块。
+ * 插槽：默认插槽放在导语下方（按钮、索引等）；before-title 放在标签和标题之间（例如游戏 Logo）；
+ *       background 替换默认的背景图。
+ */
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import Tag from './Tag.astro';
+import Watermark from './Watermark.astro';
+
+interface Props {
+  image?: ImageMetadata;
+  tag: string;
+  title: string;
+  subtitle?: string;
+  lead?: string;
+  watermark?: string;
+  variant?: 'banner' | 'cover';
+}
+
+const { image, tag, title, subtitle, lead, watermark, variant = 'banner' } = Astro.props;
+const isCover = variant === 'cover';
+---
+
+<header class:list={['hero', variant]} data-theme="dark">
+  <div class="media" aria-hidden="true">
+    <slot name="background">
+      {
+        image && (
+          <Image
+            src={image}
+            alt=""
+            widths={[768, 1280, 1920]}
+            sizes="100vw"
+            loading="eager"
+            fetchpriority="high"
+            class="image"
+          />
+        )
+      }
+    </slot>
+  </div>
+  <div class="shade" aria-hidden="true"></div>
+  {watermark && <Watermark text={watermark} />}
+
+  <div class="container content">
+    <Tag size={isCover ? 'lg' : 'md'} dot={isCover}>{tag}</Tag>
+    <slot name="before-title" />
+    <h1 class="title">{title}</h1>
+    {subtitle && <p class="subtitle text-accent">{subtitle}</p>}
+    {lead && <p class="lead">{lead}</p>}
+    {
+      Astro.slots.has('default') && (
+        <div class="extra">
+          <slot />
+        </div>
+      )
+    }
+  </div>
+</header>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .banner {
+    padding: calc(var(--nav-height) + 94px) 0 clamp(56px, 6vw, 84px);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .cover {
+    display: flex;
+    align-items: flex-end;
+    min-height: max(620px, 90svh);
+    padding: calc(var(--nav-height) + 60px) 0 clamp(48px, 5vw, 70px);
+  }
+
+  .media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: in-zoom 6s ease both;
+  }
+
+  /* 宣传图的左上角自带游戏 Logo，压暗这个角落，不让它和标题挤在一起 */
+  .media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 62% at 0 0, var(--color-bg) 55%, transparent);
+  }
+
+  .shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--color-bg) 75%, transparent), transparent 60%),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-bg) 55%, transparent),
+        color-mix(in srgb, var(--color-bg) 35%, transparent) 35%,
+        color-mix(in srgb, var(--color-bg) 70%, transparent) 78%,
+        var(--color-bg)
+      );
+  }
+
+  .cover .shade {
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--color-bg) 70%, transparent), transparent 60%),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-bg) 50%, transparent),
+        transparent 32%,
+        color-mix(in srgb, var(--color-bg) 70%, transparent) 70%,
+        var(--color-bg)
+      );
+  }
+
+  .content {
+    position: relative;
+    animation: in-rise 1s var(--ease-out) both;
+  }
+
+  .title {
+    margin-top: 22px;
+    font-size: var(--text-display);
+    font-weight: 900;
+    line-height: 0.94;
+    letter-spacing: -1px;
+  }
+
+  .cover .title {
+    text-shadow: 0 6px 40px rgb(0 0 0 / 0.5);
+  }
+
+  .subtitle {
+    margin-top: 6px;
+    font-size: var(--text-subtitle);
+  }
+
+  .lead {
+    max-width: 600px;
+    margin-top: 24px;
+    font-size: var(--text-body);
+    font-weight: 300;
+    line-height: 2;
+    color: var(--color-text-secondary);
+  }
+
+  .extra {
+    margin-top: 34px;
+  }
+</style>

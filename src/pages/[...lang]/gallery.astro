@@ -1,0 +1,180 @@
+---
+/**
+ * 画廊页：人工挑选的社区作品图片，可以按作者筛选，每次显示一批，点击在灯箱中查看大图。
+ * 图片按原图宽高比排成等高的行，加载之前就占好位置，追加新的一批时已有图片的位置不变。
+ */
+import storeBackground from '@/assets/images/steam-store-bg.jpg';
+import { pages } from '@/config/site';
+import { getGalleryArtists, getGalleryItems } from '@/data/gallery';
+import { getLang, getLangPaths, localizePath, translator } from '@/i18n';
+import Button from '@/components/ui/Button.astro';
+import Callout from '@/components/ui/Callout.astro';
+import Filter from '@/components/ui/Filter.astro';
+import Lightbox from '@/components/ui/Lightbox.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Section from '@/components/ui/Section.astro';
+import GalleryTile from '@/components/works/GalleryTile.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  title: { zh: '画廊', en: 'Gallery' },
+  tag: { zh: '社区 / Community', en: 'Community' },
+  subtitle: { zh: 'Community Gallery', en: 'Selected Community Builds' },
+  description: {
+    zh: '传奇建造队社区成员的《废品机械师》建造作品精选，可以按作者筛选，点击图片查看大图。',
+    en: 'Selected Scrap Mechanic builds from the Legend Build Team community. Filter by creator and open any image at full size.',
+  },
+  lead: {
+    zh: '来自机械师们的建造作品。每一台载具、每一座建筑，都是一份耐心与心思的记录。',
+    en: 'Builds from our community of mechanics. Every vehicle and every structure is a record of patience and care.',
+  },
+  filter: { zh: '按作者筛选', en: 'Filter by creator' },
+  count: { zh: '{n} 张图片 · Selected works', en: 'Selected works: {n}' },
+  more: { zh: '显示更多', en: 'Show more' },
+  submit: {
+    zh: '想让你的作品出现在这里？欢迎通过官方社群投稿，画廊将持续收录社区精选。',
+    en: 'Would you like your work to appear here? Send it to us through our official community channels. The gallery continues to add selected community builds.',
+  },
+  contact: { zh: '投稿与联系', en: 'Submit & Contact' },
+};
+
+/** 每批显示的图片数，宽屏下是 8 行 */
+const batch = 24;
+
+const items = getGalleryItems();
+const artistOptions = getGalleryArtists().map((artist) => ({ value: artist.id, label: t(artist.name) }));
+const tileSizes = '(max-width: 600px) calc(100vw - 40px), (max-width: 1100px) calc(50vw - 47px), 450px';
+---
+
+<BaseLayout title={t(copy.title)} description={t(copy.description)}>
+  <PageHero
+    image={storeBackground}
+    tag={t(copy.tag)}
+    title={t(copy.title)}
+    subtitle={t(copy.subtitle)}
+    lead={t(copy.lead)}
+    watermark="WORKS"
+  />
+
+  <Section space="none" class="gallery">
+    <Filter
+      target="gallery-grid"
+      options={artistOptions}
+      label={t(copy.filter)}
+      count={t(copy.count)}
+      param="artist"
+      data-reveal
+    />
+    <div class="grid" id="gallery-grid" data-gallery-batch={batch}>
+      {
+        items.map((item) => (
+          <GalleryTile item={item} group="gallery" sizes={tileSizes} data-filter-value={item.artist} data-reveal />
+        ))
+      }
+    </div>
+    <div class="more" hidden data-gallery-more>
+      <Button variant="ghost" icon="arrow-down-line">{t(copy.more)}</Button>
+      <span class="progress"></span>
+    </div>
+    <Callout class="submit" kicker="Submit your build." align="center" data-reveal>
+      {t(copy.submit)}
+      <Button slot="action" href={localizePath(pages.feedback, lang)} variant="outline" size="sm" icon="arrow-right-line">
+        {t(copy.contact)}
+      </Button>
+    </Callout>
+  </Section>
+
+  <Lightbox />
+</BaseLayout>
+
+<script>
+  import { limitFiltered } from '@/components/works/filter-limit';
+
+  const grid = document.getElementById('gallery-grid')!;
+  const more = document.querySelector<HTMLElement>('[data-gallery-more]')!;
+  const progress = more.querySelector<HTMLElement>('.progress')!;
+
+  const showMore = limitFiltered(grid, Number(grid.dataset.galleryBatch), (shown, total) => {
+    more.hidden = shown >= total;
+    progress.textContent = `${shown} / ${total}`;
+  });
+
+  more.querySelector('button')!.addEventListener('click', showMore);
+</script>
+
+<style>
+  .gallery {
+    padding-block: var(--space-section-sm) var(--space-section-lg);
+  }
+
+  /*
+   * 等高行排版：每张图片的基准宽度按宽高比折算，16:9 的图片正好是一列宽；
+   * 同一行的图片按宽高比分配剩余宽度，因此行内高度一致。
+   */
+  .grid {
+    --columns: 3;
+    --gap: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--gap);
+    counter-reset: gallery-tile;
+  }
+
+  /* 最后一行的空余宽度由这个占位元素吸收，图片保持基准尺寸，不会被拉宽 */
+  .grid::after {
+    content: '';
+    flex-grow: 1000000;
+  }
+
+  .grid > :global(.tile) {
+    flex: var(--ratio) 1
+      calc((100% - (var(--columns) - 1) * var(--gap)) / var(--columns) * var(--ratio) / (16 / 9) - 1px);
+    aspect-ratio: var(--ratio);
+  }
+
+  .grid > :global([data-overflow]) {
+    display: none;
+  }
+
+  .more {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-top: 44px;
+  }
+
+  .more[hidden] {
+    display: none;
+  }
+
+  .progress {
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--color-text-muted);
+  }
+
+  .submit {
+    margin-top: clamp(44px, 5vw, 60px);
+  }
+
+  @media (max-width: 1100px) {
+    .grid {
+      --columns: 2;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .grid {
+      --columns: 1;
+      --gap: 12px;
+    }
+  }
+</style>

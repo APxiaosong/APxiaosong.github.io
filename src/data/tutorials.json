@@ -1,0 +1,3030 @@
+{
+  "categories": [
+    {
+      "id": "beginner",
+      "name": {
+        "zh": "入门",
+        "en": "Getting Started"
+      }
+    },
+    {
+      "id": "vehicle",
+      "name": {
+        "zh": "载具",
+        "en": "Vehicles"
+      }
+    },
+    {
+      "id": "track",
+      "name": {
+        "zh": "履带",
+        "en": "Tracks"
+      }
+    },
+    {
+      "id": "weapon",
+      "name": {
+        "zh": "武器",
+        "en": "Weapons"
+      }
+    },
+    {
+      "id": "advanced",
+      "name": {
+        "zh": "进阶",
+        "en": "Advanced"
+      }
+    },
+    {
+      "id": "other",
+      "name": {
+        "zh": "其他",
+        "en": "Other"
+      }
+    }
+  ],
+  "authors": [
+    {
+      "id": "apxiaosong",
+      "name": {
+        "zh": "APxiaosong",
+        "en": "APxiaosong"
+      }
+    },
+    {
+      "id": "davidsirius",
+      "name": {
+        "zh": "戴维Sirius",
+        "en": "戴维Sirius"
+      }
+    },
+    {
+      "id": "jingwuwei",
+      "name": {
+        "zh": "境无维",
+        "en": "境无维"
+      }
+    },
+    {
+      "id": "tip_cup",
+      "name": {
+        "zh": "tip_cup",
+        "en": "tip_cup"
+      }
+    }
+  ],
+  "videos": [
+    {
+      "id": "BV18N4RzQEEA",
+      "title": {
+        "zh": "履带和激光制导使用教程 传奇Mod4.1.0",
+        "en": "Track & Laser Guidance Usage Tutorial New Legend Mod 4.1.0"
+      },
+      "summary": "讲解履带底盘的搭建与激光制导系统的配置与使用。",
+      "author": "apxiaosong",
+      "category": "track",
+      "kind": "tutorial",
+      "featured": true,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV18N4RzQEEA",
+          "url": "https://www.bilibili.com/video/BV18N4RzQEEA",
+          "cover": "https://i0.hdslb.com/bfs/archive/934c80a73f8b409fe271218e68dfc3d7ab6bff2f.jpg"
+        },
+        {
+          "platform": "youtube",
+          "id": "vNJYXOaeNuU",
+          "url": "https://www.youtube.com/watch?v=vNJYXOaeNuU",
+          "cover": "https://i.ytimg.com/vi/vNJYXOaeNuU/maxresdefault.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1f18bzuEiQ",
+      "title": {
+        "zh": "履带纪元开启！传奇Mod 4.1.0 重磅前瞻",
+        "en": "Track Era Begins! Legend Mod 4.1.0 Preview"
+      },
+      "summary": "传奇Mod 4.1.0 履带系统与机动表现的预告。",
+      "author": "apxiaosong",
+      "category": "track",
+      "kind": "showcase",
+      "featured": true,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1f18bzuEiQ",
+          "url": "https://www.bilibili.com/video/BV1f18bzuEiQ",
+          "cover": "https://i1.hdslb.com/bfs/archive/cd8975501da6a59821ad7f7801523aca50a0affe.jpg"
+        },
+        {
+          "platform": "youtube",
+          "id": "_e1cA5B9wqw",
+          "url": "https://www.youtube.com/watch?v=_e1cA5B9wqw",
+          "cover": "https://i.ytimg.com/vi/_e1cA5B9wqw/maxresdefault.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1QY4y1S7Tn",
+      "title": {
+        "zh": "【戴维】船的福音！这模组能驱动你的各种载具！废品机械师",
+        "en": "A Boon for Boats: A Mod That Powers All Kinds of Vehicles"
+      },
+      "summary": "模组名：Fants Propulsion Stuff",
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1QY4y1S7Tn",
+          "url": "https://www.bilibili.com/video/BV1QY4y1S7Tn",
+          "cover": "https://i1.hdslb.com/bfs/archive/e41faadf2e3b16a6edbf7c03dc2b0ee3a932bd0a.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Ee4y1B7NZ",
+      "title": {
+        "zh": "【戴维】有意思！五花八门的手持道具模组！废品机械师",
+        "en": "A Mod with All Sorts of Handheld Items"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Ee4y1B7NZ",
+          "url": "https://www.bilibili.com/video/BV1Ee4y1B7NZ",
+          "cover": "https://i2.hdslb.com/bfs/archive/b18f80a11794f662f43e975f335542720a4f918e.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1oD4y1q76S",
+      "title": {
+        "zh": "【戴维】惊呆我！无限接近真实的新履带模组！废品机械师",
+        "en": "A New Track Mod That Comes Close to Reality"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "track",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1oD4y1q76S",
+          "url": "https://www.bilibili.com/video/BV1oD4y1q76S",
+          "cover": "https://i1.hdslb.com/bfs/archive/9684abbd2deca5826cd7ad7c7cb041cb3bbe554d.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Ae4y1Z7yA",
+      "title": {
+        "zh": "【戴维】比蓝图工具方便百倍的强大模组！废品机械师",
+        "en": "A Mod Far Handier Than the Blueprint Tool"
+      },
+      "summary": "模组名：FANT TOOLS，作者：00Fant",
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Ae4y1Z7yA",
+          "url": "https://www.bilibili.com/video/BV1Ae4y1Z7yA",
+          "cover": "https://i2.hdslb.com/bfs/archive/a5ad645a7efe1b9f3a801a4119c81fbbd7792f2e.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1dW4y1h7EH",
+      "title": {
+        "zh": "【戴维】跨时代！真正实用的坦克履带模组-废品机械师",
+        "en": "A Genuinely Practical Tank Track Mod"
+      },
+      "summary": "模组名：Fants Modular Tank Track，作者：00Fant",
+      "author": "davidsirius",
+      "category": "track",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1dW4y1h7EH",
+          "url": "https://www.bilibili.com/video/BV1dW4y1h7EH",
+          "cover": "https://i1.hdslb.com/bfs/archive/159f65dec102b2e0fa6bcb16a6f5bc961976ba25.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV13t4y1t7uv",
+      "title": {
+        "zh": "【戴维】抢先体验！用黏性轮胎飞檐走壁吧！废品机械师",
+        "en": "Early Access: Driving Up Walls on Sticky Tires"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV13t4y1t7uv",
+          "url": "https://www.bilibili.com/video/BV13t4y1t7uv",
+          "cover": "https://i1.hdslb.com/bfs/archive/035525bc707d1361fccb08a82f26aac40b9a3758.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1e3411F7CS",
+      "title": {
+        "zh": "【戴维】新功能！修改蓝图创意工坊封面教程-废品机械师",
+        "en": "New Feature: Changing a Blueprint's Workshop Cover"
+      },
+      "summary": "本视频特此鸣谢安德。",
+      "author": "davidsirius",
+      "category": "beginner",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1e3411F7CS",
+          "url": "https://www.bilibili.com/video/BV1e3411F7CS",
+          "cover": "https://i0.hdslb.com/bfs/archive/fb1f0bdfb4e793c6986b9566bf4ee8d3cf1bb0ac.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1MU4y117R7",
+      "title": {
+        "zh": "【戴维】终于能做无人机啦！遥控器教程-废品机械师",
+        "en": "Drones at Last: A Remote Control Tutorial"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1MU4y117R7",
+          "url": "https://www.bilibili.com/video/BV1MU4y117R7",
+          "cover": "https://i2.hdslb.com/bfs/archive/d71da53baa77187c951e0cdfb533585715b2f295.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1h3411A7Uc",
+      "title": {
+        "zh": "我是云南的，但废品机械师版",
+        "en": "I'm from Yunnan, Scrap Mechanic Edition"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1h3411A7Uc",
+          "url": "https://www.bilibili.com/video/BV1h3411A7Uc",
+          "cover": "https://i1.hdslb.com/bfs/archive/b5840aa178b382526893d0bad8be36ecf90863b9.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1uS4y1b7X1",
+      "title": {
+        "zh": "【戴维】可自由联机！在创造模式使用生存地图-废品机械师",
+        "en": "Playing the Survival Map in Creative Mode, with Multiplayer"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "beginner",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1uS4y1b7X1",
+          "url": "https://www.bilibili.com/video/BV1uS4y1b7X1",
+          "cover": "https://i2.hdslb.com/bfs/archive/803c003a5d76c0b42c4e5b370b7f3a972ce179c1.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1fZ4y1h7KX",
+      "title": {
+        "zh": "【戴维】大型开放更新！废品机械师0.6.0测试版试玩",
+        "en": "A Major Update: Trying the Scrap Mechanic 0.6.0 Beta"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1fZ4y1h7KX",
+          "url": "https://www.bilibili.com/video/BV1fZ4y1h7KX",
+          "cover": "https://i2.hdslb.com/bfs/archive/db55feff068d2b353a3c2abdf1fdb321b6bf22b9.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1sr4y187Pa",
+      "title": {
+        "zh": "【戴维】你难以想象的巧妙机械之密码门-废品机械师",
+        "en": "Ingenious Mechanisms: A Combination Lock Door"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1sr4y187Pa",
+          "url": "https://www.bilibili.com/video/BV1sr4y187Pa",
+          "cover": "https://i2.hdslb.com/bfs/archive/f7bf5567f8956aca747f696848decc0e76dbe215.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1544y1378W",
+      "title": {
+        "zh": "【戴维】我竟在废品机械师里玩Raft！",
+        "en": "Playing Raft in Scrap Mechanic"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1544y1378W",
+          "url": "https://www.bilibili.com/video/BV1544y1378W",
+          "cover": "https://i2.hdslb.com/bfs/archive/2b5471b9fe935167b7fcbc274bcaa7fce88155f3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1kF411M7Vb",
+      "title": {
+        "zh": "【戴维】你难以想象的巧妙机械之车库门-废品机械师",
+        "en": "Ingenious Mechanisms: A Garage Door"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1kF411M7Vb",
+          "url": "https://www.bilibili.com/video/BV1kF411M7Vb",
+          "cover": "https://i0.hdslb.com/bfs/archive/ca105dd971c11e3eef517d3bee52638b2cd750ac.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1fS4y1w7Xy",
+      "title": {
+        "zh": "【戴维】可调占空比脉冲发生器制作教程-废品机械师",
+        "en": "Building a Pulse Generator with Adjustable Duty Cycle"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1fS4y1w7Xy",
+          "url": "https://www.bilibili.com/video/BV1fS4y1w7Xy",
+          "cover": "https://i1.hdslb.com/bfs/archive/9fcd0440f7a16c83b53c80984ad52a91a2d920a5.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1RY4y1v7jr",
+      "title": {
+        "zh": "你确定这是床的正确用法？废品机械师搞笑玩法3",
+        "en": "Is This Really How You Use a Bed? Scrap Mechanic Antics, Part 3"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1RY4y1v7jr",
+          "url": "https://www.bilibili.com/video/BV1RY4y1v7jr",
+          "cover": "https://i1.hdslb.com/bfs/archive/6fcb15e27f490c6b42c569016ebf3d12db024c00.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1YS4y1m7Ld",
+      "title": {
+        "zh": "【脑洞机械师】我们在游戏中复活了安-225！-废品机械师",
+        "en": "Bringing the An-225 Back to Life in the Game"
+      },
+      "summary": "本片部分镜头来自哪吒NEZA。",
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1YS4y1m7Ld",
+          "url": "https://www.bilibili.com/video/BV1YS4y1m7Ld",
+          "cover": "https://i1.hdslb.com/bfs/archive/adbf3ee773ab74912e2dfc3f222c821ecfb231e6.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1U44y1N7nW",
+      "title": {
+        "zh": "【戴维】解决空间不足！横置弹簧悬挂教程-废品机械师",
+        "en": "Short on Space: A Transverse Spring Suspension"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1U44y1N7nW",
+          "url": "https://www.bilibili.com/video/BV1U44y1N7nW",
+          "cover": "https://i1.hdslb.com/bfs/archive/993b84d71e6675e356140132d19a654ec9e757dd.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1wi4y1k7bf",
+      "title": {
+        "zh": "【戴维】横空出世！新版废品机械师游戏工具箱！",
+        "en": "The New Scrap Mechanic Game Toolbox"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "beginner",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1wi4y1k7bf",
+          "url": "https://www.bilibili.com/video/BV1wi4y1k7bf",
+          "cover": "https://i1.hdslb.com/bfs/archive/39ef75e7ef19c8aaf5638be63634d737502318a2.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV19b4y1s7Hp",
+      "title": {
+        "zh": "【脑洞机械师】你见过如此炫酷的蝙蝠战车吗？-废品机械师",
+        "en": "A Striking Batmobile"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV19b4y1s7Hp",
+          "url": "https://www.bilibili.com/video/BV19b4y1s7Hp",
+          "cover": "https://i2.hdslb.com/bfs/archive/1e9de4653ec167c038ccb97f3bc0267436f45800.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Gr4y1h7VS",
+      "title": {
+        "zh": "【戴侦探】和我一起探索废品机械师地图的大小！",
+        "en": "Exploring How Large the Scrap Mechanic Map Is"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Gr4y1h7VS",
+          "url": "https://www.bilibili.com/video/BV1Gr4y1h7VS",
+          "cover": "https://i1.hdslb.com/bfs/archive/cadf6455df36c4031f07139a45611f592df312b5.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1kT4y1k7PB",
+      "title": {
+        "zh": "【戴维】生存可用！原版遥控技术教程-废品机械师",
+        "en": "Survival-Ready Remote Control with Vanilla Parts"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1kT4y1k7PB",
+          "url": "https://www.bilibili.com/video/BV1kT4y1k7PB",
+          "cover": "https://i2.hdslb.com/bfs/archive/d1b0ac08837ad703c1e6debe7cb687387c4f3f4e.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Eq4y1F7a2",
+      "title": {
+        "zh": "【戴维】技术突破！可开关空间锚制作教程-废品机械师",
+        "en": "Building a Space Anchor That Can Be Switched On and Off"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Eq4y1F7a2",
+          "url": "https://www.bilibili.com/video/BV1Eq4y1F7a2",
+          "cover": "https://i2.hdslb.com/bfs/archive/b2f503f776cd4b93a2860983e9270ec2581cacac.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1744y1L7QL",
+      "title": {
+        "zh": "你见过如此可爱的胡桃摇吗？-废品机械师",
+        "en": "A Very Cute Hu Tao Shake"
+      },
+      "summary": "视频灵感来自机智的Kason 的 BV1mf4y1F7vk。",
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1744y1L7QL",
+          "url": "https://www.bilibili.com/video/BV1744y1L7QL",
+          "cover": "https://i1.hdslb.com/bfs/archive/a2eca38beb3b6b42635a7830a0ed05df097722f8.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1U44y1j7Ki",
+      "title": {
+        "zh": "全程高能！这是中国玩家的力量！废品机械师精选集第四期",
+        "en": "Highlights from Chinese Players, Vol. 4"
+      },
+      "summary": "本期收录介绍了 28 名玩家的共计 22 个作品。",
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1U44y1j7Ki",
+          "url": "https://www.bilibili.com/video/BV1U44y1j7Ki",
+          "cover": "https://i0.hdslb.com/bfs/archive/1b42c2425cdfd4580521cb7158733324ec2c16bd.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV12r4y1D7X3",
+      "title": {
+        "zh": "当我用废品机械师的方式打开《幻塔》宣传片！",
+        "en": "The Tower of Fantasy Trailer, Scrap Mechanic Style"
+      },
+      "summary": "幻塔宣传片来自 BV1WY411W7SD。",
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV12r4y1D7X3",
+          "url": "https://www.bilibili.com/video/BV12r4y1D7X3",
+          "cover": "https://i1.hdslb.com/bfs/archive/52dda6cf75e269596c0461c035ea66dabb5bb456.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV16h411x7Fw",
+      "title": {
+        "zh": "【戴维】手动修改控制器速度上限教程-废品机械师",
+        "en": "Manually Raising the Controller Speed Limit"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV16h411x7Fw",
+          "url": "https://www.bilibili.com/video/BV16h411x7Fw",
+          "cover": "https://i0.hdslb.com/bfs/archive/4268c1f30963d14326752e29c8edf2da8e16f656.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1SU4y1K7bk",
+      "title": {
+        "zh": "【戴维】重磅技术！可拉伸弹簧制作教程-废品机械师",
+        "en": "Building an Extendable Spring"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1SU4y1K7bk",
+          "url": "https://www.bilibili.com/video/BV1SU4y1K7bk",
+          "cover": "https://i1.hdslb.com/bfs/archive/5a8495a1501e15593e93f7c80e8deca9038c143e.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1jT4y1R7MD",
+      "title": {
+        "zh": "【戴维】新的悬浮方式！间歇喷射悬浮教程-废品机械师",
+        "en": "A New Way to Hover: Intermittent Thrust Hovering"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1jT4y1R7MD",
+          "url": "https://www.bilibili.com/video/BV1jT4y1R7MD",
+          "cover": "https://i0.hdslb.com/bfs/archive/77d6211eb503a24fdaeaa16e1bcdea0d742daecd.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV17f4y1T7EJ",
+      "title": {
+        "zh": "【戴维】数字电路教程#8 RGB颜色方块与字符方块-废品机械师",
+        "en": "Digital Circuits #8: RGB Color Blocks and Character Blocks"
+      },
+      "summary": "数字电路模组名：The Modpack Continuation",
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV17f4y1T7EJ",
+          "url": "https://www.bilibili.com/video/BV17f4y1T7EJ",
+          "cover": "https://i2.hdslb.com/bfs/archive/d6ebb4145c8923be3db33f921961b495f09f370c.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1D3411r7wi",
+      "title": {
+        "zh": "这次有那味儿了！鱿鱼游戏还原计划Pro！",
+        "en": "Squid Game Recreated, Pro Version"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1D3411r7wi",
+          "url": "https://www.bilibili.com/video/BV1D3411r7wi",
+          "cover": "https://i2.hdslb.com/bfs/archive/a7ad4ac2f57dae5264acbfd69224fe6a62f18c00.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Yf4y1g7Vu",
+      "title": {
+        "zh": "【戴维】数字电路教程#7数码显示器与智能延时器-废品机械师",
+        "en": "Digital Circuits #7: Number Displays and Smart Delays"
+      },
+      "summary": "模组名称：The Modpack Continuation、MJM Mod",
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Yf4y1g7Vu",
+          "url": "https://www.bilibili.com/video/BV1Yf4y1g7Vu",
+          "cover": "https://i0.hdslb.com/bfs/archive/896441f0a3638b866f75b393ee0ee24b70d60c0a.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1BL4y1B7rt",
+      "title": {
+        "zh": "【戴维】活塞可控定位伸缩教程-废品机械师",
+        "en": "Controlled Positioning and Extension with Pistons"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1BL4y1B7rt",
+          "url": "https://www.bilibili.com/video/BV1BL4y1B7rt",
+          "cover": "https://i1.hdslb.com/bfs/archive/ef2dfefdffa4ed8d0a84df6bb82edf47a76804c7.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1tP4y187NK",
+      "title": {
+        "zh": "【戴维】最新地形与地图编辑器教程-废品机械师",
+        "en": "The New Terrain and Map Editor"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1tP4y187NK",
+          "url": "https://www.bilibili.com/video/BV1tP4y187NK",
+          "cover": "https://i0.hdslb.com/bfs/archive/0837b5b00931fb9a6591ccb1bd2b91ba47f2f0fb.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1QU4y1A7CK",
+      "title": {
+        "zh": "你见过这样用废品造的坦克吗？",
+        "en": "A Tank Built from Scrap"
+      },
+      "summary": "坦克外壳：典狱长ZANE",
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1QU4y1A7CK",
+          "url": "https://www.bilibili.com/video/BV1QU4y1A7CK",
+          "cover": "https://i0.hdslb.com/bfs/archive/c934674c07786571ef953aa3adabed50fc6a507d.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1KR4y1p78m",
+      "title": {
+        "zh": "\"鸡  飞  蛋  打！\"",
+        "en": "Chickens Flying, Eggs Broken"
+      },
+      "summary": "小鸡外壳：小小鱼；舞台：如果",
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1KR4y1p78m",
+          "url": "https://www.bilibili.com/video/BV1KR4y1p78m",
+          "cover": "https://i2.hdslb.com/bfs/archive/4d9a7af997e7d2c4b80f32eff7d49f8502e9c71e.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Mq4y1K7mN",
+      "title": {
+        "zh": "【戴维】砍树收集加工一体车-废品机械师生存教程",
+        "en": "An All-in-One Tree Felling and Processing Vehicle (Survival)"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Mq4y1K7mN",
+          "url": "https://www.bilibili.com/video/BV1Mq4y1K7mN",
+          "cover": "https://i1.hdslb.com/bfs/archive/7be580996d3feb22c4e45c033415ef4d47b09aa1.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1RM4y1G7aX",
+      "title": {
+        "zh": "【戴维】不用再怕熊孩子！可以保护你作品的Mod！废品机械师",
+        "en": "A Mod That Protects Your Creations from Being Wrecked"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1RM4y1G7aX",
+          "url": "https://www.bilibili.com/video/BV1RM4y1G7aX",
+          "cover": "https://i1.hdslb.com/bfs/archive/5c45b907c52cd9d2234eb130b11a7be8b47249ab.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1oy4y1G79B",
+      "title": {
+        "zh": "【戴维】来把你的土豆枪升级为土豆RPG吧！-废品机械师",
+        "en": "Upgrading Your Potato Gun to a Potato RPG"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "weapon",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1oy4y1G79B",
+          "url": "https://www.bilibili.com/video/BV1oy4y1G79B",
+          "cover": "https://i2.hdslb.com/bfs/archive/afaf99a9c86eb13be13d3c48f4939c55fc16105b.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1wb4y1U7nj",
+      "title": {
+        "zh": "【戴维】废品机械师生存开发者模式教程",
+        "en": "Developer Mode in Survival"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "beginner",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1wb4y1U7nj",
+          "url": "https://www.bilibili.com/video/BV1wb4y1U7nj",
+          "cover": "https://i0.hdslb.com/bfs/archive/e09246f9fa2dd59df5f0060cd98a2d130b6c382c.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1bg41157AW",
+      "title": {
+        "zh": "废  品  高  质  量  男  性！-废品机械师",
+        "en": "High-Quality Men, Scrap Mechanic Edition"
+      },
+      "summary": "视频灵感来自机智的Kason 的 BV1jL4y1e7Uz。",
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1bg41157AW",
+          "url": "https://www.bilibili.com/video/BV1bg41157AW",
+          "cover": "https://i1.hdslb.com/bfs/archive/12bc4b5a5ad3898ab44cdb5c1cb4bcc90a9dadb7.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV13M4y1K7JF",
+      "title": {
+        "zh": "【脑洞机械师】这怕是你能见到最高端的4S店-废品机械师",
+        "en": "Possibly the Most Upscale Car Dealership You Will See"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV13M4y1K7JF",
+          "url": "https://www.bilibili.com/video/BV13M4y1K7JF",
+          "cover": "https://i2.hdslb.com/bfs/archive/0f178de769b2e682795a6aed51e3933478763ecb.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1ay4y1578c",
+      "title": {
+        "zh": "吴  不  无  聊，凡  死  了！-废品机械师",
+        "en": "Wu Is Not Bored, Fan Is Done"
+      },
+      "summary": "视频灵感来自机智的Kason 的 BV1rh411z7GY，BGM 来自 JKAI杰凯 的 BV18v411n7ef，感谢授权使用。",
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1ay4y1578c",
+          "url": "https://www.bilibili.com/video/BV1ay4y1578c",
+          "cover": "https://i1.hdslb.com/bfs/archive/e2fe57bbe95c95cc7f0c8ffbb801d44e9af61191.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1NX4y1A72W",
+      "title": {
+        "zh": "【戴维】你妹都能看懂！废品机械师简易半自动农田教程",
+        "en": "A Simple Semi-Automatic Farm Anyone Can Follow"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1NX4y1A72W",
+          "url": "https://www.bilibili.com/video/BV1NX4y1A72W",
+          "cover": "https://i1.hdslb.com/bfs/archive/36b25dd0474de539c0ce5f76d25d14d7679ab406.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV16B4y1T7nk",
+      "title": {
+        "zh": "【脑洞机械师】大国重器！运20大型战略运输机-废品机械师",
+        "en": "The Y-20 Strategic Transport Aircraft"
+      },
+      "summary": "其他参与这架运20制作的成员：艾伦（协助）、幻影（协助）、毛毛（施工车辆）、瑞奇（友情赞助）。",
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV16B4y1T7nk",
+          "url": "https://www.bilibili.com/video/BV16B4y1T7nk",
+          "cover": "https://i2.hdslb.com/bfs/archive/c72512711b01179c143cb672df1779335018e0ce.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Qo4y1Q7zf",
+      "title": {
+        "zh": "【戴维】原版简易WASD按键转换系统教程-废品机械师",
+        "en": "A Simple Vanilla WASD Key Conversion System"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Qo4y1Q7zf",
+          "url": "https://www.bilibili.com/video/BV1Qo4y1Q7zf",
+          "cover": "https://i0.hdslb.com/bfs/archive/1fd7383efd4acdaa7cb91abf44a5d00efe048143.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1b64y1b7kD",
+      "title": {
+        "zh": "你确定这是马桶的正确用法？废品机械师搞笑玩法2",
+        "en": "Is This Really How You Use a Toilet? Scrap Mechanic Antics, Part 2"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1b64y1b7kD",
+          "url": "https://www.bilibili.com/video/BV1b64y1b7kD",
+          "cover": "https://i2.hdslb.com/bfs/archive/4df13fffffa38a40a91f16f30b4c0c0034c57a90.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1qf4y1t7NC",
+      "title": {
+        "zh": "你确定这是浴缸的正确用法？废品机械师搞笑玩法1",
+        "en": "Is This Really How You Use a Bathtub? Scrap Mechanic Antics, Part 1"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1qf4y1t7NC",
+          "url": "https://www.bilibili.com/video/BV1qf4y1t7NC",
+          "cover": "https://i1.hdslb.com/bfs/archive/30ee4f6cefb11d64a8adb152415f09b71bcef45d.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1vy4y1n7cd",
+      "title": {
+        "zh": "【戴维】传奇Mod变速箱使用教程-废品机械师",
+        "en": "Using the Gearbox in the Legend Mod"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1vy4y1n7cd",
+          "url": "https://www.bilibili.com/video/BV1vy4y1n7cd",
+          "cover": "https://i2.hdslb.com/bfs/archive/2c9869073d1a621bf24673a5fa87b77b949204a2.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Qi4y1F7m3",
+      "title": {
+        "zh": "【戴维】单次脉冲发生器制作教程-废品机械师",
+        "en": "Building a Single-Pulse Generator"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Qi4y1F7m3",
+          "url": "https://www.bilibili.com/video/BV1Qi4y1F7m3",
+          "cover": "https://i2.hdslb.com/bfs/archive/7cbf5fa987b9390ff953f9aca909288dc8ec8cb5.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1pK411M7yj",
+      "title": {
+        "zh": "【戴维】废品机械师卡顿原理与解决优化方法教程",
+        "en": "Why Scrap Mechanic Lags and How to Optimize It"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "beginner",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1pK411M7yj",
+          "url": "https://www.bilibili.com/video/BV1pK411M7yj",
+          "cover": "https://i1.hdslb.com/bfs/archive/ec3bd4db4af1fa9cd171e7a1160cae3c76082a95.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1PA41147Jx",
+      "title": {
+        "zh": "【戴维】双开自动门制作教程-废品机械师",
+        "en": "Building a Double Automatic Door"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1PA41147Jx",
+          "url": "https://www.bilibili.com/video/BV1PA41147Jx",
+          "cover": "https://i1.hdslb.com/bfs/archive/06e9d254f94a2189b4a5cd8e540caff7e943dbea.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1wa4y1W7rS",
+      "title": {
+        "zh": "【脑洞机械师】这是你从未见过的细节控大飞船！-废品机械师",
+        "en": "A Large Spaceship with Remarkable Detail"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1wa4y1W7rS",
+          "url": "https://www.bilibili.com/video/BV1wa4y1W7rS",
+          "cover": "https://i0.hdslb.com/bfs/archive/524c9d5b8f83155db4be48bf1c5a4932796afd62.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Dk4y1C7z3",
+      "title": {
+        "zh": "【戴侦探】我提取了废品机械师主界面的地形！",
+        "en": "Extracting the Terrain from the Scrap Mechanic Main Menu"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Dk4y1C7z3",
+          "url": "https://www.bilibili.com/video/BV1Dk4y1C7z3",
+          "cover": "https://i2.hdslb.com/bfs/archive/b3af3805727dae5b44838133c0f0e2a7707f6d4f.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1g541177fs",
+      "title": {
+        "zh": "【戴维】你难以想象的巧妙机械之双曲狭缝-废品机械师",
+        "en": "Ingenious Mechanisms: The Hyperbolic Slit"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1g541177fs",
+          "url": "https://www.bilibili.com/video/BV1g541177fs",
+          "cover": "https://i2.hdslb.com/bfs/archive/00b40ed46a17cc09a6e35124ad005ea2178b6ef0.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1j54y1k7GS",
+      "title": {
+        "zh": "【戴维】一个按键开飞机！视角操控飞行器教程-废品机械师",
+        "en": "Flying with One Key: A Camera-Controlled Aircraft"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1j54y1k7GS",
+          "url": "https://www.bilibili.com/video/BV1j54y1k7GS",
+          "cover": "https://i0.hdslb.com/bfs/archive/44e8c2c66cd6ec364c604aa0547fed44c08a79c8.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1fV41117ot",
+      "title": {
+        "zh": "【脑洞机械师】废品机械师战机之王！歼20重型战斗机",
+        "en": "The J-20 Heavy Fighter"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1fV41117ot",
+          "url": "https://www.bilibili.com/video/BV1fV41117ot",
+          "cover": "https://i1.hdslb.com/bfs/archive/acd94cfd5d254c60477bd39faf488d51586d8778.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Wy4y1k7AQ",
+      "title": {
+        "zh": "【戴维】最新存档蓝图使用教程-废品机械师",
+        "en": "Using Blueprints in the Latest Saves"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "beginner",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Wy4y1k7AQ",
+          "url": "https://www.bilibili.com/video/BV1Wy4y1k7AQ",
+          "cover": "https://i1.hdslb.com/bfs/archive/7a80674873c559829a3e7f1f464d668f20d95735.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1gy4y1y7au",
+      "title": {
+        "zh": "【戴维】经济实惠！生存单发飞行器教程-废品机械师",
+        "en": "An Economical Single-Thruster Aircraft (Survival)"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1gy4y1y7au",
+          "url": "https://www.bilibili.com/video/BV1gy4y1y7au",
+          "cover": "https://i1.hdslb.com/bfs/archive/b4b9ac803c481066e9f92a7baf2f5f2088a414e8.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1P54y1m7vx",
+      "title": {
+        "zh": "【脑洞机械师】这是让莱特兄弟直呼内行的飞机！-废品机械师",
+        "en": "An Airplane the Wright Brothers Would Approve Of"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1P54y1m7vx",
+          "url": "https://www.bilibili.com/video/BV1P54y1m7vx",
+          "cover": "https://i1.hdslb.com/bfs/archive/f22d4c65e24aeded56500641eafc1372c7ac45e1.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Dh411d7Pe",
+      "title": {
+        "zh": "【戴维】你妹都能看懂！废品机械师全自动化农田教程",
+        "en": "A Fully Automatic Farm Anyone Can Follow"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Dh411d7Pe",
+          "url": "https://www.bilibili.com/video/BV1Dh411d7Pe",
+          "cover": "https://i1.hdslb.com/bfs/archive/5281fd73303ae7672bedb4938dd57cc759935a37.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1LV411z7q1",
+      "title": {
+        "zh": "【戴维】负重车辆适用！整体桥悬挂制作教程-废品机械师",
+        "en": "A Solid Axle Suspension for Heavy-Load Vehicles"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1LV411z7q1",
+          "url": "https://www.bilibili.com/video/BV1LV411z7q1",
+          "cover": "https://i1.hdslb.com/bfs/archive/7cddb8f397f7c3eb0be057384e5e5d82b1a2daac.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Ph411Z74Z",
+      "title": {
+        "zh": "【戴维】摆平你的飞行器！飞行器配平配重教程-废品机械师",
+        "en": "Trimming and Balancing Your Aircraft"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Ph411Z74Z",
+          "url": "https://www.bilibili.com/video/BV1Ph411Z74Z",
+          "cover": "https://i0.hdslb.com/bfs/archive/b7ad557f1ad6cab43211bfdb630e2ab92e88f285.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1FV411r7PY",
+      "title": {
+        "zh": "【戴维】卡方块重叠建造神器！强制焊接工具教程-废品机械师",
+        "en": "The Force Weld Tool for Building with Overlapping Blocks"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1FV411r7PY",
+          "url": "https://www.bilibili.com/video/BV1FV411r7PY",
+          "cover": "https://i1.hdslb.com/bfs/archive/89a33d273cfa1a33a3b0b458205e4c88647c9f38.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Lz4y1X7QF",
+      "title": {
+        "zh": "【戴维】你难以想象的巧妙机械之万向节-废品机械师",
+        "en": "Ingenious Mechanisms: The Universal Joint"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Lz4y1X7QF",
+          "url": "https://www.bilibili.com/video/BV1Lz4y1X7QF",
+          "cover": "https://i0.hdslb.com/bfs/archive/b721077e6b496936fb01ff83b538534282a83eb7.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1rz411e7LP",
+      "title": {
+        "zh": "【戴维】原版差速转向小车-废品机械师生存教程",
+        "en": "A Vanilla Differential Steering Cart (Survival)"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1rz411e7LP",
+          "url": "https://www.bilibili.com/video/BV1rz411e7LP",
+          "cover": "https://i1.hdslb.com/bfs/archive/2f93d9ce0a06b60709372ce99f9224e06d1a67ff.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Bz4y1Q7CH",
+      "title": {
+        "zh": "【戴维】WASD信号转化与分控系统-废品机械师生存教程",
+        "en": "WASD Signal Conversion and Split Control (Survival)"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Bz4y1Q7CH",
+          "url": "https://www.bilibili.com/video/BV1Bz4y1Q7CH",
+          "cover": "https://i0.hdslb.com/bfs/archive/b613337aa835357ab9e4aca17d17f60a80986b9b.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1st4y1y7sk",
+      "title": {
+        "zh": "【戴维】无限能源的核动力小车-废品机械师生存教程",
+        "en": "A Nuclear-Powered Cart with Unlimited Energy (Survival)"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1st4y1y7sk",
+          "url": "https://www.bilibili.com/video/BV1st4y1y7sk",
+          "cover": "https://i0.hdslb.com/bfs/archive/aaa5286b204e2e96667ec45909c93a675ac760b3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1CQ4y1A7dn",
+      "title": {
+        "zh": "【戴维】更简单的全新空间锚制作方法-废品机械师",
+        "en": "A Simpler New Way to Build a Space Anchor"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1CQ4y1A7dn",
+          "url": "https://www.bilibili.com/video/BV1CQ4y1A7dn",
+          "cover": "https://i0.hdslb.com/bfs/archive/2526fc5960e157a0e8731d23d61220e85aabe130.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1tz4y1R7jY",
+      "title": {
+        "zh": "【戴维Sirius】废品机械师汉化包安装教程",
+        "en": "Installing the Scrap Mechanic Chinese Language Pack"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "beginner",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1tz4y1R7jY",
+          "url": "https://www.bilibili.com/video/BV1tz4y1R7jY",
+          "cover": "https://i0.hdslb.com/bfs/archive/51f03ad5da4bc9d81a4c597c485a628b17afcfb8.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV19K41157ft",
+      "title": {
+        "zh": "【戴维】这是让我等了四年的游戏：废品机械师生存模式试玩",
+        "en": "The Game I Waited Four Years For: Trying Survival Mode"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV19K41157ft",
+          "url": "https://www.bilibili.com/video/BV19K41157ft",
+          "cover": "https://i1.hdslb.com/bfs/archive/4d3319d08cd6b52331629af74c924ae8a00d557d.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1UV411d7EN",
+      "title": {
+        "zh": "《废品机械师》生存模式内测体验 by Moonbo",
+        "en": "Scrap Mechanic Survival Mode Closed Beta, by Moonbo"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1UV411d7EN",
+          "url": "https://www.bilibili.com/video/BV1UV411d7EN",
+          "cover": "https://i0.hdslb.com/bfs/archive/b7942dd90814c5f9f4cd2b7cfad720b34cad90aa.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Sp4y1X7TC",
+      "title": {
+        "zh": "【戴维】榨干每一帧！废品机械师生存模式预告片解析",
+        "en": "Frame by Frame: Breaking Down the Survival Mode Trailer"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Sp4y1X7TC",
+          "url": "https://www.bilibili.com/video/BV1Sp4y1X7TC",
+          "cover": "https://i0.hdslb.com/bfs/archive/203e26a822edf971713b5037a264af57c88609aa.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Q64y1T7kK",
+      "title": {
+        "zh": "《废品机械师》生存模式官方预告片",
+        "en": "Scrap Mechanic Survival Mode Official Trailer"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Q64y1T7kK",
+          "url": "https://www.bilibili.com/video/BV1Q64y1T7kK",
+          "cover": "https://i0.hdslb.com/bfs/archive/8118e25ad70b786788254804eda86155b5212ce2.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Gf4y1m7tf",
+      "title": {
+        "zh": "【戴维】数字电路教程#6 PID比例微积分自动控制-废品机械师",
+        "en": "Digital Circuits #6: PID Control"
+      },
+      "summary": "数字电路模组名：The Modpack Continuation",
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Gf4y1m7tf",
+          "url": "https://www.bilibili.com/video/BV1Gf4y1m7tf",
+          "cover": "https://i2.hdslb.com/bfs/archive/93b0841a095fa61e372c0d6c4c86faa5ed641a8d.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1sC4y1s7MB",
+      "title": {
+        "zh": "【戴维】按钮开关制作教程-废品机械师",
+        "en": "Building a Push Button Switch"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1sC4y1s7MB",
+          "url": "https://www.bilibili.com/video/BV1sC4y1s7MB",
+          "cover": "https://i1.hdslb.com/bfs/archive/b934f7edcec8dc176756f70ff4bdc6a37d8e3052.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1pQ4y1K75m",
+      "title": {
+        "zh": "【戴维】数字电路教程#5重力、空气动力组件与零件生成器-废品机械师",
+        "en": "Digital Circuits #5: Gravity and Aerodynamic Components and the Part Spawner"
+      },
+      "summary": "数字电路模组名：The Modpack Continuation",
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1pQ4y1K75m",
+          "url": "https://www.bilibili.com/video/BV1pQ4y1K75m",
+          "cover": "https://i0.hdslb.com/bfs/archive/900c6f8d08de79866122ff36b41503755609fb75.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1xa4y1x7iA",
+      "title": {
+        "zh": "【戴维】数字电路教程#4智能电机与智能喷射器-废品机械师",
+        "en": "Digital Circuits #4: Smart Motors and Smart Thrusters"
+      },
+      "summary": "数字电路模组名：The Modpack Continuation",
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1xa4y1x7iA",
+          "url": "https://www.bilibili.com/video/BV1xa4y1x7iA",
+          "cover": "https://i1.hdslb.com/bfs/archive/994ec11a9ed7917e069a1704c5a2f9f89305976c.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Y7411m7M1",
+      "title": {
+        "zh": "【戴维】数字电路教程#3遥控与内存-废品机械师",
+        "en": "Digital Circuits #3: Remote Control and Memory"
+      },
+      "summary": "数字电路模组名：The Modpack Continuation",
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Y7411m7M1",
+          "url": "https://www.bilibili.com/video/BV1Y7411m7M1",
+          "cover": "https://i0.hdslb.com/bfs/archive/8efa9526e03c320da83676b73800b6f29d32e9f9.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1j7411Z7kd",
+      "title": {
+        "zh": "《废品机械师》全部预告视频合集",
+        "en": "Every Scrap Mechanic Trailer in One Collection"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1j7411Z7kd",
+          "url": "https://www.bilibili.com/video/BV1j7411Z7kd",
+          "cover": "https://i2.hdslb.com/bfs/archive/642d40e5d8f7c2a5287b8e23ce88e960ce5eeca8.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1UE411H7JM",
+      "title": {
+        "zh": "【戴维】数字电路教程#2四种传感器功能介绍-废品机械师",
+        "en": "Digital Circuits #2: The Four Kinds of Sensors"
+      },
+      "summary": "数字电路模组名：The Modpack Continuation",
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1UE411H7JM",
+          "url": "https://www.bilibili.com/video/BV1UE411H7JM",
+          "cover": "https://i1.hdslb.com/bfs/archive/1b4363834c0e7209c1eeb1ffb8a4eccde86f894b.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1q7411N7nT",
+      "title": {
+        "zh": "【戴维】数字电路教程#1数值的写入存储与计算-废品机械师",
+        "en": "Digital Circuits #1: Writing, Storing and Calculating Values"
+      },
+      "summary": "数字电路模组名：The Modpack Continuation",
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1q7411N7nT",
+          "url": "https://www.bilibili.com/video/BV1q7411N7nT",
+          "cover": "https://i2.hdslb.com/bfs/archive/e02e4615558c0277e801bf0a7f318c51d07eb709.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1r7411T7wv",
+      "title": {
+        "zh": "【戴维】大巴车公交车车门制作教程-废品机械师",
+        "en": "Building Doors for Coaches and Buses"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1r7411T7wv",
+          "url": "https://www.bilibili.com/video/BV1r7411T7wv",
+          "cover": "https://i0.hdslb.com/bfs/archive/96a01d399254c0cdbe9153416922cd7f89262acd.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1K7411u7pd",
+      "title": {
+        "zh": "【戴维】用WASD四键实现六键操控教程-废品机械师",
+        "en": "Six Controls from the Four WASD Keys"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1K7411u7pd",
+          "url": "https://www.bilibili.com/video/BV1K7411u7pd",
+          "cover": "https://i1.hdslb.com/bfs/archive/1347f1324a1ecf949186bf7976118c5a51a6e116.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1E7411E7Cz",
+      "title": {
+        "zh": "【戴维】解决轴承力量不足！高载荷并联轴教程-废品机械师",
+        "en": "Parallel Shafts for High Loads When Bearings Fall Short"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1E7411E7Cz",
+          "url": "https://www.bilibili.com/video/BV1E7411E7Cz",
+          "cover": "https://i1.hdslb.com/bfs/archive/9065705d523e0af8ed5f566d79ed67b8e3e5ef8d.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1r741187KX",
+      "title": {
+        "zh": "【戴维】自平衡摩托车教程(高级)-废品机械师",
+        "en": "A Self-Balancing Motorcycle (Advanced)"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1r741187KX",
+          "url": "https://www.bilibili.com/video/BV1r741187KX",
+          "cover": "https://i0.hdslb.com/bfs/archive/60c2b3a158e12eab943929f7d607ff5ff59137fb.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1i7411s71V",
+      "title": {
+        "zh": "【戴维】储存信号！锁存器制作教程-废品机械师",
+        "en": "Storing Signals: Building a Latch"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1i7411s71V",
+          "url": "https://www.bilibili.com/video/BV1i7411s71V",
+          "cover": "https://i2.hdslb.com/bfs/archive/9c4e792f0d7feafcf4e745a38d27dc9db8a7fe85.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1v7411a7bX",
+      "title": {
+        "zh": "超高质量玩家作品收割你的卧槽！废品机械师精选集第三期",
+        "en": "Outstanding Player Creations, Vol. 3"
+      },
+      "summary": "本期收录了 41 名玩家的共计 50 个作品。",
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1v7411a7bX",
+          "url": "https://www.bilibili.com/video/BV1v7411a7bX",
+          "cover": "https://i2.hdslb.com/bfs/archive/b17ea23f9e11cef5287678126800a0b8b2bff335.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV12E41187iK",
+      "title": {
+        "zh": "【戴维】四连杆整体桥悬挂制作教程-废品机械师",
+        "en": "A Four-Link Solid Axle Suspension"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV12E41187iK",
+          "url": "https://www.bilibili.com/video/BV12E41187iK",
+          "cover": "https://i2.hdslb.com/bfs/archive/af7fc2579974f710146d5f901bff3fe1bc4d3a8e.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1ZE411h7y2",
+      "title": {
+        "zh": "【戴维】单向信号延时教程-废品机械师",
+        "en": "One-Way Signal Delay"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1ZE411h7y2",
+          "url": "https://www.bilibili.com/video/BV1ZE411h7y2",
+          "cover": "https://i2.hdslb.com/bfs/archive/1090f125494414bfa85886a7ba1b9b55024ff2c6.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV15E411a7zw",
+      "title": {
+        "zh": "【戴维】逻辑门电路基础入门教程-废品机械师",
+        "en": "Logic Gate Basics"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "beginner",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV15E411a7zw",
+          "url": "https://www.bilibili.com/video/BV15E411a7zw",
+          "cover": "https://i0.hdslb.com/bfs/archive/ff759d589bb03629d8904138b9f3917d5265a92b.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1LE41117be",
+      "title": {
+        "zh": "【戴维】超跑必备！单摇臂独立悬挂教程-废品机械师",
+        "en": "A Single Trailing Arm Independent Suspension for Supercars"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1LE41117be",
+          "url": "https://www.bilibili.com/video/BV1LE41117be",
+          "cover": "https://i0.hdslb.com/bfs/archive/5c9867fd414c6596051622f4180789c6ad026cf4.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1fE411R7aL",
+      "title": {
+        "zh": "【戴维Sirius】超详尽新手入门教程-废品机械师",
+        "en": "A Thorough Beginner's Guide to Scrap Mechanic"
+      },
+      "summary": "从最基础的操作与建造逻辑讲起，适合刚接触游戏的机械师快速上手。",
+      "author": "davidsirius",
+      "category": "beginner",
+      "kind": "tutorial",
+      "featured": true,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1fE411R7aL",
+          "url": "https://www.bilibili.com/video/BV1fE411R7aL",
+          "cover": "https://i1.hdslb.com/bfs/archive/504ff78f6d33f1d7ba9adfa3e1a07d81e3433ad3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1jJ411c7f9",
+      "title": {
+        "zh": "【戴维Sirius】自平衡摩托车教程(初级)-废品机械师",
+        "en": "A Self-Balancing Motorcycle (Beginner)"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1jJ411c7f9",
+          "url": "https://www.bilibili.com/video/BV1jJ411c7f9",
+          "cover": "https://i1.hdslb.com/bfs/archive/afaa9f17c299a1361a60d82028e212456f1dc17f.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1uJ411c7Vk",
+      "title": {
+        "zh": "【戴维】平衡的秘诀！空间锚用途原理讲解教程-废品机械师",
+        "en": "The Secret of Balance: How Space Anchors Work"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1uJ411c7Vk",
+          "url": "https://www.bilibili.com/video/BV1uJ411c7Vk",
+          "cover": "https://i2.hdslb.com/bfs/archive/f3492f73aa9a1d3fd5909e98b4699c1751079af5.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1iJ411F79Y",
+      "title": {
+        "zh": "【戴维】高效的操控方式！弹簧内能(黑科技)教程-废品机械师",
+        "en": "An Efficient Control Method: Spring Internal Energy"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1iJ411F79Y",
+          "url": "https://www.bilibili.com/video/BV1iJ411F79Y",
+          "cover": "https://i0.hdslb.com/bfs/archive/daba09a8ce17d106c15c6617c0b452f818499bc3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1aE411D7w2",
+      "title": {
+        "zh": "【戴维】双摇臂独立悬挂制作教程-废品机械师",
+        "en": "Building a Double Wishbone Independent Suspension"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1aE411D7w2",
+          "url": "https://www.bilibili.com/video/BV1aE411D7w2",
+          "cover": "https://i2.hdslb.com/bfs/archive/08f9cca658a3a43ed6c61d30a95de2915d6098ca.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Nt411P7fN",
+      "title": {
+        "zh": "【戴维】一组按键两套操作！分控系统教程-废品机械师",
+        "en": "Two Sets of Controls on One Set of Keys: Split Control"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Nt411P7fN",
+          "url": "https://www.bilibili.com/video/BV1Nt411P7fN",
+          "cover": "https://i0.hdslb.com/bfs/archive/9e72da11428ea41dd9b17dc6203af188cc83116f.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Jt411J7DM",
+      "title": {
+        "zh": "【戴维】单个轴承实现双向旋转教程-废品机械师",
+        "en": "Two-Way Rotation from a Single Bearing"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Jt411J7DM",
+          "url": "https://www.bilibili.com/video/BV1Jt411J7DM",
+          "cover": "https://i2.hdslb.com/bfs/archive/1f4ed1cb0a0c5c0aba7a47b4d3b17fc7ba7dead3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1it411V7Yk",
+      "title": {
+        "zh": "这才是真正的废品机械师！超高质量玩家作品盘点！",
+        "en": "Outstanding Player Creations in Review"
+      },
+      "summary": "本期收集了 28 个玩家作品。",
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1it411V7Yk",
+          "url": "https://www.bilibili.com/video/BV1it411V7Yk",
+          "cover": "https://i0.hdslb.com/bfs/archive/24535d5ef46ca9c2614f71a08661aca29c103199.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1o4411c7sS",
+      "title": {
+        "zh": "【戴维】坦克操控必备！单轴差速转向教程-废品机械师",
+        "en": "Single-Axle Differential Steering for Tanks"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "track",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1o4411c7sS",
+          "url": "https://www.bilibili.com/video/BV1o4411c7sS",
+          "cover": "https://i1.hdslb.com/bfs/archive/5b106e4f0d9029c0b9051c152f726513724fa4c5.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1M441177Eb",
+      "title": {
+        "zh": "【戴维】双闪与转向灯制作教程-废品机械师",
+        "en": "Hazard Lights and Turn Signals"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1M441177Eb",
+          "url": "https://www.bilibili.com/video/BV1M441177Eb",
+          "cover": "https://i1.hdslb.com/bfs/archive/41749744dfed81c2b2b1ff4dc98db07bb4ddaa74.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1j4411v78F",
+      "title": {
+        "zh": "【戴维】生成频闪信号！脉冲发生器教程-废品机械师",
+        "en": "Generating Strobe Signals: A Pulse Generator"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1j4411v78F",
+          "url": "https://www.bilibili.com/video/BV1j4411v78F",
+          "cover": "https://i2.hdslb.com/bfs/archive/d557776c782a39ccfbdbf59d2ec6d0f30cd7302f.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1v4411x7ka",
+      "title": {
+        "zh": "我们在《废品机械师》中复刻了行星发动机！",
+        "en": "Recreating a Planetary Engine in Scrap Mechanic"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1v4411x7ka",
+          "url": "https://www.bilibili.com/video/BV1v4411x7ka",
+          "cover": "https://i0.hdslb.com/bfs/archive/d99b9ebc97de5967e9a450f5b0caa8653ea1f830.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Tb411G753",
+      "title": {
+        "zh": "【戴维】内外双开门教程-废品机械师",
+        "en": "Doors That Open Both Ways"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Tb411G753",
+          "url": "https://www.bilibili.com/video/BV1Tb411G753",
+          "cover": "https://i2.hdslb.com/bfs/archive/20e700708f35ee425b28b0e76d3142521f696f2c.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Lb411u7BE",
+      "title": {
+        "zh": "【戴维】末日天空的王者！风神科幻直升机-废品机械师",
+        "en": "A Sci-Fi Helicopter for a Post-Apocalyptic Sky"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Lb411u7BE",
+          "url": "https://www.bilibili.com/video/BV1Lb411u7BE",
+          "cover": "https://i2.hdslb.com/bfs/archive/3468c18d5a5fafa29524638c770398375cb36d05.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1cb41147KC",
+      "title": {
+        "zh": "【戴维】飞行的秘诀！废品机械师空气动力飞机教程",
+        "en": "The Secret of Flight: An Aerodynamic Airplane"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1cb41147KC",
+          "url": "https://www.bilibili.com/video/BV1cb41147KC",
+          "cover": "https://i0.hdslb.com/bfs/archive/517185174078db7edd585c12a505c48e4bef87f9.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Vb411n7wy",
+      "title": {
+        "zh": "【戴维】用鼠标视角瞄准！视角操控制作教程-废品机械师",
+        "en": "Aiming with the Mouse: Camera Control"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Vb411n7wy",
+          "url": "https://www.bilibili.com/video/BV1Vb411n7wy",
+          "cover": "https://i1.hdslb.com/bfs/archive/bad1c6cf47cb77fa7e2586e92f9fc206af990a66.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV14b411v7e7",
+      "title": {
+        "zh": "【戴维】让飞行器永不翻车！电子自平衡教程（陀螺仪）-废品机械师",
+        "en": "Electronic Self-Balancing with a Gyroscope for Aircraft"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "vehicle",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV14b411v7e7",
+          "url": "https://www.bilibili.com/video/BV14b411v7e7",
+          "cover": "https://i1.hdslb.com/bfs/archive/087ad286fb7cd87278ba4ad59096dbc3df1327ae.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Ht411Y7b5",
+      "title": {
+        "zh": "《废品机械师》挑战模式官方预告片",
+        "en": "Scrap Mechanic Challenge Mode Official Trailer"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Ht411Y7b5",
+          "url": "https://www.bilibili.com/video/BV1Ht411Y7b5",
+          "cover": "https://i0.hdslb.com/bfs/archive/d0b8d1770138f1909e4c8d9256a671d9efb5830d.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1uW41167jk",
+      "title": {
+        "zh": "【戴维】毕业设计级的中式豪华别墅！废品机械师",
+        "en": "A Chinese-Style Luxury Villa Worthy of a Graduation Project"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1uW41167jk",
+          "url": "https://www.bilibili.com/video/BV1uW41167jk",
+          "cover": "https://i1.hdslb.com/bfs/archive/b27de9241d62f0f3700124ffa8a3d75b51d2aeee.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1oW411977K",
+      "title": {
+        "zh": "【戴维】有这海岛别墅我都不想去马尔代夫！废品机械师",
+        "en": "An Island Villa to Rival the Maldives"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1oW411977K",
+          "url": "https://www.bilibili.com/video/BV1oW411977K",
+          "cover": "https://i0.hdslb.com/bfs/archive/bb6507d5038905b7e84c9e93cda909425b13c943.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Ws411E7fn",
+      "title": {
+        "zh": "【戴维的生存教程】机械自平衡系统-废品机械师",
+        "en": "A Mechanical Self-Balancing System (Survival)"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Ws411E7fn",
+          "url": "https://www.bilibili.com/video/BV1Ws411E7fn",
+          "cover": "https://i2.hdslb.com/bfs/archive/bd4698782c83176d68704acdb3ae47a56bc15152.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1qs411n743",
+      "title": {
+        "zh": "【戴维】自修正的秘密！四向黑科技空间锚教程-废品机械师",
+        "en": "The Self-Correcting Four-Way Space Anchor"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1qs411n743",
+          "url": "https://www.bilibili.com/video/BV1qs411n743",
+          "cover": "https://i2.hdslb.com/bfs/archive/b3f6fa69767246525cbd75ae987bd98a3eca8f34.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1zs411p7H3",
+      "title": {
+        "zh": "【戴维】悬浮的秘密！万向升力空间锚教程-废品机械师",
+        "en": "The Secret of Hovering: An Omnidirectional Lift Space Anchor"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1zs411p7H3",
+          "url": "https://www.bilibili.com/video/BV1zs411p7H3",
+          "cover": "https://i1.hdslb.com/bfs/archive/8fea9813f09e2b611f8428b43f6071835b99df5c.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV16s411L7y3",
+      "title": {
+        "zh": "【戴维】来生画面模组展示及安装教程-废品机械师",
+        "en": "The Afterlife Graphics Mod: Showcase and Installation"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "beginner",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV16s411L7y3",
+          "url": "https://www.bilibili.com/video/BV16s411L7y3",
+          "cover": "https://i2.hdslb.com/bfs/archive/af65470f5f7261095ffa89659f5efa21676d3409.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1ns41177Sa",
+      "title": {
+        "zh": "【戴维】Danger的天宫空间站对接任务-废品机械师",
+        "en": "Danger's Tiangong Space Station Docking Mission"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1ns41177Sa",
+          "url": "https://www.bilibili.com/video/BV1ns41177Sa",
+          "cover": "https://i1.hdslb.com/bfs/archive/e2b0f4dac52862a95eeacac25ccda80c958eb9c2.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Cs411k7GG",
+      "title": {
+        "zh": "【戴维】游戏中造游戏！逻辑电路神还原Flappy Bird-废品机械师",
+        "en": "Flappy Bird Recreated with Logic Circuits"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Cs411k7GG",
+          "url": "https://www.bilibili.com/video/BV1Cs411k7GG",
+          "cover": "https://i0.hdslb.com/bfs/archive/2c669c923efa3fb0ba24a257f94240b88e1711ac.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV18s411q7Xc",
+      "title": {
+        "zh": "【戴维Sirius】变形金刚-最终改进电影版擎天柱-废品机械师",
+        "en": "Transformers: An Improved Movie-Version Optimus Prime"
+      },
+      "summary": null,
+      "author": "davidsirius",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV18s411q7Xc",
+          "url": "https://www.bilibili.com/video/BV18s411q7Xc",
+          "cover": "https://i1.hdslb.com/bfs/archive/813bc4a84dcbc8195686ac7093649db8fd9cb3cd.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1ikqzYME4s",
+      "title": {
+        "zh": "我花了十分钟造了一个TGA年度最佳游戏（）",
+        "en": "I Built a TGA Game of the Year in Ten Minutes"
+      },
+      "summary": null,
+      "author": "jingwuwei",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1ikqzYME4s",
+          "url": "https://www.bilibili.com/video/BV1ikqzYME4s",
+          "cover": "https://i0.hdslb.com/bfs/archive/e5f07a931a9ddfd138531037f861401d2f15ba39.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1E1421m7HQ",
+      "title": {
+        "zh": "【白噪音】（自用）沉浸式在《废品机械师》造一台保时捷911 964",
+        "en": "White Noise: Building a Porsche 911 964 in Scrap Mechanic"
+      },
+      "summary": "你在刚刚启动废品机械师的时候睡着了，这个时候，你的电脑自己动起来，为你造了一台保时捷911 964。",
+      "author": "jingwuwei",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1E1421m7HQ",
+          "url": "https://www.bilibili.com/video/BV1E1421m7HQ",
+          "cover": "https://i0.hdslb.com/bfs/archive/7438d86987ffa47bf5d70d2ba934fba96ef4015d.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1cp4y1J7cJ",
+      "title": {
+        "zh": "【废品机械师】造车玩家初次试做改装音乐盒（Eurobeat）",
+        "en": "A Car Builder's First Attempt at a Music Box (Eurobeat)"
+      },
+      "summary": "原曲：EZ DIVE, EZ GRAZE (feat. Nana Takahashi/DJ Command (Eurobeat Union))，截取了其中的一小段参考制作。",
+      "author": "jingwuwei",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1cp4y1J7cJ",
+          "url": "https://www.bilibili.com/video/BV1cp4y1J7cJ",
+          "cover": "https://i0.hdslb.com/bfs/archive/1df8a6e85099c75d8a1d1c54802c46d166390327.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Lz4y1E7iX",
+      "title": {
+        "zh": "废品原神，启动！",
+        "en": "Scrap Impact, Launch!"
+      },
+      "summary": null,
+      "author": "jingwuwei",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Lz4y1E7iX",
+          "url": "https://www.bilibili.com/video/BV1Lz4y1E7iX",
+          "cover": "https://i0.hdslb.com/bfs/archive/104e518a32ea67bb9be6234d37357595d06d244c.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1j14y127Vv",
+      "title": {
+        "zh": "开着自己造的小破supra溜几圈",
+        "en": "A Few Laps in My Homemade Supra"
+      },
+      "summary": null,
+      "author": "jingwuwei",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1j14y127Vv",
+          "url": "https://www.bilibili.com/video/BV1j14y127Vv",
+          "cover": "https://i0.hdslb.com/bfs/archive/38bd431d8996de2ad01fb0290e19232ee47ca8ef.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Em4y1i7Ab",
+      "title": {
+        "zh": "创意广告作业，别赞，要脸！",
+        "en": "A Creative Advertising Assignment"
+      },
+      "summary": null,
+      "author": "jingwuwei",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Em4y1i7Ab",
+          "url": "https://www.bilibili.com/video/BV1Em4y1i7Ab",
+          "cover": "https://i1.hdslb.com/bfs/archive/91c3d464434cf121fcdf3dec9ea7648265ff820f.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1Nu411x7YA",
+      "title": {
+        "zh": "【废品机械师】绮良良 角色演示流出",
+        "en": "Kirara Character Demo"
+      },
+      "summary": "角色来自《原神》，已上传创意工坊。",
+      "author": "jingwuwei",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1Nu411x7YA",
+          "url": "https://www.bilibili.com/video/BV1Nu411x7YA",
+          "cover": "https://i2.hdslb.com/bfs/archive/629b84e1bbc49a4856cc34e9c0a5722d37ddd023.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1FD4y1T7Ra",
+      "title": {
+        "zh": "萌新必看！废品机械师基础教程及注意事项",
+        "en": "Essential for Newcomers: Scrap Mechanic Basics and Things to Note"
+      },
+      "summary": "针对新入坑玩家提问较多、但又偏简单的问题而制作的基础教程。",
+      "author": "jingwuwei",
+      "category": "beginner",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1FD4y1T7Ra",
+          "url": "https://www.bilibili.com/video/BV1FD4y1T7Ra",
+          "cover": "https://i1.hdslb.com/bfs/archive/c8bbbc8b23b12e96c9a43d9fa2df5f52cabbe370.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1ye4y1P7NJ",
+      "title": {
+        "zh": "【废品机械师】JDM特辑",
+        "en": "JDM Special"
+      },
+      "summary": "本人爱好原版造车。",
+      "author": "jingwuwei",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1ye4y1P7NJ",
+          "url": "https://www.bilibili.com/video/BV1ye4y1P7NJ",
+          "cover": "https://i0.hdslb.com/bfs/archive/d1e65ca168c907019060958d1d5dfa83aba0cd32.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1rK411C7NK",
+      "title": {
+        "zh": "不同玩家在废品机械师怎么开车（2）",
+        "en": "How Different Players Drive in Scrap Mechanic, Part 2"
+      },
+      "summary": "展示近一年制作的车辆。",
+      "author": "jingwuwei",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1rK411C7NK",
+          "url": "https://www.bilibili.com/video/BV1rK411C7NK",
+          "cover": "https://i2.hdslb.com/bfs/archive/605671fd639d75a74e1918124d5b6a6a25e25028.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1m44y1R7dq",
+      "title": {
+        "zh": "不同玩家在废品机械师怎么开车",
+        "en": "How Different Players Drive in Scrap Mechanic"
+      },
+      "summary": "展示近一年制造过的车辆。",
+      "author": "jingwuwei",
+      "category": "vehicle",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1m44y1R7dq",
+          "url": "https://www.bilibili.com/video/BV1m44y1R7dq",
+          "cover": "https://i1.hdslb.com/bfs/archive/ba3c8ced4c4aeefef849d72f43c06188b53a4efc.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV16A411X7gR",
+      "title": {
+        "zh": "楠方你再不更新，我帮你更新！（催更不卧槽挑战）",
+        "en": "If Nanfang Won't Update, I Will"
+      },
+      "summary": null,
+      "author": "jingwuwei",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV16A411X7gR",
+          "url": "https://www.bilibili.com/video/BV16A411X7gR",
+          "cover": "https://i0.hdslb.com/bfs/archive/c86c1e7ff97e15af6fc7c76375c0f4217a58c376.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1QZ4y1B767",
+      "title": {
+        "zh": "当你拥有一个叠加了很多次的空气炮的时候",
+        "en": "When You Stack an Air Cannon Many Times Over"
+      },
+      "summary": null,
+      "author": "jingwuwei",
+      "category": "weapon",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1QZ4y1B767",
+          "url": "https://www.bilibili.com/video/BV1QZ4y1B767",
+          "cover": "https://i1.hdslb.com/bfs/archive/a2715556be15bb624112cbac18d26458842fc0da.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1C34y1z7NH",
+      "title": {
+        "zh": "【废品机械师】跨年视频！多玩家同时制作运行的跨年！",
+        "en": "A New Year's Countdown Built and Run by Many Players Together"
+      },
+      "summary": "舞台主设计：逆战boy、566.jpg、火鸡喂锅巴等；舞台运行：逆战boy；传奇mod 提供：戴维Sirius。",
+      "author": "jingwuwei",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1C34y1z7NH",
+          "url": "https://www.bilibili.com/video/BV1C34y1z7NH",
+          "cover": "https://i1.hdslb.com/bfs/archive/8744dcab46f18c13f62ab9174f79a0b197f59443.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1XUwNeaEhv",
+      "title": {
+        "zh": "[废品机械师]进阶原版技巧 章节三：公理之外（其二）轴朝向科技",
+        "en": "Advanced Vanilla Techniques, Chapter 3: Beyond the Axioms (Part 2), Axis Orientation"
+      },
+      "summary": null,
+      "author": "tip_cup",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1XUwNeaEhv",
+          "url": "https://www.bilibili.com/video/BV1XUwNeaEhv",
+          "cover": "https://i1.hdslb.com/bfs/archive/62439da26ee07ffd888ea48acfdc7d86131e8bf6.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1DuChYJE7Z",
+      "title": {
+        "zh": "[废品机械师]进阶原版技巧 章节三：公理之外（其一）零宽方块",
+        "en": "Advanced Vanilla Techniques, Chapter 3: Beyond the Axioms (Part 1), Zero-Width Blocks"
+      },
+      "summary": null,
+      "author": "tip_cup",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1DuChYJE7Z",
+          "url": "https://www.bilibili.com/video/BV1DuChYJE7Z",
+          "cover": "https://i2.hdslb.com/bfs/archive/6f00af03c9aee41807e221872b6d3e202eed8b92.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV15zC6YDEuu",
+      "title": {
+        "zh": "[废品机械师]进阶原版技巧 章节三：公理之外（先导片）",
+        "en": "Advanced Vanilla Techniques, Chapter 3: Beyond the Axioms (Prologue)"
+      },
+      "summary": null,
+      "author": "tip_cup",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV15zC6YDEuu",
+          "url": "https://www.bilibili.com/video/BV15zC6YDEuu",
+          "cover": "https://i2.hdslb.com/bfs/archive/54b22b2b061d8201883e04c4b6d25de8c92bc1dc.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1RcmWYjEuq",
+      "title": {
+        "zh": "[废品机械师]进阶原版技巧 章节二：奇妙软连接（其二）内能效应",
+        "en": "Advanced Vanilla Techniques, Chapter 2: Curious Soft Connections (Part 2), the Internal Energy Effect"
+      },
+      "summary": null,
+      "author": "tip_cup",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1RcmWYjEuq",
+          "url": "https://www.bilibili.com/video/BV1RcmWYjEuq",
+          "cover": "https://i2.hdslb.com/bfs/archive/588e99cc403e2b470a6dcec906369af5e3ae406b.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1aAS1YVEnG",
+      "title": {
+        "zh": "[废品机械师]进阶原版技巧 章节二：奇妙软连接（其一）动作冲突效应",
+        "en": "Advanced Vanilla Techniques, Chapter 2: Curious Soft Connections (Part 1), the Action Conflict Effect"
+      },
+      "summary": null,
+      "author": "tip_cup",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1aAS1YVEnG",
+          "url": "https://www.bilibili.com/video/BV1aAS1YVEnG",
+          "cover": "https://i1.hdslb.com/bfs/archive/4148a6c6878898b81c0330fd70f5ecbb43aeb37a.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1FtaweLEqm",
+      "title": {
+        "zh": "[废品机械师]进阶原版技巧 章节一（预留教程池",
+        "en": "Advanced Vanilla Techniques, Chapter 1 (Tutorial Pool)"
+      },
+      "summary": null,
+      "author": "tip_cup",
+      "category": "advanced",
+      "kind": "tutorial",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1FtaweLEqm",
+          "url": "https://www.bilibili.com/video/BV1FtaweLEqm",
+          "cover": "https://i0.hdslb.com/bfs/archive/2f50a75f0f5fd6db67a35d6204eaa5583d593afb.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1iw411G7Uj",
+      "title": {
+        "zh": "[废品机械师]实弹火炮2",
+        "en": "Live-Fire Artillery 2"
+      },
+      "summary": null,
+      "author": "tip_cup",
+      "category": "weapon",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1iw411G7Uj",
+          "url": "https://www.bilibili.com/video/BV1iw411G7Uj",
+          "cover": "https://i1.hdslb.com/bfs/archive/e86e0913f33966c2ead40a0ec2f4cb73c0c0211f.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1V94y1c7T7",
+      "title": {
+        "zh": "[废品机械师]实弹火炮",
+        "en": "Live-Fire Artillery"
+      },
+      "summary": null,
+      "author": "tip_cup",
+      "category": "weapon",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1V94y1c7T7",
+          "url": "https://www.bilibili.com/video/BV1V94y1c7T7",
+          "cover": "https://i1.hdslb.com/bfs/archive/e9f2e8ba2871c2046665433ea775ee83714f7f93.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1S64y1J7zY",
+      "title": {
+        "zh": "[废品机械师]共轴反桨齿轮组一代技术验证",
+        "en": "Coaxial Contra-Rotating Gear Set: First Technical Test"
+      },
+      "summary": null,
+      "author": "tip_cup",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1S64y1J7zY",
+          "url": "https://www.bilibili.com/video/BV1S64y1J7zY",
+          "cover": "https://i0.hdslb.com/bfs/archive/aaa6e3559567e9d153428564d10479b18a04badc.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1N94y137NS",
+      "title": {
+        "zh": "[废品机械师]缝合怪",
+        "en": "The Patchwork Monster"
+      },
+      "summary": null,
+      "author": "tip_cup",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1N94y137NS",
+          "url": "https://www.bilibili.com/video/BV1N94y137NS",
+          "cover": "https://i2.hdslb.com/bfs/archive/0d6bb672cd4bcaca773254d5e5fa340d398a0982.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1dw411K726",
+      "title": {
+        "zh": "[废品机械师]失败的履带悬挂",
+        "en": "A Failed Track Suspension"
+      },
+      "summary": null,
+      "author": "tip_cup",
+      "category": "track",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1dw411K726",
+          "url": "https://www.bilibili.com/video/BV1dw411K726",
+          "cover": "https://i0.hdslb.com/bfs/archive/9294ed374940c63ab557c25a984f4eac7b8f5172.jpg"
+        }
+      ]
+    },
+    {
+      "id": "BV1u34y1u7ur",
+      "title": {
+        "zh": "技术革命！工程的新进展",
+        "en": "A Technical Breakthrough: New Progress on the Project"
+      },
+      "summary": "书接上回，子项目 air3_m 圆满成功。",
+      "author": "tip_cup",
+      "category": "other",
+      "kind": "showcase",
+      "featured": false,
+      "sources": [
+        {
+          "platform": "bilibili",
+          "id": "BV1u34y1u7ur",
+          "url": "https://www.bilibili.com/video/BV1u34y1u7ur",
+          "cover": "https://i0.hdslb.com/bfs/archive/b200d369594ff9bc178bb81ae54baa8293fff8ff.jpg"
+        }
+      ]
+    }
+  ]
+}

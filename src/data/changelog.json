@@ -1,0 +1,2652 @@
+[
+  {
+    "id": "1788052565",
+    "publishedAt": "2026-08-30T01:16:05Z",
+    "version": "4.1.3",
+    "label": {
+      "zh": "更新内容",
+      "en": "Update Notes"
+    },
+    "title": {
+      "zh": "全面兼容 1.0 正式版，重写生存模式配方",
+      "en": "Full compatibility with version 1.0 and rewritten Survival recipes"
+    },
+    "sections": [
+      {
+        "heading": {
+          "zh": "更新后需要刷新一次游戏",
+          "en": "Refresh the game once after updating"
+        },
+        "paragraphs": [
+          {
+            "zh": "模组虽然已经更新，但受游戏缓存问题的影响，一部分内容在你的电脑上仍然是旧版本。用开发者模式启动一次游戏，就能把它们全部刷新过来：",
+            "en": "The Mod has been updated, but because of the game's caching, some content on your computer is still the old version. Launching the game once in developer mode refreshes all of it:"
+          }
+        ],
+        "items": [
+          {
+            "text": {
+              "zh": "退出游戏",
+              "en": "Exit the game"
+            }
+          },
+          {
+            "text": {
+              "zh": "在 Steam 库中右键废品机械师，选择“属性”",
+              "en": "In your Steam library, right-click Scrap Mechanic and select “Properties”"
+            }
+          },
+          {
+            "text": {
+              "zh": "打开“通用”页，在“启动选项”里填入 -dev",
+              "en": "Open the “General” tab and enter -dev under “Launch Options”"
+            }
+          },
+          {
+            "text": {
+              "zh": "启动游戏，进入一次装有传奇 Mod 的存档",
+              "en": "Launch the game and load a save that uses the Legend Mod once"
+            }
+          },
+          {
+            "text": {
+              "zh": "退出游戏，把“启动选项”里的 -dev 删掉",
+              "en": "Exit the game and remove -dev from “Launch Options”"
+            }
+          }
+        ]
+      },
+      {
+        "heading": null,
+        "paragraphs": [
+          {
+            "zh": "删掉之后就可以照常和其他玩家联机了。",
+            "en": "After removing it, you can play multiplayer with others as usual."
+          }
+        ],
+        "items": []
+      },
+      {
+        "heading": {
+          "zh": "核心更新",
+          "en": "Core Updates"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "重写了生存模式配方，经过平衡性调整后适合 1.0 正式版游戏",
+              "en": "Rewrote the Survival mode recipes and rebalanced them for the 1.0 release"
+            }
+          },
+          {
+            "text": {
+              "zh": "调整了配方平衡性",
+              "en": "Adjusted recipe balance"
+            }
+          },
+          {
+            "text": {
+              "zh": "模组全面兼容 1.0 正式版",
+              "en": "The Mod is now fully compatible with the 1.0 release"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改了赛车轮胎（实体 1x5）的轮胎模型，去除了重叠轮轴",
+              "en": "Revised the tire model of the Racing Tire (solid, 1x5) and removed the overlapping axle"
+            }
+          }
+        ]
+      },
+      {
+        "heading": {
+          "zh": "新增内容",
+          "en": "New Content"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "新增了操作编辑器",
+              "en": "Added the Control Editor"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了摄像机编辑器渲染触发模块",
+              "en": "Added the Camera Editor Render Trigger Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了坦克相机的弹道下坠提示器",
+              "en": "Added a bullet drop indicator to the Tank Camera"
+            }
+          },
+          {
+            "text": {
+              "zh": "水枪增加了水弹丸和泡沫弹丸，可以扑灭火焰",
+              "en": "Added water pellets and foam pellets to the Water Gun, which can put out fires"
+            }
+          },
+          {
+            "text": {
+              "zh": "所有传奇驾驶座支持 Shift 冲刺（直接连接后可以用于原版发动机和 V6/V8 发动机）",
+              "en": "All Legend driver's seats support Shift boost (when connected directly, it works with vanilla engines and the V6/V8 engines)"
+            }
+          },
+          {
+            "text": {
+              "zh": "传送信标支持传送到别的世界",
+              "en": "The Teleport Beacon can now teleport to other worlds"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了摄像机的准星",
+              "en": "Added a crosshair to the camera"
+            }
+          },
+          {
+            "text": {
+              "zh": "迈速表 3 新增了模式切换功能",
+              "en": "Added mode switching to Speedometer 3"
+            }
+          }
+        ]
+      },
+      {
+        "heading": {
+          "zh": "优化与修复",
+          "en": "Improvements & Fixes"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "优化了摄像机编辑器的代码，修复了摄像机编辑器的已知问题",
+              "en": "Optimized the Camera Editor code and fixed its known issues"
+            }
+          },
+          {
+            "text": {
+              "zh": "重构了代码，减少了重复，提升了效率，修复了问题",
+              "en": "Refactored code to reduce duplication, improve efficiency and fix issues"
+            }
+          },
+          {
+            "text": {
+              "zh": "提升了多人联机时部件的稳健性，减少了网络开销",
+              "en": "Improved the robustness of parts in multiplayer and reduced network overhead"
+            }
+          },
+          {
+            "text": {
+              "zh": "提升了武器子弹飞行时的平滑度",
+              "en": "Smoother projectile flight for weapons"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了履带系统的代码，修复了履带渲染等已知问题，履带的性能消耗减少了一些",
+              "en": "Optimized the track system code, fixed known issues such as track rendering, and slightly reduced the performance cost of tracks"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了重新进入存档后视角操控、迈速表、陀螺仪失效的问题",
+              "en": "Fixed the View Controller, speedometers and Gyroscope no longer working after reloading a save"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了之前改偏的视角操控逻辑",
+              "en": "Corrected View Controller logic that an earlier change had made inaccurate"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了制导模块按 U 重置后不会重置发射计时的问题（3 秒角度判断豁免、1 秒近炸引信延迟创建）",
+              "en": "Fixed the Guidance Module not resetting its launch timer after being reset with U (the 3-second angle-check exemption and the 1-second proximity fuze arming delay)"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了变速箱的已知问题",
+              "en": "Fixed known issues with the Gearbox"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了遥控器的已知问题",
+              "en": "Fixed known issues with the Remote Control"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了时间控制器失效等已知问题",
+              "en": "Fixed known issues such as the Time Controller not working"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了激光、机枪、枪口、激光炮打不烂东西的问题",
+              "en": "Fixed the Laser, Machine Gun, Gun Muzzle and Laser Cannon failing to break objects"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了空气动力件的飞行表现取决于先放了哪个零件的问题",
+              "en": "Fixed the flight behavior of aerodynamic parts depending on which part was placed first"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了坦克摄像机的准星显示的问题",
+              "en": "Fixed crosshair display issues on the Tank Camera"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了激光制导模块在某些情况下会失效的问题",
+              "en": "Fixed the Laser Guidance Module failing in certain situations"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了使用英文语言时七个零件的说明框是空的问题",
+              "en": "Fixed empty description boxes on seven parts when the game language is English"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了弹壳生成器的滚转值填负数时一个弹壳都不生成的问题",
+              "en": "Fixed the Shell Casing Generator spawning no casings when the roll value is negative"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了摄像头和坦克摄像机使用时的视角平滑度",
+              "en": "Smoother view movement when using the Camera and the Tank Camera"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了制导模块在开启后即使断开连线也会继续生效的问题",
+              "en": "Fixed the Guidance Module staying active after being switched on even when its wire was disconnected"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了输入关闭后开启的近炸引信仍然会输出的问题",
+              "en": "Fixed an enabled proximity fuze still producing output after its input was turned off"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了传送信标在移动后传送点还在原位的问题",
+              "en": "Fixed the Teleport Beacon's destination staying at the original position after the beacon was moved"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了所有界面上的黄色按钮高度变大的问题",
+              "en": "Fixed yellow buttons becoming taller on all interfaces"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了火炮类物品在断开一个激活的连线再接上时不开炮的问题",
+              "en": "Fixed cannon-type items not firing after an active wire was disconnected and reconnected"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了迫击炮的后坐力方向错误的问题",
+              "en": "Fixed the incorrect recoil direction of the Mortar"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了迫击炮和空气炮在修改了开火力量之后，后加入的玩家看不到正确挡位的问题",
+              "en": "Fixed players who joined later not seeing the correct setting after the firing power of the Mortar or Air Cannon was changed"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了空气炮的已知问题",
+              "en": "Fixed known issues with the Air Cannon"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了望远镜工具收起时会错误关闭全部摄像头的问题（包括其他人正在使用的）",
+              "en": "Fixed the Binoculars Tool incorrectly turning off all cameras when put away (including those in use by other players)"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了三个特效发生器的某些特效失效了和错误了的问题",
+              "en": "Fixed some effects of the three Effect Generators not working or behaving incorrectly"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了自定义弹壳生成器的动画效果不流畅的问题",
+              "en": "Fixed choppy animation on the Custom Shell Casing Generator"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了三个特效发生器的英文拼写错误的问题",
+              "en": "Fixed English spelling errors in the three Effect Generators"
+            }
+          },
+          {
+            "text": {
+              "zh": "删除了一些冗余内容，减少了一点模组的文件体积",
+              "en": "Removed some redundant content, slightly reducing the Mod's file size"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1786055115",
+    "publishedAt": "2026-08-06T22:25:15Z",
+    "version": "4.1.2",
+    "label": {
+      "zh": "新版 - 3",
+      "en": "New Build - 3"
+    },
+    "title": {
+      "zh": "修复多个模块可能失效的问题",
+      "en": "Fixes for several modules that could stop working"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了地雷/TP 工具/房主工具/制导模块/飞行模块可能存在的失效问题",
+              "en": "Fixed possible failures of the Landmine, TP Tool, Host Tool, Guidance Module and Flight Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了 GPS 模块在重新载入后失效的问题",
+              "en": "Fixed the GPS Module not working after reloading"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1785042223",
+    "publishedAt": "2026-07-26T05:03:43Z",
+    "version": "4.1.2",
+    "label": {
+      "zh": "新版 2",
+      "en": "New Build 2"
+    },
+    "title": {
+      "zh": "继续兼容 1.0 正式版，水枪可以灭火",
+      "en": "Further compatibility work for version 1.0; the Water Gun can now put out fires"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [
+          {
+            "zh": "继续兼容废品机械师 1.0 正式版（更完整的迁移和重构将会在之后的不久到来）",
+            "en": "Continued compatibility work for the 1.0 release of Scrap Mechanic (a more complete migration and refactor will follow soon)"
+          }
+        ],
+        "items": []
+      },
+      {
+        "heading": {
+          "zh": "需要注意的事情",
+          "en": "Please Note"
+        },
+        "paragraphs": [
+          {
+            "zh": "如果你还是看不到履带，且内容还是坏的，尝试在游戏 → 属性 → 启动项里添加“-dev”，以开发模式进一次游戏玩一下模组，之后再取消“-dev”，通常就修复了",
+            "en": "If you still cannot see tracks and content is still broken, try adding “-dev” under Game → Properties → Launch Options, enter the game once in developer mode and use the Mod for a while, then remove “-dev”. This usually fixes it."
+          }
+        ],
+        "items": []
+      },
+      {
+        "heading": {
+          "zh": "更新内容",
+          "en": "Changes"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了视角操控、陀螺仪、迈速表 1/2 重新进入游戏后失效的问题",
+              "en": "Fixed the View Controller, Gyroscope and Speedometers 1/2 no longer working after re-entering the game"
+            }
+          },
+          {
+            "text": {
+              "zh": "为水枪增加灭火效果功能，修改了其特效效果",
+              "en": "Added a fire-extinguishing effect to the Water Gun and changed its visual effects"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1784936992",
+    "publishedAt": "2026-07-24T23:49:52Z",
+    "version": "4.1.2",
+    "label": {
+      "zh": "新版",
+      "en": "New Build"
+    },
+    "title": {
+      "zh": "初步兼容 1.0 正式版",
+      "en": "Initial compatibility with version 1.0"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [
+          {
+            "zh": "初步兼容废品机械师 1.0 正式版更新",
+            "en": "Initial compatibility with the 1.0 release of Scrap Mechanic"
+          }
+        ],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了游戏更新后履带不显示的问题",
+              "en": "Fixed tracks not showing after the game update"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了更改履带颜色不生效的问题",
+              "en": "Fixed track color changes not taking effect"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1777879389",
+    "publishedAt": "2026-05-04T07:23:09Z",
+    "version": "4.1.2",
+    "label": {
+      "zh": "修复版本 - 1",
+      "en": "Hotfix - 1"
+    },
+    "title": {
+      "zh": "完善兼容提示，修复摄像机工具的问题",
+      "en": "Clearer compatibility notice and Camera Tool fixes"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修改了新旧模组兼容情况的提示",
+              "en": "Revised the notice about compatibility between the old and new Mods"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了 T 三通薄片粘结面设置错误的问题",
+              "en": "Fixed incorrect attachment face settings on the T Three-Way Thin Plate"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了摄像机工具预览模式下 FOV 调整范围不一致的问题",
+              "en": "Fixed the inconsistent FOV adjustment range in the Camera Tool preview mode"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了摄像机工具在自由移动模式下隐藏界面再退出会导致无法操作的问题",
+              "en": "Fixed the Camera Tool becoming unusable after hiding the interface in free-move mode and then exiting"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1777206658",
+    "publishedAt": "2026-04-26T12:30:58Z",
+    "version": "4.1.2",
+    "label": {
+      "zh": "几何与视界更新",
+      "en": "Geometry & View Update"
+    },
+    "title": {
+      "zh": "新增摄影机工具与多种几何方块",
+      "en": "Camera Tool and new geometry blocks"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "新增摄影机工具",
+              "en": "Added the Camera Tool"
+            }
+          }
+        ]
+      },
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "增加了版本更新日志提示",
+              "en": "Added changelog notifications for new versions"
+            }
+          },
+          {
+            "text": {
+              "zh": "为传奇 Mod 纪念牌增加了查看更新日志的功能",
+              "en": "Added a changelog viewer to the Legend Mod plaque"
+            }
+          }
+        ]
+      },
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "新增几何方块：",
+              "en": "Added geometry blocks:"
+            },
+            "items": [
+              {
+                "text": {
+                  "zh": "添加了中置细条转角方块和中置细条转角斜面",
+                  "en": "Added the centered thin-strip corner block and centered thin-strip corner slope"
+                }
+              },
+              {
+                "text": {
+                  "zh": "添加了侧置细条转角斜面和侧置细条转角三棱锥",
+                  "en": "Added the side thin-strip corner slope and side thin-strip corner triangular pyramid"
+                }
+              },
+              {
+                "text": {
+                  "zh": "添加了左右细条斜面转平面",
+                  "en": "Added left and right thin-strip slope-to-flat pieces"
+                }
+              },
+              {
+                "text": {
+                  "zh": "添加了半砖薄片细条方块和半砖薄片细条斜面",
+                  "en": "Added the half-brick thin-plate strip block and half-brick thin-plate strip slope"
+                }
+              },
+              {
+                "text": {
+                  "zh": "添加了薄片圆弧",
+                  "en": "Added the thin-plate arc"
+                }
+              },
+              {
+                "text": {
+                  "zh": "添加了薄片圆柱和半砖圆柱",
+                  "en": "Added the thin-plate cylinder and half-brick cylinder"
+                }
+              },
+              {
+                "text": {
+                  "zh": "添加了前置斜面半砖",
+                  "en": "Added the front-sloped half brick"
+                }
+              },
+              {
+                "text": {
+                  "zh": "添加了侧置左右半砖斜面",
+                  "en": "Added side left and right half-brick slopes"
+                }
+              },
+              {
+                "text": {
+                  "zh": "添加了细管转角（直角）、超细管转角（直角）",
+                  "en": "Added the thin pipe corner (right angle) and ultra-thin pipe corner (right angle)"
+                }
+              },
+              {
+                "text": {
+                  "zh": "添加了超细管五通和六通",
+                  "en": "Added ultra-thin pipe five-way and six-way connectors"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "添加了模组冲突覆盖提示（受限于游戏并不完美）",
+              "en": "Added a mod conflict override notice (not fully reliable due to game limitations)"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了五通细管丢失的英文文本",
+              "en": "Fixed missing English text for the five-way thin pipe"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化 GPS 模块的碰撞大小",
+              "en": "Optimized the collision size of the GPS Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了履带的“标准模式”计算性能",
+              "en": "Improved the calculation performance of the track “Standard mode”"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1766373157",
+    "publishedAt": "2025-12-22T03:12:37Z",
+    "version": "4.1.1",
+    "label": {
+      "zh": "补充更新 1",
+      "en": "Patch 1"
+    },
+    "title": {
+      "zh": "界面回退与文本修正",
+      "en": "Layout rollback and text corrections"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "回退了蓝图储存器的布局界面",
+              "en": "Reverted the layout of the Blueprint Storage interface"
+            }
+          },
+          {
+            "text": {
+              "zh": "修正了低风阻轮胎和豪车轮胎的错误文本",
+              "en": "Corrected wrong text for the Low-Drag Tire and Luxury Tire"
+            }
+          },
+          {
+            "text": {
+              "zh": "增加了对仪表盘 3 和履带特效系统控制模块的文本",
+              "en": "Added text for Dashboard 3 and the Track Effect System Control Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "挤掉了迈速表 3 和履带直径自定义轮多余的按 E 使用提示",
+              "en": "Removed redundant “Press E to use” prompts from Speedometer 3 and the Custom Diameter Track Wheel"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了自定义直径履带轮在特定情况下保存直径无法更新的问题",
+              "en": "Fixed the Custom Diameter Track Wheel failing to update its saved diameter in certain situations"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1766297597",
+    "publishedAt": "2025-12-21T06:13:17Z",
+    "version": "4.1.1",
+    "label": {
+      "zh": "更新内容",
+      "en": "Update Notes"
+    },
+    "title": {
+      "zh": "优化轮胎模型，增加履带计算模式",
+      "en": "Improved tire models and new track calculation modes"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了蒸汽火车轮（辐条）的贴图错误",
+              "en": "Fixed a texture error on the Steam Train Wheel (Spoked)"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了蒸汽火车轮（藕片）1x11 的模型厚度错误",
+              "en": "Fixed the incorrect model thickness of the Steam Train Wheel (Perforated) 1x11"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了火车内轮缘的碰撞设置（圆台改为圆片，理论上具有更好的稳定性）",
+              "en": "Improved the collision setup of the train wheel inner flange (changed from a truncated cone to a disc, which should be more stable)"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了火车内轮缘模型厚度和大小",
+              "en": "Improved the model thickness and size of the train wheel inner flange"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了跑车轮胎（第一组）的模型和预设颜色",
+              "en": "Improved the models and preset colors of the Sports Car Tires (first set)"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了豪车轮胎的模型",
+              "en": "Improved the Luxury Tire model"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了 F1 和跑车的轮胎字母装饰和碰撞体积（1X1 薄片）",
+              "en": "Improved the tire lettering and collision volume of the F1 and sports car tires (1X1 thin plate)"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了 F1 轮胎的模型",
+              "en": "Improved the F1 Tire model"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了原 001 车轮模型和预设颜色（现名为低风阻轮胎）",
+              "en": "Improved the model and preset colors of the former 001 Wheel (now named Low-Drag Tire)"
+            }
+          },
+          {
+            "text": {
+              "zh": "更换了原 009 车轮模型（现名为豪车轮胎），使其有更高的通用性",
+              "en": "Replaced the model of the former 009 Wheel (now named Luxury Tire) to make it suit more builds"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了越野轮胎的模型缺失轮轴的错误",
+              "en": "Fixed the missing axle on the Off-Road Tire model"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了火箭弹和迫击炮在联机情况下特效错误的问题",
+              "en": "Fixed incorrect effects for the Rocket and Mortar in multiplayer"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了相机模块的旋转表现",
+              "en": "Improved the rotation behavior of the Camera Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "原 VW 轮胎改名为家用车轮胎",
+              "en": "Renamed the former VW Tire to Family Car Tire"
+            }
+          },
+          {
+            "text": {
+              "zh": "原五菱轮胎改名为乘用车轮胎",
+              "en": "Renamed the former Wuling Tire to Passenger Car Tire"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了无文字的轮胎盖板",
+              "en": "Added tire cover plates without lettering"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了履带直径自定义轮",
+              "en": "Added the Custom Diameter Track Wheel"
+            }
+          },
+          {
+            "text": {
+              "zh": "为履带控制器增加两种履带计算模式（简易模式、拟真模式）",
+              "en": "Added two track calculation modes to the Track Controller (Simple and Realistic)"
+            }
+          },
+          {
+            "text": {
+              "zh": "为仪表盘 3 增加输入值显示功能和最小最大值设置功能",
+              "en": "Added input value display and minimum/maximum value settings to Dashboard 3"
+            }
+          },
+          {
+            "text": {
+              "zh": "为激光制导模块增加制导误差为 0 的惯导（实际表现因作品而异，制导的位置是没有误差的）",
+              "en": "Added zero-error inertial navigation to the Laser Guidance Module (actual results vary by build; the guided position itself has no error)"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1754528956",
+    "publishedAt": "2025-08-07T01:09:16Z",
+    "version": "4.1.0",
+    "label": {
+      "zh": "补充更新 - 4",
+      "en": "Patch - 4"
+    },
+    "title": {
+      "zh": "改善履带渲染的稳定性",
+      "en": "More stable track rendering"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了当履带控制器和轮子们都面朝天空放置时履带渲染抽搐和错误的问题",
+              "en": "Fixed tracks twitching and rendering incorrectly when the Track Controller and wheels are all placed facing the sky"
+            }
+          },
+          {
+            "text": {
+              "zh": "通过在特定时候略微增加的一点点性能消耗，优化了大部分时候可能会出现的履带块在某一个轮子下旋转错误的问题",
+              "en": "At a slight extra performance cost in specific situations, reduced track links rotating incorrectly under a particular wheel, which could happen most of the time"
+            }
+          },
+          {
+            "text": {
+              "zh": "通过修改参数可能优化了交错负重轮的坦克可能更容易让履带看起来不自然的问题（会不会出现新的问题有待考究）",
+              "en": "Adjusted parameters that may make tracks look less unnatural on tanks with staggered road wheels (whether this introduces new issues remains to be seen)"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了履带控制器的脚本，现在连续修改多个数值并只按一次回车的情况下，其他数值不会被“打回原形”了",
+              "en": "Optimized the Track Controller script: when several values are changed in a row and Enter is pressed only once, the other values no longer revert"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1754452195",
+    "publishedAt": "2025-08-06T03:49:55Z",
+    "version": "4.1.0",
+    "label": {
+      "zh": "补充更新 - 3",
+      "en": "Patch - 3"
+    },
+    "title": {
+      "zh": "修复履带渲染与房间控制器的问题",
+      "en": "Fixes for track rendering and the Room Controller"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了在极端罕见的情况下，履带渲染错误的问题",
+              "en": "Fixed incorrect track rendering in extremely rare cases"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了房间控制器的飞行模式移动速度异常的问题",
+              "en": "Fixed abnormal movement speed in the Room Controller's flight mode"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化并统一了履带的位置，现在“挖掘机用的金属履带”不会陷入地形了",
+              "en": "Optimized and unified track positions; the “metal excavator tracks” no longer sink into the terrain"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1754414364",
+    "publishedAt": "2025-08-05T17:19:24Z",
+    "version": "4.1.0",
+    "label": {
+      "zh": "补充更新 - 2",
+      "en": "Patch - 2"
+    },
+    "title": {
+      "zh": "修复履带样式保存，优化履带算法",
+      "en": "Track style saving fix and track algorithm optimization"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了履带控制器无法保存履带样式的漏洞",
+              "en": "Fixed the Track Controller failing to save track styles"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了履带算法，现在性能更好，观感更棒",
+              "en": "Optimized the track algorithm for better performance and appearance"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1754410578",
+    "publishedAt": "2025-08-05T16:16:18Z",
+    "version": "4.1.0",
+    "label": {
+      "zh": "修复",
+      "en": "Fix"
+    },
+    "title": {
+      "zh": "修复激光解码器无法连线的问题",
+      "en": "Laser Decoder wiring fix"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了激光解码器无法连线的问题",
+              "en": "Fixed the Laser Decoder being impossible to wire"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1754403542",
+    "publishedAt": "2025-08-05T14:19:02Z",
+    "version": "4.1.0",
+    "label": {
+      "zh": "履带纪元",
+      "en": "Track Era"
+    },
+    "title": {
+      "zh": "新增履带系统",
+      "en": "Introducing the track system"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [
+          {
+            "zh": "注意：其中第二个还没有经过测试，如果发现了新的 bug 请向开发人员反馈",
+            "en": "Note: the second item has not been tested yet. If you find new bugs, please report them to the developers."
+          }
+        ],
+        "items": [
+          {
+            "text": {
+              "zh": "优化了飞机轮胎 1x4 和坦克负重轮 1x4 的碰撞体积",
+              "en": "Improved the collision volume of the Aircraft Tire 1x4 and Tank Road Wheel 1x4"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了圆锥 0.5x1 尺寸的碰撞精细度，同时修复了其碰撞体积大于模型的问题",
+              "en": "Improved the collision precision of the 0.5x1 Cone and fixed its collision volume being larger than its model"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了圆锥 1x2 尺寸的碰撞细精度",
+              "en": "Improved the collision precision of the 1x2 Cone"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了半格薄片的碰撞大小",
+              "en": "Improved the collision size of the half-unit thin plate"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了传送工具的动画",
+              "en": "Improved the Teleport Tool animation"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了火箭弹发射器和迫击炮发射器的特效在发射后方向不会改变的问题",
+              "en": "Fixed effects of the Rocket Launcher and Mortar Launcher not changing direction after firing"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了各火炮错误的后坐力大小",
+              "en": "Fixed incorrect recoil strength on various cannons"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了 2x3、2x4、3x4 切尖立方体（L/R）的碰撞方向错误",
+              "en": "Fixed incorrect collision orientation of the 2x3, 2x4 and 3x4 Truncated Cubes (L/R)"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改了制导模块的近炸检测激活时间（从 3 秒后调整为 1 秒后）",
+              "en": "Changed the proximity detection activation time of the Guidance Module (from 3 seconds to 1 second)"
+            }
+          },
+          {
+            "text": {
+              "zh": "更改了“圆角薄片”的名称为“圆弧薄片”",
+              "en": "Renamed “Rounded Thin Plate” to “Arc Thin Plate”"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了 1x2 至 1x4 的圆弧薄片（侧）",
+              "en": "Added 1x2 to 1x4 Arc Thin Plates (Side)"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了 1x1 至 1x4 的反圆弧薄片（侧）",
+              "en": "Added 1x1 to 1x4 Inverse Arc Thin Plates (Side)"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了半砖圆柱薄片",
+              "en": "Added the Half-Brick Cylinder Thin Plate"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了半薄片至平面（L/R）",
+              "en": "Added Half Thin Plate to Flat (L/R)"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了手持望远镜和手持管理工具（房主）",
+              "en": "Added Handheld Binoculars and the Handheld Management Tool (host)"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了 3 个激光制导组件",
+              "en": "Added 3 laser guidance components"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了履带特效计算组件",
+              "en": "Added the Track Effect Calculation Component"
+            }
+          },
+          {
+            "text": {
+              "zh": "新增了以下轮胎对履带功能的支持：",
+              "en": "Added track support for the following wheels:"
+            },
+            "items": [
+              {
+                "text": {
+                  "zh": "飞机轮胎 1x2 至 1x4 和 2x5、2x7",
+                  "en": "Aircraft Tire 1x2 to 1x4, 2x5 and 2x7"
+                }
+              },
+              {
+                "text": {
+                  "zh": "迷你轮胎 1x1 至 1x2",
+                  "en": "Mini Tire 1x1 to 1x2"
+                }
+              },
+              {
+                "text": {
+                  "zh": "坦克负重轮 1x3、2x3、1x4、2x5",
+                  "en": "Tank Road Wheel 1x3, 2x3, 1x4 and 2x5"
+                }
+              },
+              {
+                "text": {
+                  "zh": "坦克驱动轮 1x3、2x3、2x5",
+                  "en": "Tank Drive Wheel 1x3, 2x3 and 2x5"
+                }
+              },
+              {
+                "text": {
+                  "zh": "半边驱动轮 1x3、1x4、1x5",
+                  "en": "Half Drive Wheel 1x3, 1x4 and 1x5"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1738916792",
+    "publishedAt": "2025-02-07T08:26:32Z",
+    "version": "4.0.9",
+    "label": {
+      "zh": "补充更新",
+      "en": "Patch"
+    },
+    "title": {
+      "zh": "修复火炮后坐力与视角操控的问题",
+      "en": "Fixes for cannon recoil and View Controller aiming"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了火炮后坐力方向错误的问题",
+              "en": "Fixed incorrect cannon recoil direction"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了当世界内，存在多个遥控的视角操控时，瞄准方向归属不正确的问题",
+              "en": "Fixed aiming direction being assigned incorrectly when a world contains multiple remote-controlled View Controllers"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了半格薄片转角的法向错误",
+              "en": "Fixed incorrect normals on the half-unit thin plate corner"
+            }
+          }
+        ]
+      },
+      {
+        "heading": null,
+        "paragraphs": [
+          {
+            "zh": "其中第二个还没有经过测试，如果发现了新的 bug 请向开发人员反馈",
+            "en": "The second item has not been tested yet. If you find new bugs, please report them to the developers."
+          }
+        ],
+        "items": []
+      }
+    ]
+  },
+  {
+    "id": "1735282406",
+    "publishedAt": "2024-12-27T06:53:26Z",
+    "version": "4.0.9",
+    "label": {
+      "zh": "内容更新",
+      "en": "Content Update"
+    },
+    "title": {
+      "zh": "新增多种材质的楔",
+      "en": "Wedges in more materials"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "顺应游戏更新，添加了多种材质的楔",
+              "en": "Added wedges in several materials, following the game update"
+            }
+          },
+          {
+            "text": {
+              "zh": "修正按键逻辑门的 UUID 判定的问题（修正之前也不影响使用）",
+              "en": "Corrected the UUID check of the Key Logic Gate (this did not affect use before the fix)"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1735202217",
+    "publishedAt": "2024-12-26T08:36:57Z",
+    "version": "4.0.8",
+    "label": {
+      "zh": "补充更新",
+      "en": "Patch"
+    },
+    "title": {
+      "zh": "调整变速箱、集线器与相机模块",
+      "en": "Gearbox, Hub and Camera Module adjustments"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了对于某些座椅上特定颜色会导致变速箱档位被调节的问题",
+              "en": "Fixed certain colors on some seats changing the Gearbox gear"
+            }
+          },
+          {
+            "text": {
+              "zh": "调整了火炮类物品介绍文本，参数更加直观",
+              "en": "Revised the description text of cannon-type items to make their parameters clearer"
+            }
+          },
+          {
+            "text": {
+              "zh": "为集线器增加特殊颜色激活（可用于激活发动机）",
+              "en": "Added special-color activation to the Hub (can be used to activate engines)"
+            }
+          },
+          {
+            "text": {
+              "zh": "调整了相机模块默认的初始 FOV 数值 22→70",
+              "en": "Changed the Camera Module's default initial FOV 22→70"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1734773900",
+    "publishedAt": "2024-12-21T09:38:20Z",
+    "version": "4.0.8",
+    "label": {
+      "zh": "更新日志",
+      "en": "Changelog"
+    },
+    "title": {
+      "zh": "新增自定义弹壳生成器",
+      "en": "Custom Shell Casing Generator"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "添加自定义弹壳生成器",
+              "en": "Added the Custom Shell Casing Generator"
+            }
+          },
+          {
+            "text": {
+              "zh": "减少了激光切割器的弹药特效",
+              "en": "Reduced the projectile effects of the Laser Cutter"
+            }
+          },
+          {
+            "text": {
+              "zh": "调整了激光切割器的单发伤害 10→5",
+              "en": "Changed the Laser Cutter's damage per hit 10→5"
+            }
+          },
+          {
+            "text": {
+              "zh": "修正了部分活塞的介绍",
+              "en": "Corrected the descriptions of some pistons"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1734413925",
+    "publishedAt": "2024-12-17T05:38:45Z",
+    "version": "4.0.7",
+    "label": {
+      "zh": "Block Ⅱ (3)",
+      "en": "Block II (3)"
+    },
+    "title": {
+      "zh": "部分回退相机模块与视角操控的代码",
+      "en": "Partial rollback of the Camera Module and View Controller code"
+    },
+    "sections": [
+      {
+        "heading": {
+          "zh": "部分回档",
+          "en": "Partial Rollback"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "回档了相机模块部分代码",
+              "en": "Rolled back part of the Camera Module code"
+            }
+          },
+          {
+            "text": {
+              "zh": "回档了视角操控部分代码",
+              "en": "Rolled back part of the View Controller code"
+            }
+          }
+        ]
+      },
+      {
+        "heading": null,
+        "paragraphs": [
+          {
+            "zh": "情况说明：上述两模块代码在单机均正常，但联机情况下会出现不同情况的故障，为了尽可能的游戏体验，在解决前，回档上述两个模块的代码。",
+            "en": "Explanation: the code of both modules works correctly in single-player, but causes various failures in multiplayer. To keep the game experience as good as possible, the code of both modules has been rolled back until the issues are resolved."
+          }
+        ],
+        "items": []
+      },
+      {
+        "heading": {
+          "zh": "存在的问题",
+          "en": "Open Issues"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "相机模块缩放，整个游戏世界公用一个参数，不同玩家同时调整存在冲突情况",
+              "en": "Camera Module zoom uses a single parameter for the entire game world, so adjustments by different players at the same time conflict"
+            }
+          },
+          {
+            "text": {
+              "zh": "视角操控在多于两个人联机情况下可能会操控权限被其中一人夺取的情况",
+              "en": "With more than two players in multiplayer, control of the View Controller may be taken over by one of them"
+            }
+          }
+        ]
+      },
+      {
+        "heading": {
+          "zh": "更新",
+          "en": "Update"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "尝试修复了联机情况下制导模块在 WASD 输出模式下垂直跟踪错误的问题",
+              "en": "Attempted to fix incorrect vertical tracking of the Guidance Module in WASD output mode in multiplayer"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1734220472",
+    "publishedAt": "2024-12-14T23:54:32Z",
+    "version": "4.0.7",
+    "label": {
+      "zh": "小更新",
+      "en": "Minor Update"
+    },
+    "title": {
+      "zh": "修复制导模块重新进入游戏后的故障",
+      "en": "Guidance Module fix after reloading a game"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了制导模块重新进入游戏后存在故障的问题",
+              "en": "Fixed Guidance Module malfunctions after re-entering the game"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1734163560",
+    "publishedAt": "2024-12-14T08:06:00Z",
+    "version": "4.0.7",
+    "label": {
+      "zh": "Block Ⅱ 补充更新",
+      "en": "Block II Patch"
+    },
+    "title": {
+      "zh": "改进相机缩放、制导模块与生成模块",
+      "en": "Improvements to camera zoom, the Guidance Module and generator modules"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了在使用相机缩放功能时，视角控制对于控制者判定的错误",
+              "en": "Fixed view control misidentifying the controlling player when camera zoom is used"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改了高级轴承活塞控制器数值输入的逻辑，输入小数数值操作更方便",
+              "en": "Changed the value input logic of the Advanced Bearing Piston Controller to make entering decimal values easier"
+            }
+          },
+          {
+            "text": {
+              "zh": "优化了相机模块的 FOV 缩放",
+              "en": "Improved FOV zoom on the Camera Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "为制导模块增加了对 W/A/S/D 逻辑门的输出兼容",
+              "en": "Added output compatibility with W/A/S/D logic gates to the Guidance Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "为炸弹生成模块添加生成位置预测和自身初始速度",
+              "en": "Added spawn position prediction and the module's own initial velocity to the Bomb Generator Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "为干扰弹生成模块添加生成位置预测",
+              "en": "Added spawn position prediction to the Flare Generator Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "微调了干扰弹生成模块抛射力度（抛射距离更远了一些）",
+              "en": "Slightly adjusted the launch force of the Flare Generator Module (flares are thrown a little farther)"
+            }
+          },
+          {
+            "text": {
+              "zh": "移除了高级轴承活塞控制器最大 99999 的限制，现在单一为 0 至 999999",
+              "en": "Removed the 99999 maximum of the Advanced Bearing Piston Controller; the range is now 0 to 999999"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1733632193",
+    "publishedAt": "2024-12-08T04:29:53Z",
+    "version": "4.0.7",
+    "label": {
+      "zh": "小更新",
+      "en": "Minor Update"
+    },
+    "title": {
+      "zh": "修复 GPS 导致多个模块失效的问题",
+      "en": "Fixes for modules disabled by the GPS"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了 GPS 因玩家出入房间导致变速箱/视角操控/时速表等失效的问题",
+              "en": "Fixed the GPS causing the Gearbox, View Controller, speedometer and other parts to stop working when players entered or left a room"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了视角操控直连座椅时出现的操控者判定错误的问题",
+              "en": "Fixed the controlling player being misidentified when the View Controller is connected directly to a seat"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了炸弹生成器在后台日志的 GUI 报错的问题（原报错不影响使用）",
+              "en": "Fixed a GUI error from the Bomb Generator in the background log (the error did not affect use)"
+            }
+          },
+          {
+            "text": {
+              "zh": "为炸弹生成器添加了“中型炸弹”的生成选项",
+              "en": "Added a “Medium Bomb” spawn option to the Bomb Generator"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1733482057",
+    "publishedAt": "2024-12-06T10:47:37Z",
+    "version": "4.0.7",
+    "label": {
+      "zh": "Block Ⅱ",
+      "en": "Block II"
+    },
+    "title": {
+      "zh": "修复玩家出入房间导致模块失效的问题",
+      "en": "Fixes for modules failing when players enter or leave a room"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了视角操控因玩家出入房间导致失效的问题",
+              "en": "Fixed the View Controller stopping working when players entered or left a room"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了视角操控使用遥控模块时候判定控制权按距离的错误，现在按遥控模块连接的座椅为准",
+              "en": "Fixed the View Controller assigning control by distance when used with a Remote Control Module; control now follows the seat connected to the Remote Control Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了迈速表因玩家出入房间导致失效的问题",
+              "en": "Fixed the speedometer stopping working when players entered or left a room"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了陀螺仪因玩家出入房间导致失效的问题",
+              "en": "Fixed the Gyroscope stopping working when players entered or left a room"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了变速箱因玩家出入房间导致失效的问题",
+              "en": "Fixed the Gearbox stopping working when players entered or left a room"
+            }
+          },
+          {
+            "text": {
+              "zh": "为倾斜襟翼气动方块独立为新气动脚本计算，其他气动方块沿用原 4.0.5 版本（旧）气动脚本计算",
+              "en": "Tilted Flap aerodynamic blocks now use a separate new aerodynamics script; other aerodynamic blocks keep the original (old) script from version 4.0.5"
+            }
+          },
+          {
+            "text": {
+              "zh": "为摄像头模块增加 FOV 平滑变化",
+              "en": "Added smooth FOV transitions to the Camera Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "为无火推进器调整了工作模式，现有线性模式（输出设置输入油门）和开关模式（输入设置开或关）",
+              "en": "Changed the working modes of the Flameless Thruster: it now has a linear mode (the output follows the input throttle) and an on/off mode (the input switches it on or off)"
+            }
+          }
+        ]
+      },
+      {
+        "heading": {
+          "zh": "已知问题",
+          "en": "Known Issues"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "上述所有关于玩家出入房间失效的修复均不是完全修复，还是有概率触发这个漏洞",
+              "en": "None of the above fixes for failures caused by players entering or leaving a room are complete; the bug can still occur occasionally"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1731132304",
+    "publishedAt": "2024-11-09T06:05:04Z",
+    "version": "4.0.7",
+    "label": {
+      "zh": "小更新",
+      "en": "Minor Update"
+    },
+    "title": {
+      "zh": "坦克相机、变速箱与逻辑门连接的修正",
+      "en": "Tank camera, gearbox and logic gate connection fixes"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修改了坦克相机模块测距输出文本和数据",
+              "en": "Changed the rangefinder output text and data of the Tank Camera Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改了变速箱的刹车信号的输入",
+              "en": "Changed the brake signal input of the Gearbox"
+            }
+          },
+          {
+            "text": {
+              "zh": "增加遥控对坦克相机模块的兼容",
+              "en": "Added remote control compatibility to the Tank Camera Module"
+            }
+          },
+          {
+            "text": {
+              "zh": "为制导模块说明文本增加 U 键说明，为英文文本增加功能说明",
+              "en": "Added a description of the U key to the Guidance Module text, and added feature descriptions to the English text"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了倾斜襟翼和大升力倾斜襟翼空气动力方向错误的问题",
+              "en": "Fixed incorrect aerodynamic force direction on the Tilted Flap and High-Lift Tilted Flap"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了视角操控器意外连接逻辑门会故障损坏的问题",
+              "en": "Fixed the View Controller breaking when accidentally connected to a logic gate"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了陀螺仪意外连接逻辑门会故障损坏的问题",
+              "en": "Fixed the Gyroscope breaking when accidentally connected to a logic gate"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了 W/A/S/D 键信号逻辑门被集线器/反向器连接会故障的问题",
+              "en": "Fixed W/A/S/D key signal logic gates malfunctioning when connected through a Hub or Inverter"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1727430813",
+    "publishedAt": "2024-09-27T09:53:33Z",
+    "version": "4.0.5",
+    "label": {
+      "zh": "小更新",
+      "en": "Minor Update"
+    },
+    "title": {
+      "zh": "WS 轴承舵机调速与多项参数调整",
+      "en": "WS Bearing Servo speed control and parameter adjustments"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "更换了 WS 轴承舵机 UI",
+              "en": "Replaced the WS Bearing Servo UI"
+            }
+          },
+          {
+            "text": {
+              "zh": "为 WS 轴承舵机添加速度调节",
+              "en": "Added speed adjustment to the WS Bearing Servo"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了相机 FOV 卡死的问题（仅调节卡死问题）",
+              "en": "Fixed the camera FOV getting stuck (only the adjustment getting stuck)"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了斜面 1x1 转 1x3 间距 2 左的模型错位错误",
+              "en": "Fixed a misaligned model on Slope 1x1 to 1x3 Spacing 2 Left"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了半格斜面薄片（右）底边碰撞位置不正确的问题",
+              "en": "Fixed the incorrect bottom-edge collision position of the Half-Unit Slope Thin Plate (Right)"
+            }
+          },
+          {
+            "text": {
+              "zh": "Mod 内所有座椅强度调整 5→7",
+              "en": "Changed the durability of all seats in the Mod 5→7"
+            }
+          },
+          {
+            "text": {
+              "zh": "调整了螺丝（小）的碰撞大小",
+              "en": "Adjusted the collision size of the Screw (Small)"
+            }
+          },
+          {
+            "text": {
+              "zh": "调整了制导模块的视野范围（±60→±90）",
+              "en": "Changed the field of view of the Guidance Module (±60→±90)"
+            }
+          },
+          {
+            "text": {
+              "zh": "调整了激光（火炮）的弹药直径 0.8→0.5",
+              "en": "Changed the projectile diameter of the Laser (cannon) 0.8→0.5"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1725944698",
+    "publishedAt": "2024-09-10T05:04:58Z",
+    "version": null,
+    "label": {
+      "zh": "小更新",
+      "en": "Minor Update"
+    },
+    "title": {
+      "zh": "改进近炸引信的检测性能",
+      "en": "Faster proximity fuze detection"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "改进了制导模块的近炸引信的范围检测的性能",
+              "en": "Improved the performance of range detection for the Guidance Module's proximity fuze"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1725784339",
+    "publishedAt": "2024-09-08T08:32:19Z",
+    "version": "4.0.4",
+    "label": {
+      "zh": "小更新",
+      "en": "Minor Update"
+    },
+    "title": {
+      "zh": "修正炸弹质量，制导模块增加近炸感应",
+      "en": "Bomb mass corrections and proximity sensing for the Guidance Module"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修正了错误的炸弹质量参数：",
+              "en": "Corrected wrong bomb mass parameters:"
+            },
+            "items": [
+              {
+                "text": {
+                  "zh": "1*9 中型航弹 1000→250",
+                  "en": "1*9 Medium Aerial Bomb 1000→250"
+                }
+              },
+              {
+                "text": {
+                  "zh": "3*13 航爆弹 2500→250",
+                  "en": "3*13 Aerial Bomb 2500→250"
+                }
+              },
+              {
+                "text": {
+                  "zh": "1*6 坦克弹药 250→150",
+                  "en": "1*6 Tank Ammunition 250→150"
+                }
+              }
+            ]
+          },
+          {
+            "text": {
+              "zh": "修改了高级轴承活塞控制器关于轴承模式下的运算公式",
+              "en": "Changed the calculation formula of the Advanced Bearing Piston Controller in bearing mode"
+            }
+          },
+          {
+            "text": {
+              "zh": "为干扰弹生成模块添加了干扰弹抛射初速和随机散射，现在不再依靠挤压提供初速",
+              "en": "Added launch velocity and random spread for flares to the Flare Generator Module; flares no longer rely on being squeezed out for their initial velocity"
+            }
+          },
+          {
+            "text": {
+              "zh": "为制导模块增加了近炸感应（16 格）输出功能",
+              "en": "Added proximity sensing (16 blocks) output to the Guidance Module"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1724842975",
+    "publishedAt": "2024-08-28T11:02:55Z",
+    "version": null,
+    "label": {
+      "zh": "紧急修复",
+      "en": "Emergency Fix"
+    },
+    "title": {
+      "zh": "修复高级轴承活塞控制器与蓝图储存器的问题",
+      "en": "Fixes for the Advanced Bearing Piston Controller and Blueprint Storage"
+    },
+    "sections": [
+      {
+        "heading": {
+          "zh": "更新内容",
+          "en": "Changes"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复高级轴承活塞控制器的一些 bug",
+              "en": "Fixed some bugs in the Advanced Bearing Piston Controller"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复蓝图储存器没有 UI 的问题",
+              "en": "Fixed the Blueprint Storage having no UI"
+            }
+          },
+          {
+            "text": {
+              "zh": "补充了修改后的制导模块描述",
+              "en": "Added the revised Guidance Module description"
+            }
+          },
+          {
+            "text": {
+              "zh": "补充了高级轴承活塞控制器的英文描述",
+              "en": "Added an English description for the Advanced Bearing Piston Controller"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了坦克相机模块的 UI",
+              "en": "Fixed the Tank Camera Module UI"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1724832797",
+    "publishedAt": "2024-08-28T08:13:17Z",
+    "version": "4.0.3",
+    "label": {
+      "zh": "更新内容",
+      "en": "Update Notes"
+    },
+    "title": {
+      "zh": "调整武器参数，增加英文物品介绍",
+      "en": "Weapon adjustments and English item descriptions"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "调整了方块控制器的贴图，消除了和普通方块之间的色差",
+              "en": "Adjusted the Block Controller texture to remove the color difference from regular blocks"
+            }
+          },
+          {
+            "text": {
+              "zh": "增加了作品保护器的详细描述",
+              "en": "Added a detailed description for the Creation Protector"
+            }
+          },
+          {
+            "text": {
+              "zh": "增加了作品保护器的英文交互文本",
+              "en": "Added English interaction text for the Creation Protector"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改了作品保护器的工作方式，将作者离开房间作品爆炸改为保护模式变动为高",
+              "en": "Changed how the Creation Protector works: instead of the creation exploding when its author leaves the room, the protection mode is now raised to high"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改了遥控器 GUI，现在可以直接输入频道数",
+              "en": "Changed the Remote Control GUI; the channel number can now be entered directly"
+            }
+          },
+          {
+            "text": {
+              "zh": "增加英文版本的物品介绍",
+              "en": "Added English item descriptions"
+            }
+          },
+          {
+            "text": {
+              "zh": "为传送工具图标增加 TP 字样特征，降低拿错概率",
+              "en": "Added a “TP” mark to the Teleport Tool icon to make it less likely to be picked up by mistake"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改了坦克负重轮、坦克驱动轮、卡车前/后轮、拖拉机轮、BBS 轮的贴图，降低了材质的镜面表现",
+              "en": "Changed the textures of the Tank Road Wheel, Tank Drive Wheel, Truck Front/Rear Wheels, Tractor Wheel and BBS Wheel to reduce material reflectivity"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了喷漆枪连线情况下工作不正常的问题",
+              "en": "Fixed the Paint Gun not working properly when wired"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改了航空机炮的爆炸冲击范围 2→1",
+              "en": "Changed the explosion radius of the Aircraft Autocannon 2→1"
+            }
+          },
+          {
+            "text": {
+              "zh": "提高了炮口的弹药初速 400→500，现在和坦克炮弹速持平",
+              "en": "Increased the muzzle velocity of the Cannon Muzzle 400→500, now matching tank shells"
+            }
+          },
+          {
+            "text": {
+              "zh": "提高了加特林的单发命中伤害 1→5",
+              "en": "Increased the Gatling's damage per hit 1→5"
+            }
+          },
+          {
+            "text": {
+              "zh": "提高了枪口的单发命中伤害 1→5",
+              "en": "Increased the Gun Muzzle's damage per hit 1→5"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改了激光的单发命中伤害→10",
+              "en": "Changed the Laser's damage per hit →10"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改了激光炮的单发命中伤害→65",
+              "en": "Changed the Laser Cannon's damage per hit →65"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改了激光炮炮弹的判定范围 1→0.5（自爆和发射出就蹭边问题解决）",
+              "en": "Changed the hit detection range of Laser Cannon shells 1→0.5 (fixes shells self-detonating or grazing objects right after launch)"
+            }
+          },
+          {
+            "text": {
+              "zh": "增加了手持 TP 工具的模型",
+              "en": "Added a model for the handheld TP Tool"
+            }
+          },
+          {
+            "text": {
+              "zh": "重做蓝图生成模块，由一存储一生成两个物品合并为一个，现在蓝图保存在模块内（仅存储一个），不再存储在本地文件内，使用方法见物品说明",
+              "en": "Reworked the Blueprint Generator Module: the separate storage and generation items are merged into one, and the blueprint is now saved inside the module (one at a time) instead of in local files; see the item description for usage"
+            }
+          },
+          {
+            "text": {
+              "zh": "相机模块功能升级，增加在使用遥控器情况下使用滚轮调节 FOV 缩放功能（兼容遥控模块使用）",
+              "en": "Upgraded the Camera Module: FOV zoom can now be adjusted with the scroll wheel while using a Remote Control (compatible with the Remote Control Module)"
+            }
+          },
+          {
+            "text": {
+              "zh": "高级轴承活塞控制器修改完毕，现在可用，参数调节由滑条改为直接填写，但要注意有效范围",
+              "en": "The Advanced Bearing Piston Controller rework is complete and it is now usable; parameters are entered directly instead of set with sliders, but mind the valid range"
+            }
+          },
+          {
+            "text": {
+              "zh": "增加坦克观瞄镜，内置瞄准和测距功能 UI（标尺固定，并不适配所有火炮）",
+              "en": "Added the Tank Gunsight with a built-in aiming and rangefinding UI (fixed reticle, not suited to all cannons)"
+            }
+          },
+          {
+            "text": {
+              "zh": "修改跟踪模块",
+              "en": "Changed the Tracking Module"
+            },
+            "items": [
+              {
+                "text": {
+                  "zh": "加入视场概念，模块视场 ±60 度，超过视场角度范围模块跟踪力量取消",
+                  "en": "Introduced a field of view: the module's field of view is ±60 degrees, and its tracking force is removed outside this range"
+                }
+              },
+              {
+                "text": {
+                  "zh": "不在视场内的干扰弹不参与概率计算",
+                  "en": "Flares outside the field of view are not included in the probability calculation"
+                }
+              },
+              {
+                "text": {
+                  "zh": "加入概率概念，受到干扰弹干扰时将以概率计算是否被干扰",
+                  "en": "Introduced probability: when flares are present, whether the module is jammed is decided by probability"
+                }
+              }
+            ]
+          },
+          {
+            "text": {
+              "zh": "加入中型航弹",
+              "en": "Added the Medium Aerial Bomb"
+            }
+          },
+          {
+            "text": {
+              "zh": "修订了部分炸弹重量",
+              "en": "Revised the weight of some bombs"
+            },
+            "items": [
+              {
+                "text": {
+                  "zh": "1*5 小炸弹 250→250",
+                  "en": "1*5 Small Bomb 250→250"
+                }
+              },
+              {
+                "text": {
+                  "zh": "1*9 中型炸弹 250→1000",
+                  "en": "1*9 Medium Bomb 250→1000"
+                }
+              },
+              {
+                "text": {
+                  "zh": "3*13 大航爆弹 250→2500",
+                  "en": "3*13 Large Aerial Bomb 250→2500"
+                }
+              },
+              {
+                "text": {
+                  "zh": "1*6 坦克弹药 1000→250",
+                  "en": "1*6 Tank Ammunition 1000→250"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "heading": {
+          "zh": "存在问题",
+          "en": "Open Issues"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "摄像头直接连接座椅无法使用 FOV 调节，需要先连接无线使用再接座椅",
+              "en": "Cameras connected directly to a seat cannot use FOV adjustment; connect them wirelessly first, then connect the seat"
+            }
+          },
+          {
+            "text": {
+              "zh": "坦克瞄准镜未被遥控兼容（未添加 UUID）",
+              "en": "The Tank Gunsight is not yet compatible with remote control (UUID not added)"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1723906852",
+    "publishedAt": "2024-08-17T15:00:52Z",
+    "version": null,
+    "label": {
+      "zh": "紧急修复",
+      "en": "Emergency Fix"
+    },
+    "title": {
+      "zh": "修复加特林与激光武器的问题",
+      "en": "Fixes for the Gatling and laser weapons"
+    },
+    "sections": [
+      {
+        "heading": {
+          "zh": "修复内容",
+          "en": "Fixes"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "修复了加特林炮弹速度错误赋值",
+              "en": "Fixed an incorrectly assigned Gatling projectile speed"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了激光切割器发射点判定问题",
+              "en": "Fixed the firing point detection of the Laser Cutter"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了激光炮特效类型不正确问题",
+              "en": "Fixed the wrong effect type on the Laser Cannon"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了激光炮发射点判定问题",
+              "en": "Fixed the firing point detection of the Laser Cannon"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1723898771",
+    "publishedAt": "2024-08-17T12:46:11Z",
+    "version": null,
+    "label": {
+      "zh": "漏洞修复",
+      "en": "Bug Fixes"
+    },
+    "title": {
+      "zh": "修复非房主玩家的界面与特效问题",
+      "en": "UI and effect fixes for non-host players"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [
+          {
+            "zh": "修复了三个严重的漏洞！",
+            "en": "Fixed three serious bugs!"
+          }
+        ],
+        "items": []
+      },
+      {
+        "heading": {
+          "zh": "更新内容",
+          "en": "Changes"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "发动机 UI 修复（修复了发动机界面在非房主情况下打开就会崩溃的问题）",
+              "en": "Engine UI fix (fixed the engine interface crashing when opened by a non-host player)"
+            }
+          },
+          {
+            "text": {
+              "zh": "相机模块修复（修复了相机模块在非房主情况下无法正常显示的问题）",
+              "en": "Camera Module fix (fixed the Camera Module not displaying correctly for non-host players)"
+            }
+          },
+          {
+            "text": {
+              "zh": "加特林/枪口修复（修复了火炮特效在非房主情况下不能正常显示的问题，修复了激光炮初始速度过低的问题，修复了加特林/枪口射出弹药没有击退力的问题）",
+              "en": "Gatling/Gun Muzzle fix (fixed cannon effects not displaying correctly for non-host players, fixed the Laser Cannon's initial velocity being too low, and fixed Gatling/Gun Muzzle projectiles having no knockback)"
+            }
+          },
+          {
+            "text": {
+              "zh": "更改了部分火炮的散布和子弹速度数据",
+              "en": "Changed the spread and projectile speed of some cannons"
+            }
+          },
+          {
+            "text": {
+              "zh": "部分车轮的摩擦力从 5 调至 6",
+              "en": "Raised the friction of some wheels from 5 to 6"
+            }
+          },
+          {
+            "text": {
+              "zh": "玩家传送器的提示文本增加英文",
+              "en": "Added English to the Player Teleporter's prompt text"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "1723731870",
+    "publishedAt": "2024-08-15T14:24:30Z",
+    "version": "4.0.1",
+    "label": {
+      "zh": "紧急小更新",
+      "en": "Minor Emergency Update"
+    },
+    "title": {
+      "zh": "改为 beta 版本，修正碰撞与文本错误",
+      "en": "Marked as beta, with collision and text fixes"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [
+          {
+            "zh": "从 4.0.1 变更为 4.0.1 beta 版本",
+            "en": "Changed from 4.0.1 to 4.0.1 beta"
+          }
+        ],
+        "items": []
+      },
+      {
+        "heading": {
+          "zh": "更新内容",
+          "en": "Changes"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "增加了高级轴承控制器图标",
+              "en": "Added an icon for the Advanced Bearing Controller"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复了老式轮胎 1.75*5 和五菱轮胎 2*5 的碰撞大小错误",
+              "en": "Fixed incorrect collision sizes of the Vintage Tire 1.75*5 and Wuling Tire 2*5"
+            }
+          },
+          {
+            "text": {
+              "zh": "更改了错误的作者描述文本",
+              "en": "Corrected the wrong author description text"
+            }
+          },
+          {
+            "text": {
+              "zh": "删除了蓝图生成器里名为“1222”的测试用蓝图",
+              "en": "Removed a test blueprint named “1222” from the Blueprint Generator"
+            }
+          }
+        ]
+      },
+      {
+        "heading": {
+          "zh": "已知问题",
+          "en": "Known Issues"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "非房主在使用速射炮会有特效停留在空中",
+              "en": "Effects stay in the air when non-host players use the rapid-fire cannon"
+            }
+          },
+          {
+            "text": {
+              "zh": "非房主使用摄像头会出现漏洞",
+              "en": "Non-host players encounter bugs when using the Camera"
+            }
+          }
+        ]
+      },
+      {
+        "heading": null,
+        "paragraphs": [
+          {
+            "zh": "需要注意：机翼前缘 3*4 在旧版传奇 Mod 中模型和碰撞设置是错误的，新 Mod 为修正设置，因此会导致老作品的机翼前缘 3*4 出现问题，我们对此深表歉意",
+            "en": "Please note: the model and collision settings of Wing Leading Edge 3*4 were wrong in the old Legend Mod and have been corrected in the new Mod, so Wing Leading Edge 3*4 on older creations will have problems. We sincerely apologize for this."
+          }
+        ],
+        "items": []
+      }
+    ]
+  },
+  {
+    "id": "1723709323",
+    "publishedAt": "2024-08-15T08:08:43Z",
+    "version": "4.0.1",
+    "label": {
+      "zh": "New Legend Mod 续篇",
+      "en": "New Legend Mod Continuation"
+    },
+    "title": {
+      "zh": "New Legend Mod 续篇正式发布",
+      "en": "New Legend Mod Continuation released"
+    },
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [
+          {
+            "zh": "New Legend Mod 续篇正式发布，虽然还有很多需要改进的地方，但是这是一个全新的开始！",
+            "en": "New Legend Mod Continuation is officially released. There is still much to improve, but this is a fresh start!"
+          }
+        ],
+        "items": []
+      },
+      {
+        "heading": {
+          "zh": "传奇 Mod 4.0 初步更新内容清单",
+          "en": "Legend Mod 4.0 Initial Content List"
+        },
+        "paragraphs": [],
+        "items": [
+          {
+            "text": {
+              "zh": "加入贴边薄片三通",
+              "en": "Added an edge-mounted thin-plate three-way piece"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入 1X3 宽体轮眉",
+              "en": "Added a 1X3 wide-body fender flare"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入 0.5X0.5 小方灯片",
+              "en": "Added a 0.5X0.5 small square light panel"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入 1X5 至 1X8 机翼前缘后缘",
+              "en": "Added 1X5 to 1X8 wing leading and trailing edges"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入 1X0.5 贴边三角薄片",
+              "en": "Added a 1X0.5 edge-mounted triangular thin plate"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入 1X1 至 1X4 双面斜面",
+              "en": "Added 1X1 to 1X4 double-sided slopes"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入贴边细条转角",
+              "en": "Added an edge-mounted thin-strip corner"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入细管分离器",
+              "en": "Added a thin pipe splitter"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入作品防盗器（感谢叶依风）",
+              "en": "Added the Creation Anti-Theft Device (thanks to 叶依风)"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入三通、四通、五通、六通玻璃真空管",
+              "en": "Added three-way, four-way, five-way and six-way glass vacuum tubes"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入载具储存加载器（by 80老宋）",
+              "en": "Added the Vehicle Storage Loader (by 80老宋)"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入半砖斜四棱锥等多种半砖衔接几何体",
+              "en": "Added several half-brick transition shapes, such as the half-brick oblique square pyramid"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入多组老式轮毂轮胎",
+              "en": "Added several sets of vintage wheels and tires"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入手持玩家传送器",
+              "en": "Added the Handheld Player Teleporter"
+            }
+          },
+          {
+            "text": {
+              "zh": "加入并扩充斜面转斜面几何体尺寸（如 1X2 转 1X4 间距 2、4）",
+              "en": "Added and expanded the sizes of slope-to-slope shapes (e.g. 1X2 to 1X4 with spacing 2 and 4)"
+            }
+          },
+          {
+            "text": {
+              "zh": "升级陀螺仪使其可以根据倾斜角度输出 0 到 1 的数值控制信号了",
+              "en": "Upgraded the Gyroscope so it can output a 0 to 1 numeric control signal based on its tilt angle"
+            }
+          },
+          {
+            "text": {
+              "zh": "升级重写所有的枪、炮的脚本，全新原创算法更真实更少的资源占用，发射不卡顿，同时修复过往所有 Bug",
+              "en": "Upgraded and rewrote the scripts of all guns and cannons with a new original algorithm that is more realistic, uses fewer resources and fires without stutter, and fixed all previous bugs"
+            }
+          },
+          {
+            "text": {
+              "zh": "升级切割激光的脚本变为投掷物实现切割效果不再卡顿",
+              "en": "Upgraded the cutting laser script to cut with projectiles, removing stutter"
+            }
+          },
+          {
+            "text": {
+              "zh": "升级清图方块，现在按 E 可以清除单个载具，按 U 为清图",
+              "en": "Upgraded the World Clear Block: press E to clear a single vehicle, or U to clear the world"
+            }
+          },
+          {
+            "text": {
+              "zh": "升级喷漆模块与喷枪界面，颜色调节改为滑条调节，并加入手动输入 RGB 颜色数值功能与取色功能",
+              "en": "Upgraded the Paint Module and spray gun interface: colors are adjusted with sliders, with manual RGB input and a color picker added"
+            }
+          },
+          {
+            "text": {
+              "zh": "调整圆管模型厚度让彼此之间衔接无缝隙",
+              "en": "Adjusted the thickness of round pipe models so they join without gaps"
+            }
+          },
+          {
+            "text": {
+              "zh": "调整轮胎橡胶的贴图材质效果",
+              "en": "Adjusted the texture and material of tire rubber"
+            }
+          },
+          {
+            "text": {
+              "zh": "增强全部材质的金属光泽",
+              "en": "Enhanced the metallic sheen of all materials"
+            }
+          },
+          {
+            "text": {
+              "zh": "增大摩托轮胎摩擦力",
+              "en": "Increased the friction of motorcycle tires"
+            }
+          },
+          {
+            "text": {
+              "zh": "将集线器与反向器的物品介绍补充得更详细",
+              "en": "Expanded the item descriptions of the Hub and Inverter"
+            }
+          },
+          {
+            "text": {
+              "zh": "改正陀螺仪的物品介绍错误",
+              "en": "Corrected errors in the Gyroscope's item description"
+            }
+          },
+          {
+            "text": {
+              "zh": "使用 Lua 脚本重构 V6、V8 发动机功能代码，增大其可调速度与力量上限，并且可用 UI 界面分别调节",
+              "en": "Rebuilt the V6 and V8 engines with Lua scripts and raised their adjustable speed and power limits, which can be set separately in the UI"
+            }
+          },
+          {
+            "text": {
+              "zh": "修正错误的物品强度数值",
+              "en": "Corrected wrong item durability values"
+            }
+          },
+          {
+            "text": {
+              "zh": "修正船螺旋桨错误的模型方向",
+              "en": "Corrected the model orientation of the boat propeller"
+            }
+          },
+          {
+            "text": {
+              "zh": "修正薄片四棱锥 C 物品名错误",
+              "en": "Corrected the item name of Thin-Plate Square Pyramid C"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复火箭弹粒子贴图材质错误功能",
+              "en": "Fixed incorrect rocket particle textures and materials"
+            }
+          },
+          {
+            "text": {
+              "zh": "所有炮加入不同角度范围炮弹的随机散射",
+              "en": "All cannons now have random shell spread over different angle ranges"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复 2X3、2X4 机翼前缘不能对齐的问题",
+              "en": "Fixed 2X3 and 2X4 wing leading edges not aligning"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复摄像头在运动时视角抖动的问题",
+              "en": "Fixed the camera view shaking while moving"
+            }
+          },
+          {
+            "text": {
+              "zh": "修复炮弹粒子模型变形的问题",
+              "en": "Fixed deformed shell particle models"
+            }
+          },
+          {
+            "text": {
+              "zh": "尝试修复少部分玩家使用 Mod 座椅时人物坐姿姿态丢失的问题",
+              "en": "Attempted to fix the sitting pose being lost for some players using Mod seats"
+            }
+          },
+          {
+            "text": {
+              "zh": "重做优化加特林的模型",
+              "en": "Rebuilt and optimized the Gatling model"
+            }
+          },
+          {
+            "text": {
+              "zh": "重做 Mod 信息纪念牌贴图",
+              "en": "Redid the Mod info plaque texture"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

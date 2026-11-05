@@ -1,0 +1,62 @@
+---
+/**
+ * 虚线框说明块：一行 Spectral 斜体引语加一句说明，可以附带按钮。
+ * 用于空状态，以及「持续补充中，欢迎投稿」一类的邀请。
+ * align：split 文字在左、按钮在右；center 全部居中，按钮在文字下方。
+ * 默认插槽放说明文字，action 插槽放按钮。
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
+  kicker: string;
+  align?: 'split' | 'center';
+}
+
+const { kicker, align = 'split', class: className, ...rest } = Astro.props;
+---
+
+<div class:list={['callout', align, className]} {...rest}>
+  <div class="text">
+    <p class="kicker text-accent">{kicker}</p>
+    <p class="message"><slot /></p>
+  </div>
+  {
+    Astro.slots.has('action') && (
+      <div class="action">
+        <slot name="action" />
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .callout {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px 30px;
+    padding: clamp(28px, 3vw, 36px) clamp(24px, 3vw, 40px);
+    border: 1px dashed var(--color-line-strong);
+    clip-path: var(--clip-notch-lg);
+  }
+
+  .center {
+    flex-direction: column;
+    justify-content: center;
+    padding-block: clamp(44px, 5vw, 64px);
+    text-align: center;
+  }
+
+  .kicker {
+    font-size: 20px;
+  }
+
+  .message {
+    margin-top: 6px;
+    font-size: var(--text-small);
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+</style>

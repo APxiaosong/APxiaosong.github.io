@@ -1,0 +1,114 @@
+---
+/**
+ * 卡片：次级底色、细边框、切角，传入 href 时整张卡片可点击，悬停时金边上移。
+ * shape：corner 只切右上角，用于带图卡片；notch 切两角，用于纯文字卡片。
+ * media 插槽放 16:9 的图片，悬停时图片缓慢放大；badge 显示在图片左上角。
+ * 没有 media 插槽时，正文的内边距更宽。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import Badge from './Badge.astro';
+
+interface Props extends HTMLAttributes<'a'> {
+  href?: string;
+  external?: boolean;
+  shape?: 'corner' | 'notch';
+  badge?: string;
+}
+
+const { href, external = false, shape = 'corner', badge, class: className, ...rest } = Astro.props;
+const t = translator(getLang(Astro.url));
+const Element = href ? 'a' : 'div';
+const hasMedia = Astro.slots.has('media');
+---
+
+<Element
+  class:list={['card', shape, { interactive: href, 'has-media': hasMedia }, className]}
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+  {...rest}
+>
+  {
+    hasMedia && (
+      <div class="media">
+        <slot name="media" />
+        {badge && <Badge class="badge">{badge}</Badge>}
+      </div>
+    )
+  }
+  <div class="body">
+    <slot />
+    {external && <span class="sr-only">{t(ui.common.newWindow)}</span>}
+  </div>
+</Element>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    transition:
+      border-color 0.35s,
+      background-color 0.35s,
+      transform 0.35s var(--ease-out);
+  }
+
+  .corner {
+    clip-path: var(--clip-corner-sm);
+  }
+
+  .notch {
+    clip-path: var(--clip-notch-md);
+  }
+
+  .interactive:hover {
+    border-color: var(--color-accent-line);
+    transform: translateY(-4px);
+  }
+
+  .interactive.notch:hover {
+    background: var(--color-bg-raised);
+  }
+
+  .media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .interactive:hover .media :global(img) {
+    transform: scale(1.06);
+  }
+
+  .interactive:hover :global(.arrow-link) {
+    gap: 10px;
+  }
+
+  .badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+  }
+
+  .body {
+    flex: 1;
+    padding: 30px;
+  }
+
+  .has-media .body {
+    padding: 20px 22px 22px;
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+/**
+ * 区块上方的一行小标题：Oswald 大写金色文字，后面可以跟一段 Spectral 斜体注释，
+ * 例如「01 · 主推内容 Featured」。在金底区块中自动变为深色。
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'p'> {
+  label: string;
+  note?: string;
+}
+
+const { label, note, class: className, ...rest } = Astro.props;
+---
+
+<p class:list={['eyebrow', className]} {...rest}>
+  <span class="label">{label}</span>
+  {note && <span class="note text-note">{note}</span>}
+</p>
+
+<style>
+  .eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 18px;
+  }
+
+  .label {
+    font-family: var(--font-label);
+    font-size: var(--text-small);
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-accent-text);
+  }
+
+  .note {
+    font-size: 18px;
+  }
+</style>

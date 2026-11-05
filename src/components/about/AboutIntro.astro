@@ -1,0 +1,33 @@
+---
+/**
+ * 带大号序号的介绍区：右侧依次是标签、标题和两栏正文。
+ * 默认插槽放在正文下方，例如时间线或跳转链接。
+ */
+import NumberedIntro from '@/components/ui/NumberedIntro.astro';
+import Tag from '@/components/ui/Tag.astro';
+import TextColumns from './TextColumns.astro';
+
+interface Props {
+  index: string;
+  tag: string;
+  title: string;
+  paragraphs: string[];
+}
+
+const { index, tag, title, paragraphs } = Astro.props;
+---
+
+<NumberedIntro index={index} data-reveal>
+  <Tag>{tag}</Tag>
+  <h2 class="title">{title}</h2>
+  <TextColumns paragraphs={paragraphs} />
+  <slot />
+</NumberedIntro>
+
+<style>
+  .title {
+    margin: 18px 0 30px;
+    font-size: var(--text-h2);
+    line-height: 1.12;
+  }
+</style>

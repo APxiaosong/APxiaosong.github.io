@@ -1,0 +1,67 @@
+---
+/**
+ * 视频封面和居中的金色播放标记，铺满父元素，父元素需要 position: relative。
+ * widths 为封面的候选宽度（实际像素），图床不支持缩放时只输出原图。
+ * B 站图床按 Referer 防盗链，所以封面一律不发送 Referer。
+ * 播放标记的尺寸由 --play-size 控制，所在的链接悬停时变亮放大。
+ */
+import Icon from '@/components/ui/Icon.astro';
+import { resizeImage, resizeSrcset } from '@/data/images';
+import type { VideoSource } from '@/data/tutorials';
+
+interface Props {
+  source: VideoSource;
+  widths: number[];
+  sizes: string;
+}
+
+const { source, widths, sizes } = Astro.props;
+const srcset = resizeSrcset(source.cover, widths);
+---
+
+<img
+  class="cover"
+  src={resizeImage(source.cover, widths[0])}
+  srcset={srcset}
+  sizes={srcset && sizes}
+  width={widths[0]}
+  height={Math.round((widths[0] * 9) / 16)}
+  alt=""
+  loading="lazy"
+  decoding="async"
+  referrerpolicy="no-referrer"
+/>
+<span class="play" aria-hidden="true"><Icon name="play-fill" /></span>
+
+<style>
+  .cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .play {
+    --play-size: 54px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--play-size);
+    height: var(--play-size);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-accent) 92%, transparent);
+    color: var(--color-on-accent);
+    font-size: calc(var(--play-size) * 0.4);
+    transform: translate(-50%, -50%);
+    transition:
+      background-color var(--duration-hover),
+      transform var(--duration-hover) var(--ease-out);
+  }
+
+  :global(a:hover) .play {
+    background: var(--color-accent-hover);
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+</style>

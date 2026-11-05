@@ -1,0 +1,155 @@
+{
+  "id": "3309460746",
+  "name": "New Legend Mod Continuation",
+  "version": "4.1.3",
+  "itemCount": 1238,
+  "createdAt": "2024-08-15T08:08:43Z",
+  "updatedAt": "2026-08-30T01:16:05Z",
+  "subscriptions": 69730,
+  "favorites": 1068,
+  "fileSizeMb": 253.571,
+  "previewUrl": "https://images.steamusercontent.com/ugc/15214456443635998824/F63F580AD54992D76C7425CF2BAA512A395E8D03/",
+  "screenshots": [
+    {
+      "image": "https://images.steamusercontent.com/ugc/7416500500644112/0482990E641347BE1CD36988D03350BB5D09F0A9/",
+      "width": 2560,
+      "height": 1600
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078665362/A910378875899BC8C672052ED6FD2CDEB67BAE28/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078665718/9AA58AE8347C5AEABD91A95055AB5E242A5CA492/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078665960/8B6E5A778E2BB5C57B9AFC552A0FA2531642D932/",
+      "width": 637,
+      "height": 358
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078666157/507A52331F81FC530C705BA3918CE89E3EC241D8/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078666345/2C8E272E8BA8053142DFE419958EF71A20815134/",
+      "width": 637,
+      "height": 358
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078666605/5FC57887F0850B8A2B2A2A17FE13B10A028399A0/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078666840/FC74A3F06D2E9978C930C5703AEF842D7D36EEA3/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078667122/88D087D62230DA7984B518FBF3D0A0E8AD9C226E/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078667301/65C59FDE93B62C9D262DFE7DF650830CC29B355F/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078667446/2F56E2256CE5CB78A2E098907049B860AE1643FC/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078667601/B1B19894D1EB00E1900C0FCE0A3FA6D03DC583FB/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078667800/BEF6E3AC9421E632581415C8917621A7E92E3015/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078668073/6204F7741A60F9945DB49DFBF72C8DFE7C04E8FC/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078668242/15A84EAD42D75391E92A8B3210FDF7F1BAC9E252/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078668419/AB5665A61C9F40E02454274DE4E005834DE7EBC8/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078668656/6AAB71DCF32C6A8455418D79989E89FCD0D8BBBA/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078668855/0281C136D9C38FAD7E76C209818CA403C9F9AF52/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078669137/1E915D5571E8490CCA7CA5A865C69F68C8CAA20B/",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "image": "https://images.steamusercontent.com/ugc/2429215282078669364/5929976B25E244930793DDFA0AB646D29A447FD1/",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "related": [
+    {
+      "id": "3111285012",
+      "title": {
+        "zh": "传奇生存自定义游戏",
+        "en": "Legend Survival Custom Game"
+      },
+      "kind": {
+        "zh": "自定义游戏",
+        "en": "Custom Game"
+      },
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3111285012",
+      "previewUrl": "https://images.steamusercontent.com/ugc/2295210273364830020/02439CA862DDBB71EA4C7AD303FF5374966A0528/"
+    },
+    {
+      "id": "3351154765",
+      "title": {
+        "zh": "新传奇地形资产 Mod",
+        "en": "New Legend Terrain Assets Mod"
+      },
+      "kind": {
+        "zh": "地形资产",
+        "en": "Terrain Assets"
+      },
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3351154765",
+      "previewUrl": "https://images.steamusercontent.com/ugc/2475382792375164874/3170096BE7041871E17CD596824455044E8B036F/"
+    },
+    {
+      "id": "3347439895",
+      "title": {
+        "zh": "更多炸弹 Mod（非官方补档）",
+        "en": "More Bombs Mod (Unofficial Reupload)"
+      },
+      "kind": {
+        "zh": "补档",
+        "en": "Reupload"
+      },
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3347439895",
+      "previewUrl": "https://images.steamusercontent.com/ugc/2485515528493965524/D3BA7D1CDFF8436A56DA052345E17CF5BD7A467E/"
+    }
+  ]
+}

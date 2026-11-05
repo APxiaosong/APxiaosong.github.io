@@ -1,0 +1,31 @@
+---
+/**
+ * Remix Icon 图标。name 为不带 ri- 前缀的图标名，例如 arrow-right-line，
+ * 可在 https://remixicon.com 查找。图标对读屏软件隐藏，含义由所在按钮或链接的文字或 aria-label 表达。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { iconGlyph } from './remixicon';
+
+interface Props extends HTMLAttributes<'i'> {
+  name: string;
+}
+
+const { name, class: className, ...rest } = Astro.props;
+---
+
+<i class:list={['icon', className]} data-icon={iconGlyph(name)} aria-hidden="true" {...rest}></i>
+
+<style>
+  .icon {
+    display: inline-block;
+    font-family: var(--font-icon);
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    vertical-align: -0.125em;
+  }
+
+  .icon::before {
+    content: attr(data-icon);
+  }
+</style>

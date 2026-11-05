@@ -1,0 +1,51 @@
+/*
+ * 字体随网站发布，由 Vite 打包成共用的样式表。
+ * 中文字体使用可变字体，按 unicode-range 分片，浏览器只下载页面用到的字符所在的分片，
+ * 一套分片同时覆盖全部字重。
+ * Noto Serif SC 只有少数组件使用，由这些组件自行 import '@fontsource-variable/noto-serif-sc'。
+ */
+@import '@fontsource-variable/noto-sans-sc';
+@import '@fontsource-variable/oswald';
+
+/*
+ * Spectral 斜体只用于西文点缀，只声明西文和扩展西文两个分片。
+ * 不引入包里的 400-italic.css，它为每个分片附带 woff 后备文件，现代浏览器用不到。
+ */
+@font-face {
+  font-family: 'Spectral';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('@fontsource/spectral/files/spectral-latin-ext-400-italic.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+    U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Spectral';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('@fontsource/spectral/files/spectral-latin-400-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/*
+ * 西文弯引号：Noto Sans SC 把 U+2018–201F 画成全角字形，英文单词里的撇号两侧会出现空隙。
+ * 这个字体只覆盖这几个字符，取自已经加载的 Oswald 拉丁分片，只放在英文页面的正文字体栈最前面。
+ */
+@font-face {
+  font-family: 'Latin Quotes';
+  src: url('@fontsource-variable/oswald/files/oswald-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 200 700;
+  font-display: swap;
+  unicode-range: U+2018-201F;
+}
+
+/* 图标字体：Icon 组件按图标名查出码位后直接输出，不需要 remixicon.css 中的类名规则 */
+@font-face {
+  font-family: 'remixicon';
+  src: url('remixicon/fonts/remixicon.woff2') format('woff2');
+  font-display: block;
+}

@@ -1,0 +1,42 @@
+---
+/**
+ * 404 页面。GitHub Pages 对中英文网址都返回根目录的 404.html，
+ * 所以页面同时给出中文和英文的说明与返回入口。
+ */
+import scene from '@/assets/images/scene-challenge.png';
+import Button from '@/components/ui/Button.astro';
+import ButtonGroup from '@/components/ui/ButtonGroup.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import { pages } from '@/config/site';
+import { localizePath } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="页面不存在" noindex>
+  <PageHero variant="cover" image={scene} tag="404" title="页面不存在" subtitle="Page not found" watermark="404">
+    <p class="message">你访问的页面不存在，可能已经移动或删除。</p>
+    <p class="message" lang="en">The page you are looking for may have been moved or removed.</p>
+    <ButtonGroup class="actions">
+      <Button href={localizePath(pages.home, 'zh')} icon="arrow-right-line">返回首页</Button>
+      <Button href={localizePath(pages.home, 'en')} variant="ghost" lang="en">Back to home</Button>
+    </ButtonGroup>
+  </PageHero>
+</BaseLayout>
+
+<style>
+  .message {
+    max-width: 600px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--color-text-secondary);
+  }
+
+  .message:lang(en) {
+    font-size: var(--text-small);
+    color: var(--color-text-muted);
+  }
+
+  .actions {
+    margin-top: 32px;
+  }
+</style>

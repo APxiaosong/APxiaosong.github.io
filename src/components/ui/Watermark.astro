@@ -1,0 +1,45 @@
+---
+/**
+ * 背景上的巨型英文字，只作装饰。父元素需要 position: relative 和 overflow: hidden。
+ * 颜色来自 --color-watermark，在金底区块里自动变为深色。
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'span'> {
+  text: string;
+  position?: 'top-right' | 'bottom-left';
+}
+
+const { text, position = 'top-right', class: className, ...rest } = Astro.props;
+---
+
+<span class:list={['watermark', position, className]} data-text={text} aria-hidden="true" {...rest}></span>
+
+<style>
+  /* 文字由伪元素输出，不属于页面内容，搜索、复制和对比度检测都不会把它当作正文 */
+  .watermark::before {
+    content: attr(data-text);
+  }
+
+  .watermark {
+    position: absolute;
+    font-family: var(--font-label);
+    font-size: clamp(110px, 17vw, 290px);
+    font-weight: 700;
+    line-height: 0.8;
+    color: var(--color-watermark);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .top-right {
+    top: 10px;
+    right: 5%;
+  }
+
+  .bottom-left {
+    bottom: -0.12em;
+    left: -1%;
+  }
+</style>

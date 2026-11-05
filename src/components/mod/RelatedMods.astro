@@ -1,0 +1,93 @@
+---
+/**
+ * 模组简介中推荐的其他创意工坊物品，每项一张带预览图的卡片，在新窗口打开创意工坊页面。
+ * 中文页面在卡片上另外显示英文名称，方便在 Steam 上查找。
+ */
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Card from '@/components/ui/Card.astro';
+import { getMod } from '@/data/mod';
+import { resizeImage, resizeSrcset } from '@/data/images';
+import { getLang, translator } from '@/i18n';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const { related } = getMod();
+
+const subscribe = { zh: '订阅', en: 'Subscribe' };
+---
+
+<ul class="related">
+  {
+    related.map((item) => (
+      <li>
+        <Card href={item.url} external badge={t(item.kind)} class="card">
+          <img
+            slot="media"
+            src={resizeImage(item.previewUrl, 640)}
+            srcset={resizeSrcset(item.previewUrl, [320, 640, 960])}
+            sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"
+            width="640"
+            height="360"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <h3 class="title">{t(item.title)}</h3>
+          <div class="footer">
+            {lang === 'zh' && <span class="name text-note">{item.title.en}</span>}
+            <ArrowLink external class="action">
+              {t(subscribe)}
+            </ArrowLink>
+          </div>
+        </Card>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .related {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .related :global(.card) {
+    height: 100%;
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .name {
+    font-size: var(--text-small);
+  }
+
+  .footer :global(.action) {
+    margin-left: auto;
+    font-size: 12px;
+  }
+
+  @media (max-width: 1100px) {
+    .related {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .related {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

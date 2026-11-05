@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import logo from '@/assets/images/logo.png';
+import TeamMembers from '@/components/about/TeamMembers.astro';
+import TextColumns from '@/components/about/TextColumns.astro';
+import Button from '@/components/ui/Button.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import StatBand from '@/components/ui/StatBand.astro';
+import { pages } from '@/config/site';
+import { getMod } from '@/data/mod';
+import { getMembers } from '@/data/team';
+import { getLang, getLangPaths, localizePath, translator } from '@/i18n';
+import { formatNumber } from '@/i18n/format';
+import { ui } from '@/i18n/ui';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  title: { zh: '关于传奇建造队', en: 'About the Team' },
+  description: {
+    zh: '传奇建造队成立于 2016 年，是《废品机械师》的中国玩家团体，也是传奇模组的开发团队。本页介绍团队的由来和成员。',
+    en: 'Founded in 2016, Legend Build Team is a Chinese Scrap Mechanic community and the team behind the New Legend Mod. Learn about our history and members.',
+  },
+  tag: { zh: '关于 / About', en: 'About' },
+  subtitle: { zh: 'Legend Build Team', en: 'Est. 2016' },
+  founding: {
+    zh: '传奇建造队成立于 2016 年 4 月 2 日，由一众《废品机械师》爱好者发起。多年发展至今，已成长为横跨三个千人交流群的国内大型玩家团体。我们因对这款游戏的热爱而聚集，持续挖掘它在建造与机械上的潜力与可能。',
+    en: 'Legend Build Team was founded on April 2, 2016 by a group of Scrap Mechanic enthusiasts. It has since grown into one of the larger player communities in China, spread across three QQ groups of around a thousand members each. A shared love of the game brings us together, and we keep exploring its potential for building and engineering.',
+  },
+  mod: {
+    zh: '传奇模组于 2016 年 5 月 21 日诞生，如今已是创意工坊订阅量、物品丰富度与体量均居前列的综合性模组。比起这些数字，我们更看重每一位机械师长期的陪伴与信任——这才是团队走到今天的真正缘由。',
+    en: 'The New Legend Mod first appeared on May 21, 2016. Today it ranks among the leading all-in-one mods on the Steam Workshop in subscriptions, item variety and overall size. More than these numbers, we value the long-standing company and trust of every mechanic. That is what has kept the team going.',
+  },
+  subscriptions: { zh: 'Steam 创意工坊\n订阅数', en: 'Steam Workshop\nsubscribers' },
+  members: { zh: '核心\n团队成员', en: 'Core team\nmembers' },
+  items: { zh: '模组\n物品总数', en: 'Items\nin the Mod' },
+  ctaTitle: { zh: '看看我们打造的传奇模组', en: 'Take a look at the New Legend Mod' },
+  ctaMod: { zh: '传奇模组', en: 'New Legend Mod' },
+  ctaContact: { zh: '联系我们', en: 'Contact us' },
+};
+
+const mod = getMod();
+
+const stats = [
+  { value: formatNumber(mod.subscriptions), label: t(copy.subscriptions) },
+  { value: formatNumber(getMembers().length), label: t(copy.members) },
+  { value: formatNumber(mod.itemCount), label: t(copy.items) },
+];
+---
+
+<BaseLayout title={t(copy.title)} description={t(copy.description)}>
+  <PageHero tag={t(copy.tag)} title={t(ui.site.name)} subtitle={t(copy.subtitle)}>
+    <div slot="background" class="backdrop">
+      <Image src={logo} alt="" widths={[800, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    </div>
+    <TextColumns paragraphs={[t(copy.founding), t(copy.mod)]} />
+  </PageHero>
+
+  <StatBand items={stats} />
+
+  <TeamMembers />
+
+  <CtaBand tone="alt" kicker="Our work" title={t(copy.ctaTitle)}>
+    <Button href={localizePath(pages.mod, lang)} icon="arrow-right-line">{t(copy.ctaMod)}</Button>
+    <Button href={localizePath(pages.feedback, lang)} variant="ghost">{t(copy.ctaContact)}</Button>
+  </CtaBand>
+</BaseLayout>
+
+<style>
+  /* 首屏背景用淡化的团队 Logo 代替场景图，靠右完整显示 */
+  .backdrop {
+    height: 100%;
+    padding: 60px;
+    opacity: 0.14;
+  }
+
+  .backdrop img {
+    object-fit: contain;
+    object-position: right center;
+  }
+
+  @media (max-width: 600px) {
+    .backdrop {
+      padding: 20px;
+    }
+  }
+</style>

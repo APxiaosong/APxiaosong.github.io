@@ -1,0 +1,312 @@
+---
+import { Image } from 'astro:assets';
+import gameLogo from '@/assets/images/scrap-mechanic-logo.png';
+import sceneCreative from '@/assets/images/scene-creative.png';
+import AboutIntro from '@/components/about/AboutIntro.astro';
+import GameModes from '@/components/about/GameModes.astro';
+import GameRequirements from '@/components/about/GameRequirements.astro';
+import GameTicket from '@/components/about/GameTicket.astro';
+import GameTimeline from '@/components/about/GameTimeline.astro';
+import Button from '@/components/ui/Button.astro';
+import ButtonGroup from '@/components/ui/ButtonGroup.astro';
+import Card from '@/components/ui/Card.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { links, pages } from '@/config/site';
+import { getLang, getLangPaths, localizePath, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  description: {
+    zh: '《废品机械师》是 Axolot Games 开发的开放世界建造与生存沙盒游戏，2026 年 7 月发布 1.0 正式版。本页介绍游戏模式、核心系统、运行配置和购买方式。',
+    en: 'Scrap Mechanic is an open-world building and survival sandbox by Axolot Games, released as version 1.0 in July 2026. This page covers its game modes, core systems, system requirements and where to buy it.',
+  },
+  heroTag: { zh: 'Version 1.0 · 正式版', en: 'Version 1.0 · Full Release' },
+  heroSubtitle: { zh: 'Scrap Mechanic', en: 'By Axolot Games' },
+  heroLead: {
+    zh: '传奇建造队全部作品所生长的土壤——一个关于建造、机械与想象力的开放世界。历经十年抢先体验，已于 2026 年 7 月发布 1.0 正式版。',
+    en: "The ground all of Legend Build Team's work grows from: an open world of building, machines and imagination. After ten years in Early Access, version 1.0 was released in July 2026.",
+  },
+  introTag: { zh: '什么是废品机械师', en: 'What is Scrap Mechanic' },
+  introTitle: { zh: '用零件，搭建你的想象', en: 'Build what you imagine, part by part' },
+  introGame: {
+    zh: '《废品机械师》（Scrap Mechanic）是由 Axolot Games 打造的开放世界建造与生存沙盒游戏。玩家以模块化零件自由组装机械、载具与各式装置，用想象力解决问题。游戏于 2016 年开启抢先体验，2026 年 7 月 24 日发布 1.0 正式版。',
+    en: 'Scrap Mechanic is an open-world building and survival sandbox game by Axolot Games. Players put together machines, vehicles and all kinds of contraptions from modular parts, and solve problems in their own way. The game entered Early Access in 2016, and version 1.0 was released on July 24, 2026.',
+  },
+  introRelease: {
+    zh: '1.0 版本带来了「钻探雷霆」扩展内容：重制的生存模式、新的地点与完整剧情，以及一轮针对性能与画面的整体优化。从逻辑电路到大型工程载具，这份开放孕育了包括传奇建造队在内的创作社区。',
+    en: 'Version 1.0 brings the Drilling Thunder expansion: a reworked Survival mode, new locations, a complete story, and a broad pass on performance and visuals. From logic circuits to large engineering vehicles, this openness has given rise to creative communities, Legend Build Team among them.',
+  },
+  systemsTag: { zh: '核心系统 / Core Systems', en: 'Core Systems' },
+  // \u2060 是不占宽度的连接符，窄屏换行时不把「可运转」拆到两行
+  systemsTitle: { zh: '把想象变成可\u2060运\u2060转的机械', en: 'Turning ideas into working machines' },
+  closingKicker: { zh: 'Where we build.', en: 'Where we build.' },
+  closingTitle: {
+    zh: '传奇建造队的全部作品\n皆生长于这片土壤之上',
+    en: 'Everything Legend Build Team makes\nis built on this ground',
+  },
+  closingText: {
+    zh: '如果你也热爱建造，欢迎在 Steam 中开始你的旅程，并尝试由我们打造的传奇模组。',
+    en: 'If you enjoy building too, start your journey on Steam and give the New Legend Mod a try.',
+  },
+  closingStore: { zh: '在 Steam 查看', en: 'View on Steam' },
+  closingMod: { zh: '了解传奇模组', en: 'About the Mod' },
+};
+
+const features = [
+  { name: 'Modular', text: { zh: '模块化零件，自由拼装', en: 'Modular parts, freely assembled' } },
+  { name: 'Physics', text: { zh: '真实物理与逻辑系统', en: 'Realistic physics and logic' } },
+  { name: 'Co-op', text: { zh: '多人协作，共同建造', en: 'Build together in multiplayer' } },
+  { name: 'Workshop', text: { zh: '创意工坊，持续拓展', en: 'Extended through the Workshop' } },
+];
+
+const systems = [
+  {
+    letter: 'A',
+    title: { zh: '模块化建造', en: 'Modular building' },
+    motto: 'Block by block',
+    text: {
+      zh: '以方块与零件自由拼装，借助轴承、活塞与连接件构筑结构，每一处连接都真实可拆解。',
+      en: 'Put blocks and parts together, and use bearings, pistons and connectors to form structures. Every connection is real and can be taken apart.',
+    },
+  },
+  {
+    letter: 'B',
+    title: { zh: '物理与逻辑', en: 'Physics and logic' },
+    motto: 'Make it think',
+    text: {
+      zh: '真实物理赋予机械重量与惯性；逻辑门、传感器与计时器让造物学会判断与自动化。',
+      en: 'Real physics gives machines weight and inertia. Logic gates, sensors and timers let your creations make decisions and run on their own.',
+    },
+  },
+  {
+    letter: 'C',
+    title: { zh: '动力与载具', en: 'Power and vehicles' },
+    motto: 'Bring it to life',
+    text: {
+      zh: '引擎、推进器与控制器注入动力，配合轮胎与履带，搭建能跑能作业的载具与机械。',
+      en: 'Engines, thrusters and controllers supply the power. Add wheels or tracks to build vehicles and machines that drive and get work done.',
+    },
+  },
+];
+---
+
+<BaseLayout title={t(ui.nav.game)} description={t(copy.description)} image={sceneCreative}>
+  <PageHero
+    variant="cover"
+    image={sceneCreative}
+    tag={t(copy.heroTag)}
+    title={t(ui.nav.game)}
+    subtitle={t(copy.heroSubtitle)}
+    lead={t(copy.heroLead)}
+  >
+    <Image slot="before-title" src={gameLogo} alt="" height={74} densities={[1, 2]} loading="eager" class="game-logo" />
+  </PageHero>
+
+  <Section>
+    <AboutIntro
+      index="01"
+      tag={t(copy.introTag)}
+      title={t(copy.introTitle)}
+      paragraphs={[t(copy.introGame), t(copy.introRelease)]}
+    >
+      <GameTimeline />
+    </AboutIntro>
+  </Section>
+
+  <Section tone="accent" space="sm">
+    <ul class="features" data-reveal>
+      {
+        features.map((feature) => (
+          <li class="feature">
+            <span class="feature-name">{feature.name}</span>
+            <span class="feature-text">{t(feature.text)}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <GameModes />
+
+  <Section space="md">
+    <SectionHeading index="03" tag={t(copy.systemsTag)} title={t(copy.systemsTitle)} data-reveal />
+    <ul class="systems" data-reveal>
+      {
+        systems.map((system) => (
+          <li>
+            <Card shape="notch" class="system">
+              <span class="system-letter" aria-hidden="true">
+                {system.letter}
+              </span>
+              <h3 class="system-title">{t(system.title)}</h3>
+              <p class="system-motto text-accent">{system.motto}</p>
+              <p class="system-text">{t(system.text)}</p>
+            </Card>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <GameRequirements />
+
+  <GameTicket />
+
+  <Section tone="alt" width="narrow" divider>
+    <div class="closing" data-reveal>
+      <p class="closing-kicker text-accent">{t(copy.closingKicker)}</p>
+      <h2 class="closing-title">{t(copy.closingTitle)}</h2>
+      <p class="closing-text text-body">{t(copy.closingText)}</p>
+      <ButtonGroup class="closing-actions">
+        <Button href={links.gameStore} external>{t(copy.closingStore)}</Button>
+        <Button href={localizePath(pages.mod, lang)} variant="ghost">{t(copy.closingMod)}</Button>
+      </ButtonGroup>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .game-logo {
+    display: block;
+    width: auto;
+    height: 74px;
+    margin-top: 24px;
+    filter: drop-shadow(0 4px 20px rgb(0 0 0 / 0.5));
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 30px;
+  }
+
+  .feature {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .feature + .feature {
+    padding-left: 30px;
+    border-left: 1px solid var(--color-line);
+  }
+
+  .feature-name {
+    font-family: var(--font-label);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .feature-text {
+    font-size: var(--text-small);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .systems {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .system {
+    height: 100%;
+  }
+
+  .system-letter {
+    font-family: var(--font-label);
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-accent);
+  }
+
+  .system-title {
+    margin: 14px 0 6px;
+    font-size: 21px;
+    font-weight: 700;
+  }
+
+  .system-motto {
+    margin-bottom: 12px;
+    font-size: 15px;
+  }
+
+  .system-text {
+    font-size: var(--text-small);
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--color-text-muted);
+  }
+
+  .closing {
+    text-align: center;
+  }
+
+  .closing-kicker {
+    font-size: clamp(22px, 3vw, 36px);
+  }
+
+  .closing-title {
+    margin: 16px 0 24px;
+    font-size: clamp(28px, 3.8vw, 46px);
+    line-height: 1.3;
+    white-space: pre-line;
+  }
+
+  .closing-text {
+    max-width: 660px;
+    margin: 0 auto 36px;
+  }
+
+  .closing-actions {
+    justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    .features {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .feature:nth-child(odd) {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .systems {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .game-logo {
+      height: 52px;
+    }
+
+    .features {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+
+    .feature,
+    .feature + .feature {
+      padding: 16px 0;
+      border-left: 0;
+    }
+
+    .feature + .feature {
+      border-top: 1px solid var(--color-line);
+    }
+  }
+</style>

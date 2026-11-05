@@ -1,0 +1,67 @@
+---
+/**
+ * 切角小标签，用于零件分类、关键词和筛选按钮。
+ * 传入 href 时渲染为链接；传入 pressed 时渲染为切换按钮，
+ * 选中态由 aria-pressed 决定，脚本切换这个属性即可改变外观。
+ * highlight 让静态标签显示为金底，用于需要突出的那一项。
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'span'> {
+  href?: string;
+  pressed?: boolean;
+  highlight?: boolean;
+}
+
+const { href, pressed, highlight = false, class: className, ...rest } = Astro.props;
+const classes = ['chip', { highlight, interactive: href || pressed !== undefined }, className];
+---
+
+{
+  href ? (
+    <a class:list={classes} href={href} {...rest}>
+      <slot />
+    </a>
+  ) : pressed !== undefined ? (
+    <button class:list={classes} type="button" aria-pressed={pressed ? 'true' : 'false'} {...rest}>
+      <slot />
+    </button>
+  ) : (
+    <span class:list={classes} {...rest}>
+      <slot />
+    </span>
+  )
+}
+
+<style>
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid var(--color-line-strong);
+    background: var(--color-bg);
+    color: var(--color-text-secondary);
+    font-size: var(--text-small);
+    line-height: 1.4;
+    white-space: nowrap;
+    clip-path: var(--clip-notch-sm);
+    transition:
+      color var(--duration-hover),
+      border-color var(--duration-hover),
+      background-color var(--duration-hover);
+  }
+
+  .interactive:hover {
+    border-color: var(--color-accent-line);
+    color: var(--color-accent-text);
+  }
+
+  .chip.highlight,
+  .chip[aria-pressed='true'] {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-weight: 700;
+  }
+</style>

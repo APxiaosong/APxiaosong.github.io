@@ -1,0 +1,125 @@
+---
+/**
+ * 教程库的视频卡片：封面、分类、播放平台、标题、简介和作者，整张卡片在新窗口打开视频。
+ * 播放平台按页面语言选择；简介只有中文，英文页面不显示。
+ */
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Card from '@/components/ui/Card.astro';
+import { getTutorialAuthor, getTutorialCategory, getVideoSource, platformNames, type Video } from '@/data/tutorials';
+import { getLang, translator } from '@/i18n';
+import VideoPoster from './VideoPoster.astro';
+
+interface Props {
+  video: Video;
+}
+
+const { video } = Astro.props;
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const source = getVideoSource(video, lang);
+const author = t(getTutorialAuthor(video.author).name);
+const summary = lang === 'zh' ? video.summary : null;
+
+const copy = {
+  watch: { zh: '观看', en: 'Watch' },
+};
+---
+
+<Card href={source.url} external badge={t(getTutorialCategory(video.category).name)} class="video-card">
+  <Fragment slot="media">
+    <VideoPoster
+      source={source}
+      widths={[400, 800]}
+      sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 1100px) 50vw, 440px"
+    />
+    <Badge tone="muted" class="platform">{platformNames[source.platform]}</Badge>
+  </Fragment>
+  <div class="content">
+    <div class="text">
+      <h3 class="title">{t(video.title)}</h3>
+      {summary && <p class="summary">{summary}</p>}
+    </div>
+    <div class="meta">
+      <span class="author">
+        <span class="initial" aria-hidden="true">{Array.from(author)[0].toUpperCase()}</span>
+        {author}
+      </span>
+      <ArrowLink external>{t(copy.watch)}</ArrowLink>
+    </div>
+  </div>
+</Card>
+
+<style>
+  .video-card {
+    height: 100%;
+  }
+
+  .platform {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* 占满剩余高度，同一行的卡片高度不同时，作者一栏都贴在底部 */
+  .text {
+    flex: 1;
+    padding-bottom: 18px;
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.45;
+    text-wrap: pretty;
+  }
+
+  .summary {
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    font-family: var(--font-accent);
+    font-size: 15px;
+    font-style: italic;
+    color: var(--color-text-secondary);
+  }
+
+  .initial {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border: 1px solid var(--color-accent-line);
+    background: var(--color-accent-tint-strong);
+    color: var(--color-accent-text);
+    font-family: var(--font-label);
+    font-size: 12px;
+    font-style: normal;
+  }
+</style>

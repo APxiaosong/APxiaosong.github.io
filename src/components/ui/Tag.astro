@@ -1,0 +1,59 @@
+---
+/**
+ * 金底切角标签，用于区块和页面的分类标记，例如「关于 / About」。
+ * size：sm 用于列表行和版本号，md 为区块标题上方的默认尺寸，lg 用于首屏。
+ * dot：在文字前加一个小方块，首屏标签使用。
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'span'> {
+  size?: 'sm' | 'md' | 'lg';
+  dot?: boolean;
+}
+
+const { size = 'md', dot = false, class: className, ...rest } = Astro.props;
+---
+
+<span class:list={['tag', size, className]} {...rest}>
+  {dot && <span class="dot" aria-hidden="true"></span>}
+  <slot />
+</span>
+
+<style>
+  .tag {
+    --cut: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px 6px 12px;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-family: var(--font-label);
+    font-size: var(--text-label);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+  }
+
+  .sm {
+    --cut: 6px;
+    padding: 4px 12px 4px 10px;
+    letter-spacing: 2px;
+  }
+
+  .lg {
+    --cut: 10px;
+    padding: 8px 18px 8px 14px;
+    font-size: 13px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    flex: none;
+    background: currentColor;
+  }
+</style>

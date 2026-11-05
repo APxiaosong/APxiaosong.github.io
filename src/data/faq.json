@@ -1,0 +1,197 @@
+[
+  {
+    "id": "install",
+    "title": {
+      "zh": "获取与安装",
+      "en": "Getting the Mod"
+    },
+    "items": [
+      {
+        "id": "how-to-install",
+        "question": {
+          "zh": "如何安装传奇模组？",
+          "en": "How do I install the New Legend Mod?"
+        },
+        "answer": {
+          "zh": "在 Steam 创意工坊页面点击「订阅」，游戏将自动下载并保持更新，无需手动安装文件。创建新存档时勾选启用传奇模组，或在现有存档的模组管理中启用，即可在创造模式中使用。",
+          "en": "Click \"Subscribe\" on the Steam Workshop page and the game will download the Mod and keep it up to date; there are no files to install by hand. Enable the Mod when creating a new save, or turn it on in the mod settings of an existing save, and it is ready to use in Creative Mode."
+        },
+        "featured": true
+      },
+      {
+        "id": "where-are-parts",
+        "question": {
+          "zh": "安装后在哪里找到这些零件？",
+          "en": "Where do I find the parts after installing?"
+        },
+        "answer": {
+          "zh": "进入创造模式，在物品栏／建造菜单中可找到传奇模组提供的零件分类，按类别取用即可。",
+          "en": "In Creative Mode, open the inventory or building menu. The parts added by the Mod are grouped into their own categories, so you can take them from there."
+        },
+        "featured": false
+      },
+      {
+        "id": "is-it-free",
+        "question": {
+          "zh": "使用模组需要付费吗？",
+          "en": "Does the Mod cost anything?"
+        },
+        "answer": {
+          "zh": "传奇模组在 Steam 创意工坊免费订阅；但需要先在 Steam 拥有并安装本体游戏《废品机械师》。",
+          "en": "The New Legend Mod is free to subscribe to on the Steam Workshop. You do need to own and install Scrap Mechanic on Steam first."
+        },
+        "featured": false
+      },
+      {
+        "id": "compatibility",
+        "question": {
+          "zh": "传奇模组与其他模组兼容吗？",
+          "en": "Is the Mod compatible with other mods?"
+        },
+        "answer": {
+          "zh": "传奇模组与大多数模组兼容。请勿同时启用 New Legend Mod 3.2.3 与 New Legend Mod Continuation，否则会导致错误；部分模组组合可能导致材质偏色或显示异常。传奇模组已针对 Modpack 做了部分兼容性优化。",
+          "en": "The New Legend Mod works with most mods. Do not enable New Legend Mod 3.2.3 and New Legend Mod Continuation at the same time, as this causes errors. Some combinations of mods may cause discolored textures or other display problems. The Mod has been partly optimized for compatibility with the Modpack."
+        },
+        "featured": false
+      }
+    ]
+  },
+  {
+    "id": "usage",
+    "title": {
+      "zh": "模组使用",
+      "en": "Using the Mod"
+    },
+    "items": [
+      {
+        "id": "english",
+        "question": {
+          "zh": "模组支持英文吗？",
+          "en": "Is the Mod available in English?"
+        },
+        "answer": {
+          "zh": "支持。传奇模组现已为全部物品提供英文描述，海外机械师也能顺畅查阅与使用。",
+          "en": "Yes. Every item in the New Legend Mod now has an English description, so players outside China can read and use them without difficulty."
+        },
+        "featured": true
+      },
+      {
+        "id": "exclusive-parts",
+        "question": {
+          "zh": "「传奇专属零件」是什么？",
+          "en": "What are \"Legend exclusive parts\"?"
+        },
+        "answer": {
+          "zh": "这是由传奇建造队原创设计的独特零件，区别于游戏与常规模组，是本模组的特色内容之一。",
+          "en": "They are original parts designed by Legend Build Team. They differ from the parts in the base game and in other mods, and are one of the distinctive features of this Mod."
+        },
+        "featured": false
+      },
+      {
+        "id": "tracks",
+        "question": {
+          "zh": "如何使用履带功能？",
+          "en": "How do I use tracks?"
+        },
+        "answer": {
+          "zh": "将轮子按顺序连线形成闭环，然后放置履带控制器并连接至其中一个轮子，即可生成履带。详细操作请参阅教程库中的履带使用教程，以及模组简介中的开发者说明。",
+          "en": "Connect the wheels in order to form a closed loop, then place a track controller and connect it to one of the wheels to generate the track. For details, see the track tutorial in the Library and the developer notes in the Mod description."
+        },
+        "featured": false
+      },
+      {
+        "id": "performance",
+        "question": {
+          "zh": "模组会影响存档或性能吗？",
+          "en": "Does the Mod affect saves or performance?"
+        },
+        "answer": {
+          "zh": "在合理范围内使用通常不会有明显影响。若你在特定场景遇到问题，欢迎通过社群向我们反馈，便于我们持续优化。",
+          "en": "Used within reason, it usually has no noticeable effect. If you run into problems in a particular situation, please let us know through the community so that we can keep improving the Mod."
+        },
+        "featured": false
+      },
+      {
+        "id": "blueprint-not-loading",
+        "question": {
+          "zh": "为什么我的蓝图无法加载？",
+          "en": "Why won't my blueprint load?"
+        },
+        "answer": {
+          "zh": "若蓝图使用旧版传奇模组制作，请使用对应的版本打开。新版模组可以打开旧版蓝图，但旧版模组无法打开新版蓝图。另外，请勿同时启用 New Legend Mod 3.2.3 与 New Legend Mod Continuation，否则加载作品时可能显示「无效接合位置」。",
+          "en": "If the blueprint was made with an older version of the Mod, open it with the matching version. Newer versions can open older blueprints, but older versions cannot open newer ones. Also, do not enable New Legend Mod 3.2.3 and New Legend Mod Continuation at the same time, as this may cause an \"invalid joint position\" error when loading creations."
+        },
+        "featured": false
+      },
+      {
+        "id": "build-failed",
+        "question": {
+          "zh": "为什么千斤顶加载蓝图时显示「构建作品失败」？",
+          "en": "Why does the lift show \"Build failed\" when loading a blueprint?"
+        },
+        "answer": {
+          "zh": "这通常是因为作品使用了当前存档未加载的模组。请检查该作品在创意工坊页面列出的前置模组，确保全部启用。注意：部分作者可能未完整标注作品所需的模组。",
+          "en": "This usually means the creation uses mods that are not loaded in your current save. Check the required mods listed on its Workshop page and make sure they are all enabled. Note that some creators may not list every mod their creations need."
+        },
+        "featured": false
+      }
+    ]
+  },
+  {
+    "id": "community",
+    "title": {
+      "zh": "社区与支持",
+      "en": "Community & Support"
+    },
+    "items": [
+      {
+        "id": "get-help",
+        "question": {
+          "zh": "遇到问题去哪里求助？",
+          "en": "Where can I get help?"
+        },
+        "answer": {
+          "zh": "欢迎加入官方 QQ 群（一群 537532878 / 二群 158484814 / 三群 633703984）或 Steam 社区组，与团队成员和其他机械师交流。",
+          "en": "Join our official QQ groups (Group 1: 537532878 / Group 2: 158484814 / Group 3: 633703984) or the Steam group to talk with team members and other builders."
+        },
+        "featured": true
+      },
+      {
+        "id": "feedback",
+        "question": {
+          "zh": "如何反馈问题或提出建议？",
+          "en": "How do I report a problem or make a suggestion?"
+        },
+        "answer": {
+          "zh": "可以在 Steam 创意工坊的模组评论区或讨论组留言，也可以通过 QQ 群，或页面底部「反馈」中的邮箱联系我们。我们重视每一条反馈。",
+          "en": "Leave a comment or start a discussion on the Mod's Steam Workshop page, post in our QQ groups, or write to the email address under \"Feedback\" at the bottom of the page. We value every piece of feedback."
+        },
+        "featured": false
+      },
+      {
+        "id": "update-frequency",
+        "question": {
+          "zh": "模组多久更新一次？",
+          "en": "How often is the Mod updated?"
+        },
+        "answer": {
+          "zh": "团队保持稳定的更新节奏，会持续新增内容并修复问题。重要更新会在「动态」页与社群同步发布。",
+          "en": "The team updates the Mod at a steady pace, adding new content and fixing issues. Major updates are announced on the News page and in the community at the same time."
+        },
+        "featured": true
+      },
+      {
+        "id": "gallery-submission",
+        "question": {
+          "zh": "如何让我的作品出现在画廊？",
+          "en": "How can my creation appear in the Gallery?"
+        },
+        "answer": {
+          "zh": "欢迎通过官方社群投稿你的建造作品，我们会持续收录社区精选至画廊页面。",
+          "en": "Submit your creations through the official community channels. We regularly add selected community work to the Gallery."
+        },
+        "featured": false
+      }
+    ]
+  }
+]

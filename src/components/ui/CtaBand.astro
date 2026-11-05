@@ -1,0 +1,73 @@
+---
+/**
+ * 行动号召横条：左侧是一行引语或标签加标题，右侧放按钮（默认插槽）。
+ * 常用于页面末尾引导到下一个页面，例如「想要更系统的教程？ → 前往教程库」。
+ * kicker 为 Spectral 斜体引语，tag 为金底标签，二者选一。
+ * space 为上下留白，夹在页面中间的紧凑横条用 sm。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import Section from './Section.astro';
+import Tag from './Tag.astro';
+
+interface Props extends HTMLAttributes<'section'> {
+  title: string;
+  kicker?: string;
+  tag?: string;
+  tone?: 'base' | 'alt' | 'accent';
+  space?: 'md' | 'sm';
+}
+
+const { title, kicker, tag, tone = 'base', space = 'md', ...rest } = Astro.props;
+---
+
+<Section tone={tone} space={space} divider={tone !== 'accent'} {...rest}>
+  <div class="cta" data-reveal>
+    <div class="text">
+      {tag && <Tag>{tag}</Tag>}
+      {kicker && <p class="kicker text-accent">{kicker}</p>}
+      <h2 class="title">{title}</h2>
+    </div>
+    <div class="actions"><slot /></div>
+  </div>
+</Section>
+
+<style>
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .text :global(.tag) {
+    margin-bottom: 8px;
+  }
+
+  .kicker {
+    font-size: 20px;
+  }
+
+  /* 标题是带标点的短句，中文只在标点和空格处换行，不把词语拆到两行 */
+  .title {
+    max-width: 720px;
+    font-size: var(--text-h3);
+    font-weight: 700;
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+/**
+ * 团队页的成员墙：成员名按名单顺序排开，字号、字体和颜色按固定序列轮换，形成错落的排版。
+ */
+import '@fontsource-variable/noto-serif-sc';
+import { getMembers } from '@/data/team';
+import { getLang, translator } from '@/i18n';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+
+const t = translator(getLang(Astro.url));
+
+const copy = {
+  tag: { zh: '团队成员 / Members', en: 'Members' },
+  title: { zh: '每一个名字，都是一份热爱', en: 'Behind every name is a love of the game' },
+  closing: { zh: '—— 以及每一位与我们同行的机械师。', en: '— and every mechanic who has built alongside us.' },
+};
+
+// 字号，单位为 px
+const sizes = [30, 48, 24, 40, 58, 28, 44, 34, 52, 26, 38, 62, 32, 46];
+const fonts = ['serif', 'label', 'sans'] as const;
+
+const members = getMembers().map((name, i) => {
+  const size = sizes[i % sizes.length];
+  const font = fonts[i % fonts.length];
+  return {
+    name,
+    size,
+    font,
+    bold: font === 'label' || size > 42,
+    accent: i % 5 === 1 || i % 5 === 3,
+  };
+});
+---
+
+<Section>
+  <SectionHeading index="01" tag={t(copy.tag)} title={t(copy.title)} data-reveal />
+
+  <ul class="wall" data-reveal>
+    {
+      members.map((member) => (
+        <li class:list={['name', member.font, { bold: member.bold, accent: member.accent }]} style={`--size: ${member.size}`}>
+          {member.name}
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="closing text-note" data-reveal>{t(copy.closing)}</p>
+</Section>
+
+<style>
+  .wall {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 20px 36px;
+    max-width: 1260px;
+  }
+
+  .name {
+    font-size: calc(var(--size) * 1px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    color: var(--color-text);
+    transition:
+      color var(--duration-hover),
+      transform var(--duration-hover) var(--ease-out);
+  }
+
+  .name:hover {
+    color: var(--color-accent-text);
+    transform: translateY(-6px);
+  }
+
+  .serif {
+    font-family: var(--font-serif);
+  }
+
+  .label {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+
+  .accent {
+    color: var(--color-accent-text);
+  }
+
+  .closing {
+    margin-top: 40px;
+    font-size: 18px;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  @media (max-width: 600px) {
+    .wall {
+      gap: 14px 22px;
+    }
+
+    .name {
+      font-size: calc(var(--size) * 0.6px + 4px);
+    }
+  }
+</style>

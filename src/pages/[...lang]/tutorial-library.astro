@@ -1,0 +1,138 @@
+---
+import scene from '@/assets/images/scene-survival.png';
+import GroupHeading from '@/components/learn/GroupHeading.astro';
+import LanguageNotice from '@/components/learn/LanguageNotice.astro';
+import { libraryParam } from '@/components/learn/library';
+import VideoCard from '@/components/learn/VideoCard.astro';
+import Button from '@/components/ui/Button.astro';
+import Callout from '@/components/ui/Callout.astro';
+import Filter from '@/components/ui/Filter.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Section from '@/components/ui/Section.astro';
+import { pages } from '@/config/site';
+import { getTutorialAuthor, getTutorialCategories, getTutorialCategory, getVideos, type Video } from '@/data/tutorials';
+import { getLang, getLangPaths, localizePath, translator } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  title: { zh: '教程库', en: 'Tutorial Library' },
+  description: {
+    zh: '按类别汇总的《废品机械师》视频教程与作品展示，可以按分类筛选和搜索。',
+    en: 'Scrap Mechanic video tutorials and showcases, sorted by category and searchable.',
+  },
+  tag: { zh: '教程 / Tutorials', en: 'Tutorials' },
+  subtitle: { zh: 'Tutorial Library', en: 'Videos by Category' },
+  lead: {
+    zh: '按类别汇总的教程索引，从入门到进阶持续补充，也收录了一些作品展示。',
+    en: 'An index of tutorials sorted by category, from getting started to advanced topics, along with a selection of showcase videos. New videos are added over time.',
+  },
+  filterLabel: { zh: '按分类筛选', en: 'Filter by category' },
+  search: { zh: '搜索教程、作者或关键词…', en: 'Search titles, creators or keywords…' },
+  count: { zh: '{n} 个视频 · Results', en: 'Results: {n}' },
+  empty: { zh: '没有匹配的视频，试试其他关键词或分类。', en: 'No videos match. Try a different keyword or category.' },
+  tutorials: { zh: '教程 · Tutorials', en: 'Tutorials' },
+  showcases: { zh: '作品展示 · Showcases', en: 'Showcases' },
+  more: {
+    zh: '教程库持续补充中，欢迎在社群提出你想看的主题。',
+    en: 'The library keeps growing. Let us know in the community which topics you would like to see.',
+  },
+  suggest: { zh: '提交建议', en: 'Suggest a Topic' },
+};
+
+const videos = getVideos();
+const groups = [
+  { title: copy.tutorials, videos: videos.filter((video) => video.kind === 'tutorial') },
+  { title: copy.showcases, videos: videos.filter((video) => video.kind === 'showcase') },
+];
+
+const options = getTutorialCategories().map((category) => ({ value: category.id, label: t(category.name) }));
+
+// 搜索范围包括两种语言的标题、作者和分类，英文页面上也能用中文原标题找到视频
+function searchText(video: Video): string {
+  const author = getTutorialAuthor(video.author).name;
+  const category = getTutorialCategory(video.category).name;
+  const fields = [video.title.zh, video.title.en, video.summary, author.zh, author.en, category.zh, category.en];
+  return [...new Set(fields.filter(Boolean))].join(' ');
+}
+---
+
+<BaseLayout title={t(copy.title)} description={t(copy.description)}>
+  <PageHero
+    image={scene}
+    tag={t(copy.tag)}
+    title={t(copy.title)}
+    subtitle={t(copy.subtitle)}
+    lead={t(copy.lead)}
+    watermark="INDEX"
+  />
+
+  <Section space="md">
+    <LanguageNotice class="notice" data-reveal />
+    <Filter
+      target="videos"
+      options={options}
+      label={t(copy.filterLabel)}
+      search={t(copy.search)}
+      count={t(copy.count)}
+      param={libraryParam}
+      empty={t(copy.empty)}
+      data-reveal
+    />
+
+    <div class="groups" id="videos">
+      {
+        groups.map((group) => (
+          <section data-filter-group>
+            <GroupHeading>{t(group.title)}</GroupHeading>
+            <ul class="grid">
+              {group.videos.map((video, index) => (
+                <li
+                  data-filter-value={video.category}
+                  data-filter-text={searchText(video)}
+                  data-reveal
+                  style={`--reveal-delay: ${(index % 3) * 70}ms`}
+                >
+                  <VideoCard video={video} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    <Callout kicker="More coming." class="more" data-reveal>
+      {t(copy.more)}
+      <Button slot="action" href={localizePath(pages.feedback, lang)} variant="outline" size="sm" icon="arrow-right-line">
+        {t(copy.suggest)}
+      </Button>
+    </Callout>
+  </Section>
+</BaseLayout>
+
+<style>
+  .notice {
+    margin-bottom: 30px;
+  }
+
+  .groups {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(56px, 6vw, 80px);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(330px, 100%), 1fr));
+    gap: 18px;
+  }
+
+  .more {
+    margin-top: clamp(40px, 5vw, 56px);
+  }
+</style>

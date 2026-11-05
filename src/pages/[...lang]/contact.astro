@@ -1,0 +1,25 @@
+---
+/** /contact.html 立即跳转到首页的反馈区块，使外部已有的链接继续有效。页面本身不被搜索引擎收录。 */
+import { pages } from '@/config/site';
+import { getLang, getLangPaths, htmlLang, localizePath, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const target = localizePath(pages.feedback, lang);
+---
+
+<!doctype html>
+<html lang={htmlLang[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <title>{t(ui.nav.feedback)} | {t(ui.site.name)}</title>
+  </head>
+  <body>
+    <a href={target}>{t(ui.nav.feedback)}</a>
+  </body>
+</html>

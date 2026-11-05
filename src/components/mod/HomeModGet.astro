@@ -1,0 +1,19 @@
+---
+/** 首页「获取模组」横条，锚点 #mod-get。 */
+import Button from '@/components/ui/Button.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import { links } from '@/config/site';
+import { getLang, translator } from '@/i18n';
+
+const t = translator(getLang(Astro.url));
+
+const copy = {
+  tag: { zh: '获取 / Get', en: 'Get' },
+  title: { zh: '在 Steam 创意工坊一键订阅', en: 'One-click subscribe on the Steam Workshop' },
+  action: { zh: '前往订阅页', en: 'Open Workshop Page' },
+};
+---
+
+<CtaBand id="mod-get" tag={t(copy.tag)} title={t(copy.title)} space="sm">
+  <Button href={links.modWorkshop} variant="outline" external>{t(copy.action)}</Button>
+</CtaBand>

@@ -1,0 +1,186 @@
+---
+/**
+ * 精选视频：封面加播放标记，下方是分类、平台、标题和外部链接。
+ * 封面是指向视频页面的链接；脚本可用时，单击封面改为在原位置加载播放器，按住修饰键点击仍在新窗口打开。
+ * 播放器要等点击后才加载，避免页面打开时就请求多个视频网站的脚本。
+ * size：lg 用于主视频，标题和链接左右排列并显示简介；sm 用于并排的小视频，上下排列。
+ * ratio：画面比例，默认 16 / 9；手机宽度下一律为 16:9。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { getTutorialCategory, getVideoSource, platformNames, type Video, type VideoSource } from '@/data/tutorials';
+import { getLang, translator } from '@/i18n';
+import VideoPoster from './VideoPoster.astro';
+
+interface Props extends HTMLAttributes<'figure'> {
+  video: Video;
+  size?: 'lg' | 'sm';
+  ratio?: string;
+}
+
+const { video, size = 'sm', ratio = '16 / 9', class: className, ...rest } = Astro.props;
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const source = getVideoSource(video, lang);
+const platform = platformNames[source.platform];
+const title = t(video.title);
+const summary = size === 'lg' && lang === 'zh' ? video.summary : null;
+
+const copy = {
+  play: { zh: '播放：', en: 'Play: ' },
+  open: { zh: '{platform} 打开', en: 'Open on {platform}' },
+};
+
+function embedUrl({ platform, id }: VideoSource): string {
+  return platform === 'bilibili'
+    ? `https://player.bilibili.com/player.html?bvid=${id}&high_quality=1&danmaku=0&autoplay=1`
+    : `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+}
+---
+
+<figure class:list={['featured-video', size, className]} {...rest}>
+  <div class="frame" style={`--ratio: ${ratio}`}>
+    <a
+      class="poster"
+      href={source.url}
+      target="_blank"
+      rel="noopener"
+      aria-label={t(copy.play) + title}
+      data-embed={embedUrl(source)}
+      data-embed-title={title}
+    >
+      <VideoPoster
+        source={source}
+        widths={size === 'lg' ? [800, 1600] : [480, 960]}
+        sizes={size === 'lg' ? '(max-width: 900px) 100vw, 900px' : '(max-width: 900px) 100vw, 560px'}
+      />
+    </a>
+  </div>
+  <figcaption class="caption">
+    <div class="text">
+      <p class="meta">
+        <Badge>{t(getTutorialCategory(video.category).name)}</Badge>
+        <span class="platform text-accent">{platform}</span>
+      </p>
+      <h3 class="title">{title}</h3>
+      {summary && <p class="summary">{summary}</p>}
+    </div>
+    <ArrowLink href={source.url} external tone="muted" class="open">
+      {t(copy.open).replace('{platform}', platform)}
+    </ArrowLink>
+  </figcaption>
+</figure>
+
+<script>
+  for (const poster of document.querySelectorAll<HTMLAnchorElement>('[data-embed]')) {
+    poster.addEventListener('click', (event) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      const player = document.createElement('iframe');
+      player.src = poster.dataset.embed!;
+      player.title = poster.dataset.embedTitle!;
+      player.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+      player.allowFullscreen = true;
+      poster.replaceWith(player);
+      player.focus();
+    });
+  }
+</script>
+
+<style>
+  .frame {
+    position: relative;
+    aspect-ratio: var(--ratio);
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    background: var(--color-bg-sunken);
+  }
+
+  .lg .frame {
+    clip-path: var(--clip-frame-lg);
+  }
+
+  .poster {
+    position: absolute;
+    inset: 0;
+  }
+
+  .poster :global(.cover) {
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .poster:hover :global(.cover) {
+    transform: scale(1.04);
+  }
+
+  .lg .poster :global(.play) {
+    --play-size: 72px;
+  }
+
+  /* 播放器由脚本插入，不带组件的样式作用域 */
+  .frame :global(iframe) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .caption {
+    padding: 18px 2px 0;
+  }
+
+  .lg .caption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px 30px;
+    padding-top: 20px;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .platform {
+    font-size: 16px;
+  }
+
+  .title {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-wrap: pretty;
+  }
+
+  .lg .title {
+    font-size: clamp(20px, 2vw, 24px);
+  }
+
+  .summary {
+    max-width: 560px;
+    margin-top: 8px;
+    font-size: var(--text-small);
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .sm .open {
+    margin-top: 8px;
+  }
+
+  /* 手机上宽银幕比例的画面过矮，统一改为 16:9，播放标记也恢复常规尺寸 */
+  @media (max-width: 600px) {
+    .frame {
+      aspect-ratio: 16 / 9;
+    }
+
+    .lg .poster :global(.play) {
+      --play-size: 54px;
+    }
+  }
+</style>

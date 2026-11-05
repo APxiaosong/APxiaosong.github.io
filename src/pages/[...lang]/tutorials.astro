@@ -1,0 +1,218 @@
+---
+import scene from '@/assets/images/scene-creative.png';
+import FeaturedVideo from '@/components/learn/FeaturedVideo.astro';
+import LanguageNotice from '@/components/learn/LanguageNotice.astro';
+import { libraryCategoryPath } from '@/components/learn/library';
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Button from '@/components/ui/Button.astro';
+import Card from '@/components/ui/Card.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Section from '@/components/ui/Section.astro';
+import { pages } from '@/config/site';
+import { getFeaturedVideos, getTutorialCategories, getVideos } from '@/data/tutorials';
+import { getLang, getLangPaths, localizePath, translator } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  title: { zh: '精选教程', en: 'Tutorials' },
+  description: {
+    zh: '从零基础到进阶技巧，一些值得一看的《废品机械师》和传奇模组视频教程。',
+    en: 'A few Scrap Mechanic and New Legend Mod video tutorials worth watching, from the basics to more advanced techniques.',
+  },
+  tag: { zh: '教程 / Tutorials', en: 'Tutorials' },
+  subtitle: { zh: 'Featured Guides', en: 'Featured Guides' },
+  lead: {
+    zh: '从零基础到进阶技巧，我们挑选了一些值得一看的教程。想要更系统的内容，请前往教程库。',
+    en: 'From the basics to more advanced techniques, here are a few tutorials worth watching. For a fuller collection, see the Tutorial Library.',
+  },
+  featured: { zh: '精选 · Featured', en: 'Featured' },
+  featuredNote: { zh: '从这里开始', en: 'Start here' },
+  path: { zh: '学习路径 · Path', en: 'Learning Path' },
+  pathNote: { zh: '循序渐进', en: 'One step at a time' },
+  tutorialCount: {
+    zh: (count: number) => `${count} 个教程`,
+    en: (count: number) => `${count} ${count === 1 ? 'tutorial' : 'tutorials'}`,
+  },
+  ctaTitle: { zh: '想要更系统、更全面的教程？', en: 'Looking for more tutorials?' },
+  toLibrary: { zh: '前往教程库', en: 'Go to the Library' },
+};
+
+// 学习路径的每一步对应教程库的一个分类
+const steps = [
+  {
+    category: 'beginner',
+    title: { zh: '基础操作', en: 'The Basics' },
+    text: {
+      zh: '安装游戏与模组，熟悉基础操作、游戏设置和蓝图的使用。',
+      en: 'Install the game and mods, and learn the controls, settings and blueprints.',
+    },
+  },
+  {
+    category: 'vehicle',
+    title: { zh: '动力与载具', en: 'Vehicles' },
+    text: { zh: '车辆、悬挂、转向与飞行器的搭建。', en: 'Build cars, suspension, steering and aircraft.' },
+  },
+  {
+    category: 'track',
+    title: { zh: '履带与机动', en: 'Tracks' },
+    text: { zh: '履带底盘的搭建，以及坦克的差速转向。', en: 'Build tracked chassis and differential steering for tanks.' },
+  },
+  {
+    category: 'advanced',
+    title: { zh: '逻辑与机构', en: 'Logic & Mechanisms' },
+    text: {
+      zh: '逻辑电路、各类机构、自动化与建造技巧。',
+      en: 'Logic circuits, mechanisms, automation and building techniques.',
+    },
+  },
+];
+
+const tutorials = getVideos().filter((video) => video.kind === 'tutorial');
+const tutorialCount = (category: string) =>
+  t(copy.tutorialCount)(tutorials.filter((video) => video.category === category).length);
+
+// 按教程库的分类顺序排列，入门视频在最前
+const categoryOrder = getTutorialCategories().map((category) => category.id);
+const [lead, ...others] = getFeaturedVideos().sort(
+  (a, b) => categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category),
+);
+---
+
+<BaseLayout title={t(copy.title)} description={t(copy.description)}>
+  <PageHero
+    image={scene}
+    tag={t(copy.tag)}
+    title={t(copy.title)}
+    subtitle={t(copy.subtitle)}
+    lead={t(copy.lead)}
+    watermark="LEARN"
+  />
+
+  <Section>
+    <Eyebrow label={t(copy.featured)} note={t(copy.featuredNote)} class="eyebrow" data-reveal />
+    <LanguageNotice class="notice" data-reveal />
+    <div class="featured-grid" data-reveal>
+      <FeaturedVideo video={lead} size="lg" />
+      <div class="others">
+        {others.map((video) => <FeaturedVideo video={video} />)}
+      </div>
+    </div>
+
+    <Eyebrow label={t(copy.path)} note={t(copy.pathNote)} class="eyebrow path" data-reveal />
+    <ol class="steps" data-reveal>
+      {
+        steps.map((step, index) => (
+          <li>
+            <Card href={libraryCategoryPath(step.category, lang)} shape="notch" class="step">
+              <span class="step-index">{String(index + 1).padStart(2, '0')}</span>
+              <h3 class="step-title">{t(step.title)}</h3>
+              <p class="step-text">{t(step.text)}</p>
+              <ArrowLink tone="muted" class="step-link">
+                {tutorialCount(step.category)}
+              </ArrowLink>
+            </Card>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  <CtaBand kicker="More guides" title={t(copy.ctaTitle)}>
+    <Button href={localizePath(pages.library, lang)} icon="arrow-right-line">{t(copy.toLibrary)}</Button>
+  </CtaBand>
+</BaseLayout>
+
+<style>
+  .eyebrow {
+    margin-bottom: 40px;
+  }
+
+  .path {
+    margin-top: clamp(80px, 9vw, 120px);
+  }
+
+  .notice {
+    margin-bottom: 30px;
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 30px;
+    align-items: start;
+  }
+
+  .others {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .step {
+    height: 100%;
+  }
+
+  .step-index {
+    font-family: var(--font-label);
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color-accent);
+  }
+
+  .step-title {
+    margin: 12px 0 8px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .step-text {
+    font-size: var(--text-small);
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .step-link {
+    margin-top: 18px;
+  }
+
+  @media (max-width: 1100px) {
+    .steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 900px) {
+    .featured-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+    }
+
+    .others {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .others,
+    .steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

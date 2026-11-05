@@ -1,0 +1,230 @@
+---
+/**
+ * 废品机械师页「02 游戏模式」：三张竖版图卡上下错落排列，中间的生存模式加金边突出。
+ * 图卡叠在图片上，两种主题下都使用深色。
+ */
+import { Image } from 'astro:assets';
+import sceneChallenge from '@/assets/images/scene-challenge.png';
+import sceneCreative from '@/assets/images/scene-creative.png';
+import sceneSurvival from '@/assets/images/scene-survival.png';
+import { getLang, translator } from '@/i18n';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+
+const t = translator(getLang(Astro.url));
+
+const copy = {
+  tag: { zh: '游戏模式 / Game Modes', en: 'Game Modes' },
+  title: { zh: '三种方式，同一片热土', en: 'Three ways to play, one world' },
+};
+
+const modes = [
+  {
+    image: sceneCreative,
+    label: 'Creative',
+    name: { zh: '创造模式', en: 'Creative Mode' },
+    text: {
+      zh: '400 余种建造零件与无限资源，专注于纯粹的建造与实验，并可通过创意工坊载入社区零件。',
+      en: 'Over 400 building parts and unlimited resources, purely for building and experimenting. Community parts can be added through the Steam Workshop.',
+    },
+    featured: false,
+  },
+  {
+    image: sceneSurvival,
+    label: 'Survival',
+    name: { zh: '生存模式', en: 'Survival Mode' },
+    text: {
+      zh: '迫降于失控的农业星球，采集、耕种、建造与防御。1.0「钻探雷霆」重制了生存模式，补完剧情并延伸至星球地心。',
+      en: "Crash-land on a farming planet gone haywire, then gather, farm, build and defend. The 1.0 Drilling Thunder expansion reworks Survival, completes the story and takes it down to the planet's core.",
+    },
+    featured: true,
+  },
+  {
+    image: sceneChallenge,
+    label: 'Challenge',
+    name: { zh: '挑战模式', en: 'Challenge Mode' },
+    text: {
+      zh: '「大师机械师试炼」共 40 道关卡，考验建造思维与机械直觉；也可自制关卡与好友分享。',
+      en: 'The Master Mechanic Trials offer 40 levels that test your building logic and mechanical intuition. You can also make your own levels and share them with friends.',
+    },
+    featured: false,
+  },
+];
+---
+
+<Section>
+  <SectionHeading index="02" tag={t(copy.tag)} title={t(copy.title)} data-reveal />
+
+  <ol class="modes" data-reveal>
+    {
+      modes.map((mode, i) => (
+        <li class:list={['mode', { featured: mode.featured }]} data-theme="dark">
+          <Image src={mode.image} alt="" widths={[480, 720, 960]} sizes="(max-width: 900px) 100vw, 33vw" class="photo" />
+          <span class="index" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <span class="label" aria-hidden="true">
+            {mode.label}
+          </span>
+          <div class="caption">
+            <h3 class="name">{t(mode.name)}</h3>
+            <p class="text">{t(mode.text)}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</Section>
+
+<style>
+  .modes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 26px;
+    align-items: start;
+  }
+
+  .mode {
+    position: relative;
+    aspect-ratio: 3 / 4.5;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    color: var(--color-text);
+    clip-path: var(--clip-corner-lg);
+  }
+
+  /* 三张卡片错落排列，中间一张最高、位置最低 */
+  .mode:nth-child(2) {
+    margin-top: 72px;
+    aspect-ratio: 3 / 5;
+  }
+
+  .mode:nth-child(3) {
+    margin-top: 34px;
+  }
+
+  .featured {
+    border-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
+  }
+
+  .photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease-out);
+  }
+
+  .mode:hover .photo {
+    transform: scale(1.06);
+  }
+
+  /* 顶部压暗以衬托序号，底部压暗以承托文字 */
+  .mode::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-bg) 50%, transparent),
+      transparent 36%,
+      color-mix(in srgb, var(--color-bg) 30%, transparent) 58%,
+      color-mix(in srgb, var(--color-bg) 95%, transparent)
+    );
+  }
+
+  .index,
+  .label,
+  .caption {
+    position: absolute;
+    z-index: 1;
+  }
+
+  .index {
+    top: 20px;
+    left: 24px;
+    font-family: var(--font-label);
+    font-size: 66px;
+    font-weight: 700;
+    line-height: 0.8;
+    color: transparent;
+    -webkit-text-stroke: 1.5px color-mix(in srgb, var(--color-accent) 85%, transparent);
+  }
+
+  .featured .index {
+    color: var(--color-accent);
+    -webkit-text-stroke: 0;
+  }
+
+  .label {
+    top: 30px;
+    right: 24px;
+    font-family: var(--font-label);
+    font-size: var(--text-label);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--color-accent-text);
+    writing-mode: vertical-rl;
+  }
+
+  .caption {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 30px;
+  }
+
+  .name {
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .name::after {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 3px;
+    margin: 14px 0;
+    background: var(--color-accent);
+  }
+
+  .text {
+    font-size: var(--text-small);
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 900px) {
+    .modes {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 20px;
+    }
+
+    .mode,
+    .mode:nth-child(n) {
+      margin-top: 0;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .mode,
+    .mode:nth-child(n) {
+      aspect-ratio: 4 / 5;
+    }
+
+    .index {
+      font-size: 52px;
+    }
+
+    .caption {
+      padding: 24px;
+    }
+
+    .name {
+      font-size: 26px;
+    }
+  }
+</style>

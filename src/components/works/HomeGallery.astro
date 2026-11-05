@@ -1,0 +1,80 @@
+---
+/**
+ * 首页「画廊」区块，锚点 #gallery。画廊的前四张精选图片拼成大小错落的格子，
+ * 点击在灯箱中查看，下方链接到画廊页。
+ */
+import { pages } from '@/config/site';
+import { getGalleryItems } from '@/data/gallery';
+import { getLang, localizePath, translator } from '@/i18n';
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Lightbox from '@/components/ui/Lightbox.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import GalleryTile from './GalleryTile.astro';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const items = getGalleryItems();
+
+const copy = {
+  title: { zh: '画廊', en: 'Gallery' },
+  viewAll: { zh: `查看全部 ${items.length} 张图片`, en: `View all ${items.length} images` },
+};
+
+// 第一张占两行两列，最后一张横跨两列，中间两张各占一格
+const wide = '(max-width: 900px) 100vw, 50vw';
+const narrow = '(max-width: 900px) 50vw, 25vw';
+const featured = items.slice(0, 4).map((item, i) => ({ item, sizes: i === 0 || i === 3 ? wide : narrow }));
+---
+
+<Section id="gallery" tone="alt">
+  <SectionHeading title={t(copy.title)} note="Community Builds" data-reveal />
+  <div class="mosaic" data-reveal>
+    {featured.map(({ item, sizes }) => <GalleryTile item={item} group="home-gallery" sizes={sizes} />)}
+  </div>
+  <div class="more" data-reveal>
+    <ArrowLink href={localizePath(pages.gallery, lang)}>{t(copy.viewAll)}</ArrowLink>
+  </div>
+  <Lightbox />
+</Section>
+
+<style>
+  .mosaic {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    aspect-ratio: 16 / 5;
+    counter-reset: gallery-tile;
+  }
+
+  .mosaic > :global(:first-child) {
+    grid-area: span 2 / span 2;
+  }
+
+  .mosaic > :global(:last-child) {
+    grid-column: span 2;
+  }
+
+  .more {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 28px;
+  }
+
+  @media (max-width: 900px) {
+    .mosaic {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: none;
+      aspect-ratio: auto;
+    }
+
+    .mosaic > :global(*) {
+      aspect-ratio: 16 / 9;
+    }
+
+    .mosaic > :global(:first-child) {
+      grid-area: auto / span 2;
+    }
+  }
+</style>

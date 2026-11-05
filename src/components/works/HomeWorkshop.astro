@@ -1,0 +1,33 @@
+---
+/** 首页「创意工坊」横条，锚点 #workshop：链接到本站的成员作品页和传奇模组在 Steam 创意工坊上的页面。 */
+import { links, pages } from '@/config/site';
+import { getLang, localizePath, translator } from '@/i18n';
+import Button from '@/components/ui/Button.astro';
+import ButtonGroup from '@/components/ui/ButtonGroup.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  title: {
+    zh: '创意工坊 —— 订阅、收藏与分享每一份建造灵感',
+    en: 'Workshop — subscribe to, favorite and share building ideas',
+  },
+  works: { zh: '浏览成员作品', en: 'Member Creations' },
+  open: { zh: '打开工坊', en: 'Open Workshop' },
+};
+---
+
+<CtaBand id="workshop" tag="Steam Workshop" title={t(copy.title)} space="sm">
+  <ButtonGroup class="actions">
+    <Button href={localizePath(pages.workshop, lang)} variant="ghost" icon="arrow-right-line">{t(copy.works)}</Button>
+    <Button href={links.modWorkshop} variant="ghost" external>{t(copy.open)}</Button>
+  </ButtonGroup>
+</CtaBand>
+
+<style>
+  .actions {
+    gap: 14px;
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+/**
+ * 金底统计带：一行大号数字和说明，用细线分隔。
+ * label 中的换行符会按原样换行，例如 'Steam\n综合排行榜'。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import Section from './Section.astro';
+
+interface Props extends HTMLAttributes<'section'> {
+  items: { value: string; label: string }[];
+}
+
+const { items, ...rest } = Astro.props;
+---
+
+<Section tone="accent" space="sm" {...rest}>
+  <ul class="stats" data-reveal style={`--columns: ${items.length}`}>
+    {
+      items.map((item) => (
+        <li class="stat">
+          <span class="value">{item.value}</span>
+          <span class="label">{item.label}</span>
+        </li>
+      ))
+    }
+  </ul>
+</Section>
+
+<style>
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+    gap: 30px;
+  }
+
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .stat + .stat {
+    padding-left: 30px;
+    border-left: 1px solid var(--color-line);
+  }
+
+  .value {
+    font-family: var(--font-label);
+    font-size: clamp(44px, 5vw, 62px);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .label {
+    font-size: var(--text-small);
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: pre-line;
+  }
+
+  @media (max-width: 600px) {
+    .stats {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+
+    .stat {
+      padding-block: 18px;
+    }
+
+    .stat + .stat {
+      padding-left: 0;
+      border-left: 0;
+      border-top: 1px solid var(--color-line);
+    }
+  }
+</style>

@@ -1,0 +1,127 @@
+---
+/**
+ * 画廊中的一张图片，点击后在灯箱中查看大图，悬停或获得焦点时显示序号和署名。
+ * 序号来自父元素上用 counter-reset 建立的 gallery-tile 计数器，隐藏的格子不计数。
+ * 根元素带有原图宽高比 --ratio，格子的尺寸由父元素的排版决定，图片按 cover 填满格子。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { getGalleryArtist, type GalleryItem } from '@/data/gallery';
+import { resizeImage, resizeSrcset } from '@/data/images';
+import { getLang, translator } from '@/i18n';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'style'> {
+  item: GalleryItem;
+  /** 灯箱的分组名，同一组的图片可以在灯箱中互相切换 */
+  group: string;
+  /** 缩略图的 sizes 属性，取决于格子在父元素排版中的显示宽度 */
+  sizes: string;
+}
+
+const { item, group, sizes, class: className, ...rest } = Astro.props;
+const t = translator(getLang(Astro.url));
+const artist = t(getGalleryArtist(item.artist).name);
+const label = item.title ? `${item.title} · ${artist}` : artist;
+---
+
+<a
+  class:list={['tile', className]}
+  href={resizeImage(item.image, 1920)}
+  style={`--ratio: ${(item.width / item.height).toFixed(4)}`}
+  data-lightbox={group}
+  data-lightbox-title={item.title ?? undefined}
+  data-lightbox-note={artist}
+  {...rest}
+>
+  <img
+    src={resizeImage(item.image, 960)}
+    srcset={resizeSrcset(item.image, [480, 960, 1440])}
+    sizes={sizes}
+    width={item.width}
+    height={item.height}
+    alt={label}
+    loading="lazy"
+    decoding="async"
+  />
+  <span class="caption" data-theme="dark" aria-hidden="true">
+    <span class="index"></span>
+    <span class="label">{label}</span>
+  </span>
+</a>
+
+<style>
+  .tile {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    background: var(--placeholder-stripes);
+    clip-path: var(--clip-corner-sm);
+    counter-increment: gallery-tile;
+    transition: border-color 0.35s;
+  }
+
+  /* 焦点框画在格子内侧，避免被切角裁掉 */
+  .tile:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .tile:hover,
+  .tile:focus-visible {
+    border-color: var(--color-accent-line);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 14px;
+    padding: 24px;
+    background: linear-gradient(180deg, transparent 40%, color-mix(in srgb, var(--color-bg) 86%, transparent));
+    color: var(--color-text);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .tile:hover .caption,
+  .tile:focus-visible .caption {
+    opacity: 1;
+  }
+
+  .index {
+    font-family: var(--font-label);
+    font-size: clamp(26px, 3vw, 40px);
+    font-weight: 700;
+    line-height: 0.85;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-accent);
+  }
+
+  .index::before {
+    content: counter(gallery-tile, decimal-leading-zero);
+  }
+
+  .label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-accent);
+    font-size: 15px;
+    font-style: italic;
+  }
+
+  .label::before {
+    content: '';
+    flex: none;
+    width: 18px;
+    height: 2px;
+    background: var(--color-accent);
+  }
+</style>

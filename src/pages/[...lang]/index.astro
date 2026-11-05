@@ -1,0 +1,69 @@
+---
+import { getImage } from 'astro:assets';
+import logo from '@/assets/images/logo-stacked.png';
+import HomeAboutGame from '@/components/about/HomeAboutGame.astro';
+import HomeAboutTeam from '@/components/about/HomeAboutTeam.astro';
+import HomeFeedback from '@/components/home/HomeFeedback.astro';
+import HomeHero from '@/components/home/HomeHero.astro';
+import HomeFaq from '@/components/learn/HomeFaq.astro';
+import HomeTutorials from '@/components/learn/HomeTutorials.astro';
+import HomeFeed from '@/components/mod/HomeFeed.astro';
+import HomeMod from '@/components/mod/HomeMod.astro';
+import HomeModGet from '@/components/mod/HomeModGet.astro';
+import HomeStats from '@/components/mod/HomeStats.astro';
+import HomeGallery from '@/components/works/HomeGallery.astro';
+import HomeWorkshop from '@/components/works/HomeWorkshop.astro';
+import { links, pages } from '@/config/site';
+import { getLang, getLangPaths, htmlLang, localizePath, otherLang, pick, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const absolute = (path: string) => new URL(path, Astro.site).href;
+const organizationId = absolute(`${pages.home}#organization`);
+const logoImage = await getImage({ src: logo, width: 512, format: 'png' });
+
+// 团队和网站的结构化数据，供搜索引擎识别站点名称、所属组织和 Logo；两种语言的首页指向同一个组织
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: t(ui.site.name),
+      alternateName: pick(ui.site.name, otherLang(lang)),
+      description: t(ui.site.description),
+      url: absolute(pages.home),
+      logo: absolute(logoImage.src),
+      foundingDate: '2016-04-02',
+      sameAs: [links.steamGroup],
+    },
+    {
+      '@type': 'WebSite',
+      name: t(ui.site.name),
+      url: absolute(localizePath(pages.home, lang)),
+      inLanguage: htmlLang[lang],
+      publisher: { '@id': organizationId },
+    },
+  ],
+};
+---
+
+<BaseLayout>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  <HomeHero />
+  <HomeAboutTeam />
+  <HomeStats />
+  <HomeAboutGame />
+  <HomeMod />
+  <HomeModGet />
+  <HomeFeed />
+  <HomeGallery />
+  <HomeWorkshop />
+  <HomeFaq />
+  <HomeTutorials />
+  <HomeFeedback />
+</BaseLayout>

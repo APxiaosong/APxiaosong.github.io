@@ -1,0 +1,78 @@
+---
+/**
+ * 带箭头的文字链接，例如「详情」「查看全部」「YouTube 打开」。
+ * tone：accent 金色，muted 灰色、悬停变金。underline：文字下方加一条金色细线。
+ * external：在新窗口打开，箭头换成外部链接图标。
+ * 不传 href 时渲染为 <span>，用在整张可点击的卡片里，只作为视觉提示（链接不能嵌套）。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import Icon from './Icon.astro';
+
+interface Props extends HTMLAttributes<'a'> {
+  href?: string;
+  tone?: 'accent' | 'muted';
+  underline?: boolean;
+  external?: boolean;
+}
+
+const { href, tone = 'accent', underline = false, external = false, class: className, ...rest } = Astro.props;
+const t = translator(getLang(Astro.url));
+const Element = href ? 'a' : 'span';
+---
+
+<Element
+  class:list={['arrow-link', tone, { underline }, className]}
+  href={href}
+  target={href && external ? '_blank' : undefined}
+  rel={href && external ? 'noopener' : undefined}
+  {...rest}
+>
+  <span><slot /></span>
+  {href && external && <span class="sr-only">{t(ui.common.newWindow)}</span>}
+  <Icon name={external ? 'arrow-right-up-line' : 'arrow-right-line'} class="arrow" />
+</Element>
+
+<style>
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-label);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition:
+      color var(--duration-hover),
+      border-color var(--duration-hover),
+      gap var(--duration-hover) var(--ease-out);
+  }
+
+  a.arrow-link:hover {
+    gap: 10px;
+  }
+
+  .accent,
+  a.muted:hover {
+    color: var(--color-accent-text);
+  }
+
+  .muted {
+    color: var(--color-text-muted);
+  }
+
+  .underline {
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--color-accent-line);
+  }
+
+  a.underline:hover {
+    border-color: var(--color-accent);
+  }
+
+  .arrow {
+    font-size: 1.15em;
+  }
+</style>

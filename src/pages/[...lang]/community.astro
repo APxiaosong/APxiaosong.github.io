@@ -1,0 +1,114 @@
+---
+/** 动态页：传奇模组在创意工坊上的全部更新记录。 */
+import scene from '@/assets/images/scene-challenge.png';
+import Changelog from '@/components/mod/Changelog.astro';
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Section from '@/components/ui/Section.astro';
+import { links } from '@/config/site';
+import { getChangelog } from '@/data/changelog';
+import { getMod } from '@/data/mod';
+import { getLang, getLangPaths, translator } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const getStaticPaths = getLangPaths;
+
+const t = translator(getLang(Astro.url));
+const entries = getChangelog();
+const mod = getMod();
+
+const copy = {
+  title: { zh: '动态', en: 'News' },
+  description: {
+    zh: '传奇模组在 Steam 创意工坊上的全部更新记录，按发布时间从新到旧排列。',
+    en: 'Every New Legend Mod update published on the Steam Workshop, from newest to oldest.',
+  },
+  tag: { zh: '社区 / Community', en: 'Community' },
+  eyebrow: { zh: '模组更新日志', en: 'Mod Changelog' },
+  eyebrowNote: { zh: 'Changelog', en: '' },
+  heading: { zh: '传奇模组 · 更新记录', en: 'New Legend Mod · Updates' },
+  summary: {
+    zh: `当前版本 ${mod.version} · 共 ${entries.length} 条记录`,
+    en: `Current version ${mod.version} · ${entries.length} entries`,
+  },
+  source: {
+    zh: '以上记录整理自 Steam 创意工坊的更新日志，原文以创意工坊页面为准。',
+    en: 'Compiled from the Steam Workshop changelog. The notes are translated from the original Chinese, which remains on the Workshop page.',
+  },
+  viewSource: { zh: '在 Steam 查看原文', en: 'View on Steam' },
+};
+---
+
+<BaseLayout title={t(copy.title)} description={t(copy.description)}>
+  <PageHero
+    image={scene}
+    tag={t(copy.tag)}
+    title={t(copy.title)}
+    subtitle="News & Changelog"
+    lead={t(copy.description)}
+    watermark="NEWS"
+  />
+
+  <Section width="narrow">
+    <header class="intro" data-reveal>
+      <Eyebrow label={t(copy.eyebrow)} note={t(copy.eyebrowNote)} />
+      <div class="heading">
+        <h2 class="title">{t(copy.heading)}</h2>
+        <p class="summary">{t(copy.summary)}</p>
+      </div>
+    </header>
+
+    <Changelog entries={entries} />
+
+    <footer class="source" data-reveal>
+      <p>{t(copy.source)}</p>
+      <ArrowLink href={links.modChangelog} external>{t(copy.viewSource)}</ArrowLink>
+    </footer>
+  </Section>
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-bottom: clamp(40px, 5vw, 64px);
+  }
+
+  .heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 18px;
+    margin-top: 14px;
+  }
+
+  .title {
+    font-size: var(--text-h2);
+    font-weight: 900;
+  }
+
+  .summary {
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--color-text-muted);
+  }
+
+  /* 左侧留白等于时间线左栏宽度加栏间距（180px + 32px），与正文列对齐 */
+  .source {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px 24px;
+    margin-top: 12px;
+    padding-left: 212px;
+    font-size: var(--text-small);
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 600px) {
+    .source {
+      padding-left: 0;
+    }
+  }
+</style>

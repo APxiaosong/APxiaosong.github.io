@@ -1,0 +1,205 @@
+---
+/** 废品机械师页「04 运行配置」：最低配置和推荐配置两块面板并排，推荐配置用金边突出。 */
+import { getLang, translator } from '@/i18n';
+import Badge from '@/components/ui/Badge.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  tag: { zh: '运行配置 / Requirements', en: 'Requirements' },
+  title: { zh: '开始之前，先确认设备', en: 'Check your hardware first' },
+  badge: { zh: '推荐', en: 'Recommended' },
+  footnote: {
+    zh: '* 需要 64 位处理器与操作系统。以上为 1.0 正式版配置，较抢先体验阶段明显提高；最终以 Steam 商店页面公布为准。',
+    en: '* Requires a 64-bit processor and operating system. These are the requirements for version 1.0, noticeably higher than during Early Access. Please refer to the Steam store page for the final requirements.',
+  },
+};
+
+const field = {
+  os: { zh: '操作系统', en: 'OS' },
+  cpu: { zh: '处理器', en: 'Processor' },
+  memory: { zh: '内存', en: 'Memory' },
+  graphics: { zh: '显卡', en: 'Graphics' },
+  directx: { zh: 'DirectX', en: 'DirectX' },
+  network: { zh: '网络', en: 'Network' },
+  storage: { zh: '存储空间', en: 'Storage' },
+};
+
+const shared = {
+  directx: { zh: '版本 11', en: 'Version 11' },
+  network: { zh: '宽带互联网连接', en: 'Broadband Internet connection' },
+  storage: { zh: '30 GB 可用空间', en: '30 GB available space' },
+};
+
+// label 是中文标题旁的英文点缀，英文页面上与标题重复，不显示
+const panels = [
+  {
+    title: { zh: '最低配置', en: 'Minimum' },
+    label: 'Minimum',
+    recommended: false,
+    specs: [
+      { name: field.os, value: { zh: 'Windows 10（64 位）或更高', en: 'Windows 10 (64-bit) or later' } },
+      { name: field.cpu, value: { zh: 'Intel Core i5-1235U 或同级', en: 'Intel Core i5-1235U or equivalent' } },
+      { name: field.memory, value: { zh: '8 GB RAM', en: '8 GB RAM' } },
+      { name: field.graphics, value: { zh: 'Intel Iris Xe Graphics 或同级', en: 'Intel Iris Xe Graphics or equivalent' } },
+      { name: field.directx, value: shared.directx },
+      { name: field.network, value: shared.network },
+      { name: field.storage, value: shared.storage },
+    ],
+  },
+  {
+    title: { zh: '推荐配置', en: 'Recommended' },
+    label: 'Recommended',
+    recommended: true,
+    specs: [
+      { name: field.os, value: { zh: 'Windows 11', en: 'Windows 11' } },
+      { name: field.cpu, value: { zh: 'Intel Core i5-12500 / AMD Ryzen 5 5600', en: 'Intel Core i5-12500 / AMD Ryzen 5 5600' } },
+      { name: field.memory, value: { zh: '16 GB RAM', en: '16 GB RAM' } },
+      {
+        name: field.graphics,
+        value: { zh: 'NVIDIA RTX 3060 / AMD RX 6700 XT（12 GB 显存）', en: 'NVIDIA RTX 3060 / AMD RX 6700 XT (12 GB VRAM)' },
+      },
+      { name: field.directx, value: shared.directx },
+      { name: field.network, value: shared.network },
+      { name: field.storage, value: shared.storage },
+    ],
+  },
+];
+---
+
+<Section tone="alt" space="md" divider>
+  <SectionHeading index="04" tag={t(copy.tag)} title={t(copy.title)} data-reveal />
+
+  <div class="panels" data-reveal>
+    {
+      panels.map((panel) => (
+        <article class:list={['panel', { recommended: panel.recommended }]}>
+          {panel.recommended && <Badge class="corner">{t(copy.badge)}</Badge>}
+          <header class="head">
+            <h3 class="title">{t(panel.title)}</h3>
+            {lang === 'zh' && <span class="label">{panel.label}</span>}
+          </header>
+          <dl>
+            {panel.specs.map((spec) => (
+              <div class="row">
+                <dt class="key">{t(spec.name)}</dt>
+                <dd class="value">{t(spec.value)}</dd>
+              </div>
+            ))}
+          </dl>
+        </article>
+      ))
+    }
+  </div>
+
+  <p class="footnote" data-reveal>{t(copy.footnote)}</p>
+</Section>
+
+<style>
+  .panels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+  }
+
+  .panel {
+    position: relative;
+    padding: 40px;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    clip-path: var(--clip-corner-lg);
+  }
+
+  .recommended {
+    border-color: var(--color-accent-line);
+    background: none;
+  }
+
+  /* 角标贴在面板切角处，右侧加宽，文字不被切角裁掉 */
+  .panel .corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-right: 22px;
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .label {
+    font-family: var(--font-label);
+    font-size: var(--text-label);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .recommended :is(.title, .label) {
+    color: var(--color-accent-text);
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .recommended .row {
+    border-color: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  }
+
+  .key {
+    flex: none;
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .value {
+    font-size: var(--text-small);
+    text-align: right;
+    color: var(--color-text-secondary);
+  }
+
+  .recommended .value {
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .footnote {
+    margin-top: 24px;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .panels {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .panel {
+      padding: 28px 22px;
+    }
+  }
+</style>

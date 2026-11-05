@@ -1,0 +1,147 @@
+---
+/**
+ * 首页「社区动态」区块，锚点 #feed。列出最新的几条模组更新，每行链接到动态页中对应的记录。
+ * 区块不留下边距，与紧接着的画廊区块共用同一种底色，间距由画廊的上边距提供。
+ */
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import Tag from '@/components/ui/Tag.astro';
+import { pages } from '@/config/site';
+import { changelogAnchor, getChangelog } from '@/data/changelog';
+import { getLang, localizePath, translator } from '@/i18n';
+import { formatDate } from '@/i18n/format';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const entries = getChangelog().slice(0, 3);
+
+const copy = {
+  tag: { zh: '社区 / Community', en: 'Community' },
+  title: { zh: '社区动态', en: 'Community News' },
+  latest: { zh: '最新更新', en: 'Latest' },
+  update: { zh: '更新', en: 'Update' },
+  separator: { zh: ' —— ', en: ' — ' },
+  details: { zh: '详情', en: 'Details' },
+  viewAll: { zh: '全部更新记录', en: 'All updates' },
+};
+---
+
+<Section id="feed" tone="alt" divider space="none">
+  <div class="feed">
+    <SectionHeading index="02" tag={t(copy.tag)} title={t(copy.title)} data-reveal />
+    <ul class="rows" data-reveal>
+      {
+        entries.map((entry, i) => (
+          <li>
+            <a class="row" href={localizePath(`${pages.news}#${changelogAnchor(entry)}`, lang)}>
+              <Tag size="sm" class="kind">{t(i === 0 ? copy.latest : copy.update)}</Tag>
+              <span class="headline">
+                {[entry.version, t(entry.label)].filter(Boolean).join(' ')}
+                {t(copy.separator)}
+                {t(entry.title)}
+              </span>
+              <time class="date" datetime={entry.publishedAt}>
+                {formatDate(entry.publishedAt, lang)}
+              </time>
+              <ArrowLink tone="muted" class="details">{t(copy.details)}</ArrowLink>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="more" data-reveal>
+      <ArrowLink href={localizePath(pages.news, lang)}>{t(copy.viewAll)}</ArrowLink>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .feed {
+    padding-top: var(--space-section-lg);
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 26px 0;
+    border-top: 1px solid var(--color-line);
+    transition:
+      background-color var(--duration-hover),
+      padding var(--duration-hover) var(--ease-out);
+  }
+
+  li:last-child .row {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .row:hover {
+    padding-left: 16px;
+    background: var(--color-accent-tint);
+  }
+
+  .row :global(.kind) {
+    flex: none;
+  }
+
+  .headline {
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  .date {
+    flex: none;
+    margin-left: auto;
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+  }
+
+  .row :global(.details) {
+    flex: none;
+    padding-right: 4px;
+  }
+
+  .row:hover :global(.details) {
+    gap: 10px;
+    color: var(--color-accent-text);
+  }
+
+  .more {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 28px;
+  }
+
+  /* 手机上标签和日期占第一行，标题另起一行 */
+  @media (max-width: 600px) {
+    .row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px 16px;
+      padding: 22px 0;
+    }
+
+    .row:hover {
+      padding-left: 0;
+    }
+
+    .headline {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      font-size: 17px;
+    }
+
+    .date {
+      justify-self: end;
+    }
+
+    .row :global(.details) {
+      display: none;
+    }
+  }
+</style>

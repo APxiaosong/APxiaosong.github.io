@@ -1,0 +1,30 @@
+---
+/**
+ * 一排按钮：放不下时换行，手机上每个按钮占满整行。
+ * 默认间距为 16px，使用处可以通过 class 调整间距、对齐和外边距。
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'div'>;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div class:list={['button-group', className]} {...rest}>
+  <slot />
+</div>
+
+<style>
+  /* 写在 :where() 中不增加优先级，使用处通过 class 设置的间距可以直接覆盖 */
+  :where(.button-group) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .button-group > :global(*) {
+      flex: 1 1 100%;
+    }
+  }
+</style>

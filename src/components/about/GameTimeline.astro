@@ -1,0 +1,123 @@
+---
+/** 《废品机械师》发展历程的三个节点，最后一项为当前版本，用金色突出。 */
+import { formatDate } from '@/i18n/format';
+import { getLang, translator } from '@/i18n';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const milestones = [
+  {
+    date: '2016-01-19',
+    title: { zh: '抢先体验', en: 'Early Access' },
+    note: { zh: '创造模式上线', en: 'Creative Mode launches' },
+  },
+  {
+    date: '2020-05-07',
+    title: { zh: '生存模式', en: 'Survival Mode' },
+    note: { zh: '采集、耕种与烹饪', en: 'Gathering, farming and cooking' },
+  },
+  {
+    date: '2026-07-24',
+    title: { zh: '1.0 正式版', en: 'Version 1.0' },
+    note: { zh: '「钻探雷霆」扩展内容', en: 'The Drilling Thunder expansion' },
+  },
+];
+---
+
+<ol class="timeline">
+  {
+    milestones.map((milestone) => (
+      <li class="milestone">
+        <time class="date" datetime={milestone.date}>
+          {formatDate(milestone.date, lang)}
+        </time>
+        <strong class="title">{t(milestone.title)}</strong>
+        <span class="note">{t(milestone.note)}</span>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 960px;
+    margin-top: 48px;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .milestone {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 22px 24px 0;
+  }
+
+  .milestone:first-child {
+    padding-left: 0;
+  }
+
+  .milestone + .milestone {
+    border-left: 1px solid var(--color-line);
+  }
+
+  .milestone:last-child {
+    border-left-color: var(--color-accent-line);
+  }
+
+  .milestone:last-child::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 7px;
+    height: 7px;
+    background: var(--color-accent);
+  }
+
+  .date {
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .title {
+    margin-top: 8px;
+    font-size: var(--text-body);
+    font-weight: 700;
+  }
+
+  .note {
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--color-text-muted);
+  }
+
+  .milestone:last-child :is(.date, .title) {
+    color: var(--color-accent-text);
+  }
+
+  .milestone:last-child .note {
+    color: var(--color-text-secondary);
+  }
+
+  /* 手机上改为竖排，左侧细线串起各个节点 */
+  @media (max-width: 600px) {
+    .timeline {
+      grid-template-columns: minmax(0, 1fr);
+      margin-top: 36px;
+      border-top: 0;
+    }
+
+    .milestone,
+    .milestone:first-child {
+      padding: 14px 0 14px 20px;
+      border-left: 1px solid var(--color-line);
+    }
+  }
+</style>

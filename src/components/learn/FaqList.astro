@@ -1,0 +1,157 @@
+---
+/**
+ * 常见问题的手风琴列表。每一问以数据中的 id 作锚点：打开带锚点的网址，或点击指向它的链接时，对应的问题自动展开；
+ * 展开一问时网址的锚点随之更新，便于复制链接。open 为默认展开的问题 id。
+ * 问题是按钮，可以用 Tab 切换、Enter 或空格展开；脚本不可用时全部展开。
+ */
+import Icon from '@/components/ui/Icon.astro';
+import type { FaqItem } from '@/data/faq';
+import { getLang, translator } from '@/i18n';
+
+interface Props {
+  items: FaqItem[];
+  open?: string;
+}
+
+const { items, open } = Astro.props;
+const t = translator(getLang(Astro.url));
+---
+
+<ul class="faq">
+  {
+    items.map((item) => (
+      <li class="item" id={item.id} data-faq-item>
+        <h3>
+          <button
+            class="question"
+            type="button"
+            id={`${item.id}-question`}
+            aria-expanded={item.id === open ? 'true' : 'false'}
+            aria-controls={`${item.id}-answer`}
+          >
+            <span>{t(item.question)}</span>
+            <Icon name="add-line" class="toggle" />
+          </button>
+        </h3>
+        <div class="answer" id={`${item.id}-answer`} role="region" aria-labelledby={`${item.id}-question`}>
+          <div class="answer-inner">
+            <p>{t(item.answer)}</p>
+          </div>
+        </div>
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  const items = Array.from(document.querySelectorAll<HTMLElement>('[data-faq-item]'));
+  const buttonOf = (item: HTMLElement) => item.querySelector<HTMLButtonElement>('.question')!;
+
+  function setOpen(item: HTMLElement, open: boolean) {
+    buttonOf(item).setAttribute('aria-expanded', String(open));
+  }
+
+  function openFromHash() {
+    const target = items.find((item) => `#${item.id}` === location.hash);
+    if (target) setOpen(target, true);
+  }
+
+  for (const item of items) {
+    buttonOf(item).addEventListener('click', () => {
+      const open = buttonOf(item).getAttribute('aria-expanded') !== 'true';
+      setOpen(item, open);
+      const url = new URL(location.href);
+      if (open) url.hash = item.id;
+      else if (url.hash === `#${item.id}`) url.hash = '';
+      history.replaceState(history.state, '', url);
+    });
+  }
+
+  openFromHash();
+  addEventListener('hashchange', openFromHash);
+</script>
+
+<style>
+  .faq {
+    border-top: 1px solid var(--color-line-strong);
+  }
+
+  .item {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    padding: 26px 4px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-text);
+    text-align: left;
+    transition: color var(--duration-hover);
+  }
+
+  .question:hover {
+    color: var(--color-accent-text);
+  }
+
+  .toggle {
+    flex: none;
+    font-size: 22px;
+    color: var(--color-accent-text);
+    transition: transform var(--duration-hover) var(--ease-out);
+  }
+
+  [aria-expanded='true'] .toggle {
+    transform: rotate(45deg);
+  }
+
+  .answer p {
+    max-width: 820px;
+    padding: 0 4px 26px;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.95;
+    color: var(--color-text-muted);
+  }
+
+  /*
+   * 只在脚本可用时折叠。行高从 0fr 过渡到 1fr 来展开；收起后内容设为不可见，
+   * 读屏软件和 Tab 键都不会进入，visibility 延迟到收起动画结束后才切换。
+   */
+  :global(.js) .answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 0.4s var(--ease-out),
+      opacity 0.3s;
+  }
+
+  :global(.js) .answer-inner {
+    overflow: hidden;
+    visibility: hidden;
+    transition: visibility 0s 0.4s;
+  }
+
+  :global(.js) h3:has([aria-expanded='true']) + .answer {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  :global(.js) h3:has([aria-expanded='true']) + .answer .answer-inner {
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  @media (max-width: 600px) {
+    .question {
+      padding-block: 22px;
+      font-size: 16px;
+    }
+  }
+</style>

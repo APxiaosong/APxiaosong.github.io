@@ -1,0 +1,30 @@
+---
+/** 并排两栏的正文段落，900px 以下改为单栏。 */
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
+  paragraphs: string[];
+}
+
+const { paragraphs, class: className, ...rest } = Astro.props;
+---
+
+<div class:list={['columns', className]} {...rest}>
+  {paragraphs.map((paragraph) => <p class="text-body">{paragraph}</p>)}
+</div>
+
+<style>
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+    max-width: 960px;
+  }
+
+  @media (max-width: 900px) {
+    .columns {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+    }
+  }
+</style>

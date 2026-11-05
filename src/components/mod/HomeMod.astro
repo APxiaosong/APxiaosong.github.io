@@ -1,0 +1,188 @@
+---
+/**
+ * 首页「传奇模组」区块，锚点 #mod。上半部分是整幅模组封面，在两种主题下都保持深色；
+ * 下半部分是简介、零件类别和订阅按钮。
+ */
+import { Image } from 'astro:assets';
+import cover from '@/assets/images/mod-cover.jpg';
+import Button from '@/components/ui/Button.astro';
+import Chip from '@/components/ui/Chip.astro';
+import Tag from '@/components/ui/Tag.astro';
+import { links } from '@/config/site';
+import { getLang, translator } from '@/i18n';
+
+const t = translator(getLang(Astro.url));
+
+const copy = {
+  tag: { zh: '模组 / The Mod', en: 'The Mod' },
+  title: { zh: '传奇模组', en: 'New Legend Mod' },
+  subtitle: { zh: 'New Legend Mod', en: 'Continuation' },
+  intro: {
+    zh: '欢迎各位机械师订阅由中国玩家团队「传奇建造队」制作的传奇模组。这是一个综合性 Mod，可满足日常建造的绝大部分需要：材质方块、各种几何体、可互动零件、车辆轮胎与载具零件、威力强大的武器、丰富的装饰与自然景物，以及独特的传奇专属零件。',
+    en: 'The New Legend Mod is made by Legend Build Team, a Chinese player community. It is a comprehensive Mod that covers most of what everyday building needs: material blocks, geometric shapes, interactive parts, wheels, tires and vehicle parts, weapons, decorations and natural scenery, along with a set of parts unique to the Mod.',
+  },
+  english: { zh: '现已支持英文物品描述。', en: 'Item descriptions are available in English.' },
+  subscribe: { zh: '前往创意工坊订阅', en: 'Subscribe on the Workshop' },
+};
+
+const categories = [
+  { zh: '材质方块', en: 'Material Blocks' },
+  { zh: '几何体', en: 'Geometric Shapes' },
+  { zh: '可互动零件', en: 'Interactive Parts' },
+  { zh: '车辆轮胎', en: 'Wheels & Tires' },
+  { zh: '载具零件', en: 'Vehicle Parts' },
+  { zh: '强力武器', en: 'Weapons' },
+  { zh: '装饰物件', en: 'Decorations' },
+  { zh: '自然景物', en: 'Natural Scenery' },
+  { zh: '建筑零件', en: 'Building Parts' },
+];
+const signature = { zh: '传奇专属零件', en: 'Legend-Exclusive Parts' };
+---
+
+<section id="mod" class="mod">
+  <div class="cover" data-theme="dark">
+    <div class="media" aria-hidden="true">
+      <Image src={cover} alt="" widths={[768, 1280, 1920]} sizes="100vw" />
+    </div>
+    <div class="shade" aria-hidden="true"></div>
+    <div class="container cover-text" data-reveal>
+      <Tag>{t(copy.tag)}</Tag>
+      <h2 class="title">{t(copy.title)}</h2>
+      <p class="subtitle text-accent">{t(copy.subtitle)}</p>
+    </div>
+  </div>
+
+  <div class="container details" data-reveal>
+    <div class="text-body intro">
+      <p>{t(copy.intro)}</p>
+      <p class="english">{t(copy.english)}</p>
+    </div>
+    <div>
+      <ul class="chips">
+        {
+          categories.map((category) => (
+            <li>
+              <Chip>{t(category)}</Chip>
+            </li>
+          ))
+        }
+        <li><Chip highlight>{t(signature)}</Chip></li>
+      </ul>
+      <Button href={links.modWorkshop} external class="subscribe">{t(copy.subscribe)}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mod {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .cover {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 600px;
+    overflow: hidden;
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* 封面在区块进入视口时从 1.1 倍缓慢缩回原大小 */
+  :global(.js) .media :global(img) {
+    transform: scale(1.1);
+    transition: transform 6s ease;
+  }
+
+  :global(.js) .cover:has(.is-revealed) .media :global(img) {
+    transform: none;
+  }
+
+  .shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-bg) 50%, transparent),
+      transparent 35%,
+      color-mix(in srgb, var(--color-bg) 82%, transparent) 78%,
+      var(--color-bg)
+    );
+  }
+
+  .cover-text {
+    position: relative;
+    padding-block: 60px 64px;
+  }
+
+  .title {
+    margin-top: 14px;
+    font-size: var(--text-display);
+    font-weight: 900;
+    line-height: 0.95;
+    text-shadow: 0 4px 36px rgb(0 0 0 / 0.6);
+  }
+
+  .subtitle {
+    margin-top: 4px;
+    font-size: var(--text-subtitle);
+  }
+
+  .details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 60px;
+    align-items: start;
+    padding-block: var(--space-section-sm);
+  }
+
+  .intro {
+    font-size: var(--text-lead);
+    line-height: 2.1;
+  }
+
+  .english {
+    margin-top: 1.6em;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11px;
+  }
+
+  .subscribe {
+    margin-top: 32px;
+  }
+
+  @media (max-width: 900px) {
+    .details {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 36px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cover {
+      min-height: 460px;
+    }
+
+    .subscribe {
+      width: 100%;
+    }
+  }
+</style>

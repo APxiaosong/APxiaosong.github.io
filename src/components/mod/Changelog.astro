@@ -1,0 +1,313 @@
+---
+/**
+ * 更新日志时间线。每条记录左侧是版本号、日期和标签，右侧是标题和正文；
+ * 最新一条的版本号为实心金色，其余为描边。正文较长的记录默认只显示前半部分，
+ * 点击按钮展开；从带锚点的链接进入时，目标记录自动展开。
+ */
+import Icon from '@/components/ui/Icon.astro';
+import { changelogAnchor, type ChangelogEntry, type ChangelogItem } from '@/data/changelog';
+import { getLang, translator } from '@/i18n';
+import { formatDate } from '@/i18n/format';
+import ChangelogItems from './ChangelogItems.astro';
+
+interface Props {
+  entries: ChangelogEntry[];
+}
+
+const { entries } = Astro.props;
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  noVersion: { zh: '未标注版本', en: 'Version not stated' },
+  expand: { zh: '展开全部', en: 'Show all' },
+  collapse: { zh: '收起', en: 'Show less' },
+  itemCount: { zh: '共 {n} 条', en: '{n} items' },
+};
+
+// 正文超过这个行数时折叠，行数按分组标题、段落和条目（含子条目）计算
+const COLLAPSE_AFTER = 10;
+
+const countItems = (items: ChangelogItem[]): number =>
+  items.reduce((sum, item) => sum + 1 + countItems(item.items ?? []), 0);
+
+const rows = entries.map((entry, index) => {
+  const itemCount = entry.sections.reduce((sum, section) => sum + countItems(section.items), 0);
+  const lineCount = entry.sections.reduce(
+    (sum, section) => sum + (section.heading ? 1 : 0) + section.paragraphs.length + countItems(section.items),
+    0,
+  );
+  return { entry, anchor: changelogAnchor(entry), latest: index === 0, itemCount, collapsible: lineCount > COLLAPSE_AFTER };
+});
+---
+
+<ol class="timeline" data-changelog>
+  {
+    rows.map(({ entry, anchor, latest, itemCount, collapsible }) => (
+      <li class:list={['entry', { latest, collapsible }]} id={anchor} data-reveal>
+        <div class="meta">
+          {entry.version ? (
+            <p class="version">{entry.version}</p>
+          ) : (
+            <p class="version">
+              <span aria-hidden="true">—</span>
+              <span class="sr-only">{t(copy.noVersion)}</span>
+            </p>
+          )}
+          <a class="date" href={`#${anchor}`}>
+            <time datetime={entry.publishedAt}>{formatDate(entry.publishedAt, lang)}</time>
+          </a>
+          <p class="label">{t(entry.label)}</p>
+        </div>
+
+        <article class="body">
+          <h3 class="title">{t(entry.title)}</h3>
+          <div class="content" id={`${anchor}-content`} data-content>
+            {entry.sections.map((section) => (
+              <div class="group">
+                {section.heading && <h4 class="heading">{t(section.heading)}</h4>}
+                {section.paragraphs.map((paragraph) => (
+                  <p class="paragraph">{t(paragraph)}</p>
+                ))}
+                {section.items.length > 0 && <ChangelogItems items={section.items} />}
+              </div>
+            ))}
+          </div>
+          {collapsible && (
+            <button class="toggle" type="button" aria-expanded="false" aria-controls={`${anchor}-content`} data-toggle>
+              <span class="when-closed">
+                {t(copy.expand)} · {t(copy.itemCount).replace('{n}', String(itemCount))}
+              </span>
+              <span class="when-open">{t(copy.collapse)}</span>
+              <Icon name="arrow-down-s-line" class="chevron" />
+            </button>
+          )}
+        </article>
+      </li>
+    ))
+  }
+</ol>
+
+<script>
+  import { prefersReducedMotion } from '@/components/ui/motion';
+
+  const timeline = document.querySelector<HTMLElement>('[data-changelog]')!;
+
+  function setOpen(entry: HTMLElement, open: boolean) {
+    const toggle = entry.querySelector<HTMLButtonElement>('[data-toggle]');
+    if (!toggle || toggle.ariaExpanded === String(open)) return;
+
+    const content = entry.querySelector<HTMLElement>('[data-content]')!;
+    const from = content.offsetHeight;
+    toggle.ariaExpanded = String(open);
+    entry.toggleAttribute('data-open', open);
+    const to = content.offsetHeight;
+
+    if (!prefersReducedMotion()) {
+      const easing = getComputedStyle(timeline).getPropertyValue('--ease-out');
+      content.animate({ height: [`${from}px`, `${to}px`] }, { duration: 600, easing });
+    }
+  }
+
+  timeline.addEventListener('click', (event) => {
+    const toggle = (event.target as Element).closest<HTMLButtonElement>('[data-toggle]');
+    if (!toggle) return;
+    const entry = toggle.closest<HTMLElement>('.entry')!;
+    const open = toggle.ariaExpanded !== 'true';
+    setOpen(entry, open);
+    // 收起长记录后，记录开头可能已经在视口上方，滚回记录开头
+    if (!open && entry.getBoundingClientRect().top < 0) {
+      entry.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+    }
+  });
+
+  function openTarget() {
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target?.matches('.entry')) setOpen(target, true);
+  }
+
+  openTarget();
+  addEventListener('hashchange', openTarget);
+</script>
+
+<style>
+  .entry {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  /* 阅读长记录时，版本号和日期停留在视口上方 */
+  .meta {
+    position: sticky;
+    top: calc(var(--nav-height) + 24px);
+    align-self: start;
+  }
+
+  .version {
+    font-family: var(--font-label);
+    font-size: clamp(30px, 3.4vw, 44px);
+    font-weight: 700;
+    line-height: 0.9;
+    color: transparent;
+    -webkit-text-stroke: 1.2px color-mix(in srgb, var(--color-accent-text) 70%, transparent);
+  }
+
+  .latest .version {
+    color: var(--color-accent-text);
+    -webkit-text-stroke: 0;
+  }
+
+  .date {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+    transition: color var(--duration-hover);
+  }
+
+  .date:hover {
+    color: var(--color-accent-text);
+  }
+
+  .label {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-accent-text);
+  }
+
+  .body {
+    position: relative;
+    padding: 4px 0 48px 32px;
+    border-left: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+  }
+
+  /* 时间线上的菱形节点，描边使用页面底色，在节点处遮住竖线 */
+  .body::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -7px;
+    width: 12px;
+    height: 12px;
+    border: 3px solid var(--color-bg);
+    background: var(--color-accent);
+    rotate: 45deg;
+  }
+
+  .title {
+    margin-bottom: 14px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.45;
+    transition: color var(--duration-hover);
+  }
+
+  .entry:target .title {
+    color: var(--color-accent-text);
+  }
+
+  .group + .group {
+    margin-top: 20px;
+  }
+
+  .heading {
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-accent-text);
+  }
+
+  .paragraph {
+    margin-bottom: 10px;
+    font-size: var(--text-small);
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--color-text-secondary);
+  }
+
+  .content {
+    overflow: hidden;
+  }
+
+  /* 折叠只在脚本可用时生效，脚本失效时正文完整显示 */
+  :global(.js) .collapsible:not([data-open]) .content {
+    height: 320px;
+    mask-image: linear-gradient(180deg, #000 calc(100% - 110px), transparent);
+  }
+
+  .toggle {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--color-accent-line);
+    font-family: var(--font-label);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-accent-text);
+    transition: border-color var(--duration-hover);
+  }
+
+  :global(.js) .toggle {
+    display: inline-flex;
+  }
+
+  .toggle:hover {
+    border-color: var(--color-accent);
+  }
+
+  .toggle :global(.chevron) {
+    font-size: 1.2em;
+    transition: rotate var(--duration-hover) var(--ease-out);
+  }
+
+  .toggle[aria-expanded='true'] :global(.chevron) {
+    rotate: 180deg;
+  }
+
+  .toggle[aria-expanded='true'] .when-closed,
+  .toggle[aria-expanded='false'] .when-open {
+    display: none;
+  }
+
+  /* 手机上版本号、日期和标签排成一行，放在正文上方 */
+  @media (max-width: 600px) {
+    .entry {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .meta {
+      position: static;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 4px 14px;
+    }
+
+    .version {
+      font-size: 30px;
+    }
+
+    .date,
+    .label {
+      margin-top: 0;
+    }
+
+    .body {
+      padding: 4px 0 40px 24px;
+    }
+
+    .title {
+      font-size: 18px;
+    }
+  }
+</style>

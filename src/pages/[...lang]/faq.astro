@@ -1,0 +1,89 @@
+---
+import scene from '@/assets/images/scene-challenge.png';
+import FaqList from '@/components/learn/FaqList.astro';
+import GroupHeading from '@/components/learn/GroupHeading.astro';
+import Button from '@/components/ui/Button.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Section from '@/components/ui/Section.astro';
+import { pages } from '@/config/site';
+import { getFaqGroups } from '@/data/faq';
+import { getLang, getLangPaths, localizePath, translator } from '@/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  title: { zh: '常见问题', en: 'FAQ' },
+  description: {
+    zh: '传奇模组的获取、安装、使用与支持等方面的常见问题。',
+    en: 'Answers to common questions about getting, installing and using the New Legend Mod, and where to find help.',
+  },
+  tag: { zh: '社区 / Community', en: 'Community' },
+  subtitle: { zh: 'Frequently Asked', en: 'Questions & Answers' },
+  lead: {
+    zh: '关于获取、安装、使用与支持的常见疑问，都整理在这里。若仍未解决，欢迎通过社群与我们联系。',
+    en: 'Common questions about getting, installing and using the Mod, and about support. If your question is not answered here, feel free to contact us through the community.',
+  },
+  ctaTitle: { zh: '没找到答案？直接联系我们', en: 'Didn’t find an answer? Contact us directly' },
+  contact: { zh: '联系与反馈', en: 'Contact & Feedback' },
+};
+
+const groups = getFaqGroups();
+
+// FAQPage 结构化数据，帮助搜索引擎识别页面上的问答
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: groups.flatMap((group) =>
+    group.items.map((item) => ({
+      '@type': 'Question',
+      name: t(item.question),
+      acceptedAnswer: { '@type': 'Answer', text: t(item.answer) },
+    })),
+  ),
+};
+---
+
+<BaseLayout title={t(copy.title)} description={t(copy.description)}>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+  <PageHero
+    image={scene}
+    tag={t(copy.tag)}
+    title={t(copy.title)}
+    subtitle={t(copy.subtitle)}
+    lead={t(copy.lead)}
+    watermark="FAQ"
+  />
+
+  <Section width="narrow">
+    <div class="groups">
+      {
+        groups.map((group, index) => (
+          <section>
+            <GroupHeading data-reveal>{t(group.title)}</GroupHeading>
+            <div data-reveal>
+              <FaqList items={group.items} open={index === 0 ? group.items[0].id : undefined} />
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </Section>
+
+  <CtaBand tone="accent" kicker="Still need help?" title={t(copy.ctaTitle)}>
+    <Button href={localizePath(pages.feedback, lang)} variant="dark" icon="arrow-right-line">{t(copy.contact)}</Button>
+  </CtaBand>
+</BaseLayout>
+
+<style>
+  .groups {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(60px, 7vw, 90px);
+  }
+</style>

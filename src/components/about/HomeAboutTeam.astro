@@ -1,0 +1,37 @@
+---
+/** 首页「关于传奇建造队」区块，锚点 #about-team，末尾链接到团队页。 */
+import { pages } from '@/config/site';
+import { getLang, localizePath, translator } from '@/i18n';
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Section from '@/components/ui/Section.astro';
+import AboutIntro from './AboutIntro.astro';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  tag: { zh: '关于 / About', en: 'About' },
+  title: { zh: '关于传奇建造队', en: 'About Legend Build Team' },
+  founding: {
+    zh: '传奇建造队成立于 2016 年 4 月 2 日，由一众《废品机械师》爱好者发起。多年发展至今，已成长为横跨三个千人交流群的国内大型玩家团体。我们因对这款游戏的热爱而聚集，持续挖掘它在建造与机械上的可能。',
+    en: 'Legend Build Team was founded on April 2, 2016 by a group of Scrap Mechanic enthusiasts. It has since grown into one of the larger player communities in China, spread across three QQ groups of around a thousand members each. A shared love of the game brings us together, and we keep exploring what it can do for building and engineering.',
+  },
+  mod: {
+    zh: '传奇模组于 2016 年 5 月 21 日诞生，如今已是创意工坊订阅量、物品丰富度与体量均居前列的综合性模组。比起这些数字，我们更看重每一位机械师长期的陪伴与信任。',
+    en: 'The New Legend Mod first appeared on May 21, 2016. Today it ranks among the leading all-in-one mods on the Steam Workshop in subscriptions, item variety and overall size. More than these numbers, we value the long-standing company and trust of every mechanic.',
+  },
+  more: { zh: '了解传奇建造队', en: 'About the team' },
+};
+---
+
+<Section id="about-team">
+  <AboutIntro index="01" tag={t(copy.tag)} title={t(copy.title)} paragraphs={[t(copy.founding), t(copy.mod)]}>
+    <ArrowLink href={localizePath(pages.team, lang)} underline class="more">{t(copy.more)}</ArrowLink>
+  </AboutIntro>
+</Section>
+
+<style>
+  .more {
+    margin-top: 36px;
+  }
+</style>

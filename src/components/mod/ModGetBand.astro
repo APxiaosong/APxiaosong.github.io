@@ -1,0 +1,133 @@
+---
+/** 模组页末尾的金底横条：左侧是订阅说明，右侧是创意工坊和获取页两个入口。 */
+import Icon from '@/components/ui/Icon.astro';
+import Section from '@/components/ui/Section.astro';
+import { links, pages } from '@/config/site';
+import { getLang, localizePath, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  title: { zh: '立即获取传奇模组', en: 'Get the New Legend Mod' },
+  text: {
+    zh: '在 Steam 创意工坊点击「订阅」，游戏将自动下载并保持更新，在存档中启用即可使用。',
+    en: 'Click Subscribe on the Steam Workshop. The game downloads the Mod and keeps it up to date; enable it in a world to start building.',
+  },
+  workshop: { zh: '创意工坊订阅页', en: 'Workshop Page' },
+  get: { zh: '前往获取中心', en: 'Get Started' },
+};
+---
+
+<Section tone="accent" space="md">
+  <div class="band" data-reveal>
+    <div>
+      <p class="kicker text-accent">Subscribe on Steam.</p>
+      <h2 class="title">{t(copy.title)}</h2>
+      <p class="text">{t(copy.text)}</p>
+    </div>
+    <div class="links">
+      <a class="link primary" href={links.modWorkshop} target="_blank" rel="noopener" data-theme="dark">
+        <span>{t(copy.workshop)}</span>
+        <span class="sr-only">{t(ui.common.newWindow)}</span>
+        <Icon name="arrow-right-up-line" class="arrow" />
+      </a>
+      <a class="link secondary" href={localizePath(pages.get, lang)}>
+        <span>{t(copy.get)}</span>
+        <Icon name="arrow-right-line" class="arrow" />
+      </a>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .band {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+
+  .kicker {
+    font-size: clamp(22px, 3vw, 38px);
+  }
+
+  .title {
+    margin-top: 6px;
+    font-size: clamp(34px, 5vw, 72px);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .text {
+    max-width: 520px;
+    margin-top: 20px;
+    font-size: var(--text-body);
+    font-weight: 500;
+    line-height: 1.7;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 30px;
+    font-family: var(--font-label);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    clip-path: var(--clip-notch-md);
+    transition:
+      transform var(--duration-hover) var(--ease-out),
+      background-color var(--duration-hover);
+  }
+
+  .arrow {
+    font-size: 20px;
+  }
+
+  .primary {
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .primary .arrow {
+    color: var(--color-accent);
+  }
+
+  .primary:hover {
+    transform: translateX(4px);
+  }
+
+  .secondary {
+    border: 1px solid var(--color-line-strong);
+    background: color-mix(in srgb, var(--color-text) 12%, transparent);
+  }
+
+  .secondary:hover {
+    background: color-mix(in srgb, var(--color-text) 22%, transparent);
+  }
+
+  @media (max-width: 900px) {
+    .band {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 36px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .link {
+      padding: 20px 24px;
+      font-size: 15px;
+    }
+  }
+</style>

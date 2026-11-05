@@ -1,0 +1,157 @@
+---
+/** 模组页的开发者说明：左侧是激光制导的用法，右侧是已知问题和致谢。内容与创意工坊的模组简介一致。 */
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import { pages } from '@/config/site';
+import { getLang, localizePath, translator } from '@/i18n';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  system: { zh: '系统 / System', en: 'System' },
+  // 英文页面的大标题就是 Laser Guidance，注释留空
+  systemNote: { zh: 'Laser Guidance', en: '' },
+  title: { zh: '激光制导', en: 'Laser Guidance' },
+  issues: { zh: '已知问题 / Known Issues', en: 'Known Issues' },
+  feedback: { zh: '反馈问题', en: 'Report a problem' },
+  thanks: {
+    zh: '特别感谢 Modpack 作者 Durf 提供的体积优化建议，以及 MJM Mod 提供的开源座椅脚本。',
+    en: 'Special thanks to Modpack author Durf for advice on reducing file size, and to MJM Mod for the open-source seat script.',
+  },
+};
+
+const guidance = [
+  {
+    zh: '发射机需设置编码并接开关，开关打开后，激光制导模块方可手动切换编码。',
+    en: 'The launcher needs a code and a wired switch. Once the switch is on, the Laser Guidance Module can switch codes manually.',
+  },
+  {
+    zh: '制导模块被激光编码模块连线时，由后者控制编码，编码模块可级联传递。',
+    en: 'When a Laser Guidance Module is wired to a Laser Code Module, the code module controls the code. Code modules can be chained.',
+  },
+  {
+    zh: '制导能力需连接开关或逻辑门激活，力度与 WASD 模式同制导模块一致。',
+    en: 'Guidance is activated by a switch or logic gate. Force and WASD-mode behavior match the standard Guidance Module.',
+  },
+];
+
+const issues = [
+  {
+    zh: '功能异常时，请先确认存档不是用旧版传奇模组创建的（新旧版本互不兼容）。',
+    en: 'If something stops working, first check that the save was not created with the old Legend Mod; the old and new versions are not compatible.',
+  },
+  {
+    zh: '发现新的问题，欢迎向开发者反馈。',
+    en: 'Please report any new bugs to the developers.',
+  },
+];
+---
+
+<div class="notes">
+  <div data-reveal>
+    <Eyebrow label={t(copy.system)} note={t(copy.systemNote)} />
+    <h2 class="title">{t(copy.title)}</h2>
+    <ul class="guidance">
+      {guidance.map((item) => <li>{t(item)}</li>)}
+    </ul>
+  </div>
+
+  <div class="side" data-reveal style="--reveal-delay: 120ms">
+    <Eyebrow label={t(copy.issues)} />
+    <ul class="issues">
+      {issues.map((item) => <li>{t(item)}</li>)}
+    </ul>
+    <ArrowLink href={localizePath(pages.feedback, lang)} class="feedback">{t(copy.feedback)}</ArrowLink>
+    <p class="thanks">{t(copy.thanks)}</p>
+  </div>
+</div>
+
+<style>
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 56px;
+    align-items: start;
+  }
+
+  .title {
+    margin-top: 14px;
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .guidance {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 26px;
+  }
+
+  .guidance li {
+    position: relative;
+    padding-left: 26px;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--color-text-secondary);
+  }
+
+  .guidance li::before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    rotate: 45deg;
+  }
+
+  .issues {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .issues li {
+    position: relative;
+    padding-left: 18px;
+    font-size: var(--text-small);
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--color-text-muted);
+  }
+
+  .issues li::before {
+    content: '';
+    position: absolute;
+    top: 11px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    background: var(--color-text-muted);
+  }
+
+  .side :global(.feedback) {
+    margin-top: 18px;
+  }
+
+  .thanks {
+    margin-top: 30px;
+    padding-top: 22px;
+    border-top: 1px solid var(--color-line);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .notes {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 48px;
+    }
+  }
+</style>

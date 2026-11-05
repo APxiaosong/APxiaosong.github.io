@@ -1,0 +1,203 @@
+---
+/**
+ * 一位作者的作品横条：可横向滚动的作品卡片，末尾是链接到作者 Steam 创意工坊主页的卡片。
+ * 每张卡片是一个筛选条目（data-filter-value 为分类），横条只显示前 limit 个匹配的作品。
+ * 能悬停的设备上，两侧显示滚动按钮。
+ */
+import type { Work, WorkshopAuthor } from '@/data/workshop';
+import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import Icon from '@/components/ui/Icon.astro';
+import WorkCard from './WorkCard.astro';
+
+interface Props {
+  author: WorkshopAuthor;
+  works: Work[];
+  /** 作者名下作品的总数，显示在末尾的卡片上 */
+  total: number;
+  limit: number;
+}
+
+const { author, works, total, limit } = Astro.props;
+const t = translator(getLang(Astro.url));
+
+const copy = {
+  viewAll: { zh: '在 Steam 查看全部作品', en: 'View all on Steam' },
+  back: { zh: '向前滚动', en: 'Scroll back' },
+  forward: { zh: '向后滚动', en: 'Scroll forward' },
+};
+---
+
+<div class="strip" data-work-strip={limit}>
+  <ul class="track">
+    {
+      works.map((work) => (
+        <li data-filter-value={work.category}>
+          <WorkCard work={work} author={author.id} />
+        </li>
+      ))
+    }
+    <li>
+      <a class="all" href={author.workshopUrl} target="_blank" rel="noopener">
+        <span class="count">{total}</span>
+        <span class="all-label">
+          {t(copy.viewAll)}
+          <Icon name="arrow-right-up-line" />
+        </span>
+        <span class="sr-only">{t(ui.common.newWindow)}</span>
+      </a>
+    </li>
+  </ul>
+  <button class="nudge back" type="button" tabindex="-1" aria-label={t(copy.back)} data-strip-step="-1">
+    <Icon name="arrow-left-s-line" />
+  </button>
+  <button class="nudge forward" type="button" tabindex="-1" aria-label={t(copy.forward)} data-strip-step="1">
+    <Icon name="arrow-right-s-line" />
+  </button>
+</div>
+
+<script>
+  import { prefersReducedMotion } from '@/components/ui/motion';
+  import { limitFiltered } from './filter-limit';
+
+  for (const strip of document.querySelectorAll<HTMLElement>('[data-work-strip]')) {
+    const track = strip.querySelector<HTMLElement>('.track')!;
+
+    // 滚动到两端时隐藏对应方向的按钮
+    const update = () => {
+      strip.toggleAttribute('data-at-start', track.scrollLeft < 1);
+      strip.toggleAttribute('data-at-end', track.scrollLeft + track.clientWidth > track.scrollWidth - 1);
+    };
+
+    for (const button of strip.querySelectorAll<HTMLButtonElement>('[data-strip-step]')) {
+      button.addEventListener('click', () => {
+        const distance = Number(button.dataset.stripStep) * track.clientWidth * 0.75;
+        track.scrollBy({ left: distance, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+      });
+    }
+
+    track.addEventListener('scroll', update, { passive: true });
+    new ResizeObserver(update).observe(track);
+    limitFiltered(track, Number(strip.dataset.workStrip), () => {
+      track.scrollLeft = 0;
+      update();
+    });
+  }
+</script>
+
+<style>
+  .strip {
+    position: relative;
+  }
+
+  .track {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0 18px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+  }
+
+  .track > li {
+    flex: none;
+    width: min(300px, 76vw);
+    scroll-snap-align: start;
+  }
+
+  .track > [data-overflow] {
+    display: none;
+  }
+
+  .all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    aspect-ratio: 4 / 3;
+    border: 1px dashed var(--color-line-strong);
+    color: var(--color-text-secondary);
+    clip-path: var(--clip-corner-sm);
+    transition:
+      border-color var(--duration-hover),
+      background-color var(--duration-hover),
+      color var(--duration-hover);
+  }
+
+  .all:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-tint);
+    color: var(--color-accent-text);
+  }
+
+  .all:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .count {
+    font-family: var(--font-label);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-accent);
+  }
+
+  .all-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* 按钮停在卡片图片的垂直中线上，不计入轨道底部给滚动条留出的空间 */
+  .nudge {
+    position: absolute;
+    top: calc(4px + (100% - 22px) / 2);
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--color-line-strong);
+    background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+    color: var(--color-text);
+    font-size: 22px;
+    clip-path: var(--clip-notch-sm);
+    translate: 0 -50%;
+    backdrop-filter: blur(6px);
+    transition:
+      opacity var(--duration-hover),
+      border-color var(--duration-hover),
+      color var(--duration-hover);
+  }
+
+  .nudge:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent-text);
+  }
+
+  .back {
+    left: 12px;
+  }
+
+  .forward {
+    right: 12px;
+  }
+
+  [data-at-start] .back,
+  [data-at-end] .forward {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (hover: none) {
+    .nudge {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+/** 首页金色统计带：订阅数和物品总数来自模组数据。 */
+import StatBand from '@/components/ui/StatBand.astro';
+import { getMod } from '@/data/mod';
+import { getLang, translator } from '@/i18n';
+import { formatNumber } from '@/i18n/format';
+
+const t = translator(getLang(Astro.url));
+const mod = getMod();
+
+const items = [
+  {
+    value: formatNumber(mod.subscriptions),
+    label: t({ zh: 'Steam 创意工坊\n订阅数', en: 'Steam Workshop\nsubscribers' }),
+  },
+  {
+    value: formatNumber(mod.itemCount),
+    label: t({ zh: '模组\n物品总数', en: 'Items\nin the Mod' }),
+  },
+  {
+    value: 'EN',
+    label: t({ zh: '已支持\n英文物品描述', en: 'Item descriptions\nin English' }),
+  },
+];
+---
+
+<StatBand items={items} />

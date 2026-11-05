@@ -1,0 +1,163 @@
+---
+/**
+ * 首页反馈区块，锚点 #feedback，全站的「反馈」入口都指向这里。
+ * 金底区块中左侧是深色的邮箱卡片，右侧是 QQ 群号和 Steam 社区组入口。
+ */
+import { feedbackEmail, links, qqGroups } from '@/config/site';
+import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import Button from '@/components/ui/Button.astro';
+import EmailLink from '@/components/ui/EmailLink.astro';
+import Icon from '@/components/ui/Icon.astro';
+import Section from '@/components/ui/Section.astro';
+
+const t = translator(getLang(Astro.url));
+
+const copy = {
+  kicker: { zh: 'Get in touch.', en: 'Feedback & support' },
+  title: { zh: '与我们取得联系', en: 'Get in touch' },
+  emailLabel: { zh: 'Email · 反馈邮箱', en: 'Email' },
+  emailHint: { zh: '点击直接发送邮件', en: 'Click to write to us' },
+  qqLabel: { zh: 'QQ 群', en: 'QQ Groups' },
+};
+---
+
+<Section id="feedback" tone="accent">
+  <div data-reveal>
+    <div class="heading">
+      <p class="kicker text-accent">{t(copy.kicker)}</p>
+      <h2 class="title">{t(copy.title)}</h2>
+    </div>
+
+    <div class="grid">
+      <EmailLink class="email-card" data-theme="dark">
+        <span class="card-label">{t(copy.emailLabel)}</span>
+        <span class="address" data-email-text>{feedbackEmail.user} [at] {feedbackEmail.domain}</span>
+        <span class="hint">{t(copy.emailHint)} <Icon name="arrow-right-line" /></span>
+      </EmailLink>
+
+      <div class="community">
+        <h3 class="groups-label">{t(copy.qqLabel)}</h3>
+        <ul class="groups">
+          {
+            qqGroups.map((group) => (
+              <li class="group">
+                <span>{t(group.name)}</span>
+                <span class="number">{group.number}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <Button href={links.steamGroup} variant="dark" size="sm" external class="steam">
+          {t(ui.nav.steamGroup)}
+        </Button>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 18px;
+    margin-bottom: 44px;
+  }
+
+  .kicker {
+    font-size: clamp(22px, 3vw, 38px);
+  }
+
+  .title {
+    font-size: clamp(40px, 6.5vw, 90px);
+    line-height: 0.98;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+
+  .email-card {
+    display: block;
+    padding: clamp(28px, 4vw, 48px);
+    background: var(--color-bg);
+    color: var(--color-text);
+    clip-path: var(--clip-frame-lg);
+    transition: transform var(--duration-hover) var(--ease-out);
+  }
+
+  .email-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .card-label,
+  .groups-label {
+    display: block;
+    font-family: var(--font-label);
+    font-size: var(--text-label);
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .card-label {
+    color: var(--color-accent-text);
+  }
+
+  .address {
+    display: block;
+    margin-top: 16px;
+    font-size: clamp(22px, 3vw, 38px);
+    font-weight: 700;
+    line-height: 1.3;
+    word-break: break-all;
+  }
+
+  .hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    font-size: var(--text-small);
+    color: var(--color-text-muted);
+  }
+
+  .groups-label {
+    margin-bottom: 18px;
+  }
+
+  .groups {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .group {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-line);
+    font-weight: 500;
+  }
+
+  .number {
+    font-family: var(--font-label);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .steam {
+    margin-top: 22px;
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+    }
+  }
+</style>

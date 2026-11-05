@@ -1,0 +1,151 @@
+---
+/**
+ * 切角按钮。传入 href 时渲染为链接，否则渲染为 <button type="button">。
+ * variant：primary 金底；ghost 半透明描边，用于深色背景上的次要操作；
+ *          outline 金色描边；dark 深底金字，只用在金底区块上。
+ * external：在新窗口打开，并在文字后显示外部链接图标。
+ * icon / iconBefore：文字后、文字前的 Remix Icon 图标名。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import Icon from './Icon.astro';
+
+interface Props extends HTMLAttributes<'a'> {
+  href?: string;
+  variant?: 'primary' | 'ghost' | 'outline' | 'dark';
+  size?: 'sm' | 'md';
+  icon?: string;
+  iconBefore?: string;
+  external?: boolean;
+}
+
+const { href, variant = 'primary', size = 'md', icon, iconBefore, external = false, class: className, ...rest } = Astro.props;
+
+const t = translator(getLang(Astro.url));
+const trailingIcon = icon ?? (external ? 'arrow-right-up-line' : undefined);
+const classes = ['button', variant, size, className];
+---
+
+{
+  href ? (
+    <a
+      class:list={classes}
+      href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener' : undefined}
+      {...rest}
+    >
+      {iconBefore && <Icon name={iconBefore} class="before" />}
+      <span>
+        <slot />
+      </span>
+      {external && <span class="sr-only">{t(ui.common.newWindow)}</span>}
+      {trailingIcon && <Icon name={trailingIcon} class="after" />}
+    </a>
+  ) : (
+    <button class:list={classes} type="button" {...(rest as HTMLAttributes<'button'>)}>
+      {iconBefore && <Icon name={iconBefore} class="before" />}
+      <span>
+        <slot />
+      </span>
+      {trailingIcon && <Icon name={trailingIcon} class="after" />}
+    </button>
+  )
+}
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 17px 36px;
+    border: 1px solid transparent;
+    font-family: var(--font-label);
+    font-size: 15px;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    clip-path: var(--clip-notch-md);
+    transition:
+      background-color var(--duration-hover),
+      border-color var(--duration-hover),
+      color var(--duration-hover),
+      transform var(--duration-hover) var(--ease-out);
+  }
+
+  .sm {
+    padding: 11px 26px;
+    font-size: var(--text-small);
+    clip-path: var(--clip-notch-sm);
+  }
+
+  /* ghost 按钮沿用常规字重，与实心按钮并排时主次分明 */
+  .primary,
+  .outline,
+  .dark {
+    font-weight: 600;
+  }
+
+  .primary {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  .primary:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
+  }
+
+  .ghost {
+    border-color: var(--color-line-contrast);
+    background: color-mix(in srgb, var(--color-text) 6%, transparent);
+    color: var(--color-text);
+    backdrop-filter: blur(6px);
+  }
+
+  .ghost:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-tint-strong);
+  }
+
+  .outline {
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent-text);
+  }
+
+  .outline:hover {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  .dark {
+    background: var(--color-on-accent);
+    color: var(--color-accent);
+  }
+
+  .dark:hover {
+    transform: translateY(-2px);
+  }
+
+  .before {
+    font-size: 0.85em;
+    color: var(--color-accent);
+  }
+
+  .primary .before,
+  .outline:hover .before {
+    color: inherit;
+  }
+
+  .after {
+    font-size: 1.1em;
+    transition: transform var(--duration-hover) var(--ease-out);
+  }
+
+  .button:hover .after {
+    transform: translateX(3px);
+  }
+</style>

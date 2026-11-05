@@ -1,0 +1,101 @@
+---
+/**
+ * 主题切换按钮。图标和文字都表示点击后切换到的主题，按当前主题由 CSS 显示其中一组。
+ * 宽屏下只显示图标；导航折叠为菜单面板后显示带文字的按钮。
+ */
+import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import Icon from '@/components/ui/Icon.astro';
+
+const t = translator(getLang(Astro.url));
+---
+
+<button class="theme-toggle" type="button" data-theme-toggle>
+  <span class="to-light">
+    <Icon name="sun-line" class="icon" />
+    <span class="label">{t(ui.theme.toLight)}</span>
+  </span>
+  <span class="to-dark">
+    <Icon name="moon-line" class="icon" />
+    <span class="label">{t(ui.theme.toDark)}</span>
+  </span>
+</button>
+
+<script>
+  const STORAGE_KEY = 'theme';
+  const root = document.documentElement;
+  const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+
+  for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+    button.addEventListener('click', () => {
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        // 浏览器禁用存储时只在当前页面生效
+      }
+      themeColor?.setAttribute('content', getComputedStyle(root).getPropertyValue('--color-bg').trim());
+    });
+  }
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--color-text-secondary);
+    transition: color var(--duration-hover);
+  }
+
+  .theme-toggle:hover {
+    color: var(--color-accent-text);
+  }
+
+  .to-light,
+  .to-dark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  :global(:root[data-theme='dark']) .to-dark,
+  :global(:root[data-theme='light']) .to-light {
+    display: none;
+  }
+
+  .icon {
+    font-size: 18px;
+  }
+
+  .label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .theme-toggle {
+      width: auto;
+      height: auto;
+      padding: 12px 18px;
+      border: 1px solid var(--color-line-strong);
+      font-size: var(--text-small);
+      clip-path: var(--clip-notch-sm);
+    }
+
+    .label {
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      clip-path: none;
+    }
+  }
+</style>

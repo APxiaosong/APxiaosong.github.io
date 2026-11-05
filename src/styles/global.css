@@ -1,0 +1,228 @@
+/* 全局基础样式：重置、页面底色、可复用的文字角色、入场动画 */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--color-scrollbar) var(--color-bg);
+}
+
+/* 站内锚点跳转时平滑滚动。is-loaded 由 BaseLayout 在加载完成后加上，带锚点的网址初次打开时直接定位 */
+@media (prefers-reduced-motion: no-preference) {
+  html.is-loaded {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 只有 Spectral 带斜体字形，斜体文字中的汉字落到正文字体时保持正体，不由浏览器伪造倾斜 */
+  font-synthesis: weight;
+  overflow-x: hidden;
+  transition: background-color var(--duration-hover), color var(--duration-hover);
+}
+
+/* 字体继承的是父元素算好的值，语言变化的地方重新取一次正文字体，弯引号的字形才会随语言切换 */
+[lang] {
+  font-family: var(--font-body);
+}
+
+img,
+picture,
+video,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 900;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* 锚点跳转时避开固定导航栏 */
+[id] {
+  scroll-margin-top: calc(var(--nav-height) + 6px);
+}
+
+/* 内容容器：所有区块的水平宽度和左右留白 */
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container-narrow {
+  max-width: var(--content-width-narrow);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* 文字角色，对应 DESIGN.md 的字体排印表 */
+.text-body {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-weight: 300;
+  color: var(--color-text-secondary);
+}
+
+.text-label {
+  font-family: var(--font-label);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.text-accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-accent-text);
+}
+
+.text-note {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+@keyframes in-rise {
+  from {
+    opacity: 0;
+    transform: translateY(38px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes in-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes in-zoom {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/*
+ * 滚动入场：元素加 data-reveal，进入视口时由 BaseLayout 的脚本加上 is-revealed。
+ * 只在脚本可用（html.js）时隐藏，脚本失效时内容照常显示。
+ * 需要错开节奏时，用 style="--reveal-delay: 120ms" 设置延迟。
+ */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(38px);
+  transition:
+    opacity var(--duration-reveal) var(--ease-out) var(--reveal-delay, 0s),
+    transform var(--duration-reveal) var(--ease-out) var(--reveal-delay, 0s);
+}
+
+.js [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* 锚点目标和包含它的入场容器直接就位，浏览器才能按最终位置滚动，不会停在导航栏下面 */
+.js [data-reveal]:is(:target, :has(:target)) {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,134 @@
+---
+/** 模组页：传奇模组的介绍、履带与激光制导说明、相关物品和游戏截图。 */
+import cover from '@/assets/images/mod-cover.jpg';
+import ModAbout from '@/components/mod/ModAbout.astro';
+import ModGetBand from '@/components/mod/ModGetBand.astro';
+import ModNotes from '@/components/mod/ModNotes.astro';
+import ModScreenshots from '@/components/mod/ModScreenshots.astro';
+import ModTracks from '@/components/mod/ModTracks.astro';
+import RelatedMods from '@/components/mod/RelatedMods.astro';
+import Button from '@/components/ui/Button.astro';
+import ButtonGroup from '@/components/ui/ButtonGroup.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Lightbox from '@/components/ui/Lightbox.astro';
+import NumberedIntro from '@/components/ui/NumberedIntro.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Section from '@/components/ui/Section.astro';
+import Tag from '@/components/ui/Tag.astro';
+import { links } from '@/config/site';
+import { getMod } from '@/data/mod';
+import { getLang, getLangPaths, translator } from '@/i18n';
+import { formatNumber } from '@/i18n/format';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const getStaticPaths = getLangPaths;
+
+const t = translator(getLang(Astro.url));
+const mod = getMod();
+
+const copy = {
+  title: { zh: '传奇模组', en: 'New Legend Mod' },
+  subtitle: { zh: 'New Legend Mod', en: 'Continuation' },
+  description: {
+    zh: `传奇模组是传奇建造队为《废品机械师》制作的综合性建造模组，当前版本 ${mod.version}，共有 ${formatNumber(mod.itemCount)} 件物品。`,
+    en: `The New Legend Mod is a comprehensive building Mod for Scrap Mechanic by Legend Build Team. Current version ${mod.version}, with ${formatNumber(mod.itemCount)} items.`,
+  },
+  subscribe: { zh: '前往创意工坊订阅', en: 'Subscribe on the Workshop' },
+  preview: { zh: '查看模组预览', en: 'See Screenshots' },
+  overviewTag: { zh: '关于模组 / Overview', en: 'Overview' },
+  overviewTitle: { zh: '满足日常建造的\n绝大部分需要', en: 'Most of what everyday building calls for' },
+  overviewText: {
+    zh: '欢迎各位机械师订阅由中国玩家团队「传奇建造队」制作的传奇 Mod。这是一个综合性 Mod，包含材质方块、各种几何体、各种可互动零件、各种车辆轮胎、载具零件、威力强大的武器、各种装饰、自然景物装饰、建筑零件，以及独特的传奇专属零件。',
+    en: 'The New Legend Mod is made by Legend Build Team, a Chinese player community. It is a comprehensive Mod with material blocks, geometric shapes, interactive parts, wheels and tires, vehicle parts, weapons, decorations, natural scenery, building parts and a set of parts unique to the Mod.',
+  },
+  english: { zh: '现已支持英文物品描述 · English Supported', en: 'Item descriptions in English and Chinese' },
+  relatedEyebrow: { zh: '更多模组 / Related', en: 'Related' },
+  relatedTitle: { zh: '相关 Mod 与自定义游戏', en: 'Related Mods & Custom Games' },
+};
+---
+
+<BaseLayout title={t(copy.title)} description={t(copy.description)} image={cover}>
+  <PageHero variant="cover" image={cover} tag="Steam Workshop" title={t(copy.title)} subtitle={t(copy.subtitle)}>
+    <ButtonGroup>
+      <Button href={links.modWorkshop} external>{t(copy.subscribe)}</Button>
+      <Button href="#screenshots" variant="ghost" icon="arrow-down-line">{t(copy.preview)}</Button>
+    </ButtonGroup>
+  </PageHero>
+
+  <Section>
+    <NumberedIntro index="01" data-reveal>
+      <Tag>{t(copy.overviewTag)}</Tag>
+      <h2 class="overview-title">{t(copy.overviewTitle)}</h2>
+      <p class="text-body overview-text">{t(copy.overviewText)}</p>
+      <p class="english">{t(copy.english)}</p>
+    </NumberedIntro>
+  </Section>
+
+  <ModAbout />
+  <ModTracks />
+
+  <Section tone="alt">
+    <ModNotes />
+    <div class="related" data-reveal>
+      <Eyebrow label={t(copy.relatedEyebrow)} />
+      <h2 class="related-title">{t(copy.relatedTitle)}</h2>
+      <RelatedMods />
+    </div>
+  </Section>
+
+  <Section id="screenshots">
+    <ModScreenshots />
+  </Section>
+
+  <ModGetBand />
+  <Lightbox />
+</BaseLayout>
+
+<style>
+  .overview-title {
+    margin: 18px 0 28px;
+    font-size: clamp(30px, 4.2vw, 52px);
+    font-weight: 900;
+    line-height: 1.15;
+    white-space: pre-line;
+  }
+
+  .overview-text {
+    max-width: 900px;
+    font-size: var(--text-lead);
+    line-height: 2.1;
+  }
+
+  .english {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 26px;
+    padding: 12px 20px;
+    border: 1px solid var(--color-accent-line);
+    font-family: var(--font-label);
+    font-size: var(--text-small);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent-text);
+    clip-path: var(--clip-notch-md);
+  }
+
+  .english::before {
+    content: '';
+    flex: none;
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+  }
+
+  .related {
+    margin-top: var(--space-section-md);
+  }
+
+  .related-title {
+    margin: 12px 0 36px;
+    font-size: clamp(28px, 3.6vw, 48px);
+    font-weight: 900;
+  }
+</style>

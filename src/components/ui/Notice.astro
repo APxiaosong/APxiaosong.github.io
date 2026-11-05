@@ -1,0 +1,40 @@
+---
+/**
+ * 提示条：淡金底、金色细边和提示图标，用于兼容性说明等需要读者留意的内容。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import Icon from './Icon.astro';
+
+type Props = HTMLAttributes<'div'>;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div class:list={['notice', className]} role="note" {...rest}>
+  <Icon name="error-warning-line" class="icon" />
+  <div class="text"><slot /></div>
+</div>
+
+<style>
+  .notice {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 22px;
+    border: 1px solid var(--color-accent-line);
+    background: var(--color-accent-tint);
+    clip-path: var(--clip-notch-md);
+  }
+
+  .icon {
+    flex: none;
+    font-size: 22px;
+    color: var(--color-accent-text);
+  }
+
+  .text {
+    font-size: var(--text-small);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+</style>

@@ -1,0 +1,271 @@
+---
+/**
+ * 筛选控件：一组筛选按钮（最前面自动加上「全部」）、可选的搜索框和结果数，没有结果时显示空状态。
+ * 组件只输出控件，条目由页面放在 id 为 target 的元素里，并用 data-filter-* 属性声明，写法见 README。
+ * 脚本不可用时控件整体隐藏，条目全部显示。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { getLang, translator } from '@/i18n';
+import Callout from './Callout.astro';
+import Chip from './Chip.astro';
+import Icon from './Icon.astro';
+
+export interface FilterOption {
+  /** 与条目的 data-filter-value 对应，不能含空格 */
+  value: string;
+  label: string;
+}
+
+interface Props extends HTMLAttributes<'div'> {
+  target: string;
+  options: FilterOption[];
+  label: string;
+  search?: string;
+  count?: string;
+  param?: string;
+  empty?: string;
+}
+
+const t = translator(getLang(Astro.url));
+
+const copy = {
+  all: { zh: '全部', en: 'All' },
+  empty: { zh: '没有符合条件的内容，试试其他关键词或分类。', en: 'Nothing matches. Try a different keyword or filter.' },
+};
+
+const {
+  target,
+  options,
+  label,
+  search,
+  count,
+  param,
+  empty = t(copy.empty),
+  class: className,
+  ...rest
+} = Astro.props;
+
+const allOptions = [{ value: '', label: t(copy.all) }, ...options];
+---
+
+<div
+  class:list={['filter', { 'has-search': search }, className]}
+  data-filter={target}
+  data-filter-param={param}
+  {...rest}
+>
+  <div class="controls">
+    {
+      search && (
+        <label class="search">
+          <Icon name="search-line" class="search-icon" />
+          <input class="search-input" type="search" placeholder={search} aria-label={search} autocomplete="off" data-filter-search />
+        </label>
+      )
+    }
+    <div class="options" role="group" aria-label={label}>
+      {
+        allOptions.map((option) => (
+          <Chip class="option" pressed={option.value === ''} data-filter-option={option.value}>
+            {option.label}
+          </Chip>
+        ))
+      }
+    </div>
+    {count && <p class="count text-note" aria-live="polite" data-filter-count={count}></p>}
+  </div>
+  <div class="empty" data-filter-empty hidden>
+    <Callout kicker="No results." align="center">{empty}</Callout>
+  </div>
+</div>
+
+<script>
+  import { prefersReducedMotion } from './motion';
+
+  const easing = getComputedStyle(document.documentElement).getPropertyValue('--ease-out').trim();
+  const normalize = (text: string) => text.normalize('NFKC').toLowerCase();
+
+  // 筛选后重新出现的条目淡入；同时标记为已入场，免得滚动到它时再播放一次入场动画
+  function reveal(item: HTMLElement, order: number) {
+    item.classList.add('is-revealed');
+    if (prefersReducedMotion()) return;
+    item.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], {
+      duration: 500,
+      delay: Math.min(order, 8) * 40,
+      easing,
+      fill: 'backwards',
+    });
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-filter]')) {
+    const scope = document.getElementById(root.dataset.filter!)!;
+    const items = Array.from(scope.querySelectorAll<HTMLElement>('[data-filter-value]'), (element) => ({
+      element,
+      values: element.dataset.filterValue!.split(' '),
+      text: normalize(element.dataset.filterText ?? element.textContent ?? ''),
+    }));
+    const groups = Array.from(scope.querySelectorAll<HTMLElement>('[data-filter-group]'));
+    const options = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-filter-option]'));
+    const search = root.querySelector<HTMLInputElement>('[data-filter-search]');
+    const count = root.querySelector<HTMLElement>('[data-filter-count]');
+    const empty = root.querySelector<HTMLElement>('[data-filter-empty]')!;
+    const param = root.dataset.filterParam;
+    let selected = '';
+
+    // animate：all 让全部可见条目重新淡入（切换分类），new 只让新出现的条目淡入（输入搜索词）
+    function update(animate: 'all' | 'new' | 'none') {
+      const terms = normalize(search?.value ?? '').split(/\s+/).filter(Boolean);
+      let shown = 0;
+      for (const { element, values, text } of items) {
+        const visible = (!selected || values.includes(selected)) && terms.every((term) => text.includes(term));
+        const appearing = animate === 'all' || (animate === 'new' && element.hidden);
+        element.hidden = !visible;
+        if (!visible) continue;
+        if (appearing) reveal(element, shown);
+        shown++;
+      }
+      for (const group of groups) group.hidden = !group.querySelector('[data-filter-value]:not([hidden])');
+      if (count) count.textContent = count.dataset.filterCount!.replace('{n}', String(shown));
+      empty.hidden = shown > 0;
+    }
+
+    function select(value: string) {
+      selected = value;
+      for (const option of options) option.setAttribute('aria-pressed', String(option.dataset.filterOption === value));
+    }
+
+    for (const option of options) {
+      option.addEventListener('click', () => {
+        const value = option.dataset.filterOption!;
+        if (value === selected) return;
+        select(value);
+        update('all');
+        if (!param) return;
+        const url = new URL(location.href);
+        if (value) url.searchParams.set(param, value);
+        else url.searchParams.delete(param);
+        history.replaceState(history.state, '', url);
+      });
+    }
+
+    search?.addEventListener('input', () => update('new'));
+
+    const initial = param && new URLSearchParams(location.search).get(param);
+    if (initial && options.some((option) => option.dataset.filterOption === initial)) select(initial);
+    update('none');
+  }
+</script>
+
+<style>
+  .filter {
+    margin-bottom: clamp(30px, 3.5vw, 40px);
+  }
+
+  :global(html:not(.js)) .filter {
+    display: none;
+  }
+
+  /* 条目和分组的组件样式通常带有 display，hidden 属性需要更高的优先级才能生效 */
+  :global([data-filter-value][hidden], [data-filter-group][hidden]) {
+    display: none !important;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px 24px;
+  }
+
+  .search {
+    position: relative;
+    flex: 1 1 320px;
+    max-width: 440px;
+  }
+
+  /* 输入框的 clip-path 会形成层叠上下文，图标需要显式排在它上面 */
+  .search-icon {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 16px;
+    font-size: 17px;
+    color: var(--color-accent-text);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    border: 1px solid var(--color-line-strong);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-size: 15px;
+    clip-path: var(--clip-notch-md);
+    transition: border-color var(--duration-hover);
+  }
+
+  .search-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .search-input:hover,
+  .search-input:focus {
+    border-color: var(--color-accent-line);
+  }
+
+  /* 切角会裁掉外描边，焦点改用金色边框表示 */
+  .search-input:focus-visible {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .options .option {
+    padding: 11px 22px;
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .options .option[aria-pressed='false'] {
+    background: transparent;
+  }
+
+  .count {
+    margin-left: auto;
+    font-size: 15px;
+  }
+
+  /* 有搜索框时，搜索框和结果数占第一行，筛选按钮另起一行 */
+  .has-search .count {
+    order: 1;
+  }
+
+  .has-search .options {
+    order: 2;
+    flex-basis: 100%;
+  }
+
+  .empty {
+    margin-top: clamp(30px, 3.5vw, 40px);
+  }
+
+  @media (max-width: 600px) {
+    .options {
+      gap: 8px;
+    }
+
+    .options .option {
+      padding: 9px 14px;
+    }
+  }
+</style>

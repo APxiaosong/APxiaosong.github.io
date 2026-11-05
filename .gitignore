@@ -1,6 +1,10 @@
 # Claude Code
 .claude/
-AGENTS.md
+
+# 依赖与构建产物
+node_modules/
+dist/
+.astro/
 
 # 系统文件
 Thumbs.db
@@ -14,10 +18,3 @@ Desktop.ini
 *.swp
 *.swo
 *~
-
-# Node.js（脚本可能产生的临时依赖）
-node_modules/
-
-# Python 缓存
-__pycache__/
-*.pyc

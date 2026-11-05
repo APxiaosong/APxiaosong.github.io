@@ -1,0 +1,430 @@
+---
+/**
+ * 固定顶栏。宽屏下菜单横排，四个分组的下拉菜单支持悬停、点击和键盘操作；
+ * 900px 以下折叠为菜单按钮，展开后是整屏面板，分组改为手风琴。
+ * 两种形态共用同一份 HTML，分组的展开状态都记录在触发按钮的 aria-expanded 上。
+ */
+import { Image } from 'astro:assets';
+import logo from '@/assets/images/logo.png';
+import { homeLink, navGroups, pages } from '@/config/site';
+import { getLang, localizePath, pageKey, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import Button from '@/components/ui/Button.astro';
+import Icon from '@/components/ui/Icon.astro';
+import LangSwitch from './LangSwitch.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const currentPage = pageKey(Astro.url);
+const href = (path: string) => localizePath(path, lang);
+const current = (path: string) => (path === currentPage ? 'page' : undefined);
+---
+
+<header class="nav" data-nav>
+  <div class="container bar">
+    <a class="brand" href={href(pages.home)}>
+      <Image src={logo} alt={t(ui.site.name)} height={36} densities={[1, 2]} loading="eager" class="logo" />
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="nav-panel"
+      aria-label={t(ui.nav.openMenu)}
+      data-label-open={t(ui.nav.openMenu)}
+      data-label-close={t(ui.nav.closeMenu)}
+      data-nav-toggle
+    >
+      <Icon name="menu-line" class="when-closed" />
+      <Icon name="close-line" class="when-open" />
+    </button>
+
+    <div class="panel" id="nav-panel">
+      <nav aria-label={t(ui.nav.mainLabel)}>
+        <ul class="menu">
+          <li>
+            <a class="link" href={href(homeLink.href)} aria-current={current(homeLink.href)}>{t(homeLink.label)}</a>
+          </li>
+          {
+            navGroups.map((group) => (
+              <li class="group" data-nav-group>
+                <button
+                  class:list={['link', 'trigger', { active: group.items.some((item) => item.href === currentPage) }]}
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls={`nav-${group.id}`}
+                >
+                  {t(group.label)}
+                  <Icon name="arrow-down-s-line" class="chevron" />
+                </button>
+                <div class="dropdown" id={`nav-${group.id}`}>
+                  <ul class="dropdown-list">
+                    {group.items.map((item) => (
+                      <li>
+                        <a class="dropdown-link" href={href(item.href)} aria-current={current(item.href)}>
+                          {t(item.label)}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <div class="tools">
+        <ThemeToggle />
+        <LangSwitch />
+      </div>
+      <Button href={href(pages.feedback)} size="sm" class="feedback">{t(ui.nav.feedback)}</Button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('[data-nav]')!;
+  const menuToggle = nav.querySelector<HTMLButtonElement>('[data-nav-toggle]')!;
+  const groups = Array.from(nav.querySelectorAll<HTMLElement>('[data-nav-group]'));
+  const wide = matchMedia('(min-width: 901px)');
+
+  const triggerOf = (group: HTMLElement) => group.querySelector<HTMLButtonElement>('.trigger')!;
+  const isOpen = (group: HTMLElement) => triggerOf(group).getAttribute('aria-expanded') === 'true';
+
+  function setGroup(group: HTMLElement, open: boolean) {
+    if (open) groups.forEach((other) => other !== group && setGroup(other, false));
+    triggerOf(group).setAttribute('aria-expanded', String(open));
+  }
+
+  function setPanel(open: boolean) {
+    nav.toggleAttribute('data-open', open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', (open ? menuToggle.dataset.labelClose : menuToggle.dataset.labelOpen)!);
+    document.documentElement.classList.toggle('nav-open', open);
+    if (!open) groups.forEach((group) => setGroup(group, false));
+  }
+
+  for (const group of groups) {
+    const trigger = triggerOf(group);
+
+    // 鼠标在宽屏下点击时只负责打开，避免悬停已经打开的菜单被点击关掉
+    trigger.addEventListener('click', (event) => {
+      const fromMouse = (event as PointerEvent).pointerType === 'mouse' && wide.matches;
+      setGroup(group, fromMouse || !isOpen(group));
+    });
+
+    group.addEventListener('pointerenter', (event) => {
+      if (event.pointerType === 'mouse' && wide.matches) setGroup(group, true);
+    });
+    group.addEventListener('pointerleave', (event) => {
+      if (event.pointerType === 'mouse' && wide.matches) setGroup(group, false);
+    });
+    group.addEventListener('focusout', (event) => {
+      if (wide.matches && !group.contains(event.relatedTarget as Node | null)) setGroup(group, false);
+    });
+  }
+
+  menuToggle.addEventListener('click', () => setPanel(!nav.hasAttribute('data-open')));
+  wide.addEventListener('change', () => setPanel(false));
+
+  // 菜单面板中点击链接后收起面板，跳转到本页锚点时也能看到目标位置
+  nav.querySelector('#nav-panel')!.addEventListener('click', (event) => {
+    if ((event.target as Element).closest('a')) setPanel(false);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!nav.contains(event.target as Node)) groups.forEach((group) => setGroup(group, false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const openGroup = groups.find(isOpen);
+    if (openGroup) {
+      setGroup(openGroup, false);
+      triggerOf(openGroup).focus();
+    } else if (nav.hasAttribute('data-open')) {
+      setPanel(false);
+      menuToggle.focus();
+    }
+  });
+</script>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 200;
+    height: var(--nav-height);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  /* 毛玻璃背景放在伪元素上：backdrop-filter 会让元素成为固定定位子元素的包含块，菜单面板就无法铺满屏幕 */
+  .nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--color-nav);
+    backdrop-filter: blur(12px);
+    transition: background-color var(--duration-hover);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .brand {
+    flex: none;
+  }
+
+  .logo {
+    width: auto;
+    height: 36px;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .panel,
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .group {
+    position: relative;
+  }
+
+  .link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 11px 18px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    transition: color var(--duration-hover);
+  }
+
+  .link:hover,
+  .link[aria-current='page'],
+  .link.active,
+  .trigger[aria-expanded='true'] {
+    color: var(--color-accent-text);
+  }
+
+  .chevron {
+    font-size: 16px;
+    opacity: 0.6;
+    transition: transform var(--duration-hover) var(--ease-out);
+  }
+
+  .trigger[aria-expanded='true'] .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* 外层留出 8px 透明间隔，鼠标从按钮移到菜单的途中不会离开分组 */
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 50;
+    padding-top: 8px;
+    opacity: 0;
+    visibility: hidden;
+    translate: -50% 10px;
+    transition:
+      opacity 0.24s ease,
+      translate 0.28s var(--ease-out),
+      visibility 0.28s;
+  }
+
+  .trigger[aria-expanded='true'] + .dropdown {
+    opacity: 1;
+    visibility: visible;
+    translate: -50% 0;
+  }
+
+  .dropdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 188px;
+    padding: 6px;
+    border: 1px solid var(--color-accent-line);
+    background: var(--color-bg-sunken);
+    clip-path: var(--clip-frame-sm);
+  }
+
+  .dropdown-link {
+    display: block;
+    padding: 11px 16px;
+    font-size: var(--text-small);
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+
+  .dropdown-link[aria-current='page'] {
+    color: var(--color-accent-text);
+  }
+
+  .dropdown-link:hover,
+  .dropdown-link:focus-visible {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  .tools {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+    padding-left: 8px;
+    border-left: 1px solid var(--color-line);
+  }
+
+  .feedback {
+    margin-left: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .logo {
+      height: 30px;
+    }
+
+    .menu-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      margin-right: -10px;
+      font-size: 24px;
+      color: var(--color-text);
+    }
+
+    .menu-toggle .when-open,
+    .nav[data-open] .menu-toggle .when-closed {
+      display: none;
+    }
+
+    .nav[data-open] .menu-toggle .when-open {
+      display: inline-block;
+    }
+
+    .panel {
+      position: fixed;
+      inset: var(--nav-height) 0 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 8px var(--gutter) calc(32px + env(safe-area-inset-bottom));
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: var(--color-bg);
+      opacity: 0;
+      visibility: hidden;
+      translate: 0 -12px;
+      transition:
+        opacity 0.3s ease,
+        translate 0.4s var(--ease-out),
+        visibility 0.4s;
+    }
+
+    .nav[data-open] .panel {
+      opacity: 1;
+      visibility: visible;
+      translate: 0 0;
+    }
+
+    .menu {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .menu > li {
+      border-bottom: 1px solid var(--color-line);
+    }
+
+    .link {
+      justify-content: space-between;
+      width: 100%;
+      padding: 18px 0;
+      font-size: 17px;
+    }
+
+    .chevron {
+      font-size: 20px;
+    }
+
+    .dropdown {
+      position: static;
+      display: grid;
+      grid-template-rows: 0fr;
+      padding: 0;
+      opacity: 1;
+      translate: none;
+      transition:
+        grid-template-rows 0.4s var(--ease-out),
+        visibility 0.4s;
+    }
+
+    .trigger[aria-expanded='true'] + .dropdown {
+      grid-template-rows: 1fr;
+      translate: none;
+    }
+
+    .dropdown-list {
+      gap: 0;
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      padding: 0;
+      border: 0;
+      background: none;
+      clip-path: none;
+    }
+
+    .dropdown-list li:last-child {
+      padding-bottom: 14px;
+    }
+
+    .dropdown-link {
+      padding: 11px 0 11px 18px;
+      border-left: 1px solid var(--color-line);
+      font-size: 15px;
+    }
+
+    .dropdown-link:hover,
+    .dropdown-link:focus-visible {
+      border-left-color: var(--color-accent);
+      background: none;
+      color: var(--color-accent-text);
+    }
+
+    .tools {
+      gap: 12px;
+      margin: 28px 0 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .feedback {
+      margin: 16px 0 0;
+    }
+
+    :global(html.nav-open) {
+      overflow: hidden;
+    }
+  }
+</style>

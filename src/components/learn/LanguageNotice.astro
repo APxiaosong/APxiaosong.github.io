@@ -1,0 +1,19 @@
+---
+/**
+ * 英文页面上的提示条，说明视频多为中文内容、英文标题是译名。中文页面不输出任何内容。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import Notice from '@/components/ui/Notice.astro';
+import { getLang } from '@/i18n';
+
+type Props = HTMLAttributes<'div'>;
+---
+
+{
+  getLang(Astro.url) === 'en' && (
+    <Notice {...Astro.props}>
+      These videos are made by Chinese creators and are mostly in Chinese. The English titles are translations for
+      reference.
+    </Notice>
+  )
+}

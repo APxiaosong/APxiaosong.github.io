@@ -1,0 +1,98 @@
+---
+/**
+ * 区块标题，覆盖设计稿里的几种写法：
+ * - 只有 title，或 tag 加 title；
+ * - index：左侧加金色大号序号，例如「02 社区动态」；
+ * - note：右侧加一行 Spectral 斜体注释，例如「画廊 … Community Builds」；
+ * - align="center"：居中排列。
+ * level 为 3 时字号和字重都降一级，用于区块内部的小节。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import Tag from './Tag.astro';
+
+interface Props extends HTMLAttributes<'div'> {
+  title: string;
+  tag?: string;
+  index?: string;
+  note?: string;
+  align?: 'start' | 'center';
+  level?: 2 | 3;
+}
+
+const { title, tag, index, note, align = 'start', level = 2, class: className, ...rest } = Astro.props;
+const Heading = level === 2 ? 'h2' : 'h3';
+---
+
+<div class:list={['heading', align, { indexed: index, noted: note }, className]} {...rest}>
+  {index && <span class="index" aria-hidden="true">{index}</span>}
+  <div class="text">
+    {tag && <Tag>{tag}</Tag>}
+    <Heading class:list={['title', `level-${level}`]}>{title}</Heading>
+  </div>
+  {note && <span class="note text-note">{note}</span>}
+</div>
+
+<style>
+  .heading {
+    display: flex;
+    gap: 22px;
+    margin-bottom: clamp(32px, 4vw, 50px);
+  }
+
+  .indexed {
+    align-items: baseline;
+  }
+
+  .noted {
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .center {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .center .text {
+    align-items: center;
+  }
+
+  /* 装饰性的大号序号，浅色主题下也使用亮金色 */
+  .index {
+    font-family: var(--font-label);
+    font-size: var(--text-index);
+    font-weight: 700;
+    line-height: 0.8;
+    color: var(--color-accent);
+  }
+
+  .level-2 {
+    font-size: var(--text-h2);
+    font-weight: 900;
+  }
+
+  .level-3 {
+    font-size: var(--text-h3);
+    font-weight: 700;
+  }
+
+  .note {
+    font-size: 18px;
+  }
+
+  /* 手机上序号移到标题上方，与 NumberedIntro 一致，标题可以使用整行宽度 */
+  @media (max-width: 600px) {
+    .indexed {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+</style>

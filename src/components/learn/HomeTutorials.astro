@@ -1,0 +1,129 @@
+---
+/**
+ * 首页「视频教程」区块，锚点 #tutorials。
+ * 上半部分是精选视频，预告片排在最前并放大显示；下半部分是教程库各分类的入口，链接到筛选后的教程库。
+ */
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Card from '@/components/ui/Card.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { getFeaturedVideos, getTutorialCategories, getVideos } from '@/data/tutorials';
+import { getLang, translator } from '@/i18n';
+import FeaturedVideo from './FeaturedVideo.astro';
+import { libraryCategoryPath } from './library';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  tag: { zh: '教程 / Tutorials', en: 'Tutorials' },
+  title: { zh: '视频教程', en: 'Video Tutorials' },
+  library: { zh: '教程库', en: 'Library' },
+  libraryNote: { zh: 'Library', en: 'Browse by category' },
+  count: {
+    zh: (count: number) => `${count} 个视频`,
+    en: (count: number) => `${count} ${count === 1 ? 'video' : 'videos'}`,
+  },
+};
+
+const [lead, ...others] = getFeaturedVideos().sort(
+  (a, b) => Number(b.kind === 'showcase') - Number(a.kind === 'showcase'),
+);
+
+const videos = getVideos();
+const categories = getTutorialCategories().map((category) => ({
+  ...category,
+  count: videos.filter((video) => video.category === category.id).length,
+}));
+---
+
+<Section id="tutorials" divider>
+  <SectionHeading index="03" tag={t(copy.tag)} title={t(copy.title)} data-reveal />
+  <FeaturedVideo video={lead} size="lg" ratio="21 / 9" class="lead" data-reveal />
+  <div class="pair" data-reveal>
+    {others.map((video) => <FeaturedVideo video={video} />)}
+  </div>
+
+  <div class="library">
+    <SectionHeading level={3} title={t(copy.library)} note={t(copy.libraryNote)} data-reveal />
+    <ul class="categories" data-reveal>
+      {
+        categories.map((category, index) => (
+          <li>
+            <Card href={libraryCategoryPath(category.id, lang)} shape="notch" class="category">
+              <span class="row">
+                <span class="index">{String(index + 1).padStart(2, '0')}</span>
+                <span class="name">{t(category.name)}</span>
+                <ArrowLink tone="muted" class="count">
+                  {t(copy.count)(category.count)}
+                </ArrowLink>
+              </span>
+            </Card>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Section>
+
+<style>
+  .lead {
+    margin-bottom: 40px;
+  }
+
+  .pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .library {
+    margin-top: clamp(72px, 8vw, 100px);
+  }
+
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .category {
+    height: 100%;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .index {
+    font-family: var(--font-label);
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-accent);
+  }
+
+  .name {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+  }
+
+  .count {
+    margin-left: auto;
+  }
+
+  @media (max-width: 900px) {
+    .categories {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .pair,
+    .categories {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

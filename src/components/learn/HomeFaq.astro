@@ -1,0 +1,71 @@
+---
+/**
+ * 首页「常见问题」区块，锚点 #faq。
+ * 列出数据中标记为 featured 的问题，问题和答案直接展开显示，末尾链接到常见问题页。
+ */
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Section from '@/components/ui/Section.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { pages } from '@/config/site';
+import { getFaqGroups } from '@/data/faq';
+import { getLang, localizePath, translator } from '@/i18n';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  title: { zh: '常见问题', en: 'Frequently Asked Questions' },
+  all: { zh: '查看全部问题', en: 'See all questions' },
+};
+
+const items = getFaqGroups()
+  .flatMap((group) => group.items)
+  .filter((item) => item.featured);
+---
+
+<Section id="faq" tone="alt" width="narrow" divider>
+  <SectionHeading tag="FAQ" title={t(copy.title)} align="center" data-reveal />
+  <dl class="list" data-reveal>
+    {
+      items.map((item) => (
+        <div class="item">
+          <dt class="question">{t(item.question)}</dt>
+          <dd class="answer">{t(item.answer)}</dd>
+        </div>
+      ))
+    }
+  </dl>
+  <p class="more" data-reveal>
+    <ArrowLink href={localizePath(pages.faq, lang)} underline>{t(copy.all)}</ArrowLink>
+  </p>
+</Section>
+
+<style>
+  .item {
+    padding-block: 28px;
+  }
+
+  .item + .item {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .question {
+    font-size: clamp(18px, 1.8vw, 21px);
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .answer {
+    max-width: 780px;
+    margin-top: 12px;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--color-text-muted);
+  }
+
+  .more {
+    margin-top: 36px;
+    text-align: center;
+  }
+</style>

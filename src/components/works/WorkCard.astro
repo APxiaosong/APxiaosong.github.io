@@ -1,0 +1,157 @@
+---
+/**
+ * 创意工坊作品卡片：4:3 预览图和分类标签，悬停时显示标题和合作者，点击在新窗口打开 Steam 上的作品页。
+ * 触屏等不能悬停的设备上，标题始终显示。
+ * author 是卡片所在章节的作者，合作者一栏列出作品的其他成员作者。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { resizeImage, resizeSrcset } from '@/data/images';
+import { getWorkshopAuthor, getWorkshopCategory, type Work } from '@/data/workshop';
+import { getLang, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import Badge from '@/components/ui/Badge.astro';
+import Icon from '@/components/ui/Icon.astro';
+
+interface Props extends HTMLAttributes<'a'> {
+  work: Work;
+  author: string;
+}
+
+const { work, author, class: className, ...rest } = Astro.props;
+const t = translator(getLang(Astro.url));
+
+const partners = work.authors.filter((id) => id !== author).map((id) => t(getWorkshopAuthor(id).name));
+
+const copy = {
+  partners: { zh: `合作：${partners.join('、')}`, en: `With ${partners.join(', ')}` },
+  view: { zh: '在工坊查看', en: 'View on Workshop' },
+};
+---
+
+<a class:list={['work', className]} href={work.url} target="_blank" rel="noopener" {...rest}>
+  <img
+    src={resizeImage(work.previewUrl, 640)}
+    srcset={resizeSrcset(work.previewUrl, [320, 640])}
+    sizes="(max-width: 600px) 76vw, 300px"
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+  <Badge class="badge">{t(getWorkshopCategory(work.category).name)}</Badge>
+  <span class="caption" data-theme="dark">
+    <span class="title">{work.title}</span>
+    {partners.length > 0 && <span class="partners">{t(copy.partners)}</span>}
+    <span class="view">
+      {t(copy.view)}
+      <Icon name="arrow-right-up-line" />
+    </span>
+  </span>
+  <span class="sr-only">{t(ui.common.newWindow)}</span>
+</a>
+
+<style>
+  .work {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    background: var(--placeholder-stripes);
+    clip-path: var(--clip-corner-sm);
+    transition: border-color 0.35s;
+  }
+
+  .work:hover,
+  .work:focus-visible {
+    border-color: var(--color-accent-line);
+  }
+
+  /* 切角会裁掉外侧的焦点框，改为画在内侧 */
+  .work:focus-visible {
+    outline-offset: -3px;
+  }
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .work:hover img {
+    transform: scale(1.05);
+  }
+
+  .badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+  }
+
+  .caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 22px;
+    background: linear-gradient(
+      180deg,
+      transparent 30%,
+      color-mix(in srgb, var(--color-bg) 72%, transparent) 62%,
+      color-mix(in srgb, var(--color-bg) 94%, transparent)
+    );
+    color: var(--color-text);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .work:hover .caption,
+  .work:focus-visible .caption {
+    opacity: 1;
+  }
+
+  .title {
+    font-size: 16px;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  .partners {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  .view {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    font-family: var(--font-label);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-accent-text);
+  }
+
+  .view::before {
+    content: '';
+    width: 16px;
+    height: 2px;
+    background: var(--color-accent);
+  }
+
+  @media (hover: none) {
+    .caption {
+      opacity: 1;
+    }
+
+    .view {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,359 @@
+---
+/**
+ * 图片灯箱：点击缩略图后在整屏的深色浮层中查看大图，同一组的图片可以左右切换。
+ * 每个页面放一个。触发元素写成 <a href="大图地址" data-lightbox="组名">，里面放一张带 width、height 的 <img>；
+ * 可选的 data-lightbox-title、data-lightbox-note 显示在图片下方，分别是标题和署名一类的补充说明。
+ * 切换顺序是同组触发元素在文档中的顺序，被筛选隐藏的元素不参与切换。
+ */
+import { getLang, translator } from '@/i18n';
+import Icon from './Icon.astro';
+
+const t = translator(getLang(Astro.url));
+
+const copy = {
+  label: { zh: '查看图片', en: 'Image viewer' },
+  close: { zh: '关闭', en: 'Close' },
+  previous: { zh: '上一张', en: 'Previous image' },
+  next: { zh: '下一张', en: 'Next image' },
+};
+---
+
+<dialog class="lightbox" aria-label={t(copy.label)} data-theme="dark" data-lightbox-dialog>
+  <button class="control close" type="button" aria-label={t(copy.close)} autofocus data-lightbox-close>
+    <Icon name="close-line" />
+  </button>
+  <div class="frame">
+    <img class="image" alt="" />
+    <Icon name="loader-4-line" class="spinner" />
+  </div>
+  <p class="caption" aria-live="polite">
+    <span class="counter"></span>
+    <span class="title"></span>
+    <span class="note text-note"></span>
+  </p>
+  <button class="control previous" type="button" aria-label={t(copy.previous)} data-lightbox-step="-1">
+    <Icon name="arrow-left-s-line" />
+  </button>
+  <button class="control next" type="button" aria-label={t(copy.next)} data-lightbox-step="1">
+    <Icon name="arrow-right-s-line" />
+  </button>
+</dialog>
+
+<script>
+  import { prefersReducedMotion } from './motion';
+
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox-dialog]')!;
+  const frame = dialog.querySelector<HTMLElement>('.frame')!;
+  const image = dialog.querySelector<HTMLImageElement>('.image')!;
+  const counter = dialog.querySelector<HTMLElement>('.counter')!;
+  const title = dialog.querySelector<HTMLElement>('.title')!;
+  const note = dialog.querySelector<HTMLElement>('.note')!;
+
+  let items: HTMLAnchorElement[] = [];
+  let index = 0;
+  let opener: HTMLAnchorElement | null = null;
+
+  const pad = (n: number) => String(n).padStart(2, '0');
+
+  async function loadFull(trigger: HTMLAnchorElement, referrerPolicy: string) {
+    const full = new Image();
+    full.referrerPolicy = referrerPolicy;
+    full.src = trigger.href;
+    const loaded = await full.decode().then(
+      () => true,
+      () => false,
+    );
+    if (items[index] !== trigger) return;
+    // 大图加载失败时保留缩略图
+    if (loaded) image.src = full.src;
+    frame.removeAttribute('data-loading');
+  }
+
+  function show(position: number, direction = 0) {
+    index = (position + items.length) % items.length;
+    const trigger = items[index];
+    const thumb = trigger.querySelector('img')!;
+
+    counter.textContent = `${pad(index + 1)} / ${pad(items.length)}`;
+    title.textContent = trigger.dataset.lightboxTitle ?? '';
+    note.textContent = trigger.dataset.lightboxNote ?? '';
+
+    // 先用已经下载的缩略图占位，大图解码完成后再替换
+    frame.style.setProperty('--ratio', `${thumb.getAttribute('width')} / ${thumb.getAttribute('height')}`);
+    frame.setAttribute('data-loading', '');
+    image.alt = thumb.alt;
+    image.referrerPolicy = thumb.referrerPolicy;
+    image.src = thumb.currentSrc || trigger.href;
+    loadFull(trigger, thumb.referrerPolicy);
+
+    if (direction && !prefersReducedMotion()) {
+      const easing = getComputedStyle(dialog).getPropertyValue('--ease-out');
+      image.animate(
+        [
+          { opacity: 0, transform: `translateX(${direction * 32}px)` },
+          { opacity: 1, transform: 'none' },
+        ],
+        { duration: 500, easing },
+      );
+    }
+  }
+
+  function open(trigger: HTMLAnchorElement) {
+    const group = trigger.dataset.lightbox;
+    items = Array.from(document.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]')).filter(
+      (item) => item.dataset.lightbox === group && item.checkVisibility(),
+    );
+    opener = trigger;
+    dialog.toggleAttribute('data-single', items.length < 2);
+    show(items.indexOf(trigger));
+    dialog.showModal();
+  }
+
+  const step = (direction: number) => items.length > 1 && show(index + direction, direction);
+
+  // 按住修饰键或用中键点击时保留链接的默认行为，在新标签页中打开大图
+  document.addEventListener('click', (event) => {
+    const trigger = (event.target as Element).closest<HTMLAnchorElement>('a[data-lightbox]');
+    if (!trigger || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    open(trigger);
+  });
+
+  dialog.addEventListener('click', (event) => {
+    const target = event.target as Element;
+    if (target === dialog || target === frame) dialog.close();
+    else if (target.closest('[data-lightbox-close]')) dialog.close();
+    else {
+      const button = target.closest<HTMLElement>('[data-lightbox-step]');
+      if (button) step(Number(button.dataset.lightboxStep));
+    }
+  });
+
+  dialog.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') step(-1);
+    else if (event.key === 'ArrowRight') step(1);
+  });
+
+  // 触屏上左右滑动切换图片；纵向手势和双指缩放仍由浏览器处理
+  let swipeStart: { x: number; y: number } | null = null;
+
+  dialog.addEventListener('pointerdown', (event) => {
+    swipeStart = event.pointerType === 'mouse' ? null : { x: event.clientX, y: event.clientY };
+  });
+
+  dialog.addEventListener('pointerup', (event) => {
+    if (!swipeStart) return;
+    const dx = event.clientX - swipeStart.x;
+    const dy = event.clientY - swipeStart.y;
+    swipeStart = null;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+  });
+
+  dialog.addEventListener('close', () => {
+    opener?.focus();
+    opener = null;
+  });
+</script>
+
+<style>
+  .lightbox {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 16px var(--gutter) 28px;
+    border: 0;
+    background: color-mix(in srgb, var(--color-bg) 94%, transparent);
+    backdrop-filter: blur(10px);
+    color: var(--color-text);
+    touch-action: pan-y pinch-zoom;
+    opacity: 0;
+    transition:
+      opacity 0.35s var(--ease-out),
+      overlay 0.35s allow-discrete,
+      display 0.35s allow-discrete;
+  }
+
+  .lightbox[open] {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr) 64px;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      '. . close'
+      'previous frame next'
+      '. caption .';
+    gap: 16px;
+    opacity: 1;
+  }
+
+  @starting-style {
+    .lightbox[open] {
+      opacity: 0;
+    }
+  }
+
+  .lightbox::backdrop {
+    background: none;
+  }
+
+  :global(html:has(.lightbox[open])) {
+    overflow: hidden;
+  }
+
+  /* 图片按 --ratio 在可用区域内取最大尺寸，大图替换缩略图时不会改变大小 */
+  .frame {
+    grid-area: frame;
+    display: grid;
+    place-items: center;
+    container-type: size;
+    transition: scale 0.5s var(--ease-out);
+  }
+
+  @starting-style {
+    .lightbox[open] .frame {
+      scale: 0.96;
+    }
+  }
+
+  .image,
+  .spinner {
+    grid-area: 1 / 1;
+  }
+
+  .image {
+    width: min(100cqw, 100cqh * var(--ratio));
+    aspect-ratio: var(--ratio);
+    object-fit: cover;
+    background: var(--placeholder-stripes);
+    clip-path: var(--clip-frame-lg);
+  }
+
+  .spinner {
+    font-size: 30px;
+    color: var(--color-accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+    animation: lightbox-spin 1s linear infinite;
+  }
+
+  /* 已缓存的大图通常很快完成，延迟显示加载图标以免一闪而过 */
+  .frame[data-loading] .spinner {
+    opacity: 1;
+    transition-delay: 0.3s;
+  }
+
+  @keyframes lightbox-spin {
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  .caption {
+    grid-area: caption;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 16px;
+    min-height: 48px;
+    text-align: center;
+  }
+
+  .counter {
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--color-accent-text);
+  }
+
+  .title {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .note {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+  }
+
+  .note::before {
+    content: '';
+    width: 18px;
+    height: 2px;
+    background: var(--color-accent);
+  }
+
+  .title:empty,
+  .note:empty,
+  [data-single] .counter {
+    display: none;
+  }
+
+  .control {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--color-line-strong);
+    color: var(--color-text-secondary);
+    font-size: 24px;
+    clip-path: var(--clip-notch-sm);
+    transition:
+      color var(--duration-hover),
+      border-color var(--duration-hover),
+      background-color var(--duration-hover);
+  }
+
+  .control:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-tint-strong);
+    color: var(--color-accent-text);
+  }
+
+  .close {
+    grid-area: close;
+    justify-self: end;
+  }
+
+  .previous,
+  .next {
+    align-self: center;
+  }
+
+  .previous {
+    grid-area: previous;
+  }
+
+  .next {
+    grid-area: next;
+    justify-self: end;
+  }
+
+  [data-single] :is(.previous, .next) {
+    visibility: hidden;
+  }
+
+  /* 手机上图片占满宽度，切换按钮移到说明文字两侧 */
+  @media (max-width: 600px) {
+    .lightbox {
+      padding: 12px var(--gutter) calc(20px + env(safe-area-inset-bottom));
+    }
+
+    .lightbox[open] {
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      grid-template-areas:
+        '. . close'
+        'frame frame frame'
+        'previous caption next';
+      gap: 12px;
+    }
+
+    .caption {
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+</style>

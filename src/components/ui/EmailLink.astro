@@ -1,0 +1,33 @@
+---
+/**
+ * 反馈邮箱链接。静态 HTML 中不出现完整地址，页面加载后由脚本拼接成 mailto 链接；
+ * 脚本运行之前，链接指向首页的反馈区块。
+ * 不传内容时显示邮箱地址；传入内容时，内容中带 data-email-text 属性的元素会被填入地址。
+ */
+import type { HTMLAttributes } from 'astro/types';
+import { feedbackEmail, pages } from '@/config/site';
+import { getLang, localizePath } from '@/i18n';
+
+type Props = HTMLAttributes<'a'>;
+
+const { class: className, ...rest } = Astro.props;
+const { user, domain } = feedbackEmail;
+---
+
+<a
+  class={className}
+  href={localizePath(pages.feedback, getLang(Astro.url))}
+  data-email-user={user}
+  data-email-domain={domain}
+  {...rest}
+>
+  {Astro.slots.has('default') ? <slot /> : <span data-email-text>{user} [at] {domain}</span>}
+</a>
+
+<script>
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('a[data-email-user]')) {
+    const address = `${link.dataset.emailUser}${String.fromCharCode(64)}${link.dataset.emailDomain}`;
+    link.href = `mailto:${address}`;
+    for (const target of link.querySelectorAll('[data-email-text]')) target.textContent = address;
+  }
+</script>

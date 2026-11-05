@@ -1,0 +1,192 @@
+---
+/**
+ * 创意工坊页：团队成员在 Steam 创意工坊发布的作品，按作者分章节，可以按分类筛选。
+ * 第一章是团队自己的传奇模组；成员章节各显示最新的若干件作品，其余作品链接到 Steam 上的个人工坊页。
+ */
+import storeBackground from '@/assets/images/steam-store-bg.jpg';
+import { links, pages } from '@/config/site';
+import { getMod } from '@/data/mod';
+import {
+  getWorks,
+  getWorksByAuthor,
+  getWorkshopAuthors,
+  getWorkshopCategories,
+  getWorkshopCategory,
+  type Work,
+} from '@/data/workshop';
+import { getLang, getLangPaths, localizePath, otherLang, pick, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import Button from '@/components/ui/Button.astro';
+import Chip from '@/components/ui/Chip.astro';
+import CtaBand from '@/components/ui/CtaBand.astro';
+import Filter from '@/components/ui/Filter.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Section from '@/components/ui/Section.astro';
+import AuthorChapter from '@/components/works/AuthorChapter.astro';
+import ModFeature from '@/components/works/ModFeature.astro';
+import WorkStrip from '@/components/works/WorkStrip.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export const getStaticPaths = getLangPaths;
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const other = otherLang(lang);
+
+const copy = {
+  title: { zh: '创意工坊', en: 'Workshop' },
+  tag: { zh: '社区 / Community', en: 'Community' },
+  subtitle: { zh: 'Workshop', en: 'Member Creations' },
+  description: {
+    zh: '传奇建造队成员在 Steam 创意工坊发布的《废品机械师》作品，按作者分章节展示，可以按分类筛选。',
+    en: 'Scrap Mechanic creations that Legend Build Team members have published on the Steam Workshop, arranged by creator and filterable by category.',
+  },
+  lead: {
+    zh: '以创作者为线索，一位一位走进他们的工坊。每一位机械师名下，都是一整条值得翻阅的作品序列。所有内容均通过 Steam 创意工坊分发。',
+    en: 'Arranged by creator, one workshop at a time. Each member’s chapter is a body of work worth browsing through. Everything here is distributed through the Steam Workshop.',
+  },
+  index: { zh: '作者索引', en: 'Creators' },
+  filter: { zh: '按分类筛选', en: 'Filter by category' },
+  officialMeta: { zh: '传奇模组的开发团队', en: 'The team behind the New Legend Mod' },
+  modLink: { zh: '模组详情', en: 'About the Mod' },
+  viewAll: { zh: '查看该作者全部', en: 'View all on Steam' },
+  joinTitle: { zh: '想成为下一位上榜的创作者？', en: 'Want to be the next creator featured here?' },
+  join: { zh: '加入 Steam 社区组', en: 'Join the Steam Group' },
+};
+
+/** 每个成员章节最多显示的作品数，也是为筛选的每个分类预备的作品数 */
+const perChapter = 8;
+
+// 取作者最新的若干件作品，再补上每个分类最新的若干件，按分类筛选时各分类都有作品可显示
+function pickWorks(works: Work[]): Work[] {
+  const taken = new Map<string, number>();
+  return works.filter((work, i) => {
+    const n = taken.get(work.category) ?? 0;
+    taken.set(work.category, n + 1);
+    return i < perChapter || n < perChapter;
+  });
+}
+
+// 作品最多的三个分类，不含「其他」
+function topCategories(works: Work[]): string[] {
+  const counts = new Map<string, number>();
+  for (const { category } of works) {
+    if (category !== 'other') counts.set(category, (counts.get(category) ?? 0) + 1);
+  }
+  return [...counts]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([id]) => t(getWorkshopCategory(id).name));
+}
+
+const mod = getMod();
+const modWork = getWorks().find((work) => work.id === mod.id)!;
+const teamName = ui.site.name;
+
+const chapters = getWorkshopAuthors().map((author, i) => {
+  const works = getWorksByAuthor(author.id);
+  const name = t(author.name);
+  const otherName = pick(author.name, other);
+  const focus = topCategories(works).join(t({ zh: '、', en: ', ' }));
+  return {
+    author,
+    works: pickWorks(works),
+    total: works.length,
+    id: `author-${author.id}`,
+    index: String(i + 2).padStart(2, '0'),
+    name,
+    handle: otherName === name ? undefined : otherName,
+    meta: [focus, t({ zh: `共 ${works.length} 件作品`, en: `${works.length} works` })],
+  };
+});
+
+const authorIndex = [{ id: 'legend-build-team', index: '01', name: t(teamName) }, ...chapters];
+const categoryOptions = getWorkshopCategories().map((category) => ({ value: category.id, label: t(category.name) }));
+---
+
+<BaseLayout title={t(copy.title)} description={t(copy.description)}>
+  <PageHero
+    image={storeBackground}
+    tag={t(copy.tag)}
+    title={t(copy.title)}
+    subtitle={t(copy.subtitle)}
+    lead={t(copy.lead)}
+    watermark="SHOP"
+  >
+    <nav class="authors" aria-label={t(copy.index)}>
+      <span class="authors-label text-label">{t(copy.index)}<span aria-hidden="true"> —</span></span>
+      {
+        authorIndex.map((item) => (
+          <Chip href={`#${item.id}`}>
+            <span class="authors-number">{item.index}</span>
+            {item.name}
+          </Chip>
+        ))
+      }
+    </nav>
+  </PageHero>
+
+  <Section space="none" class="toolbar">
+    <Filter target="workshop-works" options={categoryOptions} label={t(copy.filter)} param="category" />
+  </Section>
+
+  <div id="workshop-works">
+    <AuthorChapter
+      id="legend-build-team"
+      data-filter-group
+      index="01"
+      name={t(teamName)}
+      handle={pick(teamName, other)}
+      meta={[t(copy.officialMeta)]}
+      official
+      link={{ href: localizePath(pages.mod, lang), label: t(copy.modLink) }}
+      tone="base"
+    >
+      <ModFeature data-filter-value={modWork.category} />
+    </AuthorChapter>
+    {
+      chapters.map((chapter, i) => (
+        <AuthorChapter
+          id={chapter.id}
+          data-filter-group
+          index={chapter.index}
+          name={chapter.name}
+          handle={chapter.handle}
+          meta={chapter.meta}
+          link={{ href: chapter.author.workshopUrl, label: t(copy.viewAll), external: true }}
+          tone={i % 2 === 0 ? 'alt' : 'base'}
+        >
+          <WorkStrip author={chapter.author} works={chapter.works} total={chapter.total} limit={perChapter} />
+        </AuthorChapter>
+      ))
+    }
+  </div>
+
+  <CtaBand kicker="Join the workshop" title={t(copy.joinTitle)}>
+    <Button href={links.steamGroup} external>{t(copy.join)}</Button>
+  </CtaBand>
+</BaseLayout>
+
+<style>
+  .authors {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .authors-label {
+    margin-right: 6px;
+    color: var(--color-text-muted);
+  }
+
+  .authors-number {
+    font-family: var(--font-label);
+    font-size: 11px;
+    color: var(--color-accent-text);
+  }
+
+  .toolbar {
+    padding-top: var(--space-section-sm);
+  }
+</style>

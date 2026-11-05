@@ -1,0 +1,107 @@
+---
+/**
+ * 首页「废品机械师」区块，锚点 #about-game：左侧游戏配图，右侧简介和跳转链接。
+ * 首屏已经使用创造模式图，这里改用生存模式图。
+ */
+import { Image } from 'astro:assets';
+import sceneSurvival from '@/assets/images/scene-survival.png';
+import { pages } from '@/config/site';
+import { getLang, localizePath, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import ArrowLink from '@/components/ui/ArrowLink.astro';
+import Section from '@/components/ui/Section.astro';
+import Tag from '@/components/ui/Tag.astro';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+
+const copy = {
+  imageAlt: { zh: '《废品机械师》生存模式宣传图', en: 'Scrap Mechanic Survival Mode key art' },
+  tag: { zh: '平台 / Platform', en: 'Platform' },
+  subtitle: { zh: 'Scrap Mechanic', en: 'By Axolot Games' },
+  text: {
+    zh: '《废品机械师》是一款开放世界的多人建造沙盒游戏。在创造模式中，玩家可取用数百种零件与无限资源，自由组装会变形的载具、会行走的房屋，让想象落地；也可在生存与挑战模式中探索、协作与解谜。传奇建造队的全部作品，皆生长于这片土壤之上。',
+    en: 'Scrap Mechanic is an open-world multiplayer building sandbox. In Creative Mode, players have hundreds of parts and unlimited resources to build transforming vehicles, walking houses and whatever else they can imagine. Survival and Challenge modes add exploration, co-op play and puzzles. Everything Legend Build Team makes is built on this game.',
+  },
+  more: { zh: '了解废品机械师', en: 'About the game' },
+};
+---
+
+<Section id="about-game">
+  <div class="layout" data-reveal>
+    <figure class="frame" data-theme="dark">
+      <Image src={sceneSurvival} alt={t(copy.imageAlt)} widths={[640, 960, 1280]} sizes="(max-width: 900px) 100vw, 50vw" />
+      <figcaption class="caption" aria-hidden="true">Survival Mode</figcaption>
+    </figure>
+
+    <div>
+      <Tag>{t(copy.tag)}</Tag>
+      <h2 class="title">{t(ui.nav.game)}</h2>
+      <p class="subtitle text-accent">{t(copy.subtitle)}</p>
+      <p class="text-body">{t(copy.text)}</p>
+      <ArrowLink href={localizePath(pages.game, lang)} underline class="more">{t(copy.more)}</ArrowLink>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .layout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 60px;
+    align-items: center;
+  }
+
+  .frame {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    clip-path: var(--clip-frame-lg);
+  }
+
+  .frame :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, color-mix(in srgb, var(--color-bg) 55%, transparent));
+  }
+
+  .caption {
+    position: absolute;
+    bottom: 18px;
+    left: 20px;
+    z-index: 1;
+    font-family: var(--font-label);
+    font-size: var(--text-label);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent-text);
+  }
+
+  .title {
+    margin-top: 16px;
+    font-size: var(--text-h2);
+  }
+
+  .subtitle {
+    margin: 4px 0 24px;
+    font-size: 22px;
+  }
+
+  .more {
+    margin-top: 30px;
+  }
+
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+    }
+  }
+</style>

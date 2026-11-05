@@ -1,0 +1,161 @@
+---
+/**
+ * 页脚：Logo、与顶部导航相同的四组链接加一组外部链接，以及版权行。
+ */
+import { Image } from 'astro:assets';
+import logo from '@/assets/images/logo.png';
+import { links, navGroups, pages } from '@/config/site';
+import { getLang, localizePath, translator } from '@/i18n';
+import { ui } from '@/i18n/ui';
+import EmailLink from '@/components/ui/EmailLink.astro';
+
+const lang = getLang(Astro.url);
+const t = translator(lang);
+const externalLinks = [
+  { label: ui.nav.workshop, href: links.modWorkshop },
+  { label: ui.nav.steamGroup, href: links.steamGroup },
+];
+---
+
+<footer class="footer">
+  <div class="container top">
+    <a class="brand" href={localizePath(pages.home, lang)}>
+      <Image src={logo} alt={t(ui.site.name)} height={42} densities={[1, 2]} class="logo" />
+    </a>
+    <div class="columns">
+      {
+        navGroups.map((group) => (
+          <div class="column">
+            <h2 class="heading">{t(group.label)}</h2>
+            <ul>
+              {group.items.map((item) => (
+                <li>
+                  <a class="link" href={localizePath(item.href, lang)}>
+                    {t(item.label)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <div class="column">
+        <h2 class="heading">{t(ui.nav.links)}</h2>
+        <ul>
+          {
+            externalLinks.map((item) => (
+              <li>
+                <a class="link" href={item.href} target="_blank" rel="noopener">
+                  {t(item.label)}
+                  <span class="sr-only">{t(ui.common.newWindow)}</span>
+                </a>
+              </li>
+            ))
+          }
+          <li><EmailLink class="link">{t(ui.nav.email)}</EmailLink></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="container bottom-row">
+      <span>© {new Date().getFullYear()} {t(ui.footer.copyright)}</span>
+      <span class="tagline">{t(ui.footer.tagline)}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-line);
+    background: var(--color-bg-alt);
+  }
+
+  .top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    padding-block: 60px 44px;
+  }
+
+  .logo {
+    width: auto;
+    height: 42px;
+  }
+
+  .columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
+  .column ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .heading {
+    margin-bottom: 14px;
+    font-family: var(--font-label);
+    font-size: var(--text-label);
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent-text);
+  }
+
+  .link {
+    color: var(--color-text-muted);
+    transition: color var(--duration-hover);
+  }
+
+  .link:hover {
+    color: var(--color-accent-text);
+  }
+
+  .bottom {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .bottom-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    padding-block: 22px;
+    font-size: var(--text-label);
+    color: var(--color-text-muted);
+  }
+
+  .tagline {
+    font-family: var(--font-label);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .top {
+      flex-direction: column;
+      gap: 36px;
+      padding-block: 48px 36px;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 32px 24px;
+      width: 100%;
+    }
+
+    .column ul {
+      font-size: var(--text-small);
+    }
+  }
+</style>

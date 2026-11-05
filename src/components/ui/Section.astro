@@ -1,0 +1,57 @@
+---
+/**
+ * 页面区块：负责背景、上下留白和内容宽度。
+ * tone：base 页面底色，alt 次级底色（与 base 交替使用），accent 整块金底（全站只用一两处）。
+ * space：上下留白，lg 大区块，md 中区块，sm 紧凑区块，none 不留白（由内容自己控制）。
+ * width：wide 为 1400px 的标准宽度，narrow 为 1100px 的窄内容。
+ * divider：顶部加一条分隔线。
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'section'> {
+  tone?: 'base' | 'alt' | 'accent';
+  space?: 'lg' | 'md' | 'sm' | 'none';
+  width?: 'wide' | 'narrow';
+  divider?: boolean;
+}
+
+const { tone = 'base', space = 'lg', width = 'wide', divider = false, class: className, ...rest } = Astro.props;
+---
+
+<section
+  class:list={['section', tone, { divider }, className]}
+  data-surface={tone === 'accent' ? 'accent' : undefined}
+  {...rest}
+>
+  <div class:list={['container', `space-${space}`, { 'container-narrow': width === 'narrow' }]}>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section {
+    position: relative;
+  }
+
+  /* 次级底色区块里的卡片改用页面底色，保持和区块背景的层次 */
+  .alt {
+    --color-surface: var(--color-bg);
+    background: var(--color-bg-alt);
+  }
+
+  .divider {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .space-lg {
+    padding-block: var(--space-section-lg);
+  }
+
+  .space-md {
+    padding-block: var(--space-section-md);
+  }
+
+  .space-sm {
+    padding-block: var(--space-section-sm);
+  }
+</style>
